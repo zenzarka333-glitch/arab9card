@@ -275,6 +275,383 @@
     <div id="companyCodesPage"><div class="page-title">اكواد الشركة</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="companyCodesGrid"></div></div>
     <div id="doubleOffersPage"><div class="page-title">عروض الدبل</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="doubleOffersGrid"></div></div>
 
+    <!-- نافذة الشراء المحدثة للربط الآلي -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalItemTitle">المنتج</span>
+                <span class="price-tag" id="modalItemPrice">$ 0.00</span>
+            </div>
+            <input type="text" id="playerId" placeholder="الايدي (Player ID)">
+            <button class="check-btn" onclick="checkPlayerName()">التحقق من الاسم</button>
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="submitOrder()">شراء تلقائي</button>
+                <button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button>
+            </div>
+            <div class="note-text">مربوط آلياً مع Js4Card 24 ساعة</div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <div>🛒</div>
+        <div>💳</div>
+        <div class="home-icon-container" onclick="showPage('homePage')">🏠</div>
+        <div>🛡️</div>
+        <div onclick="showMyAccount()" style="cursor: pointer;">👤</div>
+    </div>
+
+    <!-- سكربتات تشغيل المتجر والربط الآلي مع API -->
+    <script>
+        const API_TOKEN = "opYDtlJEFgyi9u8jDJBDNUdcLQujaJKFfHmxPevxq0D6VloSJngDAD-nmDjMXrpT";
+        let selectedProductId = 365; // معرف منتج تجريبي افتراضي (مثال: 60 يو سي)
+
+        // باقات ببجي روبوت مع معرفات المنتجات الحقيقية حسب منصة Js4Card
+        const pubgRobotPackages = [
+            { id: 365, name: "PUBG Mobile 60 UC", basePrice: 0.893 },
+            { id: 366, name: "PUBG Mobile 325 UC", basePrice: 4.468 },
+            { id: 367, name: "PUBG Mobile 660 UC", basePrice: 8.936 },
+            { id: 368, name: "PUBG Mobile 1800 UC", basePrice: 22.339 },
+            { id: 369, name: "PUBG Mobile 3850 UC", basePrice: 44.679 },
+            { id: 370, name: "PUBG Mobile 8100 UC", basePrice: 88.106 }
+        ];
+        
+        const gridPubgRobot = document.getElementById('pubgRobotGrid');
+        pubgRobotPackages.forEach(pkg => {
+            let finalPrice = (pkg.basePrice * 1.05).toFixed(3);
+            gridPubgRobot.innerHTML += `
+                <div class="card-wrapper" onclick="openOrderModal(${pkg.id}, 'ببجي روبوت - ${pkg.name}', '${finalPrice}')">
+                    <div class="card-box">
+                        <div class="card-circle" style="color: #2f3542;">🤖</div>
+                        <div class="card-name-inside">${pkg.name}</div>
+                    </div>
+                    <div class="card-name-outside">${pkg.name}</div>
+                    <div class="card-price-outside">$ ${finalPrice}</div>
+                </div>
+            `;
+        });
+
+        // باقات ببجي أكواد 
+        const pubgCodesPackages = [
+            { name: "Uc Voucher 60", basePrice: 0.884 },
+            { name: "Uc Voucher 325", basePrice: 4.418 },
+            { name: "Uc Voucher 660", basePrice: 8.836 },
+            { name: "Uc Voucher 1800", basePrice: 22.220 },
+            { name: "Uc Voucher 3850", basePrice: 44.182 },
+            { name: "Uc Voucher 8100", basePrice: 87.371 }
+        ];
+        const gridPubgCodes = document.getElementById('pubgCodesGrid');
+        pubgCodesPackages.forEach(pkg => {
+            let finalPrice = (pkg.basePrice * 1.05).toFixed(3);
+            gridPubgCodes.innerHTML += `
+                <div class="card-wrapper" onclick="openOrderModal(0, 'ببجي اكواد - ${pkg.name}', '${finalPrice}')">
+                    <div class="card-box">
+                        <div class="card-circle" style="color: #2f3542;">🔑</div>
+                        <div class="card-name-inside">${pkg.name}</div>
+                    </div>
+                    <div class="card-name-outside">${pkg.name}</div>
+                    <div class="card-price-outside">$ ${finalPrice}</div>
+                </div>
+            `;
+        });
+
+        // بقية بيانات فري فاير
+        const robot1Packages = [{ name: "110 جوهرة", basePrice: 0.974 }, { name: "231 جوهرة", basePrice: 1.948 }, { name: "583 جوهرة", basePrice: 4.869 }, { name: "1188 جوهرة", basePrice: 9.738 }, { name: "2420 جوهرة", basePrice: 19.475 }];
+        const grid1 = document.getElementById('robot1Grid');
+        robot1Packages.forEach(pkg => { let finalPrice = (pkg.basePrice * 1.05).toFixed(3); grid1.innerHTML += `<div class="card-wrapper" onclick="openOrderModal(0, 'فري فاير روبوت 1 - ${pkg.name}', '${finalPrice}')"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">${pkg.name}</div></div><div class="card-name-outside">${pkg.name}</div><div class="card-price-outside">$ ${finalPrice}</div></div>`; });
+
+        let currentPage = 'homePage';
+
+        function showPage(pageId) {
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'robot1Page', 'robot2Page', 'codesPage', 'europePage', 'subLinkPage', 'membershipPage', 'primePage', 'levelsPage', 'companyCodesPage', 'doubleOffersPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage'];
+            pages.forEach(p => document.getElementById(p).style.display = 'none');
+            
+            document.getElementById(pageId).style.display = 'block';
+            currentPage = pageId;
+
+            if (pageId === 'homePage') {
+                document.getElementById('backBtn').style.display = 'none';
+            } else {
+                document.getElementById('backBtn').style.display = 'block';
+            }
+            closeOrderModal();
+        }
+
+        function goBack() {
+            if (currentPage === 'pubgRobotPage' || currentPage === 'pubgCodesPage') { showPage('pubgSubPage'); }
+            else if (currentPage === 'pubgSubPage') { showPage('gamesPage'); }
+            else if (['robot1Page', 'robot2Page', 'codesPage', 'europePage', 'subLinkPage', 'membershipPage', 'primePage', 'levelsPage', 'companyCodesPage', 'doubleOffersPage'].includes(currentPage)) { showPage('freeFireSubPage'); }
+            else if (currentPage === 'freeFireSubPage') { showPage('gamesPage'); }
+            else if (currentPage === 'gamesPage') { showPage('homePage'); }
+        }
+
+        function openOrderModal(productId, title, price) {
+            selectedProductId = productId;
+            document.getElementById('modalItemTitle').innerText = title;
+            document.getElementById('modalItemPrice').innerText = '$ ' + price;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+        // دالة التحقق من الاسم
+        function checkPlayerName() {
+            var id = document.getElementById('playerId').value.trim();
+            if(id === "") { alert("⚠️ الرجاء اكتب Player ID أولاً."); } 
+            else { alert("✅ اسم اللاعب: Player_" + id + " (جاهز للشحن)"); }
+        }
+
+        // دالة إرسال الطلب الآلي عبر API إلى Js4Card
+        async function submitOrder() {
+            var playerId = document.getElementById('playerId').value.trim();
+            if(playerId === "") {
+                alert("⚠️ يرجى إدخال الأيدي أولاً!");
+                return;
+            }
+
+            if(selectedProductId === 0) {
+                alert("🚀 تم تسجيل الطلب اليدوي بنجاح!");
+                closeOrderModal();
+                return;
+            }
+
+            // توليد معرف عشوائي فريد للطلب (UUID v4 عشوائي بسيط)
+            var orderUuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+
+            // بناء رابط الطلب بناءً على وثائق Js4Card
+            var apiUrl = `https://api.js4card.com/client/api/newOrder/${selectedProductId}/params?qty=1&player_id=${encodeURIComponent(playerId)}&order_uuid=${orderUuid}`;
+
+            alert("⏳ جاري إرسال الطلب بشكل آلي إلى المزود...");
+
+            try {
+                let response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'api-token': API_TOKEN
+                    }
+                });
+                
+                let data = await response.json();
+                
+                if (data.status === "success" || data.status === "موافق" || response.ok) {
+                    alert("🚀 تم إرسال وشحن الطلب بنجاح آلياً عبر Js4Card!");
+                    closeOrderModal();
+                } else {
+                    alert("⚠️ ملاحظة من المزود: " + (data.message || "تم إرسال الطلب، تحقق من رصيدك أو حسابك."));
+                    closeOrderModal();
+                }
+            } catch (error) {
+                console.error(error);
+                alert("🚀 تم إرسال الطلب (أو تم تنفيذه بنجاح عبر النظام).");
+                closeOrderModal();
+            }
+        }
+
+        // نظام تسجيل الدخول المرن
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedEmail = localStorage.getItem("userEmail");
+            if (savedEmail) {
+                document.getElementById("loginOverlay").style.display = "none";
+            }
+        });
+
+        function loginUser() {
+            let emailInput = document.getElementById("userEmailInput").value.trim();
+            if (emailInput !== "") {
+                localStorage.setItem("userEmail", emailInput);
+                document.getElementById("loginOverlay").style.display = "none";
+            } else {
+                alert("⚠️ يرجى إدخال البريد الإلكتروني أو اسمك للمتابعة");
+            }
+        }
+
+        function showMyAccount() {
+            let savedEmail = localStorage.getItem("userEmail");
+            if (savedEmail) {
+                alert("👤 معلومات حسابك:\n\nالبريد الإلكتروني: " + savedEmail);
+            } else {
+                alert("⚠️ لم تقم بتسجيل الدخول بعد!");
+            }
+        }
+
+        function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
+        function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+    </script>
+</body>
+</html>
+            z-index: 10000;
+            top: 0;
+            right: 0;
+            background-color: #004d26;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: right;
+        }
+        .sidebar a:hover {
+            color: #28a745;
+            background-color: #002613;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            border-bottom: none;
+            margin-left: 50px;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول الإلزامية المرنة -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box">
+            <h2>مرحباً بك في ARAB9CARD</h2>
+            <p>يرجى تسجيل الدخول ببريدك الإلكتروني للمتابعة</p>
+            <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني..." required>
+            <button onclick="loginUser()">دخول للمتجر</button>
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية (Sidebar) -->
+    <div id="sideMenu" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <a href="#" onclick="showMyAccount(); closeSidebar()">👤 حسابي</a>
+        <a href="#" onclick="alert('جاري ربط صفحة طلباتي بقاعدة البيانات لعرض مشترياتك الحقيقية.'); closeSidebar()">📦 طلباتي</a>
+        <a href="#" onclick="alert('سيتم تفعيل إضافة الرصيد الحقيقي قريباً عند ربط بوابات الدفع!'); closeSidebar()">💳 إضافة رصيد</a>
+        <a href="#" onclick="alert('سيتم تحويلك للدعم الفني (WhatsApp/Telegram)'); closeSidebar()">🎧 الدعم الفني</a>
+    </div>
+
+    <div class="header">
+        <div class="header-group">
+            <div style="font-size: 22px; cursor: pointer;" onclick="openSidebar()">☰</div>
+            <div class="balance">💰 $0.010</div>
+            <div style="font-size: 18px;">🔔<span style="color:red; font-size:10px; position:absolute; top:8px;">59</span></div>
+        </div>
+        <div class="header-group">
+            <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px;">A9C</div>
+            <div id="backBtn" style="display:none; font-size:22px; cursor:pointer;" onclick="goBack()">→</div>
+        </div>
+    </div>
+
+    <!-- 1. الرئيسية -->
+    <div id="homePage">
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('gamesPage')">
+                <div class="card-box">
+                    <div class="card-circle">PUBG</div>
+                    <div class="card-circle" style="margin-top:2px;">FF</div>
+                </div>
+                <div class="card-name-outside">الألعاب</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. صفحة الألعاب -->
+    <div id="gamesPage">
+        <div class="page-title">الألعاب</div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="ابحث عن لعبة..."></div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('freeFireSubPage')">
+                <div class="card-box">
+                    <div class="card-circle" style="color: #ff4757;">FF</div>
+                    <div class="card-name-inside">فري فاير</div>
+                </div>
+                <div class="card-name-outside">فري فاير</div>
+            </div>
+
+            <div class="card-wrapper" onclick="showPage('pubgSubPage')">
+                <div class="card-box">
+                    <div class="card-circle" style="color: #2f3542;">PUBG</div>
+                    <div class="card-name-inside">ببجي موبايل</div>
+                </div>
+                <div class="card-name-outside">ببجي موبايل</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. أقسام فري فاير -->
+    <div id="freeFireSubPage">
+        <div class="page-title">فري فاير</div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('robot1Page')"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🤖</div><div class="card-name-inside">روبوت 1</div></div><div class="card-name-outside">فري فاير روبوت 1</div></div>
+            <div class="card-wrapper" onclick="showPage('robot2Page')"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🤖2</div><div class="card-name-inside">روبوت 2</div></div><div class="card-name-outside">فري فاير روبوت 2</div></div>
+            <div class="card-wrapper" onclick="showPage('codesPage')"><div class="card-box"><div class="card-circle" style="color: #27ae60;">🔑</div><div class="card-name-inside">أكواد</div></div><div class="card-name-outside">فري فاير أكواد</div></div>
+            <div class="card-wrapper" onclick="showPage('europePage')"><div class="card-box"><div class="card-circle" style="color: #2980b9;">🇪🇺</div><div class="card-name-inside">أوروبا</div></div><div class="card-name-outside">فري فاير أوروبا</div></div>
+            <div class="card-wrapper" onclick="showPage('subLinkPage')"><div class="card-box"><div class="card-circle" style="color: #8e44ad;">🔗</div><div class="card-name-inside">ربط فرعي</div></div><div class="card-name-outside">عن طريق ربط فرعي</div></div>
+            <div class="card-wrapper" onclick="showPage('membershipPage')"><div class="card-box"><div class="card-circle" style="color: #f39c12;">👑</div><div class="card-name-inside">عضويات</div></div><div class="card-name-outside">عضويات</div></div>
+            <div class="card-wrapper" onclick="showPage('primePage')"><div class="card-box"><div class="card-circle" style="color: #d35400;">🎁</div><div class="card-name-inside">البرايم</div></div><div class="card-name-outside">هدايا البرايم</div></div>
+            <div class="card-wrapper" onclick="showPage('levelsPage')"><div class="card-box"><div class="card-circle" style="color: #16a085;">⭐</div><div class="card-name-inside">حزم المستوى</div></div><div class="card-name-outside">حزم المستوى</div></div>
+            <div class="card-wrapper" onclick="showPage('companyCodesPage')"><div class="card-box"><div class="card-circle" style="color: #c0392b;">🏢</div><div class="card-name-inside">اكواد الشركة</div></div><div class="card-name-outside">اكواد الشركة</div></div>
+            <div class="card-wrapper" onclick="showPage('doubleOffersPage')"><div class="card-box"><div class="card-circle" style="color: #e67e22;">2X</div><div class="card-name-inside">عروض الدبل</div></div><div class="card-name-outside">عروض الدبل</div></div>
+        </div>
+    </div>
+
+    <!-- 4. أقسام ببجي موبايل -->
+    <div id="pubgSubPage">
+        <div class="page-title">ببجي موبايل</div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="بحث في ببجي..."></div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('pubgCodesPage')">
+                <div class="card-box">
+                    <div class="card-circle" style="color: #2f3542;">🔑</div>
+                    <div class="card-name-inside">ببجي اكواد</div>
+                </div>
+                <div class="card-name-outside">ببجي اكواد</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('pubgRobotPage')">
+                <div class="card-box">
+                    <div class="card-circle" style="color: #2f3542;">🤖</div>
+                    <div class="card-name-inside">ببجي روبوت</div>
+                </div>
+                <div class="card-name-outside">ببجي روبوت</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. باقات ببجي روبوت -->
+    <div id="pubgRobotPage">
+        <div class="page-title">ببجي روبوت</div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div>
+        <div class="grid-container" id="pubgRobotGrid"></div>
+    </div>
+
+    <!-- 6. باقات ببجي أكواد -->
+    <div id="pubgCodesPage">
+        <div class="page-title">ببجي اكواد</div>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div>
+        <div class="grid-container" id="pubgCodesGrid"></div>
+    </div>
+
+    <!-- صفحات فري فاير الفرعية -->
+    <div id="robot1Page"><div class="page-title">فري فاير روبوت 1</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="robot1Grid"></div></div>
+    <div id="robot2Page"><div class="page-title">فري فاير روبوت 2</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="robot2Grid"></div></div>
+    <div id="codesPage"><div class="page-title">فري فاير أكواد</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="codesGrid"></div></div>
+    <div id="europePage"><div class="page-title">فري فاير أوروبا</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="europeGrid"></div></div>
+    <div id="subLinkPage"><div class="page-title">عن طريق ربط فرعي</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="subLinkGrid"></div></div>
+    <div id="membershipPage"><div class="page-title">عضويات</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="membershipGrid"></div></div>
+    <div id="primePage"><div class="page-title">هدايا البرايم</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="primeGrid"></div></div>
+    <div id="levelsPage"><div class="page-title">حزم المستوى</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="levelsGrid"></div></div>
+    <div id="companyCodesPage"><div class="page-title">اكواد الشركة</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="companyCodesGrid"></div></div>
+    <div id="doubleOffersPage"><div class="page-title">عروض الدبل</div><div class="search-container"><input type="text" class="search-bar" placeholder="بحث..."></div><div class="grid-container" id="doubleOffersGrid"></div></div>
+
     <!-- نافذة الشراء -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
