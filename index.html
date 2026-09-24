@@ -66,8 +66,7 @@
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #555; margin-bottom: 6px; padding-right: 5px; }
         .pf-input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
-        .pf-btn-upload { background-color: #fff; border: 1px solid #ddd; width: 100%; padding: 14px; border-radius: 10px; color: #777; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 5px; }
-        .pf-btn-submit { background-color: #4a7796; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        .pf-btn-submit { background-color: #28a745; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #f4f4f9; min-height: 100vh; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
@@ -81,6 +80,8 @@
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-acc { background: #28a745; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #d9534f; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        
+        .tx-badge { background: #e8f5e9; color: #2e7d32; padding: 6px 10px; border-radius: 6px; font-weight: bold; font-size: 13px; display: inline-block; margin-top: 5px; border: 1px solid #c8e6c9; }
     </style>
 </head>
 <body>
@@ -300,7 +301,7 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'chargeCodePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
             pages.forEach(p => document.getElementById(p).style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
             currentPage = pageId;
@@ -351,51 +352,45 @@
                 let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
                 html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor};">
                     <div style="font-weight: bold; margin-bottom: 5px;">إيداع عبر ${req.method} - $${req.amount}</div>
+                    <div style="font-size: 13px; color: #555; margin-bottom: 3px;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
                     <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
                 </div>`;
             });
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
-        // نموذج الدفع وتغيير زر إرفاق الصورة
+        // نموذج الدفع مع حقل رقم العملية (Transaction ID) بدلاً من الصورة
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
-                <div class="pf-field-group">
-                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
-                    <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إرفاق إثبات التحويل</button>
-                </div>
+                <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية من إيصال التحويل"></div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
             `;
             showPage('paymentFormPage');
         }
 
-        function updateFileName(input) {
-            const btn = document.getElementById('uploadBtnText');
-            if (input.files && input.files.length > 0) {
-                btn.innerHTML = `✅ تم إرفاق الصورة`; 
-                btn.style.color = "#28a745"; 
-                btn.style.borderColor = "#28a745"; 
-                btn.style.backgroundColor = "#e8f5e9";
-            }
-        }
-
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
+            let transactionId = document.getElementById('transactionId').value.trim();
+            
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
+            if (!transactionId) { alert('يرجى إدخال رقم العملية (Transaction ID)!'); return; }
             
             db.collection("deposits").add({
                 method: methodName,
                 amount: amount,
+                transactionId: transactionId,
                 status: 'pending',
                 userEmail: currentUserEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
-                alert('تم إرسال الطلب وسحبه إلى لوحة التحكم بنجاح!');
+                alert('تم إرسال الطلب بنجاح!');
                 showPage('addBalancePage');
+            }).catch(error => {
+                alert("حدث خطأ: " + error.message);
             });
         }
 
@@ -449,14 +444,21 @@
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
+                let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : `<span style="font-size:11px; color:#888;">لا يوجد رقم عملية</span>`;
+                
                 if(req.status === 'pending') {
                     balHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;">
                         <span>الزبون: <b>${req.userEmail}</b></span>
-                        <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span></div>
+                        <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span>
+                        ${txBadge}
+                        </div>
                         <div class="req-actions"><button class="btn-acc" onclick="approveBalance('${req.id}', ${req.amount})">قبول</button><button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button></div></div>`;
                 } else {
                     let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
-                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.userEmail} | $${req.amount}</span><span>${text}</span></div></div>`;
+                    balHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;">
+                        <span><b>${req.userEmail}</b> | المبلغ: <b>$${req.amount}</b> | الحالة: <b>${text}</b></span>
+                        <span>رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></span>
+                    </div></div>`;
                 }
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml;
