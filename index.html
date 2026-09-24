@@ -94,7 +94,6 @@
             <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
                 <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
             </div>
-            <!-- زر جوجل الحقيقي -->
             <button class="btn-google" onclick="triggerGoogleLogin()">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
                 المتابعة باستخدام Google
@@ -200,7 +199,7 @@
     </div>
 
     <script>
-        // 1. إعدادات Firebase الخاصة بك
+        // إعدادات Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
             authDomain: "arab9card.firebaseapp.com",
@@ -212,7 +211,6 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 2. المتغيرات الأساسية
         let userBalance = 0.010;
         let balanceRequests = []; 
         let gameOrders = [];      
@@ -225,7 +223,6 @@
             { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
 
-        // 3. جلب البيانات لحظياً من Firebase (Real-time)
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
             snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
@@ -238,7 +235,6 @@
             renderMyPayments(); renderAdminData();
         });
 
-        // 4. تهيئة Google Sign-In وبدء المتجر
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
@@ -249,7 +245,6 @@
             document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
             document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
 
-            // تهيئة زر جوجل الحقيقي
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
                     client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
@@ -258,7 +253,6 @@
             }
         };
 
-        // دوال تسجيل الدخول جوجل
         function triggerGoogleLogin() {
             if (typeof google !== 'undefined') {
                 google.accounts.id.prompt();
@@ -326,7 +320,6 @@
         function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
 
-        // 5. إرسال وعرض طلبات الزبون (عبر Firebase)
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
@@ -359,7 +352,7 @@
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
-        // نموذج الدفع مع حقل رقم العملية (Transaction ID) بدلاً من الصورة
+        // نموذج الدفع باستخدام رقم العملية (Transaction ID)
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
@@ -423,7 +416,6 @@
             });
         }
 
-        // 6. لوحة التحكم (Admin Panel مع Firebase)
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
             if (document.getElementById('adminPasswordInput').value === 'admin') {
