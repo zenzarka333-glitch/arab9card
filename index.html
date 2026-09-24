@@ -8,8 +8,6 @@
     <!-- مكتبات Firebase الرسمية -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <!-- أضفنا مكتبة التخزين للصور -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
     
     <!-- مكتبة Google Sign-In الحقيقية -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -84,17 +82,13 @@
         .btn-acc { background: #28a745; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #d9534f; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         
-        /* تصميم زر عرض الصورة في لوحة التحكم */
         .btn-view-img { background: #14375f; color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; margin-top: 5px; }
-        
-        /* شاشة التحميل عند رفع الصورة */
         #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; justify-content: center; align-items: center; z-index: 10000; font-size: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- شاشة التحميل -->
-    <div id="loadingOverlay">جاري رفع الطلب والصورة... ⏳</div>
+    <div id="loadingOverlay">جاري إرسال الطلب... ⏳</div>
 
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
@@ -104,7 +98,6 @@
             <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
                 <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
             </div>
-            <!-- زر جوجل الحقيقي -->
             <button class="btn-google" onclick="triggerGoogleLogin()">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
                 المتابعة باستخدام Google
@@ -145,10 +138,9 @@
     </div>
 
     <div id="homePage">
-        <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('gamesPage')">
-                <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
-                <div class="card-name-outside">الألعاب</div>
+        <div style="padding: 20px; display: flex; justify-content: center;">
+            <div onclick="showPage('gamesPage')" style="width: 100%; max-width: 400px; cursor: pointer; transition: transform 0.2s;">
+                <img src="Screenshot_20260925_124600_WhatsApp.jpg" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);" alt="قسم الألعاب">
             </div>
         </div>
     </div>
@@ -210,7 +202,6 @@
     </div>
 
     <script>
-        // 1. إعدادات Firebase الخاصة بك
         const firebaseConfig = {
             apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
             authDomain: "arab9card.firebaseapp.com",
@@ -221,14 +212,13 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        const storage = firebase.storage(); // تعريف خدمة التخزين للصور
 
-        // 2. المتغيرات الأساسية
         let userBalance = 0.010;
         let balanceRequests = []; 
         let gameOrders = [];      
         let currentSelectedProduct = { title: '', price: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
+        let base64ImageProof = ""; // لتخزين الصورة كنص
 
         const paymentMethods = [
             { name: "شام كاش دولار", symbol: "Z", address: "814a88285d61da72671884d2a2fbb822" },
@@ -236,7 +226,6 @@
             { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
 
-        // 3. جلب البيانات لحظياً من Firebase (Real-time)
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
             snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
@@ -249,7 +238,6 @@
             renderMyPayments(); renderAdminData();
         });
 
-        // 4. تهيئة Google Sign-In وبدء المتجر
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
@@ -368,12 +356,13 @@
 
         function openPaymentForm(index) {
             const method = paymentMethods[index];
+            base64ImageProof = "";
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
                 <div class="pf-field-group">
-                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
+                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="convertImageToBase64(this)">
                     <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إرفاق إثبات التحويل</button>
                 </div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
@@ -381,24 +370,25 @@
             showPage('paymentFormPage');
         }
 
-        function updateFileName(input) {
-            const btn = document.getElementById('uploadBtnText');
-            if (input.files && input.files.length > 0) {
-                btn.innerHTML = `✅ تم إرفاق الصورة`; 
-                btn.style.color = "#28a745"; 
-                btn.style.borderColor = "#28a745"; 
-                btn.style.backgroundColor = "#e8f5e9";
+        function convertImageToBase64(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    base64ImageProof = e.target.result; // تحويل الصورة كنص
+                    const btn = document.getElementById('uploadBtnText');
+                    btn.innerHTML = `✅ تم إرفاق الصورة`; 
+                    btn.style.color = "#28a745"; 
+                    btn.style.borderColor = "#28a745"; 
+                    btn.style.backgroundColor = "#e8f5e9";
+                };
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // دالة رفع الصورة والطلب
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
-            let fileInput = document.getElementById('realFileInput');
-            
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
             
-            // إظهار شاشة التحميل
             document.getElementById('loadingOverlay').style.display = 'flex';
             
             let depositData = {
@@ -406,35 +396,17 @@
                 amount: amount,
                 status: 'pending',
                 userEmail: currentUserEmail,
-                imageUrl: "", // رابط الصورة سيكون فارغاً في البداية
+                imageUrl: base64ImageProof, // حفظ الصورة كنص داخل قاعدة البيانات مباشرة
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
 
-            // إذا أرفق المستخدم صورة، نرفعها أولاً إلى Storage
-            if (fileInput.files && fileInput.files.length > 0) {
-                let file = fileInput.files[0];
-                let storageRef = storage.ref('proofs/' + Date.now() + '_' + file.name);
-                
-                storageRef.put(file).then(function(snapshot) {
-                    snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                        depositData.imageUrl = downloadURL; // حفظ الرابط بعد الرفع
-                        saveDepositToFirestore(depositData);
-                    });
-                }).catch(error => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                    alert("حدث خطأ أثناء رفع الصورة: " + error.message);
-                });
-            } else {
-                // إذا لم يرفق صورة، نحفظ الطلب مباشرة
-                saveDepositToFirestore(depositData);
-            }
-        }
-
-        function saveDepositToFirestore(data) {
-            db.collection("deposits").add(data).then(() => {
+            db.collection("deposits").add(depositData).then(() => {
                 document.getElementById('loadingOverlay').style.display = 'none';
-                alert('تم إرسال الطلب وسحبه إلى لوحة التحكم بنجاح!');
+                alert('تم إرسال الطلب وإفادته للوحة التحكم بنجاح!');
                 showPage('addBalancePage');
+            }).catch(error => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                alert("حدث خطأ: " + error.message);
             });
         }
 
@@ -467,7 +439,6 @@
             });
         }
 
-        // 6. لوحة التحكم (Admin Panel)
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
             if (document.getElementById('adminPasswordInput').value === 'admin') {
@@ -488,7 +459,6 @@
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
-                // إذا كان الطلب يحتوي على صورة، نعرض زر للمعاينة
                 let imgButton = req.imageUrl && req.imageUrl !== "" ? `<button class="btn-view-img" onclick="window.open('${req.imageUrl}', '_blank')">🖼️ عرض الإثبات</button>` : `<span style="font-size:11px; color:#888;">لا يوجد صورة</span>`;
                 
                 if(req.status === 'pending') {
