@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARAB9CARD - المتجر الشامل</title>
+    <!-- مكتبات Firebase الرسمية -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; padding-bottom: 70px; }
         .header { background-color: #28a745; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
@@ -40,21 +44,7 @@
         .login-box h2 { color: #1f6b3b; font-size: 22px; margin-bottom: 20px; }
         .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; text-align: right; }
         .login-box button { background-color: #1f6b3b; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
-        .btn-google img { width: 20px; }
         
-        .google-account-list { display: none; background: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 350px; text-align: right; direction: rtl; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .g-header { text-align: center; margin-bottom: 15px; }
-        .g-header img { width: 40px; margin-bottom: 5px; }
-        .g-header h3 { margin: 0; color: #202124; font-size: 20px; }
-        .g-header p { margin: 5px 0 15px; color: #5f6368; font-size: 14px; }
-        .acc-item { display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #f1f3f4; cursor: pointer; border-radius: 8px; transition: 0.2s; }
-        .acc-item:hover { background-color: #f8f9fa; }
-        .acc-avatar { width: 36px; height: 36px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; margin-left: 12px; }
-        .acc-info { display: flex; flex-direction: column; }
-        .acc-name { font-size: 14px; font-weight: bold; color: #3c4043; }
-        .acc-email { font-size: 12px; color: #5f6368; }
-
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #004d26; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
         .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #fff; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: right; font-weight: bold; }
         .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; }
@@ -64,12 +54,6 @@
         .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; direction: rtl; }
         .payment-card { background: linear-gradient(135deg, #004d26, #002613); border-radius: 10px; padding: 12px 5px; text-align: center; color: white; font-size: 9px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; position: relative; }
         .payment-icon { width: 45px; height: 45px; background-color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: #004d26; font-size: 18px; }
-        
-        .charge-code-page { padding: 20px; background-color: #fafafa; min-height: 80vh; }
-        .charge-input-box { background: white; border: 1px solid #e0e0e0; border-radius: 15px; padding: 8px 15px; position: relative; margin-top: 15px; margin-bottom: 15px; display: flex; align-items: center; }
-        .charge-label-top { position: absolute; top: -10px; right: 20px; background: white; padding: 0 8px; font-size: 11px; color: #888; font-weight: bold; }
-        .charge-input-box input { flex: 1; border: none; outline: none; text-align: right; padding: 10px 5px; font-size: 15px; color: #333; }
-        .btn-charge-submit { background-color: #14375f; color: white; border: none; width: 100%; padding: 15px; border-radius: 15px; font-size: 16px; font-weight: bold; cursor: pointer; }
         
         .pf-container { padding: 20px; direction: rtl; background-color: #fafafa; min-height: 100vh; }
         .pf-header { text-align: center; margin-bottom: 25px; }
@@ -101,44 +85,6 @@
             <h2>مرحباً بك في ARAB9CARD</h2>
             <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني..." required>
             <button onclick="loginUser()">دخول للمتجر</button>
-            <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
-                <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
-            </div>
-            <button class="btn-google" onclick="showGoogleAccountChooser()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
-                المتابعة باستخدام Google
-            </button>
-        </div>
-
-        <div class="google-account-list" id="googleAccountChooser">
-            <div class="g-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
-                <h3>اختيار حساب</h3>
-                <p>للمتابعة إلى متجر ARAB9CARD</p>
-            </div>
-            
-            <div class="acc-item" onclick="loginWithSelectedGoogle('ali.gamer.syria@gmail.com')">
-                <div class="acc-avatar" style="background:#e8710a;">ع</div>
-                <div class="acc-info">
-                    <div class="acc-name">علي</div>
-                    <div class="acc-email">ali.gamer.syria@gmail.com</div>
-                </div>
-            </div>
-
-            <div class="acc-item" onclick="loginWithSelectedGoogle('store.client2026@gmail.com')">
-                <div class="acc-avatar" style="background:#1a73e8;">S</div>
-                <div class="acc-info">
-                    <div class="acc-name">Store Client</div>
-                    <div class="acc-email">store.client2026@gmail.com</div>
-                </div>
-            </div>
-
-            <div class="acc-item" style="border-bottom: none; margin-top: 10px;" onclick="alert('تم اختيار إضافة حساب جديد.')">
-                <div class="acc-avatar" style="background:transparent; color:#5f6368; border:1px solid #dadce0;">👤</div>
-                <div class="acc-info">
-                    <div class="acc-name" style="font-weight:normal;">استخدام حساب آخر</div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -185,18 +131,7 @@
 
     <div id="addBalancePage">
         <div class="balance-page-container">
-            <div class="charge-code-banner" onclick="showPage('chargeCodePage')">
-                <div class="charge-text"><h3>كود شحن ARAB9CARD</h3><p>إدخال كود الشحن</p></div>
-                <div class="charge-icon">💳</div>
-            </div>
             <div class="payment-grid" id="paymentMethodsGrid"></div>
-        </div>
-    </div>
-
-    <div id="chargeCodePage">
-        <div class="charge-code-page">
-            <div class="charge-input-box"><span class="charge-label-top">كود البطاقة</span><input type="text" id="voucherInputCode" placeholder="ادخل الكود"></div>
-            <button class="btn-charge-submit" onclick="submitVoucher()">شحن 📦</button>
         </div>
     </div>
 
@@ -247,46 +182,62 @@
     </div>
 
     <div class="bottom-nav">
-        <div>🛒</div><div>💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div>🛡️</div><div onclick="showMyAccount()" style="cursor: pointer;">👤</div>
+        <div>🛒</div><div onclick="showPage('addBalancePage')" style="cursor:pointer;">💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div>🛡️</div><div onclick="showMyAccount()" style="cursor: pointer;">👤</div>
     </div>
 
     <script>
+        // 1. إعدادات Firebase الخاصة بك
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
+            authDomain: "arab9card.firebaseapp.com",
+            projectId: "arab9card",
+            storageBucket: "arab9card.firebasestorage.app",
+            messagingSenderId: "258855549504",
+            appId: "1:258855549504:web:ab1597d5d5a7d350f33da5"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 2. المتغيرات الأساسية
         let userBalance = 0.010;
         let balanceRequests = []; 
         let gameOrders = [];      
-        let reqCounter = 1;
         let currentSelectedProduct = { title: '', price: 0 };
-
-        function loadSavedData() {
-            if(localStorage.getItem('a9c_balance') !== null) {
-                userBalance = parseFloat(localStorage.getItem('a9c_balance'));
-                balanceRequests = JSON.parse(localStorage.getItem('a9c_balanceRequests') || '[]');
-                gameOrders = JSON.parse(localStorage.getItem('a9c_gameOrders') || '[]');
-                reqCounter = parseInt(localStorage.getItem('a9c_reqCounter') || '1');
-            }
-        }
-
-        function saveDataToStorage() {
-            localStorage.setItem('a9c_balance', userBalance.toString());
-            localStorage.setItem('a9c_balanceRequests', JSON.stringify(balanceRequests));
-            localStorage.setItem('a9c_gameOrders', JSON.stringify(gameOrders));
-            localStorage.setItem('a9c_reqCounter', reqCounter.toString());
-        }
+        let currentUserEmail = localStorage.getItem("userEmail") || "";
 
         const paymentMethods = [
-            { name: "شام كاش دولار", symbol: "Z", hasQR: true, address: "814a88285d61da72671884d2a2fbb822" },
-            { name: "آسيا سيل العراق", symbol: "A", hasQR: false, address: "07756752890" },
-            { name: "سيريتل كاش يدوي", symbol: "S", hasQR: false, address: "57592960" }
+            { name: "شام كاش دولار", symbol: "Z", address: "814a88285d61da72671884d2a2fbb822" },
+            { name: "آسيا سيل العراق", symbol: "A", address: "07756752890" },
+            { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
 
-        document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#28a745; margin-bottom:2px;">${m.name}</div></div>`).join('');
-        document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
-        document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
+        // 3. جلب البيانات لحظياً من Firebase (Real-time)
+        db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+            gameOrders = [];
+            snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
+            renderMyOrders(); renderAdminData();
+        });
+
+        db.collection("deposits").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+            balanceRequests = [];
+            snapshot.forEach((doc) => { balanceRequests.push({ id: doc.id, ...doc.data() }); });
+            renderMyPayments(); renderAdminData();
+        });
+
+        // 4. وظائف المتجر الأساسية
+        document.addEventListener("DOMContentLoaded", function() { 
+            if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
+            updateUserBalanceUI();
+            if (currentUserEmail) { document.getElementById("loginOverlay").style.display = "none"; }
+            
+            document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#28a745; margin-bottom:2px;">${m.name}</div></div>`).join('');
+            document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
+            document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
+        });
 
         let currentPage = 'homePage';
-
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'chargeCodePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
             pages.forEach(p => document.getElementById(p).style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
             currentPage = pageId;
@@ -294,88 +245,91 @@
         }
 
         function goBack() {
-            if (currentPage === 'paymentFormPage' || currentPage === 'chargeCodePage') showPage('addBalancePage');
-            else if (currentPage === 'addBalancePage' || currentPage === 'myOrdersPage' || currentPage === 'myPaymentsPage') showPage('homePage');
+            if (currentPage === 'paymentFormPage') showPage('addBalancePage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage'].includes(currentPage)) showPage('homePage');
             else if (['pubgRobotPage'].includes(currentPage)) showPage('pubgSubPage');
             else if (['robot1Page'].includes(currentPage)) showPage('freeFireSubPage');
-            else if (currentPage === 'pubgSubPage' || currentPage === 'freeFireSubPage') showPage('gamesPage');
-            else if (currentPage === 'gamesPage' || currentPage === 'adminDashboardPage') showPage('homePage');
+            else if (['pubgSubPage', 'freeFireSubPage'].includes(currentPage)) showPage('gamesPage');
         }
 
         function updateUserBalanceUI() {
             document.getElementById('userBalanceDisplay').innerText = userBalance.toFixed(3);
+            localStorage.setItem('a9c_balance', userBalance.toString());
         }
 
+        function loginUser() { 
+            let email = document.getElementById("userEmailInput").value.trim();
+            if (email !== "") { 
+                localStorage.setItem("userEmail", email); 
+                currentUserEmail = email;
+                document.getElementById("loginOverlay").style.display = "none"; 
+                renderMyOrders(); renderMyPayments();
+            } 
+        }
+
+        function logoutUser() { localStorage.removeItem("userEmail"); location.reload(); }
+        function showMyAccount() { alert(`👤 معلومات الحساب:\nالبريد: ${currentUserEmail}\nالرصيد: $${userBalance.toFixed(3)}`); }
+        function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
+        function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+
+        // 5. إرسال وعرض طلبات الزبون (عبر Firebase)
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
         function renderMyOrders() {
-            let html = '';
-            if (gameOrders.length === 0) {
-                html = '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>';
-            } else {
-                gameOrders.slice().reverse().forEach(order => {
-                    let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#28a745' : '#d9534f');
-                    let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : '❌ مرفوض');
-                    html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid ${statusColor};">
-                        <div style="font-weight: bold; margin-bottom: 5px; color: #333;">طلب شحن ألعاب</div>
-                        <div style="font-size: 13px; color: #555; margin-bottom: 8px;">${order.product} (ID: ${order.playerId})</div>
-                        <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
-                    </div>`;
-                });
-            }
+            let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
+            let html = myOrders.length === 0 ? '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>' : '';
+            myOrders.forEach(order => {
+                let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#28a745' : '#d9534f');
+                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : '❌ مرفوض');
+                html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor};">
+                    <div style="font-weight: bold; margin-bottom: 5px;">${order.product} (ID: ${order.playerId})</div>
+                    <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
+                </div>`;
+            });
             document.getElementById('myOrdersListContainer').innerHTML = html;
         }
 
         function renderMyPayments() {
-            let html = '';
-            if (balanceRequests.length === 0) {
-                html = '<p style="text-align:center; color:#888;">لا توجد دفعات سابقة حالياً</p>';
-            } else {
-                balanceRequests.slice().reverse().forEach(req => {
-                    let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#28a745' : '#d9534f');
-                    let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
-                    html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid ${statusColor};">
-                        <div style="font-weight: bold; margin-bottom: 5px; color: #333;">طلب إضافة رصيد</div>
-                        <div style="font-size: 13px; color: #555; margin-bottom: 8px;">شحن عبر ${req.method} بقيمة $${req.amount}</div>
-                        <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
-                    </div>`;
-                });
-            }
+            let myPayments = balanceRequests.filter(req => req.userEmail === currentUserEmail);
+            let html = myPayments.length === 0 ? '<p style="text-align:center; color:#888;">لا توجد دفعات حالياً</p>' : '';
+            myPayments.forEach(req => {
+                let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#28a745' : '#d9534f');
+                let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
+                html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor};">
+                    <div style="font-weight: bold; margin-bottom: 5px;">إيداع عبر ${req.method} - $${req.amount}</div>
+                    <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
+                </div>`;
+            });
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
         function openPaymentForm(index) {
             const method = paymentMethods[index];
-            let html = `
+            document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
-                <div class="pf-field-group">
-                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
-                    <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إثبات التحويل</button>
-                </div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
             `;
-            document.getElementById('pfDynamicContent').innerHTML = html;
             showPage('paymentFormPage');
-        }
-
-        function updateFileName(input) {
-            const btn = document.getElementById('uploadBtnText');
-            if (input.files && input.files.length > 0) {
-                btn.innerHTML = `✅ تم الإرفاق`; btn.style.color = "#28a745"; btn.style.borderColor = "#28a745"; btn.style.backgroundColor = "#e8f5e9";
-            }
         }
 
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
-            balanceRequests.push({ id: reqCounter++, method: methodName, amount: amount, status: 'pending' });
-            saveDataToStorage(); 
-            alert('تم تقديم طلب إضافة الرصيد بنجاح! يمكنك متابعته من قسم دفعاتي.');
-            showPage('addBalancePage');
-            renderAdminData(); 
+            
+            // إضافة البيانات لفايربيس
+            db.collection("deposits").add({
+                method: methodName,
+                amount: amount,
+                status: 'pending',
+                userEmail: currentUserEmail,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert('تم إرسال الطلب وسحبه إلى لوحة التحكم بنجاح!');
+                showPage('addBalancePage');
+            });
         }
 
         function openOrderModal(title, price) {
@@ -389,25 +343,32 @@
         function submitGameOrder() {
             let playerId = document.getElementById('playerId').value.trim();
             if(playerId === "") { alert("⚠️ يرجى إدخال الأيدي أولاً!"); return; }
-            if(userBalance < currentSelectedProduct.price) { alert("⚠️ رصيدك غير كافٍ لإتمام العملية. يرجى شحن رصيدك أولاً."); return; }
+            if(userBalance < currentSelectedProduct.price) { alert("⚠️ رصيدك غير كافٍ."); return; }
             
             userBalance -= currentSelectedProduct.price;
-            gameOrders.push({ id: reqCounter++, product: currentSelectedProduct.title, price: currentSelectedProduct.price, playerId: playerId, status: 'pending' });
-            
-            saveDataToStorage(); 
             updateUserBalanceUI();
-            
-            alert("🚀 تم تسجيل طلبك بنجاح! يمكنك متابعة حالة الطلب من قسم طلباتي.");
-            closeOrderModal();
-            renderAdminData();
+
+            // إرسال الطلب لفايربيس
+            db.collection("orders").add({
+                product: currentSelectedProduct.title,
+                price: currentSelectedProduct.price,
+                playerId: playerId,
+                status: 'pending',
+                userEmail: currentUserEmail,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert("🚀 تم تسجيل طلبك وإرساله للإدارة!");
+                closeOrderModal();
+            });
         }
 
+        // 6. لوحة التحكم (Admin Panel مع Firebase)
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
             if (document.getElementById('adminPasswordInput').value === 'admin') {
                 document.getElementById('adminLoginModal').style.display = 'none';
                 document.getElementById('adminPasswordInput').value = '';
-                renderAdminData(); showPage('adminDashboardPage');
+                showPage('adminDashboardPage');
             } else { alert('كلمة المرور خاطئة!'); }
         }
 
@@ -420,94 +381,44 @@
         }
 
         function renderAdminData() {
-            let balHtml = '';
-            if(balanceRequests.length === 0) balHtml = '<p style="text-align:center; color:#888;">لا يوجد طلبات رصيد حالياً</p>';
-            balanceRequests.slice().reverse().forEach(req => {
+            let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
+            balanceRequests.forEach(req => {
                 if(req.status === 'pending') {
-                    balHtml += `<div class="request-card"><div class="req-info"><span>الطريقة: <b>${req.method}</b></span> <span>المبلغ: <b>$${req.amount}</b></span></div><div class="req-actions"><button class="btn-acc" onclick="approveBalance(${req.id})">قبول وإضافة</button><button class="btn-rej" onclick="rejectBalance(${req.id})">رفض</button></div></div>`;
+                    balHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;">
+                        <span>الزبون: <b>${req.userEmail}</b></span>
+                        <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span></div>
+                        <div class="req-actions"><button class="btn-acc" onclick="approveBalance('${req.id}', ${req.amount})">قبول</button><button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button></div></div>`;
                 } else {
-                    let text = req.status === 'approved' ? '✅ تم القبول' : '❌ تم الرفض';
-                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.method} - $${req.amount}</span><span>${text}</span></div></div>`;
+                    let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
+                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.userEmail} | $${req.amount}</span><span>${text}</span></div></div>`;
                 }
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml;
 
-            let ordHtml = '';
-            if(gameOrders.length === 0) ordHtml = '<p style="text-align:center; color:#888;">لا يوجد طلبات ألعاب حالياً</p>';
-            gameOrders.slice().reverse().forEach(req => {
+            let ordHtml = gameOrders.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات ألعاب</p>' : '';
+            gameOrders.forEach(req => {
                 if(req.status === 'pending') {
-                    ordHtml += `<div class="request-card"><div class="req-info"><span>المنتج: <b>${req.product}</b></span> <span>الآيدي: <b>${req.playerId}</b></span></div><div class="req-actions"><button class="btn-acc" onclick="approveOrder(${req.id})">تأكيد الشحن</button><button class="btn-rej" onclick="rejectOrder(${req.id})">رفض ورد الرصيد</button></div></div>`;
+                    ordHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;">
+                        <span>الزبون: <b>${req.userEmail}</b></span>
+                        <span>المنتج: <b>${req.product}</b> | الآيدي: <b>${req.playerId}</b></span></div>
+                        <div class="req-actions"><button class="btn-acc" onclick="approveOrder('${req.id}')">تم الشحن</button><button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض</button></div></div>`;
                 } else {
-                    let text = req.status === 'approved' ? '✅ تم الشحن' : '❌ تم الرفض';
-                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.product} - ID:${req.playerId}</span><span>${text}</span></div></div>`;
+                    let text = req.status === 'approved' ? '✅ مشحون' : '❌ مرفوض';
+                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.userEmail} | ${req.product}</span><span>${text}</span></div></div>`;
                 }
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
         }
 
-        function approveBalance(id) {
-            let req = balanceRequests.find(r => r.id === id);
-            if(req && req.status === 'pending') {
-                req.status = 'approved'; userBalance += req.amount; 
-                saveDataToStorage(); 
-                updateUserBalanceUI(); renderAdminData(); alert(`تم إضافة $${req.amount} لحساب الزبون بنجاح!`);
-            }
+        function approveBalance(id, amount) {
+            db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => {
+                // ملاحظة: لإضافة الرصيد لحساب الزبون الفعلي بشكل دائم، نحتاج جدول للمستخدمين مستقبلاً.
+                alert(`تم قبول الطلب بنجاح!`);
+            });
         }
-        function rejectBalance(id) {
-            let req = balanceRequests.find(r => r.id === id);
-            if(req && req.status === 'pending') { req.status = 'rejected'; saveDataToStorage(); renderAdminData(); }
-        }
-        function approveOrder(id) {
-            let req = gameOrders.find(r => r.id === id);
-            if(req && req.status === 'pending') { req.status = 'approved'; saveDataToStorage(); renderAdminData(); }
-        }
-        function rejectOrder(id) {
-            let req = gameOrders.find(r => r.id === id);
-            if(req && req.status === 'pending') {
-                req.status = 'rejected'; userBalance += req.price;
-                saveDataToStorage(); updateUserBalanceUI(); renderAdminData();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() { 
-            loadSavedData(); 
-            updateUserBalanceUI();
-            if (localStorage.getItem("userEmail")) { 
-                document.getElementById("loginOverlay").style.display = "none"; 
-            } 
-        });
-
-        function loginUser() { 
-            if (document.getElementById("userEmailInput").value.trim() !== "") { 
-                localStorage.setItem("userEmail", document.getElementById("userEmailInput").value.trim()); 
-                document.getElementById("loginOverlay").style.display = "none"; 
-            } 
-        }
-
-        function showGoogleAccountChooser() {
-            document.getElementById("mainLoginBox").style.display = "none";
-            document.getElementById("googleAccountChooser").style.display = "block";
-        }
-
-        function loginWithSelectedGoogle(email) {
-            localStorage.setItem("userEmail", email);
-            document.getElementById("loginOverlay").style.display = "none";
-            alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
-        }
-
-        function logoutUser() {
-            localStorage.removeItem("userEmail");
-            location.reload(); 
-        }
-
-        function showMyAccount() {
-            let email = localStorage.getItem("userEmail") || "غير معروف";
-            alert(`👤 معلومات الحساب:\n\nالبريد الإلكتروني: ${email}\nالرصيد الحالي: $${userBalance.toFixed(3)}`);
-        }
-
-        function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
-        function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+        function rejectBalance(id) { db.collection("deposits").doc(id).update({ status: 'rejected' }); }
+        function approveOrder(id) { db.collection("orders").doc(id).update({ status: 'approved' }); }
+        function rejectOrder(id) { db.collection("orders").doc(id).update({ status: 'rejected' }); }
     </script>
 </body>
 </html>
-
