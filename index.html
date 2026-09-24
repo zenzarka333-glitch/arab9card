@@ -88,7 +88,7 @@
 </head>
 <body>
 
-    <div id="loadingOverlay">جاري إرسال الطلب... ⏳</div>
+    <div id="loadingOverlay">جاري إرسال الطلب مع الصورة... ⏳</div>
 
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
@@ -363,7 +363,7 @@
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
                 <div class="pf-field-group">
-                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="convertImageToBase64(this)">
+                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="compressAndConvertImage(this)">
                     <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إرفاق إثبات التحويل</button>
                 </div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
@@ -371,18 +371,51 @@
             showPage('paymentFormPage');
         }
 
-        function convertImageToBase64(input) {
+        // دالة ذكية لضغط الصورة وتصغير حجمها لكي تناسب قاعدة البيانات تماماً وتعمل بسرعة
+        function compressAndConvertImage(input) {
             if (input.files && input.files[0]) {
-                let reader = new FileReader();
+                const file = input.files[0];
+                const reader = new FileReader();
                 reader.onload = function (e) {
-                    base64ImageProof = e.target.result;
-                    const btn = document.getElementById('uploadBtnText');
-                    btn.innerHTML = `✅ تم إرفاق الصورة`; 
-                    btn.style.color = "#28a745"; 
-                    btn.style.borderColor = "#28a745"; 
-                    btn.style.backgroundColor = "#e8f5e9";
+                    const img = new Image();
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        // تحديد الحد الأقصى لأبعاد الصورة لتقليل حجمها
+                        const MAX_WIDTH = 600;
+                        const MAX_HEIGHT = 600;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // ضغط الجودة إلى 0.7 لضمان حجم أقل من 1 ميجابايت
+                        base64ImageProof = canvas.toDataURL('image/jpeg', 0.7);
+                        
+                        const btn = document.getElementById('uploadBtnText');
+                        btn.innerHTML = `✅ تم إرفاق وضغط الصورة`; 
+                        btn.style.color = "#28a745"; 
+                        btn.style.borderColor = "#28a745"; 
+                        btn.style.backgroundColor = "#e8f5e9";
+                    };
+                    img.src = e.target.result;
                 };
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             }
         }
 
@@ -403,11 +436,11 @@
 
             db.collection("deposits").add(depositData).then(() => {
                 document.getElementById('loadingOverlay').style.display = 'none';
-                alert('تم إرسال الطلب بنجاح!');
+                alert('تم إرسال الطلب وإثبات الدفع بنجاح!');
                 showPage('addBalancePage');
             }).catch(error => {
                 document.getElementById('loadingOverlay').style.display = 'none';
-                alert("حدث خطأ: " + error.message);
+                alert("حدث خطأ أثناء إرسال الطلب: " + error.message);
             });
         }
 
