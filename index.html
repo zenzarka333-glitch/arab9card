@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARAB9CARD - المتجر الشامل</title>
+    
     <!-- مكتبات Firebase الرسمية -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
+    <!-- مكتبة Google Sign-In الحقيقية -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; padding-bottom: 70px; }
@@ -44,13 +48,14 @@
         .login-box h2 { color: #1f6b3b; font-size: 22px; margin-bottom: 20px; }
         .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; text-align: right; }
         .login-box button { background-color: #1f6b3b; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; width: 100%; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .btn-google img { width: 20px; }
         
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #004d26; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
         .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #fff; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: right; font-weight: bold; }
         .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; }
 
         .balance-page-container { padding: 15px; }
-        .charge-code-banner { background-color: #14375f; border-radius: 12px; padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: rtl; cursor: pointer; }
         .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; direction: rtl; }
         .payment-card { background: linear-gradient(135deg, #004d26, #002613); border-radius: 10px; padding: 12px 5px; text-align: center; color: white; font-size: 9px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; position: relative; }
         .payment-icon { width: 45px; height: 45px; background-color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: #004d26; font-size: 18px; }
@@ -83,8 +88,16 @@
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
             <h2>مرحباً بك في ARAB9CARD</h2>
-            <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني..." required>
+            <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني (اختياري)...">
             <button onclick="loginUser()">دخول للمتجر</button>
+            <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
+                <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
+            </div>
+            <!-- زر جوجل الحقيقي -->
+            <button class="btn-google" onclick="triggerGoogleLogin()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                المتابعة باستخدام Google
+            </button>
         </div>
     </div>
 
@@ -224,16 +237,66 @@
             renderMyPayments(); renderAdminData();
         });
 
-        // 4. وظائف المتجر الأساسية
-        document.addEventListener("DOMContentLoaded", function() { 
+        // 4. تهيئة Google Sign-In وبدء المتجر
+        window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
+            
             if (currentUserEmail) { document.getElementById("loginOverlay").style.display = "none"; }
             
             document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#28a745; margin-bottom:2px;">${m.name}</div></div>`).join('');
             document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
             document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
-        });
+
+            // تهيئة زر جوجل الحقيقي
+            if (typeof google !== 'undefined') {
+                google.accounts.id.initialize({
+                    client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
+                    callback: handleCredentialResponse
+                });
+            }
+        };
+
+        // دوال تسجيل الدخول جوجل
+        function triggerGoogleLogin() {
+            if (typeof google !== 'undefined') {
+                google.accounts.id.prompt();
+            } else {
+                alert("جاري تحميل مكتبة جوجل، يرجى التأكد من اتصالك بالإنترنت.");
+            }
+        }
+
+        function handleCredentialResponse(response) {
+            let payload = parseJwt(response.credential);
+            let email = payload.email;
+            localStorage.setItem("userEmail", email);
+            currentUserEmail = email;
+            document.getElementById("loginOverlay").style.display = "none";
+            renderMyOrders(); 
+            renderMyPayments();
+            alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
+        }
+
+        function parseJwt(token) {
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        function loginUser() { 
+            let email = document.getElementById("userEmailInput").value.trim();
+            if (email !== "") { 
+                localStorage.setItem("userEmail", email); 
+                currentUserEmail = email;
+                document.getElementById("loginOverlay").style.display = "none"; 
+                renderMyOrders(); renderMyPayments();
+            } else {
+                alert("يرجى إدخال بريد إلكتروني أو المتابعة عبر جوجل");
+            }
+        }
 
         let currentPage = 'homePage';
         function showPage(pageId) {
@@ -255,16 +318,6 @@
         function updateUserBalanceUI() {
             document.getElementById('userBalanceDisplay').innerText = userBalance.toFixed(3);
             localStorage.setItem('a9c_balance', userBalance.toString());
-        }
-
-        function loginUser() { 
-            let email = document.getElementById("userEmailInput").value.trim();
-            if (email !== "") { 
-                localStorage.setItem("userEmail", email); 
-                currentUserEmail = email;
-                document.getElementById("loginOverlay").style.display = "none"; 
-                renderMyOrders(); renderMyPayments();
-            } 
         }
 
         function logoutUser() { localStorage.removeItem("userEmail"); location.reload(); }
@@ -304,22 +357,36 @@
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
+        // نموذج الدفع وتغيير زر إرفاق الصورة
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
+                <div class="pf-field-group">
+                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
+                    <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إرفاق إثبات التحويل</button>
+                </div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
             `;
             showPage('paymentFormPage');
+        }
+
+        function updateFileName(input) {
+            const btn = document.getElementById('uploadBtnText');
+            if (input.files && input.files.length > 0) {
+                btn.innerHTML = `✅ تم إرفاق الصورة`; 
+                btn.style.color = "#28a745"; 
+                btn.style.borderColor = "#28a745"; 
+                btn.style.backgroundColor = "#e8f5e9";
+            }
         }
 
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
             
-            // إضافة البيانات لفايربيس
             db.collection("deposits").add({
                 method: methodName,
                 amount: amount,
@@ -348,7 +415,6 @@
             userBalance -= currentSelectedProduct.price;
             updateUserBalanceUI();
 
-            // إرسال الطلب لفايربيس
             db.collection("orders").add({
                 product: currentSelectedProduct.title,
                 price: currentSelectedProduct.price,
@@ -412,7 +478,6 @@
 
         function approveBalance(id, amount) {
             db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => {
-                // ملاحظة: لإضافة الرصيد لحساب الزبون الفعلي بشكل دائم، نحتاج جدول للمستخدمين مستقبلاً.
                 alert(`تم قبول الطلب بنجاح!`);
             });
         }
