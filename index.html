@@ -13,17 +13,17 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9fbfb; margin: 0; padding: 0; padding-bottom: 70px; }
-        .header { background-color: #28a745; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; padding-bottom: 70px; }
+        .header { background-color: #28a745; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
         .header-group { display: flex; align-items: center; gap: 12px; }
         .balance { background-color: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 15px; font-size: 14px; }
         
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 10px; padding: 20px 15px; direction: rtl; }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .card-box { background: linear-gradient(135deg, #004d26, #002613); width: 100%; aspect-ratio: 1 / 1.1; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; }
-        .card-circle { width: 55%; aspect-ratio: 1 / 1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; margin-bottom: 8px; border: 2px solid #28a745; background-color: white; color: #004d26; text-align: center; }
+        .card-circle { width: 55%; aspect-ratio: 1 / 1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; font-weight: bold; margin-bottom: 8px; border: 2px solid #28a745; background-color: white; color: #004d26; text-align: center; }
         .card-name-inside { color: #28a745; font-size: 9px; font-weight: bold; text-align: center; }
-        .card-name-outside { margin-top: 6px; font-size: 11px; font-weight: bold; color: #004d26; text-align: center; }
+        .card-name-outside { margin-top: 6px; font-size: 10px; font-weight: bold; color: #28a745; text-align: center; }
         .card-price-outside { margin-top: 2px; font-size: 11px; font-weight: bold; color: #e74c3c; text-align: center; }
 
         .page-title { text-align: center; color: #333; font-size: 20px; font-weight: 900; margin: 20px 0 10px 0; }
@@ -66,7 +66,8 @@
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #555; margin-bottom: 6px; padding-right: 5px; }
         .pf-input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
-        .pf-btn-submit { background-color: #28a745; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        .pf-btn-upload { background-color: #fff; border: 1px solid #ddd; width: 100%; padding: 14px; border-radius: 10px; color: #777; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 5px; }
+        .pf-btn-submit { background-color: #4a7796; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #f4f4f9; min-height: 100vh; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
@@ -80,14 +81,9 @@
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-acc { background: #28a745; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #d9534f; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        
-        .tx-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 6px; font-weight: bold; font-size: 13px; display: inline-block; margin-top: 5px; border: 1px solid #c8e6c9; }
-        #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; justify-content: center; align-items: center; z-index: 10000; font-size: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
-
-    <div id="loadingOverlay">جاري إرسال الطلب... ⏳</div>
 
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
@@ -97,6 +93,7 @@
             <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
                 <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
             </div>
+            <!-- زر جوجل الحقيقي -->
             <button class="btn-google" onclick="triggerGoogleLogin()">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
                 المتابعة باستخدام Google
@@ -137,28 +134,10 @@
     </div>
 
     <div id="homePage">
-        <div class="page-title" style="margin-top: 30px;">أقسام المتجر الرئيسية</div>
         <div class="grid-container">
             <div class="card-wrapper" onclick="showPage('gamesPage')">
-                <div class="card-box">
-                    <div class="card-circle">🎮</div>
-                    <div class="card-name-inside">الألعاب</div>
-                </div>
-                <div class="card-name-outside">قسم الألعاب</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('addBalancePage')">
-                <div class="card-box">
-                    <div class="card-circle">💳</div>
-                    <div class="card-name-inside">الرصيد</div>
-                </div>
-                <div class="card-name-outside">إضافة رصيد</div>
-            </div>
-            <div class="card-wrapper" onclick="showMyOrdersPage()">
-                <div class="card-box">
-                    <div class="card-circle">📦</div>
-                    <div class="card-name-inside">الطلبات</div>
-                </div>
-                <div class="card-name-outside">طلباتي</div>
+                <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
+                <div class="card-name-outside">الألعاب</div>
             </div>
         </div>
     </div>
@@ -220,6 +199,7 @@
     </div>
 
     <script>
+        // 1. إعدادات Firebase الخاصة بك
         const firebaseConfig = {
             apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
             authDomain: "arab9card.firebaseapp.com",
@@ -231,6 +211,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // 2. المتغيرات الأساسية
         let userBalance = 0.010;
         let balanceRequests = []; 
         let gameOrders = [];      
@@ -243,6 +224,7 @@
             { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
 
+        // 3. جلب البيانات لحظياً من Firebase (Real-time)
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
             snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
@@ -255,6 +237,7 @@
             renderMyPayments(); renderAdminData();
         });
 
+        // 4. تهيئة Google Sign-In وبدء المتجر
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
@@ -265,6 +248,7 @@
             document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
             document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
 
+            // تهيئة زر جوجل الحقيقي
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
                     client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
@@ -273,6 +257,7 @@
             }
         };
 
+        // دوال تسجيل الدخول جوجل
         function triggerGoogleLogin() {
             if (typeof google !== 'undefined') {
                 google.accounts.id.prompt();
@@ -315,7 +300,7 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'chargeCodePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
             pages.forEach(p => document.getElementById(p).style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
             currentPage = pageId;
@@ -340,6 +325,7 @@
         function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
 
+        // 5. إرسال وعرض طلبات الزبون (عبر Firebase)
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
@@ -364,50 +350,52 @@
                 let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#28a745' : '#d9534f');
                 let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
                 html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor};">
-                    <div style="font-weight: bold; margin-bottom: 5px;">إيداع عبر ${req.method} - $${req.amount} (رقم العملية: ${req.transactionId})</div>
+                    <div style="font-weight: bold; margin-bottom: 5px;">إيداع عبر ${req.method} - $${req.amount}</div>
                     <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
                 </div>`;
             });
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
+        // نموذج الدفع وتغيير زر إرفاق الصورة
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
-                <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل للمتجر</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
+                <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
-                <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية من إيصال التحويل"></div>
+                <div class="pf-field-group">
+                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
+                    <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إرفاق إثبات التحويل</button>
+                </div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
             `;
             showPage('paymentFormPage');
         }
 
+        function updateFileName(input) {
+            const btn = document.getElementById('uploadBtnText');
+            if (input.files && input.files.length > 0) {
+                btn.innerHTML = `✅ تم إرفاق الصورة`; 
+                btn.style.color = "#28a745"; 
+                btn.style.borderColor = "#28a745"; 
+                btn.style.backgroundColor = "#e8f5e9";
+            }
+        }
+
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
-            let transactionId = document.getElementById('transactionId').value.trim();
-            
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
-            if (!transactionId) { alert('يرجى إدخال رقم العملية (Transaction ID)!'); return; }
             
-            document.getElementById('loadingOverlay').style.display = 'flex';
-            
-            let depositData = {
+            db.collection("deposits").add({
                 method: methodName,
                 amount: amount,
-                transactionId: transactionId,
                 status: 'pending',
-                userEmail: currentUserEmail || "guest@user.com",
+                userEmail: currentUserEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            db.collection("deposits").add(depositData).then(() => {
-                document.getElementById('loadingOverlay').style.display = 'none';
-                alert('تم إرسال الطلب بنجاح!');
+            }).then(() => {
+                alert('تم إرسال الطلب وسحبه إلى لوحة التحكم بنجاح!');
                 showPage('addBalancePage');
-            }).catch(error => {
-                document.getElementById('loadingOverlay').style.display = 'none';
-                alert("حدث خطأ أثناء إرسال الطلب: " + error.message);
             });
         }
 
@@ -440,6 +428,7 @@
             });
         }
 
+        // 6. لوحة التحكم (Admin Panel مع Firebase)
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
             if (document.getElementById('adminPasswordInput').value === 'admin') {
@@ -460,18 +449,14 @@
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
-                let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : `<span style="font-size:11px; color:#888;">لا يوجد رقم عملية</span>`;
-                
                 if(req.status === 'pending') {
                     balHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;">
                         <span>الزبون: <b>${req.userEmail}</b></span>
-                        <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span>
-                        ${txBadge}
-                        </div>
+                        <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span></div>
                         <div class="req-actions"><button class="btn-acc" onclick="approveBalance('${req.id}', ${req.amount})">قبول</button><button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button></div></div>`;
                 } else {
                     let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
-                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.userEmail} | $${req.amount} | رقم العملية: ${req.transactionId || 'غير متوفر'}</span><span>${text}</span></div></div>`;
+                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.userEmail} | $${req.amount}</span><span>${text}</span></div></div>`;
                 }
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml;
