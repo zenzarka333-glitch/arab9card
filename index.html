@@ -19,248 +19,494 @@
         .card-price-outside { margin-top: 2px; font-size: 11px; font-weight: bold; color: #e74c3c; text-align: center; }
 
         .page-title { text-align: center; color: #333; font-size: 20px; font-weight: 900; margin: 20px 0 10px 0; }
-        .search-container { padding: 0 20px 15px 20px; }
-        .search-bar { width: 100%; padding: 12px 20px; border-radius: 25px; border: none; background-color: #f0f0f0; text-align: right; box-sizing: border-box; color: #666; font-family: inherit; outline: none; }
         
-        /* النافذة المنبثقة للشراء والطلب الآلي */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: white; padding: 25px 20px; border-radius: 20px; width: 85%; max-width: 350px; text-align: center; box-sizing: border-box; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; font-size: 15px; }
         .price-tag { background-color: #002613; color: white; padding: 6px 14px; border-radius: 20px; font-size: 14px; }
-        .modal input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #b2dfdb; border-radius: 12px; box-sizing: border-box; text-align: right; font-family: inherit; outline: none; background-color: #f9fbfb; }
+        .modal input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #b2dfdb; border-radius: 12px; box-sizing: border-box; text-align: right; background-color: #f9fbfb; }
         .check-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid #b2dfdb; border-radius: 12px; color: #555; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
         .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .buy-action-btn { flex: 1; background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        .cancel-action-btn { flex: 1; background-color: white; color: #d9534f; border: 1px solid #d9534f; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        .note-text { color: #28a745; font-size: 12px; margin-top: 15px; border-right: 3px solid #28a745; padding-right: 8px; text-align: right; }
+        .buy-action-btn { flex: 1; background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .cancel-action-btn { flex: 1; background-color: white; color: #d9534f; border: 1px solid #d9534f; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); font-size: 22px; z-index: 100; }
         .home-icon-container { background-color: #f4f4f9; border-radius: 50%; padding: 15px; margin-top: -30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #eee; cursor: pointer; }
         
-        #productsPage { display: none; }
+        #gamesPage, #freeFireSubPage, #robot1Page, #pubgSubPage, #pubgRobotPage, #addBalancePage, #chargeCodePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage { display: none; }
 
-        /* القائمة الجانبية */
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { background-color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; }
+        .login-box h2 { color: #1f6b3b; font-size: 22px; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; text-align: right; }
+        .login-box button { background-color: #1f6b3b; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+        .btn-google img { width: 20px; }
+        
+        .google-account-list { display: none; background: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 350px; text-align: right; direction: rtl; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .g-header { text-align: center; margin-bottom: 15px; }
+        .g-header img { width: 40px; margin-bottom: 5px; }
+        .g-header h3 { margin: 0; color: #202124; font-size: 20px; }
+        .g-header p { margin: 5px 0 15px; color: #5f6368; font-size: 14px; }
+        .acc-item { display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #f1f3f4; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .acc-item:hover { background-color: #f8f9fa; }
+        .acc-avatar { width: 36px; height: 36px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; margin-left: 12px; }
+        .acc-info { display: flex; flex-direction: column; }
+        .acc-name { font-size: 14px; font-weight: bold; color: #3c4043; }
+        .acc-email { font-size: 12px; color: #5f6368; }
+
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #004d26; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #fff; display: block; transition: 0.3s; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: right; }
-        .sidebar a:hover { color: #28a745; background-color: #002613; }
-        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; padding: 0; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #fff; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: right; font-weight: bold; }
+        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; }
+
+        .balance-page-container { padding: 15px; }
+        .charge-code-banner { background-color: #14375f; border-radius: 12px; padding: 15px 20px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; direction: rtl; cursor: pointer; }
+        .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; direction: rtl; }
+        .payment-card { background: linear-gradient(135deg, #004d26, #002613); border-radius: 10px; padding: 12px 5px; text-align: center; color: white; font-size: 9px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; position: relative; }
+        .payment-icon { width: 45px; height: 45px; background-color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: #004d26; font-size: 18px; }
+        
+        .charge-code-page { padding: 20px; background-color: #fafafa; min-height: 80vh; }
+        .charge-input-box { background: white; border: 1px solid #e0e0e0; border-radius: 15px; padding: 8px 15px; position: relative; margin-top: 15px; margin-bottom: 15px; display: flex; align-items: center; }
+        .charge-label-top { position: absolute; top: -10px; right: 20px; background: white; padding: 0 8px; font-size: 11px; color: #888; font-weight: bold; }
+        .charge-input-box input { flex: 1; border: none; outline: none; text-align: right; padding: 10px 5px; font-size: 15px; color: #333; }
+        .btn-charge-submit { background-color: #14375f; color: white; border: none; width: 100%; padding: 15px; border-radius: 15px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        
+        .pf-container { padding: 20px; direction: rtl; background-color: #fafafa; min-height: 100vh; }
+        .pf-header { text-align: center; margin-bottom: 25px; }
+        .pf-title { font-size: 22px; font-weight: 900; color: #333; margin: 0; }
+        .pf-field-group { margin-bottom: 15px; }
+        .pf-label { display: block; font-size: 12px; color: #555; margin-bottom: 6px; padding-right: 5px; }
+        .pf-input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
+        .pf-btn-upload { background-color: #fff; border: 1px solid #ddd; width: 100%; padding: 14px; border-radius: 10px; color: #777; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 5px; }
+        .pf-btn-submit { background-color: #4a7796; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+
+        .admin-wrapper { padding: 20px; direction: rtl; background-color: #f4f4f9; min-height: 100vh; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
+        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .admin-tab { flex: 1; text-align: center; padding: 12px; background: #ddd; border-radius: 8px; font-weight: bold; cursor: pointer; color: #333; }
+        .admin-tab.active { background: #28a745; color: white; }
+        .request-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid #f39c12; }
+        .request-card.approved { border-right-color: #28a745; opacity: 0.7; }
+        .request-card.rejected { border-right-color: #d9534f; opacity: 0.7; }
+        .req-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .req-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-acc { background: #28a745; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-rej { background: #d9534f; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- القائمة الجانبية -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box" id="mainLoginBox">
+            <h2>مرحباً بك في ARAB9CARD</h2>
+            <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني..." required>
+            <button onclick="loginUser()">دخول للمتجر</button>
+            <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
+                <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #888;">أو</span>
+            </div>
+            <button class="btn-google" onclick="showGoogleAccountChooser()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                المتابعة باستخدام Google
+            </button>
+        </div>
+
+        <div class="google-account-list" id="googleAccountChooser">
+            <div class="g-header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                <h3>اختيار حساب</h3>
+                <p>للمتابعة إلى متجر ARAB9CARD</p>
+            </div>
+            
+            <div class="acc-item" onclick="loginWithSelectedGoogle('ali.gamer.syria@gmail.com')">
+                <div class="acc-avatar" style="background:#e8710a;">ع</div>
+                <div class="acc-info">
+                    <div class="acc-name">علي</div>
+                    <div class="acc-email">ali.gamer.syria@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="acc-item" onclick="loginWithSelectedGoogle('store.client2026@gmail.com')">
+                <div class="acc-avatar" style="background:#1a73e8;">S</div>
+                <div class="acc-info">
+                    <div class="acc-name">Store Client</div>
+                    <div class="acc-email">store.client2026@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="acc-item" style="border-bottom: none; margin-top: 10px;" onclick="alert('تم اختيار إضافة حساب جديد.')">
+                <div class="acc-avatar" style="background:transparent; color:#5f6368; border:1px solid #dadce0;">👤</div>
+                <div class="acc-info">
+                    <div class="acc-name" style="font-weight:normal;">استخدام حساب آخر</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <h3 style="color:#004d26;">دخول لوحة التحكم</h3>
+            <input type="password" id="adminPasswordInput" placeholder="كلمة المرور...">
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="verifyAdmin()">دخول</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('adminLoginModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div id="sideMenu" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
-        <a href="#" onclick="alert('حسابك مفعل في المتجر الشامل.'); closeSidebar()">👤 حسابي</a>
-        <a href="#" onclick="alert('قريباً عرض الطلبات الحقيقية.'); closeSidebar()">📦 طلباتي</a>
-        <a href="#" onclick="alert('بوابة إضافة الرصيد قيد التفعيل.'); closeSidebar()">💳 إضافة رصيد</a>
-        <a href="#" onclick="alert('تواصل مع الدعم الفني.'); closeSidebar()">🎧 الدعم الفني</a>
+        <a href="#" onclick="showMyAccount(); closeSidebar()">👤 حسابي</a>
+        <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
+        <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
+        <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
+        <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: #f39c12;">⚙️ لوحة التحكم (Admin)</a>
+        <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #d9534f; margin-top: 20px;">🚪 تسجيل خروج</a>
     </div>
 
     <div class="header">
         <div class="header-group">
             <div style="font-size: 22px; cursor: pointer;" onclick="openSidebar()">☰</div>
-            <div class="balance" id="userBalance">💰 جاري التحميل...</div>
-            <div style="font-size: 18px;">🔔</div>
+            <div class="balance">💰 $<span id="userBalanceDisplay">0.010</span></div>
         </div>
         <div class="header-group">
             <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px;">A9C</div>
-            <div id="backBtn" style="display:none; font-size:22px; cursor:pointer;" onclick="showHomePage()">→</div>
+            <div id="backBtn" style="display:none; font-size:22px; cursor:pointer;" onclick="goBack()">→</div>
         </div>
     </div>
 
-    <!-- 1. الرئيسية: جلب المنتجات تلقائياً من Js4Card -->
     <div id="homePage">
-        <div class="page-title">قسم المنتجات المتاحة</div>
-        <div class="search-container">
-            <input type="text" class="search-bar" id="searchBox" placeholder="ابحث عن منتج أو لعبة..." onkeyup="filterProducts()">
-        </div>
-        <div class="grid-container" id="apiProductsGrid">
-            <div style="grid-column: span 3; text-align: center; color: #666; padding: 30px;">
-                ⏳ جاري سحب المنتجات والأسعار من مزود الخدمة (Js4Card)...
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('gamesPage')">
+                <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
+                <div class="card-name-outside">الألعاب</div>
             </div>
         </div>
     </div>
 
-    <!-- نافذة الشراء والطلب الآلي -->
+    <div id="addBalancePage">
+        <div class="balance-page-container">
+            <div class="charge-code-banner" onclick="showPage('chargeCodePage')">
+                <div class="charge-text"><h3>كود شحن ARAB9CARD</h3><p>إدخال كود الشحن</p></div>
+                <div class="charge-icon">💳</div>
+            </div>
+            <div class="payment-grid" id="paymentMethodsGrid"></div>
+        </div>
+    </div>
+
+    <div id="chargeCodePage">
+        <div class="charge-code-page">
+            <div class="charge-input-box"><span class="charge-label-top">كود البطاقة</span><input type="text" id="voucherInputCode" placeholder="ادخل الكود"></div>
+            <button class="btn-charge-submit" onclick="submitVoucher()">شحن 📦</button>
+        </div>
+    </div>
+
+    <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
+
+    <div id="gamesPage"><div class="page-title">الألعاب</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('freeFireSubPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">FF</div><div class="card-name-inside">فري فاير</div></div><div class="card-name-outside">فري فاير</div></div><div class="card-wrapper" onclick="showPage('pubgSubPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div><div class="card-name-outside">ببجي موبايل</div></div></div></div>
+    <div id="freeFireSubPage"><div class="page-title">فري فاير</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('robot1Page')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🤖</div></div><div class="card-name-outside">روبوت 1</div></div></div></div>
+    <div id="pubgSubPage"><div class="page-title">ببجي موبايل</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('pubgRobotPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">🤖</div></div><div class="card-name-outside">ببجي روبوت</div></div></div></div>
+    <div id="pubgRobotPage"><div class="page-title">ببجي روبوت</div><div class="grid-container" id="pubgRobotGrid"></div></div>
+    <div id="robot1Page"><div class="page-title">فري فاير روبوت 1</div><div class="grid-container" id="robot1Grid"></div></div>
+
     <div id="orderModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <span id="modalItemTitle">المنتج</span>
-                <span class="price-tag" id="modalItemPrice">$ 0.00</span>
-            </div>
-            <input type="text" id="playerId" placeholder="الايدي أو المعرف (Player ID)">
-            <button class="check-btn" onclick="checkPlayerName()">التحقق من الاسم</button>
+            <div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div>
+            <input type="text" id="playerId" placeholder="الايدي (Player ID)">
+            <button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button>
             <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitOrder()">شراء تلقائي</button>
+                <button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button>
                 <button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button>
             </div>
-            <div class="note-text">مربوط آلياً 24 ساعة مع Js4Card</div>
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
-    <div class="bottom-nav">
-        <div>🛒</div>
-        <div>💳</div>
-        <div class="home-icon-container" onclick="showHomePage()">🏠</div>
-        <div>🛡️</div>
-        <div onclick="openSidebar()" style="cursor: pointer;">👤</div>
+    <div id="myOrdersPage">
+        <div class="page-title">طلباتي 📦</div>
+        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div>
     </div>
 
-    <!-- السكربت البرمجي لجلب بيانات الـ API وعرضها وتنفيد الشراء -->
-    <script>
-        const API_TOKEN = "opYDtlJEFgyi9u8jDJBDNUdcLQujaJKFfHmxPevxq0D6VloSJngDAD-nmDjMXrpT";
-        let allProducts = [];
-        let selectedProductId = null;
+    <div id="myPaymentsPage">
+        <div class="page-title">دفعاتي 🧾</div>
+        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div>
+    </div>
 
-        // دالة سحب الرصيد والمنتجات من Js4Card عند تشغيل المتجر
-        async function fetchStoreData() {
-            try {
-                // 1. جلب معلومات الحساب ورصيدك الحقيقي
-                let profileRes = await fetch("https://api.js4card.com/client/api/profile", {
-                    method: 'GET',
-                    headers: { 'api-token': API_TOKEN }
-                });
-                let profileData = await profileRes.json();
-                if (profileData && profileData.الرصيد) {
-                    document.getElementById('userBalance').innerText = "💰 $" + profileData.الرصيد;
-                }
-
-                // 2. جلب جميع المنتجات والبطاقات المتوفرة لديك
-                let productsRes = await fetch("https://api.js4card.com/client/api/products", {
-                    method: 'GET',
-                    headers: { 'api-token': API_TOKEN }
-                });
-                let productsData = await productsRes.json();
-                
-                if (Array.isArray(productsData)) {
-                    allProducts = productsData;
-                    displayProducts(allProducts);
-                } else {
-                    document.getElementById('apiProductsGrid').innerHTML = '<div style="grid-column: span 3; text-align: center; color: red;">⚠️ تعذر تحميل المنتجات، تأكد من الاتصال.</div>';
-                }
-            } catch (err) {
-                console.error(err);
-                document.getElementById('apiProductsGrid').innerHTML = '<div style="grid-column: span 3; text-align: center; color: red;">⚠️ خطأ في الاتصال بسيرفر المزود.</div>';
-            }
-        }
-
-        // عرض المنتجات على شكل بطاقات في المتجر مع إضافة ربح بسيط 5%
-        function displayProducts(products) {
-            const grid = document.getElementById('apiProductsGrid');
-            grid.innerHTML = "";
+    <div id="adminDashboardPage">
+        <div class="admin-wrapper">
+            <div class="admin-header">
+                <h2 style="margin:0;">لوحة التحكم</h2>
+                <div style="font-size: 20px;">👑</div>
+            </div>
+            <div class="admin-tabs">
+                <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
+                <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+            </div>
             
-            if (products.length === 0) {
-                grid.innerHTML = '<div style="grid-column: span 3; text-align: center; color: #666;">لا توجد منتجات مطابقة للبحث.</div>';
-                return;
+            <div id="adminBalanceSection"></div>
+            <div id="adminOrdersSection" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div>🛒</div><div>💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div>🛡️</div><div onclick="showMyAccount()" style="cursor: pointer;">👤</div>
+    </div>
+
+    <script>
+        let userBalance = 0.010;
+        let balanceRequests = []; 
+        let gameOrders = [];      
+        let reqCounter = 1;
+        let currentSelectedProduct = { title: '', price: 0 };
+
+        function loadSavedData() {
+            if(localStorage.getItem('a9c_balance') !== null) {
+                userBalance = parseFloat(localStorage.getItem('a9c_balance'));
+                balanceRequests = JSON.parse(localStorage.getItem('a9c_balanceRequests') || '[]');
+                gameOrders = JSON.parse(localStorage.getItem('a9c_gameOrders') || '[]');
+                reqCounter = parseInt(localStorage.getItem('a9c_reqCounter') || '1');
             }
-
-            products.forEach(item => {
-                let basePrice = parseFloat(item.السعر || item.price || 1);
-                let finalPrice = (basePrice * 1.05).toFixed(3); // زيادة ربحية 5%
-                let title = item.الاسم || item.name || "بطاقة رقمية";
-                let id = item.id;
-
-                grid.innerHTML += `
-                    <div class="card-wrapper" onclick="openOrderModal(${id}, '${title.replace(/'/g, "")}', '${finalPrice}')">
-                        <div class="card-box">
-                            <div class="card-circle">A9C</div>
-                            <div class="card-name-inside">${title}</div>
-                        </div>
-                        <div class="card-name-outside">${title}</div>
-                        <div class="card-price-outside">$ ${finalPrice}</div>
-                    </div>
-                `;
-            });
         }
 
-        // شريط البحث الحي
-        function filterProducts() {
-            let query = document.getElementById('searchBox').value.toLowerCase();
-            let filtered = allProducts.filter(item => {
-                let name = (item.الاسم || item.name || "").toLowerCase();
-                return name.includes(query);
-            });
-            displayProducts(filtered);
+        function saveDataToStorage() {
+            localStorage.setItem('a9c_balance', userBalance.toString());
+            localStorage.setItem('a9c_balanceRequests', JSON.stringify(balanceRequests));
+            localStorage.setItem('a9c_gameOrders', JSON.stringify(gameOrders));
+            localStorage.setItem('a9c_reqCounter', reqCounter.toString());
         }
 
-        function showHomePage() {
-            document.getElementById('backBtn').style.display = 'none';
-            closeOrderModal();
+        const paymentMethods = [
+            { name: "شام كاش دولار", symbol: "Z", hasQR: true, address: "814a88285d61da72671884d2a2fbb822" },
+            { name: "آسيا سيل العراق", symbol: "A", hasQR: false, address: "07756752890" },
+            { name: "سيريتل كاش يدوي", symbol: "S", hasQR: false, address: "57592960" }
+        ];
+
+        document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#28a745; margin-bottom:2px;">${m.name}</div></div>`).join('');
+        document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG 60 UC', 0.90)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG 60 UC</div><div class="card-price-outside">$ 0.90</div></div>`;
+        document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110💎', 0.97)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 0.97</div></div>`;
+
+        let currentPage = 'homePage';
+
+        function showPage(pageId) {
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'chargeCodePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            pages.forEach(p => document.getElementById(p).style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            currentPage = pageId;
+            document.getElementById('backBtn').style.display = (pageId === 'homePage') ? 'none' : 'block';
         }
 
-        function openOrderModal(productId, title, price) {
-            selectedProductId = productId;
+        function goBack() {
+            if (currentPage === 'paymentFormPage' || currentPage === 'chargeCodePage') showPage('addBalancePage');
+            else if (currentPage === 'addBalancePage' || currentPage === 'myOrdersPage' || currentPage === 'myPaymentsPage') showPage('homePage');
+            else if (['pubgRobotPage'].includes(currentPage)) showPage('pubgSubPage');
+            else if (['robot1Page'].includes(currentPage)) showPage('freeFireSubPage');
+            else if (currentPage === 'pubgSubPage' || currentPage === 'freeFireSubPage') showPage('gamesPage');
+            else if (currentPage === 'gamesPage' || currentPage === 'adminDashboardPage') showPage('homePage');
+        }
+
+        function updateUserBalanceUI() {
+            document.getElementById('userBalanceDisplay').innerText = userBalance.toFixed(3);
+        }
+
+        function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
+        function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
+
+        function renderMyOrders() {
+            let html = '';
+            if (gameOrders.length === 0) {
+                html = '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>';
+            } else {
+                gameOrders.slice().reverse().forEach(order => {
+                    let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#28a745' : '#d9534f');
+                    let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : '❌ مرفوض');
+                    html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid ${statusColor};">
+                        <div style="font-weight: bold; margin-bottom: 5px; color: #333;">طلب شحن ألعاب</div>
+                        <div style="font-size: 13px; color: #555; margin-bottom: 8px;">${order.product} (ID: ${order.playerId})</div>
+                        <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
+                    </div>`;
+                });
+            }
+            document.getElementById('myOrdersListContainer').innerHTML = html;
+        }
+
+        function renderMyPayments() {
+            let html = '';
+            if (balanceRequests.length === 0) {
+                html = '<p style="text-align:center; color:#888;">لا توجد دفعات سابقة حالياً</p>';
+            } else {
+                balanceRequests.slice().reverse().forEach(req => {
+                    let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#28a745' : '#d9534f');
+                    let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
+                    html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid ${statusColor};">
+                        <div style="font-weight: bold; margin-bottom: 5px; color: #333;">طلب إضافة رصيد</div>
+                        <div style="font-size: 13px; color: #555; margin-bottom: 8px;">شحن عبر ${req.method} بقيمة $${req.amount}</div>
+                        <div style="font-size: 13px; color: ${statusColor}; font-weight: bold;">الحالة: ${statusText}</div>
+                    </div>`;
+                });
+            }
+            document.getElementById('myPaymentsListContainer').innerHTML = html;
+        }
+
+        function openPaymentForm(index) {
+            const method = paymentMethods[index];
+            let html = `
+                <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
+                <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
+                <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
+                <div class="pf-field-group">
+                    <input type="file" id="realFileInput" accept="image/*" style="display: none;" onchange="updateFileName(this)">
+                    <button class="pf-btn-upload" id="uploadBtnText" onclick="document.getElementById('realFileInput').click()">📎 إثبات التحويل</button>
+                </div>
+                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
+            `;
+            document.getElementById('pfDynamicContent').innerHTML = html;
+            showPage('paymentFormPage');
+        }
+
+        function updateFileName(input) {
+            const btn = document.getElementById('uploadBtnText');
+            if (input.files && input.files.length > 0) {
+                btn.innerHTML = `✅ تم الإرفاق`; btn.style.color = "#28a745"; btn.style.borderColor = "#28a745"; btn.style.backgroundColor = "#e8f5e9";
+            }
+        }
+
+        function submitDepositRequest(methodName) {
+            let amount = parseFloat(document.getElementById('depositAmount').value);
+            if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
+            balanceRequests.push({ id: reqCounter++, method: methodName, amount: amount, status: 'pending' });
+            saveDataToStorage(); 
+            alert('تم تقديم طلب إضافة الرصيد بنجاح! يمكنك متابعته من قسم دفعاتي.');
+            showPage('addBalancePage');
+            renderAdminData(); 
+        }
+
+        function openOrderModal(title, price) {
+            currentSelectedProduct = { title, price };
             document.getElementById('modalItemTitle').innerText = title;
             document.getElementById('modalItemPrice').innerText = '$ ' + price;
             document.getElementById('orderModal').style.display = 'flex';
-            document.getElementById('backBtn').style.display = 'block';
+        }
+        function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+        function submitGameOrder() {
+            let playerId = document.getElementById('playerId').value.trim();
+            if(playerId === "") { alert("⚠️ يرجى إدخال الأيدي أولاً!"); return; }
+            if(userBalance < currentSelectedProduct.price) { alert("⚠️ رصيدك غير كافٍ لإتمام العملية. يرجى شحن رصيدك أولاً."); return; }
+            
+            userBalance -= currentSelectedProduct.price;
+            gameOrders.push({ id: reqCounter++, product: currentSelectedProduct.title, price: currentSelectedProduct.price, playerId: playerId, status: 'pending' });
+            
+            saveDataToStorage(); 
+            updateUserBalanceUI();
+            
+            alert("🚀 تم تسجيل طلبك بنجاح! يمكنك متابعة حالة الطلب من قسم طلباتي.");
+            closeOrderModal();
+            renderAdminData();
         }
 
-        function closeOrderModal() { 
-            document.getElementById('orderModal').style.display = 'none'; 
+        function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
+        function verifyAdmin() {
+            if (document.getElementById('adminPasswordInput').value === 'admin') {
+                document.getElementById('adminLoginModal').style.display = 'none';
+                document.getElementById('adminPasswordInput').value = '';
+                renderAdminData(); showPage('adminDashboardPage');
+            } else { alert('كلمة المرور خاطئة!'); }
         }
 
-        function checkPlayerName() {
-            var id = document.getElementById('playerId').value.trim();
-            if(id === "") { alert("⚠️ يرجى إدخال Player ID أولاً."); } 
-            else { alert("✅ اسم اللاعب: Player_" + id + " (جاهز للطلب الآلي)"); }
+        function switchAdminTab(tab) {
+            let isBal = tab === 'balance';
+            document.getElementById('tabBalance').classList.toggle('active', isBal);
+            document.getElementById('tabOrders').classList.toggle('active', !isBal);
+            document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none';
+            document.getElementById('adminOrdersSection').style.display = isBal ? 'none' : 'block';
         }
 
-        // إرسال الطلب الفعلي المباشر لـ Js4Card
-        async function submitOrder() {
-            var playerId = document.getElementById('playerId').value.trim();
-            if(playerId === "") {
-                alert("⚠️ يرجى إدخال الأيدي أو المعرف أولاً!");
-                return;
-            }
-
-            if(!selectedProductId) {
-                alert("⚠️ يرجى اختيار منتج صالح أولاً!");
-                return;
-            }
-
-            // توليد رمز فريد للطلب UUID v4
-            var orderUuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-
-            var apiUrl = `https://api.js4card.com/client/api/newOrder/${selectedProductId}/params?qty=1&player_id=${encodeURIComponent(playerId)}&order_uuid=${orderUuid}`;
-
-            alert("⏳ جاري إرسال الطلب بشكل آلي إلى سيرفر Js4Card...");
-
-            try {
-                let response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: { 'api-token': API_TOKEN }
-                });
-                
-                let data = await response.json();
-                
-                if (response.ok && (data.status === "success" || data.status === "موافق" || data.الرصيد)) {
-                    alert("🚀 تم إرسال الطلب وتنفيذه بنجاح آلياً!");
-                    closeOrderModal();
-                    fetchStoreData(); // تحديث الرصيد الجديد تلقائياً
+        function renderAdminData() {
+            let balHtml = '';
+            if(balanceRequests.length === 0) balHtml = '<p style="text-align:center; color:#888;">لا يوجد طلبات رصيد حالياً</p>';
+            balanceRequests.slice().reverse().forEach(req => {
+                if(req.status === 'pending') {
+                    balHtml += `<div class="request-card"><div class="req-info"><span>الطريقة: <b>${req.method}</b></span> <span>المبلغ: <b>$${req.amount}</b></span></div><div class="req-actions"><button class="btn-acc" onclick="approveBalance(${req.id})">قبول وإضافة</button><button class="btn-rej" onclick="rejectBalance(${req.id})">رفض</button></div></div>`;
                 } else {
-                    alert("⚠️ رد المزود: " + (data.message || data.خطأ || "تم إرسال الطلب، تأكد من رصيدك."));
-                    closeOrderModal();
+                    let text = req.status === 'approved' ? '✅ تم القبول' : '❌ تم الرفض';
+                    balHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.method} - $${req.amount}</span><span>${text}</span></div></div>`;
                 }
-            } catch (error) {
-                console.error(error);
-                alert("🚀 تم إرسال طلب الشحن بنجاح.");
-                closeOrderModal();
+            });
+            document.getElementById('adminBalanceSection').innerHTML = balHtml;
+
+            let ordHtml = '';
+            if(gameOrders.length === 0) ordHtml = '<p style="text-align:center; color:#888;">لا يوجد طلبات ألعاب حالياً</p>';
+            gameOrders.slice().reverse().forEach(req => {
+                if(req.status === 'pending') {
+                    ordHtml += `<div class="request-card"><div class="req-info"><span>المنتج: <b>${req.product}</b></span> <span>الآيدي: <b>${req.playerId}</b></span></div><div class="req-actions"><button class="btn-acc" onclick="approveOrder(${req.id})">تأكيد الشحن</button><button class="btn-rej" onclick="rejectOrder(${req.id})">رفض ورد الرصيد</button></div></div>`;
+                } else {
+                    let text = req.status === 'approved' ? '✅ تم الشحن' : '❌ تم الرفض';
+                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info"><span>${req.product} - ID:${req.playerId}</span><span>${text}</span></div></div>`;
+                }
+            });
+            document.getElementById('adminOrdersSection').innerHTML = ordHtml;
+        }
+
+        function approveBalance(id) {
+            let req = balanceRequests.find(r => r.id === id);
+            if(req && req.status === 'pending') {
+                req.status = 'approved'; userBalance += req.amount; 
+                saveDataToStorage(); 
+                updateUserBalanceUI(); renderAdminData(); alert(`تم إضافة $${req.amount} لحساب الزبون بنجاح!`);
             }
+        }
+        function rejectBalance(id) {
+            let req = balanceRequests.find(r => r.id === id);
+            if(req && req.status === 'pending') { req.status = 'rejected'; saveDataToStorage(); renderAdminData(); }
+        }
+        function approveOrder(id) {
+            let req = gameOrders.find(r => r.id === id);
+            if(req && req.status === 'pending') { req.status = 'approved'; saveDataToStorage(); renderAdminData(); }
+        }
+        function rejectOrder(id) {
+            let req = gameOrders.find(r => r.id === id);
+            if(req && req.status === 'pending') {
+                req.status = 'rejected'; userBalance += req.price;
+                saveDataToStorage(); updateUserBalanceUI(); renderAdminData();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() { 
+            loadSavedData(); 
+            updateUserBalanceUI();
+            if (localStorage.getItem("userEmail")) { 
+                document.getElementById("loginOverlay").style.display = "none"; 
+            } 
+        });
+
+        function loginUser() { 
+            if (document.getElementById("userEmailInput").value.trim() !== "") { 
+                localStorage.setItem("userEmail", document.getElementById("userEmailInput").value.trim()); 
+                document.getElementById("loginOverlay").style.display = "none"; 
+            } 
+        }
+
+        function showGoogleAccountChooser() {
+            document.getElementById("mainLoginBox").style.display = "none";
+            document.getElementById("googleAccountChooser").style.display = "block";
+        }
+
+        function loginWithSelectedGoogle(email) {
+            localStorage.setItem("userEmail", email);
+            document.getElementById("loginOverlay").style.display = "none";
+            alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
+        }
+
+        function logoutUser() {
+            localStorage.removeItem("userEmail");
+            location.reload(); 
+        }
+
+        function showMyAccount() {
+            let email = localStorage.getItem("userEmail") || "غير معروف";
+            alert(`👤 معلومات الحساب:\n\nالبريد الإلكتروني: ${email}\nالرصيد الحالي: $${userBalance.toFixed(3)}`);
         }
 
         function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
-
-        // تشغيل سحب البيانات فور فتح المتجر
-        window.onload = function() {
-            fetchStoreData();
-        };
     </script>
 </body>
 </html>
