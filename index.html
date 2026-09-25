@@ -902,7 +902,15 @@
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
             if (document.getElementById('adminPasswordInput').value === 'admin') {
-                document.getElementById('adminLoginModal').style.display = 'none'; document.getElementById('adminPasswordInput').value = ''; showPage('adminDashboardPage');
+                document.getElementById('adminLoginModal').style.display = 'none'; 
+                document.getElementById('adminPasswordInput').value = ''; 
+                // إخفاء نافذة تسجيل الدخول للمتجر تلقائياً وتعيين حساب الأدمن حتى لا تظهر أبداً
+                document.getElementById('loginOverlay').style.display = 'none';
+                if (!currentUserEmail) {
+                    currentUserEmail = "admin@arab9card.com";
+                    localStorage.setItem("userEmail", currentUserEmail);
+                }
+                showPage('adminDashboardPage');
             } else { alert('كلمة المرور خاطئة!'); }
         }
 
@@ -1036,13 +1044,13 @@
         function rejectBalance(id) { db.collection("deposits").doc(id).update({ status: 'rejected' }); }
         
         function approveOrder(id) {
-            let replyText = document.getElementById(`reply_${id}`).value.trim();
-            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyText || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاحي!'); calculateUserVIP(); });
+            let replyToken = document.getElementById(`reply_${id}`).value.trim();
+            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاح!'); calculateUserVIP(); });
         }
         
         function rejectOrder(id) {
-            let replyText = document.getElementById(`reply_${id}`).value.trim();
-            db.collection("orders").doc(id).update({ status: 'rejected', adminReply: replyText || 'تم رفض الطلب ❌' }).then(() => { alert('تم رفض الطلب وإرسال سبب الرفض للزبون!'); });
+            let replyToken = document.getElementById(`reply_${id}`).value.trim();
+            db.collection("orders").doc(id).update({ status: 'rejected', adminReply: replyToken || 'تم رفض الطلب ❌' }).then(() => { alert('تم رفض الطلب وإرسال سبب الرفض للزبون!'); });
         }
     </script>
 </body>
