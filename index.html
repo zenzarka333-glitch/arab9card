@@ -103,7 +103,6 @@
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
             <h2>مرحباً بك في ARAB9CARD</h2>
-            <!-- تم جعل حقل البريد اختيارياً بالكامل ولا يمنع الدخول -->
             <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني (اختياري)...">
             <button onclick="loginUser()">دخول للمتجر (سريع)</button>
             <div style="margin: 15px 0; border-top: 1px solid #eee; position: relative;">
@@ -168,11 +167,9 @@
         </div>
     </div>
 
-    <!-- صفحة الدعم الفني الخاصة بالزبون -->
+    <!-- صفحة الدعم الفني -->
     <div id="supportPage" style="display:none; background: #f4f6f8; min-height: 100vh; padding-bottom: 80px;">
-        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 110px); overflow-y: auto;">
-            <!-- الرسائل تظهر هنا ديناميكياً -->
-        </div>
+        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 110px); overflow-y: auto;"></div>
         <div style="position: fixed; bottom: 0; width: 100%; background: white; padding: 10px 15px; box-sizing: border-box; border-top: 1px solid #ddd; display: flex; gap: 10px; align-items: center;">
             <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 14px; text-align: right;">
             <button onclick="sendSupportMessage()" style="background: #00a8ff; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">إرسال</button>
@@ -180,7 +177,6 @@
     </div>
 
     <div id="homePage">
-        <!-- مستطيل الترحيب المضاف بناءً على طلبك -->
         <div class="welcome-banner">
             <div class="wb-glow-1"></div>
             <div class="wb-glow-2"></div>
@@ -206,25 +202,15 @@
         </div>
     </div>
 
-    <!-- تم الإبقاء على باقي الصفحات HTML كما هي بدون تغيير لهيكليتها لتجنب كسر الكود القديم -->
     <div id="addBalancePage"><div class="balance-page-container"><div class="payment-grid" id="paymentMethodsGrid"></div></div></div>
     <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
 
     <div id="gamesPage">
         <div class="page-title">الألعاب</div>
         <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('freeFireSubPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">FF</div><div class="card-name-inside">فري فاير</div></div>
-                <div class="card-name-outside">فري فاير</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('pubgSubPage')">
-                <div class="card-box"><div class="card-circle" style="color:#2f3542;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div>
-                <div class="card-name-outside">ببجي موبايل</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('minecraftPage')">
-                <div class="card-box"><div class="card-circle" style="color:#2f3542;">MC</div><div class="card-name-inside">ماين كرافت</div></div>
-                <div class="card-name-outside">ماين كرافت</div>
-            </div>
+            <div class="card-wrapper" onclick="showPage('freeFireSubPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">FF</div><div class="card-name-inside">فري فاير</div></div><div class="card-name-outside">فري فاير</div></div>
+            <div class="card-wrapper" onclick="showPage('pubgSubPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div><div class="card-name-outside">ببجي موبايل</div></div>
+            <div class="card-wrapper" onclick="showPage('minecraftPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">MC</div><div class="card-name-inside">ماين كرافت</div></div><div class="card-name-outside">ماين كرافت</div></div>
         </div>
     </div>
 
@@ -252,27 +238,16 @@
     <div id="orangeNassPage"><div class="page-title">اورنج نص بنص</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
     <div id="orangeWinkPage"><div class="page-title">اورنج وينك</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
 
-    <!-- صفحة مستويات الحساب (VIP) -->
     <div id="vipTiersPage">
         <div class="page-title">مستويات الحساب (VIP) ⭐</div>
         <div style="padding: 20px; direction: rtl; background: white; margin: 15px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <div style="font-size: 15px; font-weight: bold; color: #0f172a; margin-bottom: 5px;" id="currentTierTitleDisplay">شريحتك الحالية: مبدئي</div>
-            <p style="font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px;">
-                إذا كنت ترغب بترقية حسابك إلى شريحة أعلى، والحصول على حسومات مميزة، ما عليك إلا زيادة مبيعاتك.
-            </p>
+            <p style="font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px;">إذا كنت ترغب بترقية حسابك إلى شريحة أعلى، ما عليك إلا زيادة مبيعاتك.</p>
             <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;">
-                    <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥉</span><div><div style="font-weight: bold; font-size: 13px;">برونزي / Bronze</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 1$ | الخصم: 1%</div></div></div><span id="badgeBronze" style="font-size: 16px;">🔒</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;">
-                    <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥈</span><div><div style="font-weight: bold; font-size: 13px;">فضي / Silver</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 40$ | الخصم: 2%</div></div></div><span id="badgeSilver" style="font-size: 16px;">🔒</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;">
-                    <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥇</span><div><div style="font-weight: bold; font-size: 13px;">ذهبي / Gold</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 100$ | الخصم: 3%</div></div></div><span id="badgeGold" style="font-size: 16px;">🔒</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;">
-                    <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">💎</span><div><div style="font-weight: bold; font-size: 13px;">ألماسي / Diamond</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 300$ | الخصم: 4%</div></div></div><span id="badgeDiamond" style="font-size: 16px;">🔒</span>
-                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥉</span><div><div style="font-weight: bold; font-size: 13px;">برونزي / Bronze</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 1$ | الخصم: 1%</div></div></div><span id="badgeBronze" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥈</span><div><div style="font-weight: bold; font-size: 13px;">فضي / Silver</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 40$ | الخصم: 2%</div></div></div><span id="badgeSilver" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥇</span><div><div style="font-weight: bold; font-size: 13px;">ذهبي / Gold</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 100$ | الخصم: 3%</div></div></div><span id="badgeGold" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">💎</span><div><div style="font-weight: bold; font-size: 13px;">ألماسي / Diamond</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 300$ | الخصم: 4%</div></div></div><span id="badgeDiamond" style="font-size: 16px;">🔒</span></div>
             </div>
             <div style="margin-top: 25px;">
                 <div style="display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 5px;"><span>التقدم للشريحة التالية</span><span id="userSpentText">$0.00 / $1.00</span></div>
@@ -307,11 +282,62 @@
     <div id="companyCodesPage"><div class="page-title">اكواد شركة فري فاير</div><div class="grid-container" id="companyCodesGrid"></div></div>
     <div id="ffEuropePage"><div class="page-title">فري فاير أوروبا</div><div class="grid-container" id="ffEuropeGrid"></div></div>
 
-    <!-- نوافذ الطلب بقيت كما هي في الهيكلية لكن بألوان الـ CSS المحدثة تلقائياً -->
+    <!-- نوافذ الطلب -->
     <div id="orderModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div><input type="text" id="playerId" placeholder="الايدي (Player ID)"><button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button><div class="modal-buttons"><button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button><button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button></div></div></div>
     <div id="codeOrderModal" class="modal"><div class="modal-content" style="max-width: 380px; text-align: right;"><div class="modal-header"><span id="codeModalItemTitle" style="font-size: 15px;">المنتج</span><span class="price-tag" id="codeModalItemPrice">$ 0.00</span></div><div style="margin-bottom: 12px; text-align: right;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px;">العدد</label><input type="number" id="codeQuantity" value="1" min="1" oninput="updateCodeTotal()" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; text-align: center; box-sizing: border-box;"></div><div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;"><span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span><span id="codeModalTotal" style="color: #ff7e00; font-weight: bold; font-size: 15px;">$ 0.00</span></div><div class="modal-buttons"><button class="buy-action-btn" onclick="submitCodeOrder()">شراء</button><button class="cancel-action-btn" onclick="closeCodeOrderModal()">إلغاء</button></div><div style="margin-top: 15px; border-top: 2px solid #e74c3c; padding-top: 10px; text-align: right;"><span style="color: #e74c3c; font-weight: bold; font-size: 13px; display: block; margin-bottom: 6px;">طريقة شحن الكود :</span><p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">• قم بزيارة موقع الرسمي للشركة<br>• قم بوضع الكود الخاص بك<br>• اضغط على استرداد</p></div></div></div>
     
-    <div id="subLinkModal" class="modal"><div class="modal-content" style="max-width: 380px; text-align: right;"><div class="modal-header"><span id="subLinkModalTitle" style="font-size: 15px;">المنتج</span><span class="price-tag" id="subLinkModalPrice">$ 0.00</span></div><div style="margin-bottom: 10px;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">العدد</label><input type="number" id="subLinkQty" value="1" min="1" oninput="updateSubLinkTotal()" style="text-align: center;"></div><div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;"><span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span><span id="subLinkTotal" style="color: #ff7e00; font-weight: bold; font-size: 15px;">$ 0.00</span></div><div style="margin-bottom: 10px;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">المنصة</label><select id="subLinkPlatform"><option value="" disabled selected>اختر المنصة</option><option value="قوقل">قوقل</option><option value="فيس بوك">فيس بوك</option><option value="تويتر">تويتر</option></select></div><div style="margin-bottom: 10px;"><input type="text" id="subLinkEmail" placeholder="الإيميل"></div><div style="margin-bottom: 10px;"><input type="password" id="subLinkPassword" placeholder="كلمة السر"></div><div style="margin-bottom: 5px;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">طريقة التواصل</label><select id="subLinkContactMethod" style="margin-bottom: 5px;"><option value="" disabled selected>اختر طريقة التواصل</option><option value="واتساب">واتساب</option><option value="تيليجرام">تيليجرام</option></select></div><div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;"><div style="width: 85px;"><label style="font-size: 10px; color: #555; display: block; margin-bottom: 2px; font-weight: bold;">رمز البلد</label><div style="position: relative; display: flex; align-items: center;"><input type="text" id="subLinkCountryCode" placeholder="+963" oninput="updateFlag('subLinkCountryCode', 'subLinkFlagDisplay')" style="text-align: center; margin: 0; padding-left: 24px; font-size: 13px;"><span id="subLinkFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span></div></div><div style="flex: 1;"><input type="text" id="subLinkContact" placeholder="رقم الهاتف أو المعرف للتواصل" style="margin: 0;"></div></div><div class="modal-buttons"><button class="buy-action-btn" onclick="submitSubLinkOrder()">شراء</button><button class="cancel-action-btn" onclick="closeSubLinkModal()">إلغاء</button></div><div style="margin-top: 15px; border-top: 2px solid #00a8ff; padding-top: 10px; text-align: right;"><span style="color: #333; font-weight: bold; font-size: 12px; display: block; margin-bottom: 4px;">المنتج عباره عن :</span><p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">• شحن العضويه عن طريق الحساب داخل اللعبة ✅<br>• المنتج يعمل بأوقات العمل<br>• مده التنفيذ من 30 دقيقه الى 2 ساعتين<br>• ملاحظة ‼️ : يرجى ايقاف التحقق بخطوتين لتسريع عملية الدخول .</p></div></div></div>
+    <!-- نافذة الربط الفرعي والعضويات (بدون حقول الباسورد والإيميل) -->
+    <div id="subLinkModal" class="modal">
+        <div class="modal-content" style="max-width: 380px; text-align: right;">
+            <div class="modal-header">
+                <span id="subLinkModalTitle" style="font-size: 15px;">المنتج</span>
+                <span class="price-tag" id="subLinkModalPrice">$ 0.00</span>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">العدد</label>
+                <input type="number" id="subLinkQty" value="1" min="1" oninput="updateSubLinkTotal()" style="text-align: center;">
+            </div>
+
+            <div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;">
+                <span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span>
+                <span id="subLinkTotal" style="color: #ff7e00; font-weight: bold; font-size: 15px;">$ 0.00</span>
+            </div>
+
+            <div style="background: #e0f2fe; color: #0284c7; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 12px; border: 1px solid #bae6fd; text-align: center; line-height: 1.5;">
+                يرجى إدخال رقمك بالأسفل وإرسال الطلب، وسنقوم <b>نحن بالتواصل معك</b> لأخذ بيانات الدخول والبدء بتنفيذ طلبك.
+            </div>
+
+            <div style="margin-bottom: 5px;">
+                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">المنصة التي تفضل أن نتواصل معك عليها</label>
+                <select id="subLinkContactMethod" style="margin-bottom: 5px;">
+                    <option value="" disabled selected>اختر...</option>
+                    <option value="واتساب">واتساب</option>
+                    <option value="تيليجرام">تيليجرام</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;">
+                <div style="width: 85px;">
+                    <label style="font-size: 10px; color: #555; display: block; margin-bottom: 2px; font-weight: bold;">رمز البلد</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="text" id="subLinkCountryCode" placeholder="+963" oninput="updateFlag('subLinkCountryCode', 'subLinkFlagDisplay')" style="text-align: center; margin: 0; padding-left: 24px; font-size: 13px;">
+                        <span id="subLinkFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span>
+                    </div>
+                </div>
+                <div style="flex: 1;">
+                    <input type="text" id="subLinkContact" placeholder="رقم هاتفك" style="margin: 0;">
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="submitSubLinkOrder()">إرسال الطلب</button>
+                <button class="cancel-action-btn" onclick="closeSubLinkModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إهداء بويا باس -->
     <div id="booyahModal" class="modal"><div class="modal-content" style="max-width: 380px; text-align: right;"><div class="modal-header"><span id="booyahModalTitle" style="font-size: 15px;">إهداء بويا باس</span><span class="price-tag" id="booyahModalPrice">$ 0.00</span></div><div style="margin-bottom: 5px;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">طريقة التواصل</label><select id="booyahContactMethod" style="margin-bottom: 5px;"><option value="" disabled selected>اختر طريقة التواصل</option><option value="واتساب">واتساب</option><option value="تيليجرام">تيليجرام</option></select></div><div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;"><div style="width: 85px;"><label style="font-size: 10px; color: #555; display: block; margin-bottom: 2px; font-weight: bold;">رمز البلد</label><div style="position: relative; display: flex; align-items: center;"><input type="text" id="booyahCountryCode" placeholder="+963" oninput="updateFlag('booyahCountryCode', 'booyahFlagDisplay')" style="text-align: center; margin: 0; padding-left: 24px; font-size: 13px;"><span id="booyahFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span></div></div><div style="flex: 1;"><input type="text" id="booyahContact" placeholder="رقم الهاتف أو المعرف للتواصل" style="margin: 0;"></div></div><div class="modal-buttons"><button class="buy-action-btn" onclick="submitBooyahOrder()">شراء</button><button class="cancel-action-btn" onclick="closeBooyahModal()">إلغاء</button></div><div style="margin-top: 15px; border-top: 2px solid #00a8ff; padding-top: 10px; text-align: right;"><p style="font-size: 11px; color: #00a8ff; font-weight: bold; line-height: 1.4; margin: 0;">• يتم ارسال الهدية من داخل اللعبة عبر تيم كود ✅</p></div></div></div>
 
     <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
@@ -416,12 +442,10 @@
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
-            
             if (currentUserEmail) { document.getElementById("loginOverlay").style.display = "none"; }
-            
             document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#00a8ff; margin-bottom:2px;">${m.name}</div></div>`).join('');
             
-            // تعبئة أقسام المنتجات (تم الحفاظ على الكود كما هو)
+            // تعبئة أقسام المنتجات
             document.getElementById('zainGsmGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openOrderModal('زين اتصال 5 دينار', 11.122)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">GSM</div><div class="card-name-inside">5 دينار</div></div><div class="card-name-outside">زين اتصال 5 دينار</div><div class="card-price-outside">$ 11.122</div></div>
                 <div class="card-wrapper" onclick="openOrderModal('زين اتصال 3 دينار', 6.673)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">GSM</div><div class="card-name-inside">3 دينار</div></div><div class="card-name-outside">زين اتصال 3 دينار</div><div class="card-price-outside">$ 6.673</div></div>
@@ -431,7 +455,6 @@
                 <div class="card-wrapper" onclick="openOrderModal('زين اتصال 9 دينار', 19.981)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">GSM</div><div class="card-name-inside">9 دينار</div></div><div class="card-name-outside">زين اتصال 9 دينار</div><div class="card-price-outside">$ 19.981</div></div>
                 <div class="card-wrapper" onclick="openOrderModal('زين اتصال 6 دينار', 13.347)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">GSM</div><div class="card-name-inside">6 دينار</div></div><div class="card-name-outside">زين اتصال 6 دينار</div><div class="card-price-outside">$ 13.347</div></div>
             `;
-            // باقي المنتجات... (تم الحفاظ عليها كاملة وبدون تغيير في السعر أو الاسم)
             document.getElementById('zainDataGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openOrderModal('زين نت 4 دينار', 7.118)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">DATA</div><div class="card-name-inside">4 دينار</div></div><div class="card-name-outside">زين نت 4 دينار</div><div class="card-price-outside">$ 7.118</div></div>
                 <div class="card-wrapper" onclick="openOrderModal('زين نت 3 دينار', 5.339)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">DATA</div><div class="card-name-inside">3 دينار</div></div><div class="card-name-outside">زين نت 3 دينار</div><div class="card-price-outside">$ 5.339</div></div>
@@ -551,7 +574,6 @@
             }
         };
 
-        // وظائف الشات والدعم الفني المعدلة لتعمل بدون إجبار الزبون على الإيميل ورد الإدارة
         function sendSupportMessage() {
             let input = document.getElementById('chatInputBox');
             let text = input.value.trim();
@@ -566,15 +588,10 @@
 
             db.collection("support_messages").add(msgData).then(() => {
                 input.value = "";
-                // فحص الرد التلقائي
                 if (text.toLowerCase().includes("السلام عليكم") || text.toLowerCase().includes("مرحبا")) {
                     setTimeout(() => {
                         db.collection("support_messages").add({
-                            sender: 'الإدارة',
-                            target: currentUserEmail, // توجيه الرسالة لهذا المستخدم
-                            text: "وعليكم السلام ورحمة الله، كيف فيني ساعدك...؟",
-                            isAdmin: true,
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                            sender: 'الإدارة', target: currentUserEmail, text: "وعليكم السلام ورحمة الله، كيف فيني ساعدك...؟", isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         });
                     }, 1000);
                 }
@@ -582,7 +599,6 @@
         }
 
         function renderChatMessages() {
-            // يتم جلب رسائل المستخدم فقط ورسائل الإدارة الموجهة له
             let userMsgs = supportMessages.filter(m => m.sender === currentUserEmail || (m.isAdmin && m.target === currentUserEmail));
             let html = '';
             userMsgs.forEach(m => {
@@ -605,13 +621,9 @@
             }
         }
 
-        // تسجيل الدخول بدون إجبار على الإيميل (حساب زائر تلقائي)
         function loginUser() { 
             let email = document.getElementById("userEmailInput").value.trim();
-            if (email === "") { 
-                // إنشاء ايميل زائر عشوائي في حال لم يكتب الزبون ايميل
-                email = "Guest_" + Math.floor(Math.random() * 1000000) + "@arab9card.com";
-            }
+            if (email === "") { email = "Guest_" + Math.floor(Math.random() * 1000000) + "@arab9card.com"; }
             localStorage.setItem("userEmail", email); 
             currentUserEmail = email;
             document.getElementById("loginOverlay").style.display = "none"; 
@@ -619,11 +631,7 @@
         }
 
         function triggerGoogleLogin() {
-            if (typeof google !== 'undefined') {
-                google.accounts.id.prompt();
-            } else {
-                alert("جاري تحميل مكتبة جوجل، يرجى التأكد من اتصالك بالإنترنت.");
-            }
+            if (typeof google !== 'undefined') { google.accounts.id.prompt(); } else { alert("جاري تحميل مكتبة جوجل، يرجى التأكد من اتصالك بالإنترنت."); }
         }
 
         function handleCredentialResponse(response) {
@@ -632,10 +640,7 @@
             localStorage.setItem("userEmail", email);
             currentUserEmail = email;
             document.getElementById("loginOverlay").style.display = "none";
-            renderMyOrders(); 
-            renderMyPayments();
-            calculateUserVIP();
-            renderChatMessages();
+            renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
 
@@ -651,15 +656,11 @@
         let currentPage = 'homePage';
         function showPage(pageId) {
             const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'robot1Page', 'subLinkGemsPage', 'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage'];
-            pages.forEach(p => {
-                let el = document.getElementById(p);
-                if (el) el.style.display = 'none';
-            });
+            pages.forEach(p => { let el = document.getElementById(p); if (el) el.style.display = 'none'; });
             let targetEl = document.getElementById(pageId);
             if (targetEl) targetEl.style.display = 'block';
             currentPage = pageId;
             document.getElementById('backBtn').style.display = (pageId === 'homePage') ? 'none' : 'block';
-            
             if(pageId === 'supportPage') { renderChatMessages(); }
         }
 
@@ -692,31 +693,17 @@
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
             let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
             
-            let currentTier = 'مبدئي';
-            let headerBadgeText = '⭐ مبدئي';
-            let discount = 0;
-            let nextTarget = 1;
-            
+            let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
             if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; nextTarget = 300; } 
             else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
             else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
             else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
             else { nextTarget = 1; }
 
-            let badgeEl = document.getElementById('headerVipBadge');
-            if(badgeEl) badgeEl.innerText = headerBadgeText;
-
-            let tierEl = document.getElementById('currentTierTitleDisplay');
-            if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
-            
-            let spentText = document.getElementById('userSpentText');
-            if(spentText) spentText.innerText = `$${totalSpent.toFixed(2)} / $${nextTarget.toFixed(2)}`;
-            
-            let progressBar = document.getElementById('tierProgressBar');
-            if(progressBar) {
-                let percent = Math.min(100, (totalSpent / nextTarget) * 100);
-                progressBar.style.width = percent + '%';
-            }
+            let badgeEl = document.getElementById('headerVipBadge'); if(badgeEl) badgeEl.innerText = headerBadgeText;
+            let tierEl = document.getElementById('currentTierTitleDisplay'); if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
+            let spentText = document.getElementById('userSpentText'); if(spentText) spentText.innerText = `$${totalSpent.toFixed(2)} / $${nextTarget.toFixed(2)}`;
+            let progressBar = document.getElementById('tierProgressBar'); if(progressBar) { let percent = Math.min(100, (totalSpent / nextTarget) * 100); progressBar.style.width = percent + '%'; }
 
             if(document.getElementById('badgeBronze')) {
                 document.getElementById('badgeBronze').innerText = totalSpent >= 1 ? '✅' : '🔒';
@@ -803,10 +790,14 @@
         function openSubLinkModal(title, basePrice) {
             let finalPrice = getDiscountedPrice(basePrice);
             currentSubLinkProduct = { title, price: finalPrice };
-            document.getElementById('subLinkModalTitle').innerText = title; document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('subLinkQty').value = 1; document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
-            ['subLinkPlatform','subLinkEmail','subLinkPassword','subLinkContactMethod','subLinkCountryCode','subLinkContact'].forEach(id => document.getElementById(id).value = "");
-            document.getElementById('subLinkFlagDisplay').innerText = "🌐"; document.getElementById('subLinkModal').style.display = 'flex';
+            document.getElementById('subLinkModalTitle').innerText = title; 
+            document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('subLinkQty').value = 1; 
+            document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
+            
+            ['subLinkContactMethod','subLinkCountryCode','subLinkContact'].forEach(id => document.getElementById(id).value = "");
+            document.getElementById('subLinkFlagDisplay').innerText = "🌐"; 
+            document.getElementById('subLinkModal').style.display = 'flex';
         }
         function closeSubLinkModal() { document.getElementById('subLinkModal').style.display = 'none'; }
         function updateSubLinkTotal() { let qty = parseInt(document.getElementById('subLinkQty').value) || 1; document.getElementById('subLinkTotal').innerText = '$ ' + (currentSubLinkProduct.price * qty).toFixed(3); }
@@ -838,13 +829,30 @@
 
         function submitSubLinkOrder() {
             let qty = parseInt(document.getElementById('subLinkQty').value) || 1;
-            let platform = document.getElementById('subLinkPlatform').value; let email = document.getElementById('subLinkEmail').value.trim(); let password = document.getElementById('subLinkPassword').value.trim();
-            let contactMethod = document.getElementById('subLinkContactMethod').value; let countryCode = document.getElementById('subLinkCountryCode').value.trim(); let contact = document.getElementById('subLinkContact').value.trim();
+            let contactMethod = document.getElementById('subLinkContactMethod').value; 
+            let countryCode = document.getElementById('subLinkCountryCode').value.trim(); 
+            let contact = document.getElementById('subLinkContact').value.trim();
             let totalPrice = currentSubLinkProduct.price * qty;
-            if(!platform||!email||!password||!contactMethod||!countryCode||!contact) { alert("⚠️ يرجى تعبئة جميع الحقول!"); return; }
+            
+            if(!contactMethod||!countryCode||!contact) { alert("⚠️ يرجى تعبئة جميع الحقول!"); return; }
             if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
+            
             userBalance -= totalPrice; updateUserBalanceUI();
-            db.collection("orders").add({ product: `${currentSubLinkProduct.title} (العدد: ${qty})`, price: totalPrice, platform: platform, email: email, password: password, contactMethod: contactMethod, countryCode: countryCode, contact: `${countryCode} ${contact}`, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { alert("🚀 تم تسجيل الطلب وإرساله للإدارة بنجاح!"); closeSubLinkModal(); });
+            
+            db.collection("orders").add({ 
+                product: `${currentSubLinkProduct.title} (العدد: ${qty})`, 
+                price: totalPrice, 
+                contactMethod: contactMethod, 
+                countryCode: countryCode, 
+                contact: `${countryCode} ${contact}`, 
+                status: 'pending', 
+                adminReply: '', 
+                userEmail: currentUserEmail, 
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+            }).then(() => { 
+                alert("🚀 تم إرسال الطلب بنجاح! سنقوم بالتواصل معك قريباً لإتمام الشحن."); 
+                closeSubLinkModal(); 
+            });
         }
 
         function submitBooyahOrder() {
@@ -869,7 +877,6 @@
         }
 
         function renderAdminData() {
-            // طلبات الرصيد
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
                 let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : `<span style="font-size:11px; color:#888;">لا يوجد رقم عملية</span>`;
@@ -882,13 +889,10 @@
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml;
 
-            // طلبات الألعاب
             let ordHtml = gameOrders.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات ألعاب</p>' : '';
             gameOrders.forEach(req => {
                 let extraDetails = '';
-                if (req.email) {
-                    extraDetails = `<div style="background:#f1f8e9; padding:8px; border-radius:6px; margin:5px 0; font-size:12px; border:1px solid #dcedc8;">🌐 المنصة: <b>${req.platform}</b><br>📧 الإيميل: <b>${req.email}</b><br>🔑 كلمة السر: <b>${req.password}</b><br>📱 طريقة التواصل: <b>${req.contactMethod}</b><br>📞 رقم الهاتف: <b>${req.contact}</b></div>`;
-                } else if (req.contact) {
+                if (req.contact) {
                     extraDetails = `<div style="background:#f1f8e9; padding:8px; border-radius:6px; margin:5px 0; font-size:12px; border:1px solid #dcedc8;">📱 طريقة التواصل: <b>${req.contactMethod}</b><br>📞 رقم الهاتف: <b>${req.contact}</b></div>`;
                 }
 
@@ -901,9 +905,7 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
 
-            // تحديث جذري لقسم الدعم الفني في لوحة الإدارة ليتمكن الأدمن من الرد على الزبائن
             let supHtml = '';
-            // تجميع رسائل المستخدمين لكي يظهر كل زبون مع محادثته وصندوق الرد الخاص به
             let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
             
             if(userEmails.length === 0) {
@@ -939,21 +941,12 @@
             document.getElementById('adminSupportSection').innerHTML = supHtml;
         }
 
-        // دالة إرسال الرد من الإدارة للزبون
         function adminSendReply(userEmail, inputId) {
             let inputElement = document.getElementById(inputId);
             let text = inputElement.value.trim();
             if(!text) return;
             
-            db.collection("support_messages").add({
-                sender: 'الإدارة',
-                target: userEmail,
-                text: text,
-                isAdmin: true,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                inputElement.value = '';
-            });
+            db.collection("support_messages").add({ sender: 'الإدارة', target: userEmail, text: text, isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { inputElement.value = ''; });
         }
 
         function approveBalance(id) { db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => { alert(`تم قبول الطلب بنجاح!`); }); }
