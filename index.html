@@ -13,11 +13,16 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; padding-bottom: 70px; }
-        .header { background-color: #28a745; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; padding-bottom: 20px; }
+        .header { background-color: #28a745; color: white; padding: 12px 20px; display: flex; flex-direction: column; gap: 12px; font-weight: bold; }
+        .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .header-group { display: flex; align-items: center; gap: 8px; }
         .balance { background-color: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 15px; font-size: 14px; display: flex; align-items: center; gap: 5px; }
         
+        .top-nav-bar { display: flex; justify-content: space-around; align-items: center; background: rgba(0, 77, 38, 0.3); padding: 8px 10px; border-radius: 12px; }
+        .support-badge { display: flex; align-items: center; gap: 6px; background: white; color: #004d26; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .support-dot { width: 8px; height: 8px; background: #27ae60; border-radius: 50%; display: inline-block; box-shadow: 0 0 4px #27ae60; }
+
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 10px; padding: 20px 15px; direction: rtl; }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .card-box { background: linear-gradient(135deg, #004d26, #002613); width: 100%; aspect-ratio: 1 / 1.1; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; }
@@ -37,9 +42,6 @@
         .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
         .buy-action-btn { flex: 1; background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .cancel-action-btn { flex: 1; background-color: white; color: #d9534f; border: 1px solid #d9534f; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
-
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); font-size: 22px; z-index: 100; }
-        .home-icon-container { background-color: #f4f4f9; border-radius: 50%; padding: 15px; margin-top: -30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #eee; cursor: pointer; }
         
         #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #telecomPage, #egyptTelecomPage, #jordanTelecomPage, #zainSubPage, #orangeSubPage, #zainGsmPage, #zainDataPage, #zainMixPage, #orangeCallPage, #orangeInternetPage, #orangeNassPage, #orangeWinkPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #streamingPage, #appleTvPage, #shamnaTvPage, #iptvPage, #netflixTvPage, #primeVideoPage, #gsSubsPage, #shahidPage, #osnPage, #crunchyrollPage, #disneyPage, #aiSectionPage, #geminiProPage, #chatGptPage, #numbersPage, #icloudNumbersPage, #gmailNumbersPage, #instagramNumbersPage, #tiktokNumbersPage, #whatsappNumbersPage, #supportPage { display: none; }
 
@@ -70,7 +72,7 @@
         .payment-icon { width: 45px; height: 45px; background-color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: #004d26; font-size: 18px; }
         
         .pf-container { padding: 20px; direction: rtl; background-color: #fafafa; min-height: 100vh; }
-        .pf-header { text-align: center; margin-bottom: 25px; }
+        .pf-header-text { text-align: center; margin-bottom: 25px; }
         .pf-title { font-size: 22px; font-weight: 900; color: #333; margin: 0; }
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #555; margin-bottom: 6px; padding-right: 5px; }
@@ -78,7 +80,7 @@
         .pf-btn-submit { background-color: #28a745; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #f4f4f9; min-height: 100vh; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
+        .admin-header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
         .admin-tabs { display: flex; gap: 5px; margin-bottom: 20px; overflow-x: auto; }
         .admin-tab { flex: 1; text-align: center; padding: 10px; background: #ddd; border-radius: 8px; font-weight: bold; cursor: pointer; color: #333; font-size: 12px; white-space: nowrap; }
         .admin-tab.active { background: #28a745; color: white; }
@@ -167,40 +169,46 @@
         <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #d9534f;">🚪 تسجيل خروج</a>
     </div>
 
-    <!-- صفحة الدعم الفني للعميل -->
-    <div id="supportPage" style="display:none; background: #f4f6f8; min-height: 100vh; padding-bottom: 80px;">
-        <div style="background: white; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 10;">
-            <div style="font-weight: bold; font-size: 16px; color: #333;">الدعم الفني</div>
-            <div style="text-align: left;">
-                <div style="font-weight: bold; font-size: 13px; color: #004d26;">arab9card</div>
-                <div style="font-size: 11px; color: #27ae60; display: flex; align-items: center; gap: 4px; justify-content: flex-end;">
-                    <span style="width: 7px; height: 7px; background: #27ae60; border-radius: 50%; display: inline-block;"></span> متوفر الآن
+    <!-- الهيدر العلوي الجديد المدمج -->
+    <div class="header">
+        <!-- الصف الأول: الشعار، الرصيد والقائمة -->
+        <div class="header-top-row">
+            <div class="header-group">
+                <div style="font-size: 22px; cursor: pointer;" onclick="openSidebar()">☰</div>
+                <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(255, 255, 255, 0.25); padding: 4px 8px; border-radius: 12px; font-size: 13px;" title="شريحتك الحالية">⭐ مبدئي</div>
+                <div class="balance">
+                    <span id="userBalanceDisplay">0.024 $</span>
+                    <button onclick="showPage('addBalancePage')" style="background: white; color: #28a745; border: none; border-radius: 50%; width: 20px; height: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;" title="إضافة رصيد">+</button>
                 </div>
+            </div>
+            <div class="header-group">
+                <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px;">A9C</div>
+                <div id="backBtn" style="display:none; font-size:22px; cursor:pointer;" onclick="goBack()">→</div>
             </div>
         </div>
         
-        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 160px); overflow-y: auto;">
+        <!-- الصف الثاني: التنقل السريع وحالة الدعم -->
+        <div class="top-nav-bar">
+            <div onclick="showPage('homePage')" style="cursor:pointer; font-size: 18px;" title="الرئيسية">🏠</div>
+            <div onclick="showPage('addBalancePage')" style="cursor:pointer; font-size: 18px;" title="شحن الرصيد">💳</div>
+            <!-- زر الدعم الفني متوفر -->
+            <div class="support-badge" onclick="showPage('supportPage')">
+                <span class="support-dot"></span>
+                <span>الدعم الفني: متوفر</span>
+            </div>
+            <div onclick="openSidebar()" style="cursor: pointer; font-size: 18px;" title="حسابي">👤</div>
+        </div>
+    </div>
+
+    <!-- صفحة الدعم الفني للعميل -->
+    <div id="supportPage" style="display:none; background: #f4f6f8; min-height: 100vh; padding-bottom: 80px;">
+        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 110px); overflow-y: auto;">
             <!-- الرسائل تظهر هنا ديناميكياً -->
         </div>
 
         <div style="position: fixed; bottom: 0; width: 100%; background: white; padding: 10px 15px; box-sizing: border-box; border-top: 1px solid #ddd; display: flex; gap: 10px; align-items: center;">
             <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 14px; text-align: right;">
             <button onclick="sendSupportMessage()" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">إرسال</button>
-        </div>
-    </div>
-
-    <div class="header">
-        <div class="header-group">
-            <div style="font-size: 22px; cursor: pointer;" onclick="openSidebar()">☰</div>
-            <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(255, 255, 255, 0.25); padding: 4px 8px; border-radius: 12px; font-size: 13px;" title="شريحتك الحالية">⭐ مبدئي</div>
-            <div class="balance">
-                <span id="userBalanceDisplay">0.024 $</span>
-                <button onclick="showPage('addBalancePage')" style="background: white; color: #28a745; border: none; border-radius: 50%; width: 20px; height: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;" title="إضافة رصيد">+</button>
-            </div>
-        </div>
-        <div class="header-group">
-            <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px;">A9C</div>
-            <div id="backBtn" style="display:none; font-size:22px; cursor:pointer;" onclick="goBack()">→</div>
         </div>
     </div>
 
@@ -384,7 +392,7 @@
         <div style="padding: 20px; direction: rtl; background: white; margin: 15px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <div style="font-size: 15px; font-weight: bold; color: #004d26; margin-bottom: 5px;" id="currentTierTitleDisplay">شريحتك الحالية: مبدئي</div>
             <p style="font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px;">
-                إذا كنت ترغب بترقية حسابك إلى شريحة أعلى، والحصول على حسومات مميزة، ما عليك إلا زيادة مبيعاتك[span_2](start_span)[span_2](end_span).
+                إذا كنت ترغب بترقية حسابك إلى شريحة أعلى، والحصول على حسومات مميزة، ما عليك إلا زيادة مبيعاتك.
             </p>
             
             <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -527,7 +535,7 @@
     <!-- لوحة التحكم (Admin Dashboard) -->
     <div id="adminDashboardPage">
         <div class="admin-wrapper">
-            <div class="admin-header">
+            <div class="admin-header-box">
                 <h2 style="margin:0;">لوحة التحكم</h2>
                 <div style="font-size: 20px;">👑</div>
             </div>
@@ -541,10 +549,6 @@
             <div id="adminOrdersSection" style="display:none;"></div>
             <div id="adminSupportSection" style="display:none;"></div>
         </div>
-    </div>
-
-    <div class="bottom-nav">
-        <div>🛒</div><div onclick="showPage('addBalancePage')" style="cursor:pointer;">💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div onclick="showPage('supportPage')" style="cursor:pointer;">🎧</div><div onclick="openSidebar()" style="cursor: pointer;">👤</div>
     </div>
 
     <script>
@@ -916,7 +920,7 @@
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
-                <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
+                <div class="pf-header-text"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
                 <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية من إيصال التحويل"></div>
