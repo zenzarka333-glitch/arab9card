@@ -41,7 +41,7 @@
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); font-size: 22px; z-index: 100; }
         .home-icon-container { background-color: #f4f4f9; border-radius: 50%; padding: 15px; margin-top: -30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #eee; cursor: pointer; }
         
-        #gamesPage, #freeFireSubPage, #robot1Page, #pubgSubPage, #pubgRobotPage, #addBalancePage, #chargeCodePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage { display: none; }
+        #gamesPage, #freeFireSubPage, #robot1Page, #pubgSubPage, #pubgRobotPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage { display: none; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background-color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; }
@@ -150,7 +150,20 @@
 
     <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
 
-    <div id="gamesPage"><div class="page-title">الألعاب</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('freeFireSubPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">FF</div><div class="card-name-inside">فري فاير</div></div><div class="card-name-outside">فري فاير</div></div><div class="card-wrapper" onclick="showPage('pubgSubPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div><div class="card-name-outside">ببجي موبايل</div></div></div></div>
+    <div id="gamesPage">
+        <div class="page-title">الألعاب</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('freeFireSubPage')">
+                <div class="card-box"><div class="card-circle" style="color:#ff4757;">FF</div><div class="card-name-inside">فري فاير</div></div>
+                <div class="card-name-outside">فري فاير</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('pubgSubPage')">
+                <div class="card-box"><div class="card-circle" style="color:#2f3542;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div>
+                <div class="card-name-outside">ببجي موبايل</div>
+            </div>
+        </div>
+    </div>
+
     <div id="freeFireSubPage"><div class="page-title">فري فاير</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('robot1Page')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🤖</div></div><div class="card-name-outside">روبوت 1</div></div></div></div>
     <div id="pubgSubPage"><div class="page-title">ببجي موبايل</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('pubgRobotPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">🤖</div></div><div class="card-name-outside">ببجي روبوت</div></div></div></div>
     <div id="pubgRobotPage"><div class="page-title">ببجي روبوت</div><div class="grid-container" id="pubgRobotGrid"></div></div>
@@ -199,7 +212,6 @@
     </div>
 
     <script>
-        // إعدادات Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
             authDomain: "arab9card.firebaseapp.com",
@@ -295,9 +307,13 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'chargeCodePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
-            pages.forEach(p => document.getElementById(p).style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'robot1Page', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            pages.forEach(p => {
+                let el = document.getElementById(p);
+                if (el) el.style.display = 'none';
+            });
+            let targetEl = document.getElementById(pageId);
+            if (targetEl) targetEl.style.display = 'block';
             currentPage = pageId;
             document.getElementById('backBtn').style.display = (pageId === 'homePage') ? 'none' : 'block';
         }
@@ -352,7 +368,6 @@
             document.getElementById('myPaymentsListContainer').innerHTML = html;
         }
 
-        // نموذج الدفع باستخدام رقم العملية (Transaction ID)
         function openPaymentForm(index) {
             const method = paymentMethods[index];
             document.getElementById('pfDynamicContent').innerHTML = `
