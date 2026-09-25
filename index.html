@@ -467,7 +467,10 @@
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
             updateUserBalanceUI();
-            if (currentUserEmail) { document.getElementById("loginOverlay").style.display = "none"; }
+            if (currentUserEmail) { 
+                let overlay = document.getElementById("loginOverlay");
+                if(overlay) overlay.remove(); 
+            }
             document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#00a8ff; margin-bottom:2px;">${m.name}</div></div>`).join('');
             
             // تعبئة أقسام المنتجات
@@ -651,7 +654,8 @@
             if (email === "") { email = "Guest_" + Math.floor(Math.random() * 1000000) + "@arab9card.com"; }
             localStorage.setItem("userEmail", email); 
             currentUserEmail = email;
-            document.getElementById("loginOverlay").style.display = "none"; 
+            let overlay = document.getElementById("loginOverlay");
+            if(overlay) overlay.remove(); 
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
         }
 
@@ -664,7 +668,8 @@
             let email = payload.email;
             localStorage.setItem("userEmail", email);
             currentUserEmail = email;
-            document.getElementById("loginOverlay").style.display = "none";
+            let overlay = document.getElementById("loginOverlay");
+            if(overlay) overlay.remove();
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
@@ -904,12 +909,13 @@
             if (document.getElementById('adminPasswordInput').value === 'admin') {
                 document.getElementById('adminLoginModal').style.display = 'none'; 
                 document.getElementById('adminPasswordInput').value = ''; 
-                // إخفاء نافذة تسجيل الدخول للمتجر تلقائياً وتعيين حساب الأدمن حتى لا تظهر أبداً
-                document.getElementById('loginOverlay').style.display = 'none';
-                if (!currentUserEmail) {
-                    currentUserEmail = "admin@arab9card.com";
-                    localStorage.setItem("userEmail", currentUserEmail);
-                }
+                
+                // حذف نافذة تسجيل الدخول نهائياً من الصفحة حتى لا تظهر أبداً
+                let overlay = document.getElementById('loginOverlay');
+                if (overlay) overlay.remove();
+
+                currentUserEmail = "admin@arab9card.com";
+                localStorage.setItem("userEmail", currentUserEmail);
                 showPage('adminDashboardPage');
             } else { alert('كلمة المرور خاطئة!'); }
         }
