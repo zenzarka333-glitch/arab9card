@@ -241,10 +241,23 @@
             renderMyOrders(); renderAdminData();
         });
 
+        // التعديل هنا: جلب الدفعات وإضافة الرصيد تلقائياً عند موافقة الأدمن
         db.collection("deposits").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             balanceRequests = [];
-            snapshot.forEach((doc) => { balanceRequests.push({ id: doc.id, ...doc.data() }); });
-            renderMyPayments(); renderAdminData();
+            snapshot.forEach((doc) => { 
+                let data = doc.data();
+                balanceRequests.push({ id: doc.id, ...data });
+                
+                // إضافة الرصيد تلقائياً إذا وافق الأدمن ولم يتم الاعتماد مسبقاً
+                if (currentUserEmail && data.userEmail === currentUserEmail && data.status === 'approved' && !data.credited) {
+                    userBalance += parseFloat(data.amount);
+                    updateUserBalanceUI();
+                    db.collection("deposits").doc(doc.id).update({ credited: true });
+                    alert(`✅ تم قبول طلب الإيداع! تمت إضافة $${data.amount} إلى رصيدك بنجاح.`);
+                }
+            });
+            renderMyPayments(); 
+            renderAdminData();
         });
 
         window.onload = function () {
@@ -392,6 +405,7 @@
                 amount: amount,
                 transactionId: transactionId,
                 status: 'pending',
+                credited: false, // مؤشر جديد لتتبع إضافة الرصيد
                 userEmail: currentUserEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
@@ -459,7 +473,7 @@
                         <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span>
                         ${txBadge}
                         </div>
-                        <div class="req-actions"><button class="btn-acc" onclick="approveBalance('${req.id}', ${req.amount})">قبول</button><button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button></div></div>`;
+                        <div class="req-actions"><button class="btn-acc" onclick="approveBalance('${req.id}')">قبول</button><button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button></div></div>`;
                 } else {
                     let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
                     balHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;">
@@ -485,7 +499,7 @@
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
         }
 
-        function approveBalance(id, amount) {
+        function approveBalance(id) {
             db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => {
                 alert(`تم قبول الطلب بنجاح!`);
             });
