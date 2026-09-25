@@ -85,8 +85,8 @@
 
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #f1f5f9; min-height: 100vh; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #0f172a; color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid #ff7e00; }
-        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .admin-tab { flex: 1; text-align: center; padding: 12px; background: #cbd5e1; border-radius: 8px; font-weight: bold; cursor: pointer; color: #0f172a; font-size: 12px; }
+        .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+        .admin-tab { flex: 1; min-width: 70px; text-align: center; padding: 10px 5px; background: #cbd5e1; border-radius: 8px; font-weight: bold; cursor: pointer; color: #0f172a; font-size: 11px; }
         .admin-tab.active { background: #00a8ff; color: white; }
         .request-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid #f39c12; }
         .request-card.approved { border-right-color: #ff7e00; opacity: 0.9; }
@@ -191,13 +191,25 @@
         </div>
 
         <div class="grid-container">
+            <!-- كرت الألعاب -->
             <div class="card-wrapper" onclick="showPage('gamesPage')">
                 <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
                 <div class="card-name-outside">الألعاب</div>
             </div>
+            
+            <!-- كرت بطاقات الاتصال -->
             <div class="card-wrapper" onclick="showPage('telecomPage')">
                 <div class="card-box"><div class="card-circle" style="color:#00a8ff;">📱</div><div class="card-name-inside">اتصال</div></div>
                 <div class="card-name-outside">بطاقات الاتصال</div>
+            </div>
+
+            <!-- الكرت الجديد: تواصل معنا (واتساب) -->
+            <div class="card-wrapper" onclick="window.open('https://wa.me/963992448854', '_blank')">
+                <div class="card-box" style="border: 1px solid #25D366; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.15);">
+                    <div class="card-circle" style="color:#25D366; border-color:#25D366; font-size: 24px;">💬</div>
+                    <div class="card-name-inside" style="color:#25D366;">مباشر</div>
+                </div>
+                <div class="card-name-outside" style="color:#25D366;">تواصل معنا</div>
             </div>
         </div>
     </div>
@@ -286,7 +298,7 @@
     <div id="orderModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div><input type="text" id="playerId" placeholder="الايدي (Player ID)"><button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button><div class="modal-buttons"><button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button><button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button></div></div></div>
     <div id="codeOrderModal" class="modal"><div class="modal-content" style="max-width: 380px; text-align: right;"><div class="modal-header"><span id="codeModalItemTitle" style="font-size: 15px;">المنتج</span><span class="price-tag" id="codeModalItemPrice">$ 0.00</span></div><div style="margin-bottom: 12px; text-align: right;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px;">العدد</label><input type="number" id="codeQuantity" value="1" min="1" oninput="updateCodeTotal()" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; text-align: center; box-sizing: border-box;"></div><div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;"><span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span><span id="codeModalTotal" style="color: #ff7e00; font-weight: bold; font-size: 15px;">$ 0.00</span></div><div class="modal-buttons"><button class="buy-action-btn" onclick="submitCodeOrder()">شراء</button><button class="cancel-action-btn" onclick="closeCodeOrderModal()">إلغاء</button></div><div style="margin-top: 15px; border-top: 2px solid #e74c3c; padding-top: 10px; text-align: right;"><span style="color: #e74c3c; font-weight: bold; font-size: 13px; display: block; margin-bottom: 6px;">طريقة شحن الكود :</span><p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">• قم بزيارة موقع الرسمي للشركة<br>• قم بوضع الكود الخاص بك<br>• اضغط على استرداد</p></div></div></div>
     
-    <!-- نافذة الربط الفرعي والعضويات (بدون حقول الباسورد والإيميل) -->
+    <!-- نافذة الربط الفرعي والعضويات -->
     <div id="subLinkModal" class="modal">
         <div class="modal-content" style="max-width: 380px; text-align: right;">
             <div class="modal-header">
@@ -353,11 +365,13 @@
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
                 <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
+                <div class="admin-tab" id="tabUsers" onclick="switchAdminTab('users')">إدارة المستخدمين 👥</div>
             </div>
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
             <div id="adminSupportSection" style="display:none;"></div>
+            <div id="adminUsersSection" style="display:none;"></div>
         </div>
     </div>
 
@@ -377,6 +391,7 @@
         let balanceRequests = []; 
         let gameOrders = [];      
         let supportMessages = [];
+        let manualUserTiers = {};
         let currentSelectedProduct = { title: '', price: 0 };
         let currentCodeProduct = { title: '', price: 0 };
         let currentSubLinkProduct = { title: '', price: 0 };
@@ -402,10 +417,20 @@
         }
 
         const paymentMethods = [
-            { name: "شام كاش دولار", symbol: "Z", address: "814a88285d61da72671884d2a2fbb822" },
+            { name: "شام كاش دولار", symbol: "Z", address: "fd66709efc3e98993f92370ef6a4cb6c" },
             { name: "آسيا سيل العراق", symbol: "A", address: "07756752890" },
             { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
+
+        // جلب بيانات مستويات المستخدمين (التجار) المخصصة من الأدمن
+        db.collection("users").onSnapshot((snapshot) => {
+            manualUserTiers = {};
+            snapshot.forEach((doc) => {
+                manualUserTiers[doc.id] = doc.data();
+            });
+            calculateUserVIP();
+            renderAdminData();
+        });
 
         // جلب الرسائل والدعم الفني
         db.collection("support_messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
@@ -690,15 +715,26 @@
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
         function calculateUserVIP() {
+            let emailKey = currentUserEmail ? currentUserEmail.replace(/[^a-zA-Z0-9]/g, '_') : '';
+            let manualData = manualUserTiers[emailKey] || {};
+
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
             let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
             
             let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
-            if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; nextTarget = 300; } 
-            else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
-            else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
-            else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
-            else { nextTarget = 1; }
+            
+            if (manualData.tier && manualData.tier !== 'auto') {
+                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; }
+                else if (manualData.tier === 'gold') { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; }
+                else if (manualData.tier === 'silver') { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; }
+                else if (manualData.tier === 'bronze') { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; }
+            } else {
+                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; nextTarget = 300; } 
+                else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
+                else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
+                else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
+                else { nextTarget = 1; }
+            }
 
             let badgeEl = document.getElementById('headerVipBadge'); if(badgeEl) badgeEl.innerText = headerBadgeText;
             let tierEl = document.getElementById('currentTierTitleDisplay'); if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
@@ -706,10 +742,10 @@
             let progressBar = document.getElementById('tierProgressBar'); if(progressBar) { let percent = Math.min(100, (totalSpent / nextTarget) * 100); progressBar.style.width = percent + '%'; }
 
             if(document.getElementById('badgeBronze')) {
-                document.getElementById('badgeBronze').innerText = totalSpent >= 1 ? '✅' : '🔒';
-                document.getElementById('badgeSilver').innerText = totalSpent >= 40 ? '✅' : '🔒';
-                document.getElementById('badgeGold').innerText = totalSpent >= 100 ? '✅' : '🔒';
-                document.getElementById('badgeDiamond').innerText = totalSpent >= 300 ? '✅' : '🔒';
+                document.getElementById('badgeBronze').innerText = (totalSpent >= 1 || manualData.tier === 'bronze' || manualData.tier === 'silver' || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
+                document.getElementById('badgeSilver').innerText = (totalSpent >= 40 || manualData.tier === 'silver' || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
+                document.getElementById('badgeGold').innerText = (totalSpent >= 100 || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
+                document.getElementById('badgeDiamond').innerText = (totalSpent >= 300 || manualData.tier === 'diamond') ? '✅' : '🔒';
             }
             return discount;
         }
@@ -871,9 +907,27 @@
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isSup = tab === 'support';
-            document.getElementById('tabBalance').classList.toggle('active', isBal); document.getElementById('tabOrders').classList.toggle('active', isOrd); document.getElementById('tabSupport').classList.toggle('active', isSup);
-            document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isSup = tab === 'support'; let isUsr = tab === 'users';
+            document.getElementById('tabBalance').classList.toggle('active', isBal); 
+            document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabSupport').classList.toggle('active', isSup);
+            document.getElementById('tabUsers').classList.toggle('active', isUsr);
+            
+            document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
+            document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
+            document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
+        }
+
+        function adminSaveUserTier(email) {
+            let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
+            let selectedTier = document.getElementById(`tierSelect_${safeId}`).value;
+            db.collection("users").doc(safeId).set({
+                email: email,
+                tier: selectedTier
+            }, { merge: true }).then(() => {
+                alert("✅ تم حفظ مستوى الزبون / التاجر بنجاح!");
+            });
         }
 
         function renderAdminData() {
@@ -904,6 +958,35 @@
                 }
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
+
+            // تجميع كل الإيميلات الفريدة المسجلة في النظام (Orders, Deposits, Support)
+            let allEmails = new Set();
+            gameOrders.forEach(o => { if(o.userEmail) allEmails.add(o.userEmail); });
+            balanceRequests.forEach(d => { if(d.userEmail) allEmails.add(d.userEmail); });
+            supportMessages.forEach(m => { if(m.sender && !m.isAdmin) allEmails.add(m.sender); });
+
+            let usrHtml = allEmails.size === 0 ? '<p style="text-align:center; color:#888;">لا يوجد مستخدمون مسجلون حالياً</p>' : '';
+            allEmails.forEach(email => {
+                let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
+                let userData = manualUserTiers[safeId] || {};
+                let currentTierVal = userData.tier || 'auto';
+
+                usrHtml += `<div class="request-card" style="border-right: 4px solid #00a8ff;">
+                    <div style="font-weight: bold; margin-bottom: 8px; color: #0f172a; font-size: 14px;">📧 البريد: ${email}</div>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 4px;">تحديد الشريحة / مستوى التاجر:</label>
+                        <select id="tierSelect_${safeId}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; background: #fff;">
+                            <option value="auto" ${currentTierVal === 'auto' ? 'selected' : ''}>تلقائي (حسب المبيعات)</option>
+                            <option value="bronze" ${currentTierVal === 'bronze' ? 'selected' : ''}>برونزي (1% خصم)</option>
+                            <option value="silver" ${currentTierVal === 'silver' ? 'selected' : ''}>فضي (2% خصم)</option>
+                            <option value="gold" ${currentTierVal === 'gold' ? 'selected' : ''}>ذهبي (3% خصم)</option>
+                            <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (4%)</option>
+                        </select>
+                    </div>
+                    <button class="buy-action-btn" onclick="adminSaveUserTier('${email}')" style="padding: 10px; font-size: 13px;">حفظ وتعديل الشريحة</button>
+                </div>`;
+            });
+            document.getElementById('adminUsersSection').innerHTML = usrHtml;
 
             let supHtml = '';
             let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
@@ -954,7 +1037,7 @@
         
         function approveOrder(id) {
             let replyText = document.getElementById(`reply_${id}`).value.trim();
-            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyText || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاح!'); calculateUserVIP(); });
+            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyText || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاحي!'); calculateUserVIP(); });
         }
         
         function rejectOrder(id) {
