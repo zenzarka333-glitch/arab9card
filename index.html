@@ -41,7 +41,7 @@
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); font-size: 22px; z-index: 100; }
         .home-icon-container { background-color: #f4f4f9; border-radius: 50%; padding: 15px; margin-top: -30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #eee; cursor: pointer; }
         
-        #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage { display: none; }
+        #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #telecomPage, #egyptTelecomPage, #jordanTelecomPage, #zainSubPage, #orangeSubPage, #zainGsmPage, #zainDataPage, #zainMixPage, #orangeCallPage, #orangeInternetPage, #orangeNassPage, #orangeWinkPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #streamingPage, #appleTvPage, #shamnaTvPage, #iptvPage, #netflixTvPage, #primeVideoPage, #gsSubsPage, #shahidPage, #osnPage, #crunchyrollPage, #disneyPage, #aiSectionPage, #geminiProPage, #chatGptPage, #numbersPage, #icloudNumbersPage, #gmailNumbersPage, #instagramNumbersPage, #tiktokNumbersPage, #whatsappNumbersPage, #supportPage { display: none; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background-color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; }
@@ -51,9 +51,18 @@
         .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; width: 100%; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-google img { width: 20px; }
         
-        .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #004d26; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #fff; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: right; font-weight: bold; }
-        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #ffffff; overflow-x: hidden; transition: 0.3s; padding-top: 40px; box-shadow: -5px 0 15px rgba(0,0,0,0.3); text-align: right; }
+        .sidebar a { padding: 12px 20px; text-decoration: none; font-size: 16px; color: #333; display: block; text-align: right; font-weight: bold; border-bottom: 1px solid #f0f0f0; }
+        .sidebar a:hover { background-color: #f8f9fa; }
+        .sidebar .close-btn { position: absolute; top: 10px; left: 15px; font-size: 30px; border-bottom: none; cursor: pointer; color: #555; }
+        
+        .sidebar-profile { padding: 15px 20px; text-align: center; border-bottom: 1px solid #eee; background: #fafafa; }
+        .sidebar-avatar { width: 60px; height: 60px; background: #000; border-radius: 50%; margin: 0 auto 8px auto; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; border: 2px solid #28a745; }
+        
+        .currency-dropdown-btn { background: #fffbe6; border: 1px solid #f1c40f; padding: 10px 15px; border-radius: 20px; width: 90%; margin: 10px auto; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; color: #b7950b; font-size: 13px; box-sizing: border-box; }
+        .currency-list { display: none; background: #fff; border: 1px solid #ddd; border-radius: 10px; width: 90%; margin: 0 auto 10px auto; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .currency-item { padding: 8px 12px; font-size: 12px; border-bottom: 1px solid #f5f5f5; cursor: pointer; text-align: right; color: #333; }
+        .currency-item:hover { background: #f0fdf4; color: #28a745; }
 
         .balance-page-container { padding: 15px; }
         .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; direction: rtl; }
@@ -70,8 +79,8 @@
 
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #f4f4f9; min-height: 100vh; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #004d26; color: white; padding: 15px; border-radius: 12px; }
-        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .admin-tab { flex: 1; text-align: center; padding: 12px; background: #ddd; border-radius: 8px; font-weight: bold; cursor: pointer; color: #333; }
+        .admin-tabs { display: flex; gap: 5px; margin-bottom: 20px; overflow-x: auto; }
+        .admin-tab { flex: 1; text-align: center; padding: 10px; background: #ddd; border-radius: 8px; font-weight: bold; cursor: pointer; color: #333; font-size: 12px; white-space: nowrap; }
         .admin-tab.active { background: #28a745; color: white; }
         .request-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-right: 4px solid #f39c12; }
         .request-card.approved { border-right-color: #28a745; opacity: 0.9; }
@@ -112,24 +121,80 @@
         </div>
     </div>
 
+    <!-- القائمة الجانبية (Sidebar) -->
     <div id="sideMenu" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
-        <a href="#" onclick="showMyAccount(); closeSidebar()">👤 حسابي</a>
-        <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
-        <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
-        <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
+        <span class="close-btn" onclick="closeSidebar()">×</span>
+        <div class="sidebar-profile">
+            <div class="sidebar-avatar">👤</div>
+            <div style="font-weight: bold; font-size: 14px; color: #333;" id="sidebarUserName">Zen Zarka #7271</div>
+            <div style="font-size: 11px; color: #e67e22; margin-top: 3px;">⭐ Gold / ذهبي</div>
+            <div style="font-size: 18px; font-weight: bold; color: #e74c3c; margin-top: 8px;" id="sidebarBalanceDisplay">0.024 $</div>
+            
+            <div style="display: flex; justify-content: center; gap: 15px; margin: 10px 0; font-size: 18px;">
+                <span>❤️</span><span>👤</span><span>🚪</span>
+            </div>
+
+            <!-- زر تبديل العملة -->
+            <div class="currency-dropdown-btn" onclick="toggleCurrencyList()">
+                <span id="currentCurrencyLabel">🔄 العملة - الدولار الأمريكي</span>
+                <span>▼</span>
+            </div>
+            <!-- قائمة العملات -->
+            <div class="currency-list" id="currencyListContainer">
+                <div class="currency-item" onclick="changeCurrency('USD', 'الدولار الأمريكي - $')">الدولار الأمريكي - $</div>
+                <div class="currency-item" onclick="changeCurrency('JOD', 'دينار أردني - JOD')">دينار أردني - JOD</div>
+                <div class="currency-item" onclick="changeCurrency('SYP_SHAM', 'ليرة سورية - شام كاش - ل.س')">ليرة سورية - شام كاش - ل.س</div>
+                <div class="currency-item" onclick="changeCurrency('SYP_SYRIATEL', 'ليرة سورية - سيريتل كاش - ل.س')">ليرة سورية - سيريتل كاش - ل.س</div>
+                <div class="currency-item" onclick="changeCurrency('IQD_ASIA', 'دينار عراقي - آسيا سيل - د.ع')">دينار عراقي - آسيا سيل - د.ع</div>
+                <div class="currency-item" onclick="changeCurrency('AED_MASHREQ', 'دينار إماراتي - بنك المشرق - د.إ')">دينار إماراتي - بنك المشرق - د.إ</div>
+                <div class="currency-item" onclick="changeCurrency('AED_ADIB', 'دينار إماراتي - ADIB - د.إ')">دينار إماراتي - ADIB - د.إ</div>
+                <div class="currency-item" onclick="changeCurrency('EGP', 'جنيه مصري - EGP')">جنيه مصري - EGP</div>
+                <div class="currency-item" onclick="changeCurrency('IQD_ZAIN', 'دينار عراقي - زين كاش - د.ع')">دينار عراقي - زين كاش - د.ع</div>
+                <div class="currency-item" onclick="changeCurrency('SAR_RAJHI', 'ريال سعودي - راجحي - ﷼')">ريال سعودي - راجحي - ﷼</div>
+                <div class="currency-item" onclick="changeCurrency('SAR_KARIM', 'ريال سعودي - كريمي - ﷼')">ريال سعودي - كريمي - ﷼</div>
+                <div class="currency-item" onclick="changeCurrency('TRY', 'ليرة تركية - ₺')">ليرة تركية - ₺</div>
+                <div class="currency-item" onclick="changeCurrency('YER', 'الريال اليمني - ﷼')">الريال اليمني - ﷼</div>
+            </div>
+        </div>
+
+        <a href="#" onclick="showPage('homePage'); closeSidebar()">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
+        <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
+        <a href="#" onclick="showMyOrdersPage(); closeSidebar()">🛒 طلباتي</a>
+        <a href="#" onclick="showPage('supportPage'); closeSidebar()">🎧 الدعم الفني</a>
+        <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
         <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: #f39c12;">⚙️ لوحة التحكم (Admin)</a>
-        <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #d9534f; margin-top: 20px;">🚪 تسجيل خروج</a>
+        <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #d9534f;">🚪 تسجيل خروج</a>
     </div>
 
-    <!-- الهيدر المحدث (يحتوي على زر القائمة، شارة شريحة الـ VIP المختصرة، الرصيد مع زر + للإضافة) -->
+    <!-- صفحة الدعم الفني للعميل -->
+    <div id="supportPage" style="display:none; background: #f4f6f8; min-height: 100vh; padding-bottom: 80px;">
+        <div style="background: white; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 10;">
+            <div style="font-weight: bold; font-size: 16px; color: #333;">الدعم الفني</div>
+            <div style="text-align: left;">
+                <div style="font-weight: bold; font-size: 13px; color: #004d26;">arab9card</div>
+                <div style="font-size: 11px; color: #27ae60; display: flex; align-items: center; gap: 4px; justify-content: flex-end;">
+                    <span style="width: 7px; height: 7px; background: #27ae60; border-radius: 50%; display: inline-block;"></span> متوفر الآن
+                </div>
+            </div>
+        </div>
+        
+        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 160px); overflow-y: auto;">
+            <!-- الرسائل تظهر هنا ديناميكياً -->
+        </div>
+
+        <div style="position: fixed; bottom: 0; width: 100%; background: white; padding: 10px 15px; box-sizing: border-box; border-top: 1px solid #ddd; display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 14px; text-align: right;">
+            <button onclick="sendSupportMessage()" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">إرسال</button>
+        </div>
+    </div>
+
     <div class="header">
         <div class="header-group">
             <div style="font-size: 22px; cursor: pointer;" onclick="openSidebar()">☰</div>
-            <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(255, 255, 255, 0.25); padding: 4px 8px; border-radius: 12px; font-size: 13px;" title="شريحتك الحالية (اضغط لعرض المستويات)">⭐ مبدئي</div>
+            <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(255, 255, 255, 0.25); padding: 4px 8px; border-radius: 12px; font-size: 13px;" title="شريحتك الحالية">⭐ مبدئي</div>
             <div class="balance">
-                💰 $<span id="userBalanceDisplay">0.010</span>
+                <span id="userBalanceDisplay">0.024 $</span>
                 <button onclick="showPage('addBalancePage')" style="background: white; color: #28a745; border: none; border-radius: 50%; width: 20px; height: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;" title="إضافة رصيد">+</button>
             </div>
         </div>
@@ -144,6 +209,22 @@
             <div class="card-wrapper" onclick="showPage('gamesPage')">
                 <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
                 <div class="card-name-outside">الألعاب</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('telecomPage')">
+                <div class="card-box"><div class="card-circle" style="color:#004d26;">📱</div><div class="card-name-inside">اتصال</div></div>
+                <div class="card-name-outside">بطاقات الاتصال</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('streamingPage')">
+                <div class="card-box"><div class="card-circle" style="color:#28a745;">📺</div><div class="card-name-inside">مشاهدة</div></div>
+                <div class="card-name-outside">المشاهدة</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('aiSectionPage')">
+                <div class="card-box"><div class="card-circle" style="color:#28a745;">🤖</div><div class="card-name-inside">AI</div></div>
+                <div class="card-name-outside">الذكاء الاصطناعي</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('numbersPage')">
+                <div class="card-box"><div class="card-circle" style="color:#28a745;">📞</div><div class="card-name-inside">أرقام</div></div>
+                <div class="card-name-outside">الارقام</div>
             </div>
         </div>
     </div>
@@ -173,6 +254,129 @@
             </div>
         </div>
     </div>
+
+    <!-- قسم الارقام -->
+    <div id="numbersPage">
+        <div class="page-title">الارقام</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('icloudNumbersPage')"><div class="card-box"><div class="card-circle" style="color: #28a745;">☁️</div><div class="card-name-inside">ايكلاود</div></div><div class="card-name-outside">ارقام ايكلاود</div></div>
+            <div class="card-wrapper" onclick="showPage('gmailNumbersPage')"><div class="card-box"><div class="card-circle" style="color: #e74c3c;">M</div><div class="card-name-inside">Gmail</div></div><div class="card-name-outside">ارقام جيميل</div></div>
+            <div class="card-wrapper" onclick="showPage('instagramNumbersPage')"><div class="card-box"><div class="card-circle" style="color: #c0392b;">IG</div><div class="card-name-inside">Instagram</div></div><div class="card-name-outside">ارقام انستغرام</div></div>
+            <div class="card-wrapper" onclick="showPage('tiktokNumbersPage')"><div class="card-box"><div class="card-circle" style="color: #000;">TT</div><div class="card-name-inside">TikTok</div></div><div class="card-name-outside">ارقام تيك توك</div></div>
+            <div class="card-wrapper" onclick="showPage('whatsappNumbersPage')"><div class="card-box"><div class="card-circle" style="color: #27ae60;">WA</div><div class="card-name-inside">WhatsApp</div></div><div class="card-name-outside">ارقام واتساب</div></div>
+        </div>
+    </div>
+
+    <div id="icloudNumbersPage"><div class="page-title">ارقام ايكلاود</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="gmailNumbersPage"><div class="page-title">ارقام جيميل</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="instagramNumbersPage"><div class="page-title">ارقام انستغرام</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="tiktokNumbersPage"><div class="page-title">ارقام تيك توك</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا يوجد منتجات أو فئات فرعية حالياً ❌</p></div></div>
+    <div id="whatsappNumbersPage"><div class="page-title">ارقام واتساب</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+
+    <!-- قسم الذكاء الاصطناعي -->
+    <div id="aiSectionPage">
+        <div class="page-title">الذكاء الاصطناعي</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('geminiProPage')">
+                <div class="card-box"><div class="card-circle" style="color: #28a745;">✨</div><div class="card-name-inside">Gemini</div></div>
+                <div class="card-name-outside">Gemini Pro</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('chatGptPage')">
+                <div class="card-box"><div class="card-circle" style="color: #28a745;">GPT</div><div class="card-name-inside">CHAT</div></div>
+                <div class="card-name-outside">CHAT GPT</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="geminiProPage"><div class="page-title">Gemini Pro</div><div class="grid-container" id="geminiProGrid"></div></div>
+    <div id="chatGptPage"><div class="page-title">CHAT GPT</div><div class="grid-container" id="chatGptGrid"></div></div>
+
+    <!-- قسم المشاهدة -->
+    <div id="streamingPage">
+        <div class="page-title">المشاهدة</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('appleTvPage')"><div class="card-box"><div class="card-circle" style="color:#004d26;">🍎tv</div><div class="card-name-inside">Apple TV</div></div><div class="card-name-outside">Apple TV</div></div>
+            <div class="card-wrapper" onclick="showPage('shamnaTvPage')"><div class="card-box"><div class="card-circle" style="color:#004d26;">📺</div><div class="card-name-inside">Shamna TV</div></div><div class="card-name-outside">Shamna TV</div></div>
+            <div class="card-wrapper" onclick="showPage('iptvPage')"><div class="card-box"><div class="card-circle" style="color:#004d26;">IPTV</div><div class="card-name-inside">IP TV</div></div><div class="card-name-outside">IP TV</div></div>
+            <div class="card-wrapper" onclick="showPage('netflixTvPage')"><div class="card-box"><div class="card-circle" style="color:#e74c3c;">N</div><div class="card-name-inside">NETFLIX</div></div><div class="card-name-outside">Netflix Tv</div></div>
+            <div class="card-wrapper" onclick="showPage('primeVideoPage')"><div class="card-box"><div class="card-circle" style="color:#004d26;">PV</div><div class="card-name-inside">PRIME</div></div><div class="card-name-outside">PRIME VIDEO</div></div>
+            <div class="card-wrapper" onclick="showPage('gsSubsPage')"><div class="card-box"><div class="card-circle" style="color:#28a745;">⚽</div><div class="card-name-inside">أشتراكات</div></div><div class="card-name-outside">أشتراكات جي اس</div></div>
+            <div class="card-wrapper" onclick="showPage('shahidPage')"><div class="card-box"><div class="card-circle" style="color:#28a745;">mbc</div><div class="card-name-inside">SHAHID</div></div><div class="card-name-outside">SHAHID</div></div>
+            <div class="card-wrapper" onclick="showPage('osnPage')"><div class="card-box"><div class="card-circle" style="color:#004d26;">osn+</div><div class="card-name-inside">OSN PLUS</div></div><div class="card-name-outside">OSN PLUS</div></div>
+            <div class="card-wrapper" onclick="showPage('crunchyrollPage')"><div class="card-box"><div class="card-circle" style="color:#e67e22;">CR</div><div class="card-name-inside">Crunchyroll</div></div><div class="card-name-outside">Crunchyroll</div></div>
+            <div class="card-wrapper" onclick="showPage('disneyPage')"><div class="card-box"><div class="card-circle" style="color:#3498db;">DP</div><div class="card-name-inside">DISNEY PLUS</div></div><div class="card-name-outside">DISNEY PLUS</div></div>
+        </div>
+    </div>
+
+    <div id="appleTvPage"><div class="page-title">Apple TV</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="shamnaTvPage"><div class="page-title">Shamna TV</div><div class="grid-container" id="shamnaTvGrid"></div></div>
+    <div id="iptvPage"><div class="page-title">IP TV</div><div class="grid-container" id="iptvGrid"></div></div>
+    <div id="netflixTvPage"><div class="page-title">Netflix Tv</div><div class="grid-container" id="netflixTvGrid"></div></div>
+    <div id="primeVideoPage"><div class="page-title">PRIME VIDEO</div><div class="grid-container" id="primeVideoGrid"></div></div>
+    <div id="gsSubsPage"><div class="page-title">أشتراكات جي اس</div><div class="grid-container" id="gsSubsGrid"></div></div>
+    <div id="shahidPage"><div class="page-title">SHAHID</div><div class="grid-container" id="shahidGrid"></div></div>
+    <div id="osnPage"><div class="page-title">OSN PLUS</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا يوجد منتجات أو فئات فرعية حالياً ❌</p></div></div>
+    <div id="crunchyrollPage"><div class="page-title">Crunchyroll</div><div class="grid-container" id="crunchyrollGrid"></div></div>
+    <div id="disneyPage"><div class="page-title">DISNEY PLUS</div><div class="grid-container" id="disneyGrid"></div></div>
+
+    <!-- بطاقات الاتصالات -->
+    <div id="telecomPage">
+        <div class="page-title">بطاقات الإتصالات</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('egyptTelecomPage')">
+                <div class="card-box"><div class="card-circle" style="color:#004d26;">🇪🇬</div><div class="card-name-inside">مصر</div></div>
+                <div class="card-name-outside">إتصالات مصر</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('jordanTelecomPage')">
+                <div class="card-box"><div class="card-circle" style="color:#004d26;">🇯🇴</div><div class="card-name-inside">الأردن</div></div>
+                <div class="card-name-outside">إتصالات الأردن</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="egyptTelecomPage"><div class="page-title">إتصالات مصر</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+
+    <div id="jordanTelecomPage">
+        <div class="page-title">إتصالات الأردن</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('zainSubPage')">
+                <div class="card-box"><div class="card-circle" style="color:#6c5ce7;">ZAIN</div></div>
+                <div class="card-name-outside">زين (Zain)</div>
+            </div>
+            <div class="card-wrapper" onclick="showPage('orangeSubPage')">
+                <div class="card-box"><div class="card-circle" style="color:#e17055;">ORANGE</div></div>
+                <div class="card-name-outside">أورنج (Orange)</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="zainSubPage">
+        <div class="page-title">زين (Zain)</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('zainGsmPage')"><div class="card-box"><div class="card-circle" style="color:#6c5ce7;">GSM</div></div><div class="card-name-outside">Zain GSM</div></div>
+            <div class="card-wrapper" onclick="showPage('zainDataPage')"><div class="card-box"><div class="card-circle" style="color:#6c5ce7;">DATA</div></div><div class="card-name-outside">Zain Data</div></div>
+            <div class="card-wrapper" onclick="showPage('zainMixPage')"><div class="card-box"><div class="card-circle" style="color:#6c5ce7;">MIX</div></div><div class="card-name-outside">Zain Mix</div></div>
+        </div>
+    </div>
+
+    <div id="orangeSubPage">
+        <div class="page-title">أورنج (Orange)</div>
+        <div class="grid-container">
+            <div class="card-wrapper" onclick="showPage('orangeCallPage')"><div class="card-box"><div class="card-circle" style="color:#e17055;">📞</div></div><div class="card-name-outside">اورنج إتصال</div></div>
+            <div class="card-wrapper" onclick="showPage('orangeInternetPage')"><div class="card-box"><div class="card-circle" style="color:#e17055;">🌐</div></div><div class="card-name-outside">اورنج إنترنت</div></div>
+            <div class="card-wrapper" onclick="showPage('orangeNassPage')"><div class="card-box"><div class="card-circle" style="color:#e17055;">½</div></div><div class="card-name-outside">اورنج نص بنص</div></div>
+            <div class="card-wrapper" onclick="showPage('orangeWinkPage')"><div class="card-box"><div class="card-circle" style="color:#e17055;">WINK</div></div><div class="card-name-outside">اورنج وينك</div></div>
+        </div>
+    </div>
+
+    <div id="zainGsmPage"><div class="page-title">Zain GSM</div><div class="grid-container" id="zainGsmGrid"></div></div>
+    <div id="zainDataPage"><div class="page-title">Zain Data</div><div class="grid-container" id="zainDataGrid"></div></div>
+    <div id="zainMixPage"><div class="page-title">Zain Mix</div><div class="grid-container" id="zainMixGrid"></div></div>
+
+    <div id="orangeCallPage"><div class="page-title">اورنج إتصال</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="orangeInternetPage"><div class="page-title">اورنج إنترنت</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="orangeNassPage"><div class="page-title">اورنج نص بنص</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
+    <div id="orangeWinkPage"><div class="page-title">اورنج وينك</div><div class="grid-container"><p style="text-align:center; color:#888; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
 
     <!-- صفحة مستويات الحساب (VIP) -->
     <div id="vipTiersPage">
@@ -241,105 +445,46 @@
         </div>
     </div>
 
-    <!-- فري فاير (القسم الفرعي) -->
+    <!-- فري فاير -->
     <div id="freeFireSubPage">
         <div class="page-title">فري فاير</div>
         <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('robot1Page')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">🤖</div></div>
-                <div class="card-name-outside">روبوت 1</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('subLinkGemsPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">💎</div></div>
-                <div class="card-name-outside">جواهر ربط فرعي</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('levelPacksPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">📦</div></div>
-                <div class="card-name-outside">حزم المستوى</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('membershipsPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">👑</div></div>
-                <div class="card-name-outside">عضويات</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('ffCodesPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">🔑</div></div>
-                <div class="card-name-outside">فري فاير أكواد</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('companyCodesPage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">🏷️</div></div>
-                <div class="card-name-outside">اكواد شركة فري فاير</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('ffEuropePage')">
-                <div class="card-box"><div class="card-circle" style="color:#ff4757;">🇪🇺</div></div>
-                <div class="card-name-outside">فري فاير أوروبا</div>
-            </div>
+            <div class="card-wrapper" onclick="showPage('robot1Page')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🤖</div></div><div class="card-name-outside">روبوت 1</div></div>
+            <div class="card-wrapper" onclick="showPage('subLinkGemsPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">💎</div></div><div class="card-name-outside">جواهر ربط فرعي</div></div>
+            <div class="card-wrapper" onclick="showPage('levelPacksPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">📦</div></div><div class="card-name-outside">حزم المستوى</div></div>
+            <div class="card-wrapper" onclick="showPage('membershipsPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">👑</div></div><div class="card-name-outside">عضويات</div></div>
+            <div class="card-wrapper" onclick="showPage('ffCodesPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🔑</div></div><div class="card-name-outside">فري فاير أكواد</div></div>
+            <div class="card-wrapper" onclick="showPage('companyCodesPage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🏷️</div></div><div class="card-name-outside">اكواد شركة فري فاير</div></div>
+            <div class="card-wrapper" onclick="showPage('ffEuropePage')"><div class="card-box"><div class="card-circle" style="color:#ff4757;">🇪🇺</div></div><div class="card-name-outside">فري فاير أوروبا</div></div>
         </div>
     </div>
 
-    <!-- ببجي موبايل (القسم الفرعي) -->
+    <!-- ببجي موبايل -->
     <div id="pubgSubPage">
         <div class="page-title">ببجي موبايل</div>
         <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('pubgRobotPage')">
-                <div class="card-box"><div class="card-circle" style="color:#2f3542;">🤖</div><div class="card-name-inside">روبوت</div></div>
-                <div class="card-name-outside">ببجي روبوت</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('pubgCodesPage')">
-                <div class="card-box"><div class="card-circle" style="color:#2f3542;">🔑</div><div class="card-name-inside">أكواد</div></div>
-                <div class="card-name-outside">ببجي أكواد</div>
-            </div>
+            <div class="card-wrapper" onclick="showPage('pubgRobotPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">🤖</div><div class="card-name-inside">روبوت</div></div><div class="card-name-outside">ببجي روبوت</div></div>
+            <div class="card-wrapper" onclick="showPage('pubgCodesPage')"><div class="card-box"><div class="card-circle" style="color:#2f3542;">🔑</div><div class="card-name-inside">أكواد</div></div><div class="card-name-outside">ببجي أكواد</div></div>
         </div>
     </div>
 
     <div id="pubgRobotPage"><div class="page-title">ببجي روبوت</div><div class="grid-container" id="pubgRobotGrid"></div></div>
     <div id="pubgCodesPage"><div class="page-title">ببجي أكواد</div><div class="grid-container" id="pubgCodesGrid"></div></div>
-    
-    <!-- ماين كرافت -->
-    <div id="minecraftPage">
-        <div class="page-title">Minecraft</div>
-        <div class="grid-container" id="minecraftGrid"></div>
-    </div>
-    
+    <div id="minecraftPage"><div class="page-title">Minecraft</div><div class="grid-container" id="minecraftGrid"></div></div>
     <div id="robot1Page"><div class="page-title">فري فاير روبوت 1</div><div class="grid-container" id="robot1Grid"></div></div>
-    
-    <div id="subLinkGemsPage">
-        <div class="page-title">جواهر ربط فرعي</div>
-        <div class="grid-container" id="subLinkGemsGrid"></div>
-    </div>
+    <div id="subLinkGemsPage"><div class="page-title">جواهر ربط فرعي</div><div class="grid-container" id="subLinkGemsGrid"></div></div>
+    <div id="levelPacksPage"><div class="page-title">حزم المستوى</div><div class="grid-container" id="levelPacksGrid"><p style="text-align:center; color:#888; grid-column: span 3;">جميع حزم المستوى غير متوفرة حالياً ❌</p></div></div>
+    <div id="membershipsPage"><div class="page-title">عضويات</div><div class="grid-container" id="membershipsGrid"></div></div>
+    <div id="ffCodesPage"><div class="page-title">فري فاير أكواد</div><div class="grid-container" id="ffCodesGrid"></div></div>
+    <div id="companyCodesPage"><div class="page-title">اكواد شركة فري فاير</div><div class="grid-container" id="companyCodesGrid"></div></div>
+    <div id="ffEuropePage"><div class="page-title">فري فاير أوروبا</div><div class="grid-container" id="ffEuropeGrid"></div></div>
 
-    <div id="levelPacksPage">
-        <div class="page-title">حزم المستوى</div>
-        <div class="grid-container" id="levelPacksGrid">
-            <p style="text-align:center; color:#888; grid-column: span 3;">جميع حزم المستوى غير متوفرة حالياً ❌</p>
-        </div>
-    </div>
-
-    <div id="membershipsPage">
-        <div class="page-title">عضويات</div>
-        <div class="grid-container" id="membershipsGrid"></div>
-    </div>
-
-    <div id="ffCodesPage">
-        <div class="page-title">فري فاير أكواد</div>
-        <div class="grid-container" id="ffCodesGrid"></div>
-    </div>
-
-    <div id="companyCodesPage">
-        <div class="page-title">اكواد شركة فري فاير</div>
-        <div class="grid-container" id="companyCodesGrid"></div>
-    </div>
-
-    <div id="ffEuropePage">
-        <div class="page-title">فري فاير أوروبا</div>
-        <div class="grid-container" id="ffEuropeGrid"></div>
-    </div>
-
-    <!-- نافذة طلب المنتجات العادية (مع الأيدي) -->
+    <!-- نافذة طلب المنتجات العادية -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div>
-            <input type="text" id="playerId" placeholder="الايدي (Player ID)">
-            <button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button>
+            <input type="text" id="playerId" placeholder="الايدي (Player ID) أو معلومات الحساب">
+            <button class="check-btn" onclick="alert('✅ جاهز')">التحقق من البيانات</button>
             <div class="modal-buttons">
                 <button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button>
                 <button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button>
@@ -366,132 +511,6 @@
                 <button class="buy-action-btn" onclick="submitCodeOrder()">شراء</button>
                 <button class="cancel-action-btn" onclick="closeCodeOrderModal()">إلغاء</button>
             </div>
-            <div style="margin-top: 15px; border-top: 2px solid #e74c3c; padding-top: 10px; text-align: right;">
-                <span style="color: #e74c3c; font-weight: bold; font-size: 13px; display: block; margin-bottom: 6px;">طريقة شحن الكود :</span>
-                <p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">
-                    • قم بزيارة موقع الرسمي للشركة<br>
-                    • قم بوضع الكود الخاص بك<br>
-                    • اضغط على استرداد
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة طلب ربط فرعي -->
-    <div id="subLinkModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <div class="modal-header">
-                <span id="subLinkModalTitle" style="font-size: 15px;">المنتج</span>
-                <span class="price-tag" id="subLinkModalPrice">$ 0.00</span>
-            </div>
-            
-            <div style="margin-bottom: 10px;">
-                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">العدد</label>
-                <input type="number" id="subLinkQty" value="1" min="1" oninput="updateSubLinkTotal()" style="text-align: center;">
-            </div>
-
-            <div style="background: #f9fbfb; padding: 10px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;">
-                <span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span>
-                <span id="subLinkTotal" style="color: #e74c3c; font-weight: bold; font-size: 15px;">$ 0.00</span>
-            </div>
-
-            <div style="margin-bottom: 10px;">
-                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">المنصة</label>
-                <select id="subLinkPlatform">
-                    <option value="" disabled selected>اختر المنصة</option>
-                    <option value="قوقل">قوقل</option>
-                    <option value="فيس بوك">فيس بوك</option>
-                    <option value="تويتر">تويتر</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 10px;">
-                <input type="text" id="subLinkEmail" placeholder="الإيميل">
-            </div>
-
-            <div style="margin-bottom: 10px;">
-                <input type="password" id="subLinkPassword" placeholder="كلمة السر">
-            </div>
-
-            <div style="margin-bottom: 5px;">
-                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">طريقة التواصل</label>
-                <select id="subLinkContactMethod" style="margin-bottom: 5px;">
-                    <option value="" disabled selected>اختر طريقة التواصل</option>
-                    <option value="واتساب">واتساب</option>
-                    <option value="تيليجرام">تيليجرام</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;">
-                <div style="width: 85px;">
-                    <label style="font-size: 10px; color: #555; display: block; margin-bottom: 2px; font-weight: bold;">رمز البلد</label>
-                    <div style="position: relative; display: flex; align-items: center;">
-                        <input type="text" id="subLinkCountryCode" placeholder="+963" oninput="updateFlag('subLinkCountryCode', 'subLinkFlagDisplay')" style="text-align: center; margin: 0; padding-left: 24px; font-size: 13px;">
-                        <span id="subLinkFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span>
-                    </div>
-                </div>
-                <div style="flex: 1;">
-                    <input type="text" id="subLinkContact" placeholder="رقم الهاتف أو المعرف للتواصل" style="margin: 0;">
-                </div>
-            </div>
-
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitSubLinkOrder()">شراء</button>
-                <button class="cancel-action-btn" onclick="closeSubLinkModal()">إلغاء</button>
-            </div>
-
-            <div style="margin-top: 15px; border-top: 2px solid #28a745; padding-top: 10px; text-align: right;">
-                <span style="color: #333; font-weight: bold; font-size: 12px; display: block; margin-bottom: 4px;">المنتج عباره عن :</span>
-                <p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">
-                    • شحن العضويه عن طريق الحساب داخل اللعبة ✅<br>
-                    • المنتج يعمل بأوقات العمل<br>
-                    • مده التنفيذ من 30 دقيقه الى 2 ساعتين<br>
-                    • ملاحظة ‼️ : يرجى ايقاف التحقق بخطوتين لتسريع عملية الدخول .
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة إهداء بويا باس -->
-    <div id="booyahModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <div class="modal-header">
-                <span id="booyahModalTitle" style="font-size: 15px;">إهداء بويا باس</span>
-                <span class="price-tag" id="booyahModalPrice">$ 0.00</span>
-            </div>
-
-            <div style="margin-bottom: 5px;">
-                <label style="font-size: 12px; color: #555; display: block; margin-bottom: 3px;">طريقة التواصل</label>
-                <select id="booyahContactMethod" style="margin-bottom: 5px;">
-                    <option value="" disabled selected>اختر طريقة التواصل</option>
-                    <option value="واتساب">واتساب</option>
-                    <option value="تيليجرام">تيليجرام</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;">
-                <div style="width: 85px;">
-                    <label style="font-size: 10px; color: #555; display: block; margin-bottom: 2px; font-weight: bold;">رمز البلد</label>
-                    <div style="position: relative; display: flex; align-items: center;">
-                        <input type="text" id="booyahCountryCode" placeholder="+963" oninput="updateFlag('booyahCountryCode', 'booyahFlagDisplay')" style="text-align: center; margin: 0; padding-left: 24px; font-size: 13px;">
-                        <span id="booyahFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span>
-                    </div>
-                </div>
-                <div style="flex: 1;">
-                    <input type="text" id="booyahContact" placeholder="رقم الهاتف أو المعرف للتواصل" style="margin: 0;">
-                </div>
-            </div>
-
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitBooyahOrder()">شراء</button>
-                <button class="cancel-action-btn" onclick="closeBooyahModal()">إلغاء</button>
-            </div>
-
-            <div style="margin-top: 15px; border-top: 2px solid #28a745; padding-top: 10px; text-align: right;">
-                <p style="font-size: 11px; color: #28a745; font-weight: bold; line-height: 1.4; margin: 0;">
-                    • يتم ارسال الهدية من داخل اللعبة عبر تيم كود ✅
-                </p>
-            </div>
         </div>
     </div>
 
@@ -505,6 +524,7 @@
         <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div>
     </div>
 
+    <!-- لوحة التحكم (Admin Dashboard) -->
     <div id="adminDashboardPage">
         <div class="admin-wrapper">
             <div class="admin-header">
@@ -514,15 +534,17 @@
             <div class="admin-tabs">
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
             </div>
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
+            <div id="adminSupportSection" style="display:none;"></div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <div>🛒</div><div onclick="showPage('addBalancePage')" style="cursor:pointer;">💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div>🛡️</div><div onclick="showMyAccount()" style="cursor: pointer;">👤</div>
+        <div>🛒</div><div onclick="showPage('addBalancePage')" style="cursor:pointer;">💳</div><div class="home-icon-container" onclick="showPage('homePage')">🏠</div><div onclick="showPage('supportPage')" style="cursor:pointer;">🎧</div><div onclick="openSidebar()" style="cursor: pointer;">👤</div>
     </div>
 
     <script>
@@ -537,31 +559,54 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        let userBalance = 0.010;
+        let userBalance = 0.024;
         let balanceRequests = []; 
         let gameOrders = [];      
-        let currentSelectedProduct = { title: '', price: 0 };
-        let currentCodeProduct = { title: '', price: 0 };
-        let currentSubLinkProduct = { title: '', price: 0 };
-        let currentBooyahProduct = { title: '', price: 0 };
-        let currentUserEmail = localStorage.getItem("userEmail") || "";
+        let supportMessages = [];
+        let currentSelectedProduct = { title: '', basePrice: 0 };
+        let currentCodeProduct = { title: '', basePrice: 0 };
+        let currentUserEmail = localStorage.getItem("userEmail") || "guest@arab9card.com";
 
-        const countryFlags = {
-            '963': '🇸🇾', '964': '🇮🇶', '966': '🇸🇦', '971': '🇦🇪', '20': '🇪🇬',  
-            '961': '🇱🇧', '962': '🇯🇴', '965': '🇰🇼', '974': '🇶🇦', '973': '🇧🇭', 
-            '968': '🇴🇲', '967': '🇾🇪', '212': '🇲🇦', '213': '🇩🇿', '216': '🇹🇳', 
-            '249': '🇸🇩', '972': '🇵🇸', '90': '🇹🇷',  '1': '🇺🇸',   '49': '🇩🇪',  
-            '7': '🇷🇺',   '91': '🇮🇳',  '86': '🇨🇳',  '82': '🇰🇷',  '850': '🇰🇵', '81': '🇯🇵'   
+        const currencies = {
+            'USD': { name: 'الدولار الأمريكي - $', symbol: '$', rate: 1, pos: 'before' },
+            'JOD': { name: 'دينار أردني - JOD', symbol: 'JOD', rate: 0.709, pos: 'after' },
+            'SYP_SHAM': { name: 'ليرة سورية - شام كاش - ل.س', symbol: 'ل.س', rate: 139.125, pos: 'after' },
+            'SYP_SYRIATEL': { name: 'ليرة سورية - سيريتل كاش - ل.س', symbol: 'ل.س', rate: 139.125, pos: 'after' },
+            'IQD_ASIA': { name: 'دينار عراقي - آسيا سيل - د.ع', symbol: 'د.ع', rate: 1973.5, pos: 'after' },
+            'AED_MASHREQ': { name: 'دينار إماراتي - بنك المشرق - د.إ', symbol: 'د.إ', rate: 3.67, pos: 'after' },
+            'AED_ADIB': { name: 'دينار إماراتي - ADIB - د.إ', symbol: 'د.إ', rate: 3.67, pos: 'after' },
+            'EGP': { name: 'جنيه مصري - EGP', symbol: 'EGP', rate: 52.29, pos: 'before' },
+            'IQD_ZAIN': { name: 'دينار عراقي - زين كاش - د.ع', symbol: 'د.ع', rate: 1628.125, pos: 'after' },
+            'SAR_RAJHI': { name: 'ريال سعودي - راجحي - ﷼', symbol: '﷼', rate: 3.75, pos: 'after' },
+            'SAR_KARIM': { name: 'ريال سعودي - كريمي - ﷼', symbol: '﷼', rate: 3.75, pos: 'after' },
+            'TRY': { name: 'ليرة تركية - ₺', symbol: '₺', rate: 49.33, pos: 'before' },
+            'YER': { name: 'الريال اليمني - ﷼', symbol: '﷼', rate: 535.79, pos: 'after' }
         };
 
-        function updateFlag(inputId, flagId) {
-            let val = document.getElementById(inputId).value.replace('+', '').trim();
-            let flagSpan = document.getElementById(flagId);
-            if (countryFlags[val]) {
-                flagSpan.innerText = countryFlags[val];
+        let currentCurrencyKey = localStorage.getItem('a9c_currency') || 'USD';
+
+        function formatPrice(basePriceUSD) {
+            let cur = currencies[currentCurrencyKey] || currencies['USD'];
+            let converted = basePriceUSD * cur.rate;
+            if (cur.pos === 'before') {
+                return `${cur.symbol} ${converted.toFixed(3)}`;
             } else {
-                flagSpan.innerText = '🌐';
+                return `${converted.toFixed(3)} ${cur.symbol}`;
             }
+        }
+
+        function toggleCurrencyList() {
+            let list = document.getElementById('currencyListContainer');
+            list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function changeCurrency(key, label) {
+            currentCurrencyKey = key;
+            localStorage.setItem('a9c_currency', key);
+            document.getElementById('currentCurrencyLabel').innerText = '🔄 ' + label;
+            document.getElementById('currencyListContainer').style.display = 'none';
+            updateUserBalanceUI();
+            renderAllProducts();
         }
 
         const paymentMethods = [
@@ -569,6 +614,14 @@
             { name: "آسيا سيل العراق", symbol: "A", address: "07756752890" },
             { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
         ];
+
+        // جلب الرسائل والدعم الفني والتحديثات من Firestore
+        db.collection("support_messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
+            supportMessages = [];
+            snapshot.forEach((doc) => { supportMessages.push({ id: doc.id, ...doc.data() }); });
+            renderChatMessages();
+            renderAdminData();
+        });
 
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
@@ -596,96 +649,14 @@
 
         window.onload = function () {
             if(localStorage.getItem('a9c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a9c_balance')); }
+            if (currencies[currentCurrencyKey]) {
+                document.getElementById('currentCurrencyLabel').innerText = '🔄 ' + currencies[currentCurrencyKey].name;
+            }
             updateUserBalanceUI();
-            
-            if (currentUserEmail) { document.getElementById("loginOverlay").style.display = "none"; }
+            if (currentUserEmail && currentUserEmail !== "guest@arab9card.com") { document.getElementById("loginOverlay").style.display = "none"; }
             
             document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#28a745; margin-bottom:2px;">${m.name}</div></div>`).join('');
-            
-            document.getElementById('pubgRobotGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 60 UC', 0.976)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG Mobile 60 UC</div><div class="card-price-outside">$ 0.976</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 325 UC', 4.255)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">325 UC</div></div><div class="card-name-outside">PUBG Mobile 325 UC</div><div class="card-price-outside">$ 4.255</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 880 UC', 9.764)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">880 UC</div></div><div class="card-name-outside">PUBG Mobile 880 UC</div><div class="card-price-outside">$ 9.764</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 1800 UC', 24.394)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">1800 UC</div></div><div class="card-name-outside">PUBG Mobile 1800 UC</div><div class="card-price-outside">$ 24.394</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 3850 UC', 50.870)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">3850 UC</div></div><div class="card-name-outside">PUBG Mobile 3850 UC</div><div class="card-price-outside">$ 50.870</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 8100 UC', 96.201)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">8100 UC</div></div><div class="card-name-outside">PUBG Mobile 8100 UC</div><div class="card-price-outside">$ 96.201</div></div>
-            `;
-
-            document.getElementById('pubgCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 60', 0.965)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">Uc Voucher 60</div><div class="card-price-outside">$ 0.965</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 325', 5.085)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">325 UC</div></div><div class="card-name-outside">Uc Voucher 325</div><div class="card-price-outside">$ 5.085</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 880', 9.649)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">880 UC</div></div><div class="card-name-outside">Uc Voucher 880</div><div class="card-price-outside">$ 9.649</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 1800', 24.285)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">1800 UC</div></div><div class="card-name-outside">Uc Voucher 1800</div><div class="card-price-outside">$ 24.285</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 3850', 46.999)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">3850 UC</div></div><div class="card-name-outside">Uc Voucher 3850</div><div class="card-price-outside">$ 46.999</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 8100', 33.010)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">8100 UC</div></div><div class="card-name-outside">Uc Voucher 8100</div><div class="card-price-outside">$ 33.010</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 16200', 195.156)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">16200 UC</div></div><div class="card-name-outside">Uc Voucher 16200</div><div class="card-price-outside">$ 195.156</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 24500', 281.162)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">24500 UC</div></div><div class="card-name-outside">Uc Voucher 24500</div><div class="card-price-outside">$ 281.162</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 32400', 390.312)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">32400 UC</div></div><div class="card-name-outside">Uc Voucher 32400</div><div class="card-price-outside">$ 390.312</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Uc Voucher 40500', 504.530)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">40500 UC</div></div><div class="card-name-outside">Uc Voucher 40500</div><div class="card-price-outside">$ 504.530</div></div>
-            `;
-
-            document.getElementById('minecraftGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 3500 كوينز ماين كرافت', 12.666)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">⛏️</div><div class="card-name-inside">3500 كوينز</div></div><div class="card-name-outside">كود 3500 كوينز</div><div class="card-price-outside">$ 12.666</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 1720 كوينز ماين كرافت', 6.333)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">⛏️</div><div class="card-name-inside">1720 كوينز</div></div><div class="card-name-outside">كود 1720 كوينز</div><div class="card-price-outside">$ 6.333</div></div>
-            `;
-            
-            document.getElementById('robot1Grid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 110 جوهرة', 1.03)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 1.03</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 231 جوهرة', 2.06)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">231 جوهرة</div></div><div class="card-name-outside">231 جوهرة</div><div class="card-price-outside">$ 2.06</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 583 جوهرة', 5.16)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">583 جوهرة</div></div><div class="card-name-outside">583 جوهرة</div><div class="card-price-outside">$ 5.16</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 1188 جوهرة', 10.32)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">1188 جوهرة</div></div><div class="card-name-outside">1188 جوهرة</div><div class="card-price-outside">$ 10.32</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 2420 جوهرة', 20.64)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">2420 جوهرة</div></div><div class="card-name-outside">2420 جوهرة</div><div class="card-price-outside">$ 20.64</div></div>
-            `;
-
-            document.getElementById('subLinkGemsGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 520 جوهرة', 4.346)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">520 جوهرة</div></div><div class="card-name-outside">520 جوهرة</div><div class="card-price-outside">$ 4.346</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 1060 جوهرة', 8.374)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">1060 جوهرة</div></div><div class="card-name-outside">1060 جوهرة</div><div class="card-price-outside">$ 8.374</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 2180 جوهرة', 15.900)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">2180 جوهرة</div></div><div class="card-name-outside">2180 جوهرة</div><div class="card-price-outside">$ 15.900</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 5600 جوهرة', 41.340)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">5600 جوهرة</div></div><div class="card-name-outside">5600 جوهرة</div><div class="card-price-outside">$ 41.340</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 10000 جوهرة', 73.140)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">10000 جوهرة</div></div><div class="card-name-outside">10000 جوهرة</div><div class="card-price-outside">$ 73.140</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 20000 جوهرة', 140.980)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">20000 جوهرة</div></div><div class="card-name-outside">20000 جوهرة</div><div class="card-price-outside">$ 140.980</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 50000 جوهرة', 337.610)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">50000 جوهرة</div></div><div class="card-name-outside">50000 جوهرة</div><div class="card-price-outside">$ 337.610</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 100800 جوهرة', 662.500)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">100800 جوهرة</div></div><div class="card-name-outside">100800 جوهرة</div><div class="card-price-outside">$ 662.500</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 200200 جوهرة', 1332.420)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">200200 جوهرة</div></div><div class="card-name-outside">200200 جوهرة</div><div class="card-price-outside">$ 1332.420</div></div>
-            `;
-
-            document.getElementById('membershipsGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openBooyahModal('إهداء بويا باس', 2.040)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🎁</div><div class="card-name-inside">إهداء بويا باس</div></div><div class="card-name-outside">إهداء بويا باس</div><div class="card-price-outside">$ 2.040</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('أسبوعيا ( ربط فرعي )', 2.142)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">👑</div><div class="card-name-inside">أسبوعيا ( ربط فرعي )</div></div><div class="card-name-outside">أسبوعيا ( ربط فرعي )</div><div class="card-price-outside">$ 2.142</div></div>
-                <div class="card-wrapper" onclick="openSubLinkModal('عضويه شهريه ( ربط فرعي )', 8.364)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">👑</div><div class="card-name-inside">عضويه شهريه ( ربط فرعي )</div></div><div class="card-name-outside">عضويه شهريه ( ربط فرعي )</div><div class="card-price-outside">$ 8.364</div></div>
-            `;
-
-            document.getElementById('ffCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 110 جوهرة', 1.010)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 110 جوهرة</div></div><div class="card-name-outside">كود 110 جوهرة</div><div class="card-price-outside">$ 1.010</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 231 جوهرة', 2.021)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 231 جوهرة</div></div><div class="card-name-outside">كود 231 جوهرة</div><div class="card-price-outside">$ 2.021</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 583 جوهرة', 5.078)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 583 جوهرة</div></div><div class="card-name-outside">كود 583 جوهرة</div><div class="card-price-outside">$ 5.078</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 1188 جوهرة', 10.155)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 1188 جوهرة</div></div><div class="card-name-outside">كود 1188 جوهرة</div><div class="card-price-outside">$ 10.155</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 2420 جوهرة', 20.204)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 2420 جوهرة</div></div><div class="card-name-outside">كود 2420 جوهرة</div><div class="card-price-outside">$ 20.204</div></div>
-            `;
-
-            document.getElementById('companyCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود سكن الباندا', 14.420)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">سكن الباندا</div></div><div class="card-name-outside">سكن الباندا</div><div class="card-price-outside">$ 14.420</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن الابيض', 10.815)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">السكن الابيض</div></div><div class="card-name-outside">السكن الابيض</div><div class="card-price-outside">$ 10.815</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود الرقصة', 10.815)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">الرقصة</div></div><div class="card-name-outside">الرقصة</div><div class="card-price-outside">$ 10.815</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن', 13.390)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">السكن</div></div><div class="card-name-outside">السكن</div><div class="card-price-outside">$ 13.390</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود السيارة', 3.180)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">السيارة</div></div><div class="card-name-outside">السيارة</div><div class="card-price-outside">$ 3.180</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود المسدس', 17.510)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">المسدس</div></div><div class="card-name-outside">المسدس</div><div class="card-price-outside">$ 17.510</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود سلاح SKS', 9.270)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">كود سلاح SKS</div></div><div class="card-name-outside">كود سلاح SKS</div><div class="card-price-outside">$ 9.270</div></div>
-            `;
-
-            document.getElementById('ffEuropeGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 25 جوهرة', 0.277)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">25 جوهرة</div></div><div class="card-name-outside">25 جوهرة</div><div class="card-price-outside">$ 0.277</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 100 جوهرة', 1.062)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">100 جوهرة</div></div><div class="card-name-outside">100 جوهرة</div><div class="card-price-outside">$ 1.062</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 231 جوهرة', 2.123)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">231 جوهرة</div></div><div class="card-name-outside">231 جوهرة</div><div class="card-price-outside">$ 2.123</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 583 جوهرة', 5.308)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">583 جوهرة</div></div><div class="card-name-outside">583 جوهرة</div><div class="card-price-outside">$ 5.308</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 1188 جوهرة', 10.606)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">1188 جوهرة</div></div><div class="card-name-outside">1188 جوهرة</div><div class="card-price-outside">$ 10.606</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 2420 جوهرة', 21.222)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">2420 جوهرة</div></div><div class="card-name-outside">2420 جوهرة</div><div class="card-price-outside">$ 21.222</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 5600 جوهرة', 53.061)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">5600 جوهرة</div></div><div class="card-name-outside">5600 جوهرة</div><div class="card-price-outside">$ 53.061</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 11500 جوهرة', 106.109)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">11500 جوهرة</div></div><div class="card-name-outside">11500 جوهرة</div><div class="card-price-outside">$ 106.109</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('أسبوعي مخفف أوروبا', 0.298)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">أسبوعي مخفف</div></div><div class="card-name-outside">أسبوعي مخفف</div><div class="card-price-outside">$ 0.298</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('عضوية أسبوعية أوروبا', 1.803)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">عضوية أسبوعية</div></div><div class="card-name-outside">عضوية أسبوعية</div><div class="card-price-outside">$ 1.803</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('عضوية شهرية أوروبا', 8.471)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">عضوية شهرية</div></div><div class="card-name-outside">عضوية شهرية</div><div class="card-price-outside">$ 8.471</div></div>
-            `;
+            renderAllProducts();
 
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
@@ -695,12 +666,87 @@
             }
         };
 
-        function triggerGoogleLogin() {
-            if (typeof google !== 'undefined') {
-                google.accounts.id.prompt();
-            } else {
-                alert("جاري تحميل مكتبة جوجل، يرجى التأكد من اتصالك بالإنترنت.");
+        // وظائف الشات والدعم الفني
+        function sendSupportMessage() {
+            let input = document.getElementById('chatInputBox');
+            let text = input.value.trim();
+            if (!text) return;
+
+            let msgData = {
+                sender: currentUserEmail,
+                text: text,
+                isAdmin: false,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            db.collection("support_messages").add(msgData).then(() => {
+                input.value = "";
+                
+                // فحص الرد التلقائي إذا أرسل "السلام عليكم"
+                if (text.toLowerCase().includes("السلام عليكم")) {
+                    setTimeout(() => {
+                        db.collection("support_messages").add({
+                            sender: currentUserEmail,
+                            text: "وعليكم السلام ورحمة الله كيف فيني ساعدك...؟",
+                            isAdmin: true,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    }, 1000);
+                }
+            });
+        }
+
+        function renderChatMessages() {
+            let userMsgs = supportMessages.filter(m => m.sender === currentUserEmail);
+            let html = '';
+            userMsgs.forEach(m => {
+                let isBot = m.isAdmin;
+                let bg = isBot ? '#ffffff' : '#28a745';
+                let color = isBot ? '#333' : '#fff';
+                let align = isBot ? 'flex-start' : 'flex-end';
+                let border = isBot ? '1px solid #eee' : 'none';
+
+                html += `<div style="display: flex; justify-content: ${align}; margin-bottom: 8px;">
+                    <div style="background: ${bg}; color: ${color}; padding: 10px 14px; border-radius: 12px; max-width: 75%; font-size: 13px; border: ${border}; box-shadow: 0 1px 2px rgba(0,0,0,0.05); text-align: right;">
+                        ${m.text}
+                    </div>
+                </div>`;
+            });
+            let container = document.getElementById('chatMessagesContainer');
+            if (container) {
+                container.innerHTML = html;
+                container.scrollTop = container.scrollHeight;
             }
+        }
+
+        function renderAllProducts() {
+            document.getElementById('geminiProGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('جمني | 18 شهر | رابط تفعيل', 1.820)"><div class="card-box"><div class="card-circle" style="color: #28a745;">✨</div><div class="card-name-inside">18 شهر</div></div><div class="card-name-outside">جمني | 18 شهر | رابط تفعيل</div><div class="card-price-outside">${formatPrice(1.820)}</div></div>`;
+            document.getElementById('chatGptGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Chat Gpt Plus - شهر', 7.280)"><div class="card-box"><div class="card-circle" style="color: #28a745;">GPT</div><div class="card-name-inside">Plus</div></div><div class="card-name-outside">Chat Gpt Plus - شهر</div><div class="card-price-outside">${formatPrice(7.280)}</div></div>`;
+            document.getElementById('shamnaTvGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('شامنا تي في في 12 شهر', 6.974)"><div class="card-box"><div class="card-circle" style="color: #004d26;">📺</div><div class="card-name-inside">12 شهر</div></div><div class="card-name-outside">شامنا تي في في 12 شهر</div><div class="card-price-outside">${formatPrice(6.974)}</div></div>`;
+            document.getElementById('iptvGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('ايبي تي في في 3 أشهر', 3.264)"><div class="card-box"><div class="card-circle" style="color: #004d26;">IPTV</div><div class="card-name-inside">3 أشهر</div></div><div class="card-name-outside">ايبي تي في في 3 أشهر</div><div class="card-price-outside">${formatPrice(3.264)}</div></div>`;
+            document.getElementById('netflixTvGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('نتفلكس ملف خاص - 12 شهر', 27.900)"><div class="card-box"><div class="card-circle" style="color: #e74c3c;">N</div><div class="card-name-inside">12 شهر</div></div><div class="card-name-outside">نتفلكس ملف خاص - 12 شهر</div><div class="card-price-outside">${formatPrice(27.900)}</div></div>`;
+            document.getElementById('primeVideoGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('برايم فيديو 12 شهر', 25.614)"><div class="card-box"><div class="card-circle" style="color: #004d26;">PV</div><div class="card-name-inside">12 شهر</div></div><div class="card-name-outside">برايم فيديو 12 شهر</div><div class="card-price-outside">${formatPrice(25.614)}</div></div>`;
+            document.getElementById('gsSubsGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('جي اس برو - سنه + 3 أشهر هدية', 15.000)"><div class="card-box"><div class="card-circle" style="color: #28a745;">⚽</div><div class="card-name-inside">سنه + 3 أشهر</div></div><div class="card-name-outside">جي اس برو - سنه + 3 أشهر هدية</div><div class="card-price-outside">${formatPrice(15.000)}</div></div>`;
+            document.getElementById('shahidGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('شاهد | 12 شهر | 5 أجهزة', 31.541)"><div class="card-box"><div class="card-circle" style="color: #28a745;">mbc</div><div class="card-name-inside">12 شهر</div></div><div class="card-name-outside">شاهد | 12 شهر | 5 أجهزة</div><div class="card-price-outside">${formatPrice(31.541)}</div></div>`;
+            document.getElementById('crunchyrollGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('كرَانشي رول 12 شهر', 7.089)"><div class="card-box"><div class="card-circle" style="color: #e67e22;">CR</div><div class="card-name-inside">12 شهر</div></div><div class="card-name-outside">كرَانشي رول 12 شهر</div><div class="card-price-outside">${formatPrice(7.089)}</div></div>`;
+            document.getElementById('disneyGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('ديسني بلس 6 أشهر', 13.080)"><div class="card-box"><div class="card-circle" style="color: #3498db;">DP</div><div class="card-name-inside">6 أشهر</div></div><div class="card-name-outside">ديسني بلس 6 أشهر</div><div class="card-price-outside">${formatPrice(13.080)}</div></div>`;
+            document.getElementById('pubgRobotGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 60 UC', 0.976)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG Mobile 60 UC</div><div class="card-price-outside">${formatPrice(0.976)}</div></div>`;
+            document.getElementById('pubgCodesGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Uc Voucher 60', 0.965)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">🔑</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">Uc Voucher 60</div><div class="card-price-outside">${formatPrice(0.965)}</div></div>`;
+            document.getElementById('minecraftGrid').innerHTML = `<div class="card-wrapper" onclick="openCodeOrderModal('كود 3500 كوينز ماين كرافت', 12.666)"><div class="card-box"><div class="card-circle" style="color: #2f3542;">⛏️</div><div class="card-name-inside">3500 كوينز</div></div><div class="card-name-outside">كود 3500 كوينز</div><div class="card-price-outside">${formatPrice(12.666)}</div></div>`;
+            document.getElementById('robot1Grid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('Free Fire 110 جوهرة', 1.03)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">${formatPrice(1.03)}</div></div>`;
+            document.getElementById('subLinkGemsGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('ربط فرعي 520 جوهرة', 4.346)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔗</div><div class="card-name-inside">520 جوهرة</div></div><div class="card-name-outside">520 جوهرة</div><div class="card-price-outside">${formatPrice(4.346)}</div></div>`;
+            document.getElementById('membershipsGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('إهداء بويا باس', 2.040)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🎁</div><div class="card-name-inside">إهداء بويا باس</div></div><div class="card-name-outside">إهداء بويا باس</div><div class="card-price-outside">${formatPrice(2.040)}</div></div>`;
+            document.getElementById('ffCodesGrid').innerHTML = `<div class="card-wrapper" onclick="openCodeOrderModal('كود 110 جوهرة', 1.010)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🔑</div><div class="card-name-inside">كود 110 جوهرة</div></div><div class="card-name-outside">كود 110 جوهرة</div><div class="card-price-outside">${formatPrice(1.010)}</div></div>`;
+            document.getElementById('companyCodesGrid').innerHTML = `<div class="card-wrapper" onclick="openCodeOrderModal('كود سكن الباندا', 14.420)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🏷️</div><div class="card-name-inside">سكن الباندا</div></div><div class="card-name-outside">سكن الباندا</div><div class="card-price-outside">${formatPrice(14.420)}</div></div>`;
+            document.getElementById('ffEuropeGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 25 جوهرة', 0.277)"><div class="card-box"><div class="card-circle" style="color: #ff4757;">🇪🇺</div><div class="card-name-inside">25 جوهرة</div></div><div class="card-name-outside">25 جوهرة</div><div class="card-price-outside">${formatPrice(0.277)}</div></div>`;
+            document.getElementById('zainGsmGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('زين اتصال 5 دينار', 11.122)"><div class="card-box"><div class="card-circle" style="color: #6c5ce7;">GSM</div><div class="card-name-inside">5 دينار</div></div><div class="card-name-outside">زين اتصال 5 دينار</div><div class="card-price-outside">${formatPrice(11.122)}</div></div>`;
+            document.getElementById('zainDataGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('زين نت 4 دينار', 7.118)"><div class="card-box"><div class="card-circle" style="color: #6c5ce7;">DATA</div><div class="card-name-inside">4 دينار</div></div><div class="card-name-outside">زين نت 4 دينار</div><div class="card-price-outside">${formatPrice(7.118)}</div></div>`;
+            document.getElementById('zainMixGrid').innerHTML = `<div class="card-wrapper" onclick="openOrderModal('زين مكس 3\'3', 12.161)"><div class="card-box"><div class="card-circle" style="color: #6c5ce7;">MIX</div><div class="card-name-inside">3'3</div></div><div class="card-name-outside">زين مكس 3'3</div><div class="card-price-outside">${formatPrice(12.161)}</div></div>`;
+        }
+
+        function triggerGoogleLogin() {
+            if (typeof google !== 'undefined') { google.accounts.id.prompt(); }
+            else { alert("جاري تحميل مكتبة جوجل، يرجى التأكد من اتصالك بالإنترنت."); }
         }
 
         function handleCredentialResponse(response) {
@@ -709,9 +755,7 @@
             localStorage.setItem("userEmail", email);
             currentUserEmail = email;
             document.getElementById("loginOverlay").style.display = "none";
-            renderMyOrders(); 
-            renderMyPayments();
-            calculateUserVIP();
+            renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
 
@@ -730,15 +774,21 @@
                 localStorage.setItem("userEmail", email); 
                 currentUserEmail = email;
                 document.getElementById("loginOverlay").style.display = "none"; 
-                renderMyOrders(); renderMyPayments(); calculateUserVIP();
-            } else {
-                alert("يرجى إدخال بريد إلكتروني أو المتابعة عبر جوجل");
-            }
+                renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
+            } else { alert("يرجى إدخال بريد إلكتروني أو المتابعة عبر جوجل"); }
         }
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'vipTiersPage', 'robot1Page', 'subLinkGemsPage', 'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage'];
+            const pages = [
+                'homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 
+                'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 
+                'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'robot1Page', 'subLinkGemsPage', 
+                'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage', 'addBalancePage', 'paymentFormPage', 
+                'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'streamingPage', 'appleTvPage', 'shamnaTvPage', 'iptvPage', 
+                'netflixTvPage', 'primeVideoPage', 'gsSubsPage', 'shahidPage', 'osnPage', 'crunchyrollPage', 'disneyPage', 'aiSectionPage', 
+                'geminiProPage', 'chatGptPage', 'numbersPage', 'icloudNumbersPage', 'gmailNumbersPage', 'instagramNumbersPage', 'tiktokNumbersPage', 'whatsappNumbersPage', 'supportPage'
+            ];
             pages.forEach(p => {
                 let el = document.getElementById(p);
                 if (el) el.style.display = 'none';
@@ -747,62 +797,60 @@
             if (targetEl) targetEl.style.display = 'block';
             currentPage = pageId;
             document.getElementById('backBtn').style.display = (pageId === 'homePage') ? 'none' : 'block';
+            if(pageId === 'supportPage') { renderChatMessages(); }
         }
 
         function goBack() {
             if (currentPage === 'paymentFormPage') showPage('addBalancePage');
-            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage', 'vipTiersPage'].includes(currentPage)) showPage('homePage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage', 'vipTiersPage', 'telecomPage', 'streamingPage', 'aiSectionPage', 'numbersPage', 'supportPage'].includes(currentPage)) showPage('homePage');
+            else if (['egyptTelecomPage', 'jordanTelecomPage'].includes(currentPage)) showPage('telecomPage');
+            else if (['appleTvPage', 'shamnaTvPage', 'iptvPage', 'netflixTvPage', 'primeVideoPage', 'gsSubsPage', 'shahidPage', 'osnPage', 'crunchyrollPage', 'disneyPage'].includes(currentPage)) showPage('streamingPage');
+            else if (['geminiProPage', 'chatGptPage'].includes(currentPage)) showPage('aiSectionPage');
+            else if (['icloudNumbersPage', 'gmailNumbersPage', 'instagramNumbersPage', 'tiktokNumbersPage', 'whatsappNumbersPage'].includes(currentPage)) showPage('numbersPage');
             else if (['pubgRobotPage', 'pubgCodesPage'].includes(currentPage)) showPage('pubgSubPage');
             else if (['minecraftPage'].includes(currentPage)) showPage('gamesPage');
+            else if (['zainGsmPage', 'zainDataPage', 'zainMixPage'].includes(currentPage)) showPage('zainSubPage');
+            else if (['orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage'].includes(currentPage)) showPage('orangeSubPage');
+            else if (['zainSubPage', 'orangeSubPage'].includes(currentPage)) showPage('jordanTelecomPage');
             else if (['robot1Page', 'subLinkGemsPage', 'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage'].includes(currentPage)) showPage('freeFireSubPage');
             else if (['pubgSubPage', 'freeFireSubPage'].includes(currentPage)) showPage('gamesPage');
         }
 
         function updateUserBalanceUI() {
-            document.getElementById('userBalanceDisplay').innerText = userBalance.toFixed(3);
+            let cur = currencies[currentCurrencyKey] || currencies['USD'];
+            let convertedBal = userBalance * cur.rate;
+            let balStr = (cur.pos === 'before') ? `${cur.symbol} ${convertedBal.toFixed(3)}` : `${convertedBal.toFixed(3)} ${cur.symbol}`;
+            
+            document.getElementById('userBalanceDisplay').innerText = balStr;
+            let sidebarBal = document.getElementById('sidebarBalanceDisplay');
+            if(sidebarBal) sidebarBal.innerText = balStr;
             localStorage.setItem('a9c_balance', userBalance.toString());
         }
 
         function logoutUser() { localStorage.removeItem("userEmail"); location.reload(); }
-        function showMyAccount() { alert(`👤 معلومات الحساب:\nالبريد: ${currentUserEmail}\nالرصيد: $${userBalance.toFixed(3)}`); }
-        function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
-        function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+        function openSidebar() { document.getElementById("sideMenu").style.width = "280px"; }
+        function closeSidebar() { 
+            document.getElementById("sideMenu").style.width = "0"; 
+            document.getElementById('currencyListContainer').style.display = 'none';
+        }
 
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
         function calculateUserVIP() {
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
-            let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
+            let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.basePrice) || parseFloat(ord.price) || 0), 0);
             
             let currentTier = 'مبدئي';
             let headerBadgeText = '⭐ مبدئي';
             let discount = 0;
             let nextTarget = 1;
             
-            if (totalSpent >= 300) {
-                currentTier = 'ألماسي / Diamond 💎';
-                headerBadgeText = '💎 ألماسي';
-                discount = 0.04;
-                nextTarget = 300;
-            } else if (totalSpent >= 100) {
-                currentTier = 'ذهبي / Gold 🥇';
-                headerBadgeText = '🥇 ذهبي';
-                discount = 0.03;
-                nextTarget = 300;
-            } else if (totalSpent >= 40) {
-                currentTier = 'فضي / Silver 🥈';
-                headerBadgeText = '🥈 فضي';
-                discount = 0.02;
-                nextTarget = 100;
-            } else if (totalSpent >= 1) {
-                currentTier = 'برونزي / Bronze 🥉';
-                headerBadgeText = '🥉 برونزي';
-                discount = 0.01;
-                nextTarget = 40;
-            } else {
-                nextTarget = 1;
-            }
+            if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; nextTarget = 300; }
+            else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; }
+            else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; }
+            else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; }
+            else { nextTarget = 1; }
 
             let badgeEl = document.getElementById('headerVipBadge');
             if(badgeEl) badgeEl.innerText = headerBadgeText;
@@ -825,23 +873,21 @@
                 document.getElementById('badgeGold').innerText = totalSpent >= 100 ? '✅' : '🔒';
                 document.getElementById('badgeDiamond').innerText = totalSpent >= 300 ? '✅' : '🔒';
             }
-
             return discount;
         }
 
         function getDiscountedPrice(basePrice) {
             let discount = calculateUserVIP();
-            let finalPrice = basePrice * (1 - discount);
-            return finalPrice;
+            return basePrice * (1 - discount);
         }
 
         function renderMyOrders() {
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
-            let html = myOrders.length === 0 ? '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>' : '';
+            let html = myOrders.length === 0 ? '<p style="text-align:center; color:#888;">لا يوجد طلبات حالياً</p>' : '';
             myOrders.forEach(order => {
                 let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#28a745' : '#d9534f');
-                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : '❌ مرفوض');
-                let replyBox = order.adminReply ? `<div style="background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid #c8e6c9;"><b>رد الإدارة / الكود:</b> ${order.adminReply}</div>` : '';
+                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم التنفيذ' : '❌ مرفوض');
+                let replyBox = order.adminReply ? `<div style="background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid #c8e6c9;"><b>رد الإدارة / تفاصيل الحساب:</b> ${order.adminReply}</div>` : '';
                 
                 html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     <div style="font-weight: bold; margin-bottom: 5px;">${order.product}</div>
@@ -882,103 +928,58 @@
         function submitDepositRequest(methodName) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
             let transactionId = document.getElementById('transactionId').value.trim();
-            
             if (!amount || amount <= 0) { alert('يرجى إدخال مبلغ صحيح!'); return; }
             if (!transactionId) { alert('يرجى إدخال رقم العملية (Transaction ID)!'); return; }
             
             db.collection("deposits").add({
-                method: methodName,
-                amount: amount,
-                transactionId: transactionId,
-                status: 'pending',
-                credited: false,
-                userEmail: currentUserEmail,
+                method: methodName, amount: amount, transactionId: transactionId,
+                status: 'pending', credited: false, userEmail: currentUserEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 alert('تم إرسال الطلب بنجاح!');
                 showPage('addBalancePage');
-            }).catch(error => {
-                alert("حدث خطأ: " + error.message);
             });
         }
 
         function openOrderModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentSelectedProduct = { title, price: finalPrice };
+            let finalPriceUSD = getDiscountedPrice(basePrice);
+            currentSelectedProduct = { title, basePrice: finalPriceUSD };
             document.getElementById('modalItemTitle').innerText = title;
-            document.getElementById('modalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('modalItemPrice').innerText = formatPrice(finalPriceUSD);
             document.getElementById('playerId').value = "";
             document.getElementById('orderModal').style.display = 'flex';
         }
         function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
 
         function openCodeOrderModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentCodeProduct = { title, price: finalPrice };
+            let finalPriceUSD = getDiscountedPrice(basePrice);
+            currentCodeProduct = { title, basePrice: finalPriceUSD };
             document.getElementById('codeModalItemTitle').innerText = title;
-            document.getElementById('codeModalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('codeModalItemPrice').innerText = formatPrice(finalPriceUSD);
             document.getElementById('codeQuantity').value = 1;
-            document.getElementById('codeModalTotal').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('codeModalTotal').innerText = formatPrice(finalPriceUSD);
             document.getElementById('codeOrderModal').style.display = 'flex';
         }
         function closeCodeOrderModal() { document.getElementById('codeOrderModal').style.display = 'none'; }
+        
         function updateCodeTotal() {
             let qty = parseInt(document.getElementById('codeQuantity').value) || 1;
-            let total = currentCodeProduct.price * qty;
-            document.getElementById('codeModalTotal').innerText = '$ ' + total.toFixed(3);
-        }
-
-        function openSubLinkModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentSubLinkProduct = { title, price: finalPrice };
-            document.getElementById('subLinkModalTitle').innerText = title;
-            document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('subLinkQty').value = 1;
-            document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('subLinkPlatform').value = "";
-            document.getElementById('subLinkEmail').value = "";
-            document.getElementById('subLinkPassword').value = "";
-            document.getElementById('subLinkContactMethod').value = "";
-            document.getElementById('subLinkCountryCode').value = "";
-            document.getElementById('subLinkFlagDisplay').innerText = "🌐";
-            document.getElementById('subLinkContact').value = "";
-            document.getElementById('subLinkModal').style.display = 'flex';
-        }
-        function closeSubLinkModal() {
-            document.getElementById('subLinkModal').style.display = 'none';
-        }
-        function updateSubLinkTotal() {
-            let qty = parseInt(document.getElementById('subLinkQty').value) || 1;
-            let total = currentSubLinkProduct.price * qty;
-            document.getElementById('subLinkTotal').innerText = '$ ' + total.toFixed(3);
-        }
-
-        function openBooyahModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentBooyahProduct = { title, price: finalPrice };
-            document.getElementById('booyahModalTitle').innerText = title;
-            document.getElementById('booyahModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('booyahContactMethod').value = "";
-            document.getElementById('booyahCountryCode').value = "";
-            document.getElementById('booyahFlagDisplay').innerText = "🌐";
-            document.getElementById('booyahContact').value = "";
-            document.getElementById('booyahModal').style.display = 'flex';
-        }
-        function closeBooyahModal() {
-            document.getElementById('booyahModal').style.display = 'none';
+            let totalUSD = currentCodeProduct.basePrice * qty;
+            document.getElementById('codeModalTotal').innerText = formatPrice(totalUSD);
         }
 
         function submitGameOrder() {
             let playerId = document.getElementById('playerId').value.trim();
-            if(playerId === "") { alert("⚠️ يرجى إدخال الأيدي أولاً!"); return; }
-            if(userBalance < currentSelectedProduct.price) { alert("⚠️ رصيدك غير كافٍ."); return; }
+            if(playerId === "") { alert("⚠️ يرجى إدخال الأيدي أو البيانات المطلوبة أولاً!"); return; }
+            if(userBalance < currentSelectedProduct.basePrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
             
-            userBalance -= currentSelectedProduct.price;
+            userBalance -= currentSelectedProduct.basePrice;
             updateUserBalanceUI();
 
             db.collection("orders").add({
-                product: currentSelectedProduct.title + ' (ID: ' + playerId + ')',
-                price: currentSelectedProduct.price,
+                product: currentSelectedProduct.title + ' (البيانات: ' + playerId + ')',
+                basePrice: currentSelectedProduct.basePrice,
+                price: currentSelectedProduct.basePrice,
                 status: 'pending',
                 adminReply: '',
                 userEmail: currentUserEmail,
@@ -991,15 +992,16 @@
 
         function submitCodeOrder() {
             let qty = parseInt(document.getElementById('codeQuantity').value) || 1;
-            let totalPrice = currentCodeProduct.price * qty;
-            if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
+            let totalPriceUSD = currentCodeProduct.basePrice * qty;
+            if(userBalance < totalPriceUSD) { alert("⚠️ رصيدك غير كافٍ."); return; }
             
-            userBalance -= totalPrice;
+            userBalance -= totalPriceUSD;
             updateUserBalanceUI();
 
             db.collection("orders").add({
                 product: currentCodeProduct.title + ` (العدد: ${qty})`,
-                price: totalPrice,
+                basePrice: totalPriceUSD,
+                price: totalPriceUSD,
                 status: 'pending',
                 adminReply: '',
                 userEmail: currentUserEmail,
@@ -1007,79 +1009,6 @@
             }).then(() => {
                 alert("🚀 تم تسجيل طلبك وإرساله للإدارة!");
                 closeCodeOrderModal();
-            });
-        }
-
-        function submitSubLinkOrder() {
-            let qty = parseInt(document.getElementById('subLinkQty').value) || 1;
-            let platform = document.getElementById('subLinkPlatform').value;
-            let email = document.getElementById('subLinkEmail').value.trim();
-            let password = document.getElementById('subLinkPassword').value.trim();
-            let contactMethod = document.getElementById('subLinkContactMethod').value;
-            let countryCode = document.getElementById('subLinkCountryCode').value.trim();
-            let contact = document.getElementById('subLinkContact').value.trim();
-            let totalPrice = currentSubLinkProduct.price * qty;
-
-            if(!platform) { alert("⚠️ يرجى اختيار المنصة!"); return; }
-            if(!email) { alert("⚠️ يرجى إدخال الإيميل!"); return; }
-            if(!password) { alert("⚠️ يرجى إدخال كلمة السر!"); return; }
-            if(!contactMethod) { alert("⚠️ يرجى اختيار طريقة التواصل!"); return; }
-            if(!countryCode) { alert("⚠️ يرجى إدخال رمز البلد!"); return; }
-            if(!contact) { alert("⚠️ يرجى إدخال رقم الهاتف أو المعرف للتواصل!"); return; }
-            if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
-            
-            userBalance -= totalPrice;
-            updateUserBalanceUI();
-
-            let fullContact = `${countryCode} ${contact}`;
-
-            db.collection("orders").add({
-                product: `${currentSubLinkProduct.title} (العدد: ${qty})`,
-                price: totalPrice,
-                platform: platform,
-                email: email,
-                password: password,
-                contactMethod: contactMethod,
-                countryCode: countryCode,
-                contact: fullContact,
-                status: 'pending',
-                adminReply: '',
-                userEmail: currentUserEmail,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                alert("🚀 تم تسجيل الطلب وإرساله للإدارة بنجاح!");
-                closeSubLinkModal();
-            });
-        }
-
-        function submitBooyahOrder() {
-            let contactMethod = document.getElementById('booyahContactMethod').value;
-            let countryCode = document.getElementById('booyahCountryCode').value.trim();
-            let contact = document.getElementById('booyahContact').value.trim();
-
-            if(!contactMethod) { alert("⚠️ يرجى اختيار طريقة التواصل!"); return; }
-            if(!countryCode) { alert("⚠️ يرجى إدخال رمز البلد!"); return; }
-            if(!contact) { alert("⚠️ يرجى إدخال رقم الهاتف أو المعرف للتواصل!"); return; }
-            if(userBalance < currentBooyahProduct.price) { alert("⚠️ رصيدك غير كافٍ."); return; }
-            
-            userBalance -= currentBooyahProduct.price;
-            updateUserBalanceUI();
-
-            let fullContact = `${countryCode} ${contact}`;
-
-            db.collection("orders").add({
-                product: currentBooyahProduct.title,
-                price: currentBooyahProduct.price,
-                contactMethod: contactMethod,
-                countryCode: countryCode,
-                contact: fullContact,
-                status: 'pending',
-                adminReply: '',
-                userEmail: currentUserEmail,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                alert("🚀 تم تسجيل طلب إهداء بويا باس بنجاح!");
-                closeBooyahModal();
             });
         }
 
@@ -1094,17 +1023,22 @@
 
         function switchAdminTab(tab) {
             let isBal = tab === 'balance';
+            let isOrd = tab === 'orders';
+            let isSup = tab === 'support';
+            
             document.getElementById('tabBalance').classList.toggle('active', isBal);
-            document.getElementById('tabOrders').classList.toggle('active', !isBal);
+            document.getElementById('tabOrders').classList.toggle('active', isOrd);
+            document.getElementById('tabSupport').classList.toggle('active', isSup);
+
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none';
-            document.getElementById('adminOrdersSection').style.display = isBal ? 'none' : 'block';
+            document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none';
+            document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
         }
 
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
-                let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : `<span style="font-size:11px; color:#888;">لا يوجد رقم عملية</span>`;
-                
+                let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : '';
                 if(req.status === 'pending') {
                     balHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;">
                         <span>الزبون: <b>${req.userEmail}</b></span>
@@ -1116,51 +1050,30 @@
                     let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
                     balHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;">
                         <span><b>${req.userEmail}</b> | المبلغ: <b>$${req.amount}</b> | الحالة: <b>${text}</b></span>
-                        <span>رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></span>
                     </div></div>`;
                 }
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml;
 
-            let ordHtml = gameOrders.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات ألعاب</p>' : '';
+            let ordHtml = gameOrders.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات</p>' : '';
             gameOrders.forEach(req => {
-                let extraDetails = '';
-                if (req.email) {
-                    extraDetails = `
-                    <div style="background:#f1f8e9; padding:8px; border-radius:6px; margin:5px 0; font-size:12px; border:1px solid #dcedc8;">
-                        🌐 المنصة: <b>${req.platform}</b><br>
-                        📧 الإيميل: <b>${req.email}</b><br>
-                        🔑 كلمة السر: <b>${req.password}</b><br>
-                        📱 طريقة التواصل: <b>${req.contactMethod}</b><br>
-                        📞 رقم الهاتف: <b>${req.contact}</b>
-                    </div>`;
-                } else if (req.contact) {
-                    extraDetails = `
-                    <div style="background:#f1f8e9; padding:8px; border-radius:6px; margin:5px 0; font-size:12px; border:1px solid #dcedc8;">
-                        📱 طريقة التواصل: <b>${req.contactMethod}</b><br>
-                        📞 رقم الهاتف: <b>${req.contact}</b>
-                    </div>`;
-                }
-
                 if(req.status === 'pending') {
                     ordHtml += `<div class="request-card">
                         <div class="req-info" style="flex-direction:column; gap:5px;">
                             <span>الزبون: <b>${req.userEmail}</b></span>
-                            <span>المنتج: <b>${req.product}</b></span>
-                            ${extraDetails}
+                            <span>الطلب: <b>${req.product}</b></span>
                         </div>
-                        <textarea id="reply_${req.id}" placeholder="اكتب رد الإدارة أو الأكواد هنا ليصل للزبون..." style="width:100%; padding:10px; margin-top:10px; border:1px solid #ddd; border-radius:8px; font-size:13px; text-align:right; box-sizing:border-box;" rows="2"></textarea>
+                        <textarea id="reply_${req.id}" placeholder="اكتب رد الإدارة أو معلومات الحساب هنا..." style="width:100%; padding:10px; margin-top:10px; border:1px solid #ddd; border-radius:8px; font-size:13px; text-align:right; box-sizing:border-box;" rows="2"></textarea>
                         <div class="req-actions">
                             <button class="btn-acc" onclick="approveOrder('${req.id}')">إتمام وشحن (قبول)</button>
                             <button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض مع السبب</button>
                         </div>
                     </div>`;
                 } else {
-                    let text = req.status === 'approved' ? '✅ مشحون ومكتمل' : '❌ مرفوض';
+                    let text = req.status === 'approved' ? '✅ مكتمل' : '❌ مرفوض';
                     ordHtml += `<div class="request-card ${req.status}">
                         <div class="req-info" style="flex-direction:column; gap:5px;">
                             <span><b>${req.userEmail}</b> | <b>${req.product}</b></span>
-                            ${extraDetails}
                             <span style="color:${req.status==='approved'?'#28a745':'#d9534f'}; font-weight:bold;">الحالة: ${text}</span>
                             ${req.adminReply ? '<span style="font-size:13px; color:#333; background:#f9fbfb; padding:6px; border-radius:5px;"><b>الرد المُرسل:</b> ' + req.adminReply + '</span>' : ''}
                         </div>
@@ -1168,34 +1081,34 @@
                 }
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
+
+            // عرض رسائل الدعم الفني في لوحة التحكم
+            let supHtml = supportMessages.length === 0 ? '<p style="text-align:center; color:#888;">لا توجد رسائل دعم فني حالياً</p>' : '';
+            supportMessages.forEach(m => {
+                let badge = m.isAdmin ? '<span style="color: #27ae60; font-weight: bold;">[رد البوت / الإدارة]</span>' : '<span style="color: #2980b9; font-weight: bold;">[رسالة الزبون]</span>';
+                supHtml += `<div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-right: 4px solid #28a745; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">المرسل: <b>${m.sender}</b> ${badge}</div>
+                    <div style="font-size: 14px; color: #333; font-weight: bold;">${m.text}</div>
+                </div>`;
+            });
+            document.getElementById('adminSupportSection').innerHTML = supHtml;
         }
 
-        function approveBalance(id) {
-            db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => {
-                alert(`تم قبول الطلب بنجاح!`);
-            });
-        }
+        function approveBalance(id) { db.collection("deposits").doc(id).update({ status: 'approved' }); }
         function rejectBalance(id) { db.collection("deposits").doc(id).update({ status: 'rejected' }); }
         
         function approveOrder(id) {
             let replyText = document.getElementById(`reply_${id}`).value.trim();
             db.collection("orders").doc(id).update({ 
-                status: 'approved',
-                adminReply: replyText || 'تم تنفيذ الطلب بنجاح ✅'
-            }).then(() => {
-                alert('تمت الموافقة وإرسال الرد للزبون بنجاح!');
-                calculateUserVIP();
-            });
+                status: 'approved', adminReply: replyText || 'تم تنفيذ الطلب بنجاح ✅'
+            }).then(() => { alert('تمت الموافقة بنجاح!'); calculateUserVIP(); });
         }
         
         function rejectOrder(id) {
             let replyText = document.getElementById(`reply_${id}`).value.trim();
             db.collection("orders").doc(id).update({ 
-                status: 'rejected',
-                adminReply: replyText || 'تم رفض الطلب ❌'
-            }).then(() => {
-                alert('تم رفض الطلب وإرسال سبب الرفض للزبون!');
-            });
+                status: 'rejected', adminReply: replyText || 'تم رفض الطلب ❌'
+            }).then(() => { alert('تم رفض الطلب!'); });
         }
     </script>
 </body>
