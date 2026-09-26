@@ -259,12 +259,27 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥉</span><div><div style="font-weight: bold; font-size: 13px;">برونزي / Bronze</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 1$ | الخصم: 1%</div></div></div><span id="badgeBronze" style="font-size: 16px;">🔒</span></div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥈</span><div><div style="font-weight: bold; font-size: 13px;">فضي / Silver</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 40$ | الخصم: 2%</div></div></div><span id="badgeSilver" style="font-size: 16px;">🔒</span></div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥇</span><div><div style="font-weight: bold; font-size: 13px;">ذهبي / Gold</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 100$ | الخصم: 3%</div></div></div><span id="badgeGold" style="font-size: 16px;">🔒</span></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">💎</span><div><div style="font-weight: bold; font-size: 13px;">ألماسي / Diamond</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 300$ | الخصم: 4%</div></div></div><span id="badgeDiamond" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid #eee; background: #f8fafc;"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">💎</span><div><div style="font-weight: bold; font-size: 13px;">ألماسي / Diamond</div><div style="font-size: 11px; color: #888;">الشحن المطلوب: 300$ | الخصم: 5%</div></div></div><span id="badgeDiamond" style="font-size: 16px;">🔒</span></div>
             </div>
             <div style="margin-top: 25px;">
                 <div style="display: flex; justify-content: space-between; font-size: 12px; color: #555; margin-bottom: 5px;"><span>التقدم للشريحة التالية</span><span id="userSpentText">$0.00 / $1.00</span></div>
                 <div style="width: 100%; background: #eee; height: 10px; border-radius: 5px; overflow: hidden;"><div id="tierProgressBar" style="width: 0%; background: #ff7e00; height: 100%; transition: width 0.3s;"></div></div>
             </div>
+            
+            <!-- كرت ترقية التاجر الوهمي الجديد -->
+            <div style="margin-top: 25px; background: linear-gradient(135deg, #0f172a, #1e293b); border: 1px solid #00a8ff; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0, 168, 255, 0.2); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 15px; right: -35px; background: #ff7e00; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 11px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">عرض خاص</div>
+                <div style="font-size: 30px; margin-bottom: 10px;">💎</div>
+                <h4 style="color: #00a8ff; margin: 0 0 10px 0; font-size: 16px;">ترقية فورية لـ "حساب تاجر"</h4>
+                <p style="color: #cbd5e1; font-size: 12px; line-height: 1.6; margin-bottom: 15px;">
+                    اشترِ هذه الباقة بـ 300$ وستتم إضافتها لمبيعاتك فوراً!<br>
+                    ستحصل تلقائياً على شريحة <b>الألماسي</b> وتستمتع بحسم دائم 5% على جميع المنتجات.
+                </p>
+                <button onclick="openOrderModal('ترقية حساب تاجر (الماسي)', 300)" style="background-color: #ff7e00; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 4px 10px rgba(255, 126, 0, 0.3); width: 100%;">
+                    شراء الترقية الآن - 300$
+                </button>
+            </div>
+
         </div>
     </div>
 
@@ -295,7 +310,7 @@
     <div id="ffEuropePage"><div class="page-title">فري فاير أوروبا</div><div class="grid-container" id="ffEuropeGrid"></div></div>
 
     <!-- نوافذ الطلب -->
-    <div id="orderModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div><input type="text" id="playerId" placeholder="الايدي (Player ID)"><button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button><div class="modal-buttons"><button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button><button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button></div></div></div>
+    <div id="orderModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalItemTitle">المنتج</span><span class="price-tag" id="modalItemPrice">$ 0.00</span></div><input type="text" id="playerId" placeholder="الايدي (Player ID) / أو اكتب اسمك"><button class="check-btn" onclick="alert('✅ جاهز')">التحقق من الاسم</button><div class="modal-buttons"><button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button><button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button></div></div></div>
     <div id="codeOrderModal" class="modal"><div class="modal-content" style="max-width: 380px; text-align: right;"><div class="modal-header"><span id="codeModalItemTitle" style="font-size: 15px;">المنتج</span><span class="price-tag" id="codeModalItemPrice">$ 0.00</span></div><div style="margin-bottom: 12px; text-align: right;"><label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px;">العدد</label><input type="number" id="codeQuantity" value="1" min="1" oninput="updateCodeTotal()" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; text-align: center; box-sizing: border-box;"></div><div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee;"><span style="font-size: 13px; color: #333; font-weight: bold;">الإجمالي</span><span id="codeModalTotal" style="color: #ff7e00; font-weight: bold; font-size: 15px;">$ 0.00</span></div><div class="modal-buttons"><button class="buy-action-btn" onclick="submitCodeOrder()">شراء</button><button class="cancel-action-btn" onclick="closeCodeOrderModal()">إلغاء</button></div><div style="margin-top: 15px; border-top: 2px solid #e74c3c; padding-top: 10px; text-align: right;"><span style="color: #e74c3c; font-weight: bold; font-size: 13px; display: block; margin-bottom: 6px;">طريقة شحن الكود :</span><p style="font-size: 11px; color: #555; line-height: 1.5; margin: 0;">• قم بزيارة موقع الرسمي للشركة<br>• قم بوضع الكود الخاص بك<br>• اضغط على استرداد</p></div></div></div>
     
     <!-- نافذة الربط الفرعي والعضويات -->
@@ -736,12 +751,12 @@
             let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
             
             if (manualData.tier && manualData.tier !== 'auto') {
-                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; }
+                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.05; }
                 else if (manualData.tier === 'gold') { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; }
                 else if (manualData.tier === 'silver') { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; }
                 else if (manualData.tier === 'bronze') { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; }
             } else {
-                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.04; nextTarget = 300; } 
+                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.05; nextTarget = 300; } 
                 else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
                 else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
                 else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
@@ -1001,7 +1016,7 @@
                             <option value="bronze" ${currentTierVal === 'bronze' ? 'selected' : ''}>برونزي (1% خصم)</option>
                             <option value="silver" ${currentTierVal === 'silver' ? 'selected' : ''}>فضي (2% خصم)</option>
                             <option value="gold" ${currentTierVal === 'gold' ? 'selected' : ''}>ذهبي (3% خصم)</option>
-                            <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (4%)</option>
+                            <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (5%)</option>
                         </select>
                     </div>
                     <button class="buy-action-btn" onclick="adminSaveUserTier('${email}')" style="padding: 10px; font-size: 13px;">حفظ وتعديل الشريحة</button>
