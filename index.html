@@ -738,6 +738,7 @@
         function showMyAccount() { alert(`👤 معلومات الحساب:\nالبريد: ${currentUserEmail}\nالرصيد: $${userBalance.toFixed(3)}`); }
         function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+        
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
@@ -779,20 +780,50 @@
 
         function getDiscountedPrice(basePrice) { return basePrice * (1 - calculateUserVIP()); }
 
+        // == الدالة المعدلة لإظهار الطلبات الملغاة وزر الإلغاء للزبون ==
         function renderMyOrders() {
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
             let html = myOrders.length === 0 ? '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>' : '';
             myOrders.forEach(order => {
-                let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#ff7e00' : '#e74c3c');
-                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : '❌ مرفوض');
+                let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#ff7e00' : (order.status === 'cancelled' ? '#7f8c8d' : '#e74c3c'));
+                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : (order.status === 'cancelled' ? '🚫 ملغي' : '❌ مرفوض'));
                 let replyBox = order.adminReply ? `<div style="background: #e0f2fe; color: #0284c7; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid #bae6fd;"><b>رد الإدارة / الكود:</b> ${order.adminReply}</div>` : '';
+                
+                // زر الإلغاء يظهر فقط إذا كان الطلب قيد التنفيذ
+                let cancelBtn = order.status === 'pending' ? `<button onclick="cancelUserOrder('${order.id}', ${order.price})" style="background: white; color: #e74c3c; border: 1px solid #e74c3c; padding: 8px; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; cursor: pointer; font-size: 12px;">إلغاء الطلب (خصم 5% واسترجاع الباقي)</button>` : '';
+
                 html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
                     <div style="font-weight: bold; margin-bottom: 5px;">${order.product}</div>
                     <div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-bottom: 5px;">الحالة: ${statusText}</div>
                     ${replyBox}
+                    ${cancelBtn}
                 </div>`;
             });
             document.getElementById('myOrdersListContainer').innerHTML = html;
+        }
+
+        // == الدالة الجديدة الخاصة بإلغاء الطلب من قبل الزبون ==
+        function cancelUserOrder(id, price) {
+            let confirmCancel = confirm("هل أنت متأكد من إلغاء الطلب؟\nسيتم خصم 5% كرسوم إلغاء واسترجاع 95% من قيمة الطلب لرصيدك.");
+            if (!confirmCancel) return;
+
+            let refundAmount = parseFloat(price) * 0.95; // حساب 95% من المبلغ
+
+            db.collection("orders").doc(id).update({ 
+                status: 'cancelled', 
+                adminReply: 'تم إلغاء الطلب من قبلك (تم استرجاع 95% من المبلغ)' 
+            }).then(() => {
+                // إضافة المبلغ المخصوم للرصيد
+                db.collection("deposits").add({
+                    method: 'استرجاع رصيد (إلغاء طلب ذاتي)',
+                    amount: parseFloat(refundAmount.toFixed(3)),
+                    transactionId: 'CANCEL-' + id.substring(0, 6),
+                    status: 'approved',
+                    credited: false,
+                    userEmail: currentUserEmail,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            });
         }
 
         function renderMyPayments() {
@@ -966,6 +997,7 @@
             });
         }
 
+        // == الدالة المعدلة لإظهار الطلبات الملغاة بشكل صحيح في لوحة تحكم الإدارة ==
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
@@ -989,8 +1021,9 @@
                 if(req.status === 'pending') {
                     ordHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;"><span>الزبون: <b>${req.userEmail}</b></span><span>المنتج: <b>${req.product}</b></span>${extraDetails}</div><textarea id="reply_${req.id}" placeholder="اكتب رد الإدارة أو الأكواد هنا ليصل للزبون..." style="width:100%; padding:10px; margin-top:10px; border:1px solid #ddd; border-radius:8px; font-size:13px; text-align:right; box-sizing:border-box;" rows="2"></textarea><div class="req-actions"><button class="btn-acc" onclick="approveOrder('${req.id}')">إتمام وشحن (قبول)</button><button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض مع السبب</button></div></div>`;
                 } else {
-                    let text = req.status === 'approved' ? '✅ مشحون ومكتمل' : '❌ مرفوض';
-                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;"><span><b>${req.userEmail}</b> | <b>${req.product}</b></span>${extraDetails}<span style="color:${req.status==='approved'?'#ff7e00':'#e74c3c'}; font-weight:bold;">الحالة: ${text}</span>${req.adminReply ? '<span style="font-size:13px; color:#333; background:#f8fafc; padding:6px; border-radius:5px;"><b>الرد المُرسل:</b> ' + req.adminReply + '</span>' : ''}</div></div>`;
+                    let text = req.status === 'approved' ? '✅ مشحون ومكتمل' : (req.status === 'cancelled' ? '🚫 ملغي من قِبل الزبون' : '❌ مرفوض');
+                    let statusColor = req.status === 'approved' ? '#ff7e00' : (req.status === 'cancelled' ? '#7f8c8d' : '#e74c3c');
+                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;"><span><b>${req.userEmail}</b> | <b>${req.product}</b></span>${extraDetails}<span style="color:${statusColor}; font-weight:bold;">الحالة: ${text}</span>${req.adminReply ? '<span style="font-size:13px; color:#333; background:#f8fafc; padding:6px; border-radius:5px;"><b>الرد المُرسل:</b> ' + req.adminReply + '</span>' : ''}</div></div>`;
                 }
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
@@ -1076,9 +1109,29 @@
             db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاح!'); calculateUserVIP(); });
         }
         
+        // == الدالة المعدلة لرفض الإدارة وإرجاع كامل المبلغ (100%) ==
         function rejectOrder(id) {
             let replyToken = document.getElementById(`reply_${id}`).value.trim();
-            db.collection("orders").doc(id).update({ status: 'rejected', adminReply: replyToken || 'تم رفض الطلب ❌' }).then(() => { alert('تم رفض الطلب وإرسال سبب الرفض للزبون!'); });
+            let order = gameOrders.find(o => o.id === id); // جلب بيانات الطلب
+            
+            db.collection("orders").doc(id).update({ 
+                status: 'rejected', 
+                adminReply: replyToken || 'تم رفض الطلب واسترجاع المبلغ لرصيدك ❌' 
+            }).then(() => {
+                if (order) {
+                    // إنشاء حركة إيداع وهمية (مقبولة) لإرجاع الرصيد بشكل تلقائي للزبون
+                    db.collection("deposits").add({
+                        method: 'استرجاع رصيد (رفض الإدارة)',
+                        amount: parseFloat(order.price),
+                        transactionId: 'REFUND-' + id.substring(0, 6),
+                        status: 'approved',
+                        credited: false, // لكي يلتقطها الكود ويضيفها لرصيد الزبون تلقائياً
+                        userEmail: order.userEmail,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+                alert('تم رفض الطلب وإرجاع المبلغ للزبون بنجاح!'); 
+            });
         }
     </script>
 </body>
