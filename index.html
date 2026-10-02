@@ -191,19 +191,14 @@
         </div>
 
         <div class="grid-container">
-            <!-- كرت الألعاب -->
             <div class="card-wrapper" onclick="showPage('gamesPage')">
                 <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
                 <div class="card-name-outside">الألعاب</div>
             </div>
-            
-            <!-- كرت بطاقات الاتصال -->
             <div class="card-wrapper" onclick="showPage('telecomPage')">
                 <div class="card-box"><div class="card-circle" style="color:#00a8ff;">📱</div><div class="card-name-inside">اتصال</div></div>
                 <div class="card-name-outside">بطاقات الاتصال</div>
             </div>
-
-            <!-- الكرت الجديد: تواصل معنا (واتساب) -->
             <div class="card-wrapper" onclick="window.open('https://wa.me/963992448854', '_blank')">
                 <div class="card-box" style="border: 1px solid #25D366; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.15);">
                     <div class="card-circle" style="color:#25D366; border-color:#25D366; font-size: 24px;">💬</div>
@@ -266,7 +261,6 @@
                 <div style="width: 100%; background: #eee; height: 10px; border-radius: 5px; overflow: hidden;"><div id="tierProgressBar" style="width: 0%; background: #ff7e00; height: 100%; transition: width 0.3s;"></div></div>
             </div>
             
-            <!-- كرت ترقية التاجر الوهمي الجديد -->
             <div style="margin-top: 25px; background: linear-gradient(135deg, #0f172a, #1e293b); border: 1px solid #00a8ff; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0, 168, 255, 0.2); position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 15px; right: -35px; background: #ff7e00; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 11px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">عرض خاص</div>
                 <div style="font-size: 30px; margin-bottom: 10px;">💎</div>
@@ -471,7 +465,12 @@
                     userBalance += parseFloat(data.amount);
                     updateUserBalanceUI();
                     db.collection("deposits").doc(doc.id).update({ credited: true });
-                    alert(`✅ تم قبول طلب الإيداع! تمت إضافة $${data.amount} إلى رصيدك بنجاح.`);
+                    
+                    // تحسين رسالة الإشعار للزبون بين الخصم والإضافة
+                    let notifyMsg = parseFloat(data.amount) > 0 
+                        ? `✅ تمت إضافة $${data.amount} إلى رصيدك بنجاح.` 
+                        : `⚠️ قامت الإدارة بخصم $${Math.abs(data.amount)} من رصيدك.`;
+                    alert(notifyMsg);
                 }
             });
             renderMyPayments(); 
@@ -593,7 +592,7 @@
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن', 13.390)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن</div></div><div class="card-name-outside">السكن</div><div class="card-price-outside">$ 13.390</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السيارة', 3.180)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السيارة</div></div><div class="card-name-outside">السيارة</div><div class="card-price-outside">$ 3.180</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود المسدس', 17.510)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">المسدس</div></div><div class="card-name-outside">المسدس</div><div class="card-price-outside">$ 17.510</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود سلاح SKS', 9.270)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">كود سلاح SKS</div></div><div class="card-name-outside">كود سلاح SKS</div><div class="card-price-outside">$ 9.270</div></div>
+                <div class="card-wrapper" onclick="openCodeOrderModal('كود سلاح SKS', 9.270)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️️</div><div class="card-name-inside">كود سلاح SKS</div></div><div class="card-name-outside">كود سلاح SKS</div><div class="card-price-outside">$ 9.270</div></div>
             `;
             document.getElementById('ffEuropeGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 25 جوهرة', 0.277)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🇪🇺</div><div class="card-name-inside">25 جوهرة</div></div><div class="card-name-outside">25 جوهرة</div><div class="card-price-outside">$ 0.277</div></div>
@@ -929,7 +928,7 @@
             let totalPrice = currentSubLinkProduct.price * qty;
             
             if(!contactMethod||!countryCode||!contact) { alert("⚠️ يرجى تعبئة جميع الحقول!"); return; }
-            if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
+            if(userBalance < totalPrice) { alert("⚠️️ رصيدك غير كافٍ."); return; }
             
             userBalance -= totalPrice; updateUserBalanceUI();
             
@@ -959,11 +958,11 @@
 
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
-            if (document.getElementById('adminPasswordInput').value === 'admin') {
+            // تم تغيير كلمة المرور هنا لتصبح ADMIN10
+            if (document.getElementById('adminPasswordInput').value === 'ADMIN10') {
                 document.getElementById('adminLoginModal').style.display = 'none'; 
                 document.getElementById('adminPasswordInput').value = ''; 
                 
-                // حذف نافذة تسجيل الدخول نهائياً من الصفحة حتى لا تظهر أبداً
                 let overlay = document.getElementById('loginOverlay');
                 if (overlay) overlay.remove();
 
@@ -996,8 +995,40 @@
                 alert("✅ تم حفظ مستوى الزبون / التاجر بنجاح!");
             });
         }
+        
+        // --- إضافة الدالة الجديدة الخاصة بتعديل الرصيد من الإدارة ---
+        function adminAdjustBalance(userEmail, safeId) {
+            let inputEl = document.getElementById(`balanceAdjust_${safeId}`);
+            let amount = parseFloat(inputEl.value);
 
-        // == الدالة المعدلة لإظهار الطلبات الملغاة بشكل صحيح في لوحة تحكم الإدارة ==
+            if (isNaN(amount) || amount === 0) {
+                alert("⚠️ يرجى إدخال مبلغ صحيح.\nللإضافة اكتب رقم عادي (مثال: 5)\nللخصم اكتب إشارة السالب (مثال: -5)");
+                return;
+            }
+
+            let isAdding = amount > 0;
+            let confirmMsg = isAdding 
+                ? `هل أنت متأكد من إضافة $${amount} إلى رصيد\n${userEmail} ؟` 
+                : `هل أنت متأكد من خصم $${Math.abs(amount)} من رصيد\n${userEmail} ؟`;
+
+            if (!confirm(confirmMsg)) return;
+
+            db.collection("deposits").add({
+                method: isAdding ? 'إضافة رصيد (مباشر من الإدارة)' : 'خصم رصيد (مباشر من الإدارة)',
+                amount: amount,
+                transactionId: (isAdding ? 'ADD-' : 'SUB-') + Math.floor(Math.random() * 1000000),
+                status: 'approved',
+                credited: false,
+                userEmail: userEmail,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert("✅ تم تعديل الرصيد بنجاح! سينعكس ذلك على حساب المستخدم فوراً.");
+                inputEl.value = "";
+            }).catch(err => {
+                alert("❌ حدث خطأ: " + err.message);
+            });
+        }
+
         function renderAdminData() {
             let balHtml = balanceRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
             balanceRequests.forEach(req => {
@@ -1028,7 +1059,6 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml;
 
-            // تجميع كل الإيميلات الفريدة المسجلة في النظام (Orders, Deposits, Support)
             let allEmails = new Set();
             gameOrders.forEach(o => { if(o.userEmail) allEmails.add(o.userEmail); });
             balanceRequests.forEach(d => { if(d.userEmail) allEmails.add(d.userEmail); });
@@ -1040,19 +1070,45 @@
                 let userData = manualUserTiers[safeId] || {};
                 let currentTierVal = userData.tier || 'auto';
 
-                usrHtml += `<div class="request-card" style="border-right: 4px solid #00a8ff;">
-                    <div style="font-weight: bold; margin-bottom: 8px; color: #0f172a; font-size: 14px;">📧 البريد: ${email}</div>
-                    <div style="margin-bottom: 10px;">
-                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 4px;">تحديد الشريحة / مستوى التاجر:</label>
-                        <select id="tierSelect_${safeId}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; background: #fff;">
-                            <option value="auto" ${currentTierVal === 'auto' ? 'selected' : ''}>تلقائي (حسب المبيعات)</option>
-                            <option value="bronze" ${currentTierVal === 'bronze' ? 'selected' : ''}>برونزي (1% خصم)</option>
-                            <option value="silver" ${currentTierVal === 'silver' ? 'selected' : ''}>فضي (2% خصم)</option>
-                            <option value="gold" ${currentTierVal === 'gold' ? 'selected' : ''}>ذهبي (3% خصم)</option>
-                            <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (5%)</option>
-                        </select>
+                // --- حساب الرصيد الحالي للمستخدم بدقة وعرضه للإدارة ---
+                let userDeposits = balanceRequests.filter(req => req.userEmail === email && req.status === 'approved');
+                let totalDeposited = userDeposits.reduce((sum, req) => sum + parseFloat(req.amount || 0), 0);
+                
+                let userOrders = gameOrders.filter(o => o.userEmail === email && (o.status === 'approved' || o.status === 'pending'));
+                let totalSpent = userOrders.reduce((sum, ord) => sum + parseFloat(ord.price || 0), 0);
+                
+                let calculatedBalance = 0.010 + totalDeposited - totalSpent; // 0.010 هو الرصيد الافتتاحي
+
+                // --- تصميم كرت المستخدم مع إظهار الرصيد وإمكانية التعديل ---
+                usrHtml += `<div class="request-card" style="border-right: 4px solid #00a8ff; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                        <div style="font-weight: bold; color: #0f172a; font-size: 14px;">📧 ${email}</div>
+                        <div style="background: rgba(0, 168, 255, 0.1); padding: 5px 12px; border-radius: 20px; color: #00a8ff; font-weight: bold; font-size: 14px; border: 1px solid #00a8ff;">
+                            الرصيد: $${calculatedBalance.toFixed(3)}
+                        </div>
                     </div>
-                    <button class="buy-action-btn" onclick="adminSaveUserTier('${email}')" style="padding: 10px; font-size: 13px;">حفظ وتعديل الشريحة</button>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 4px;">مستوى التاجر (الشريحة):</label>
+                        <div style="display: flex; gap: 8px;">
+                            <select id="tierSelect_${safeId}" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; background: #fff;">
+                                <option value="auto" ${currentTierVal === 'auto' ? 'selected' : ''}>تلقائي (حسب المبيعات)</option>
+                                <option value="bronze" ${currentTierVal === 'bronze' ? 'selected' : ''}>برونزي (1% خصم)</option>
+                                <option value="silver" ${currentTierVal === 'silver' ? 'selected' : ''}>فضي (2% خصم)</option>
+                                <option value="gold" ${currentTierVal === 'gold' ? 'selected' : ''}>ذهبي (3% خصم)</option>
+                                <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (5%)</option>
+                            </select>
+                            <button onclick="adminSaveUserTier('${email}')" style="background: #0f172a; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">حفظ</button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 10px;">
+                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px; font-weight: bold;">تعديل الرصيد يدويًا:</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="number" id="balanceAdjust_${safeId}" placeholder="مثال: 5 للإضافة أو -5 للخصم" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; text-align: right; outline: none; direction: rtl;">
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}')" style="background: #ff7e00; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">تأكيد العملية</button>
+                        </div>
+                    </div>
                 </div>`;
             });
             document.getElementById('adminUsersSection').innerHTML = usrHtml;
