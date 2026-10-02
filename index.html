@@ -466,7 +466,6 @@
                     updateUserBalanceUI();
                     db.collection("deposits").doc(doc.id).update({ credited: true });
                     
-                    // تحسين رسالة الإشعار للزبون بين الخصم والإضافة
                     let notifyMsg = parseFloat(data.amount) > 0 
                         ? `✅ تمت إضافة $${data.amount} إلى رصيدك بنجاح.` 
                         : `⚠️ قامت الإدارة بخصم $${Math.abs(data.amount)} من رصيدك.`;
@@ -592,7 +591,7 @@
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن', 13.390)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن</div></div><div class="card-name-outside">السكن</div><div class="card-price-outside">$ 13.390</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السيارة', 3.180)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السيارة</div></div><div class="card-name-outside">السيارة</div><div class="card-price-outside">$ 3.180</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود المسدس', 17.510)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">المسدس</div></div><div class="card-name-outside">المسدس</div><div class="card-price-outside">$ 17.510</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود سلاح SKS', 9.270)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️️</div><div class="card-name-inside">كود سلاح SKS</div></div><div class="card-name-outside">كود سلاح SKS</div><div class="card-price-outside">$ 9.270</div></div>
+                <div class="card-wrapper" onclick="openCodeOrderModal('كود سلاح SKS', 9.270)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">كود سلاح SKS</div></div><div class="card-name-outside">كود سلاح SKS</div><div class="card-price-outside">$ 9.270</div></div>
             `;
             document.getElementById('ffEuropeGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 25 جوهرة', 0.277)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🇪🇺</div><div class="card-name-inside">25 جوهرة</div></div><div class="card-name-outside">25 جوهرة</div><div class="card-price-outside">$ 0.277</div></div>
@@ -666,7 +665,6 @@
         function loginUser() { 
             let email = document.getElementById("userEmailInput").value.trim();
             
-            // التحقق من صحة البريد وأنه ينتهي بـ @gmail.com
             let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
             if (!emailRegex.test(email)) {
                 alert("⚠️ يرجى إدخال بريد إلكتروني صالح ينتهي بـ @gmail.com");
@@ -706,7 +704,7 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'robot1Page', 'subLinkGemsPage', 'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage'];
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage'];
             pages.forEach(p => { let el = document.getElementById(p); if (el) el.style.display = 'none'; });
             let targetEl = document.getElementById(pageId);
             if (targetEl) targetEl.style.display = 'block';
@@ -779,7 +777,6 @@
 
         function getDiscountedPrice(basePrice) { return basePrice * (1 - calculateUserVIP()); }
 
-        // == الدالة المعدلة لإظهار الطلبات الملغاة وزر الإلغاء للزبون ==
         function renderMyOrders() {
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
             let html = myOrders.length === 0 ? '<p style="text-align:center; color:#888;">لا يوجد طلبات شحن حالياً</p>' : '';
@@ -788,7 +785,6 @@
                 let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : (order.status === 'cancelled' ? '🚫 ملغي' : '❌ مرفوض'));
                 let replyBox = order.adminReply ? `<div style="background: #e0f2fe; color: #0284c7; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid #bae6fd;"><b>رد الإدارة / الكود:</b> ${order.adminReply}</div>` : '';
                 
-                // زر الإلغاء يظهر فقط إذا كان الطلب قيد التنفيذ
                 let cancelBtn = order.status === 'pending' ? `<button onclick="cancelUserOrder('${order.id}', ${order.price})" style="background: white; color: #e74c3c; border: 1px solid #e74c3c; padding: 8px; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; cursor: pointer; font-size: 12px;">إلغاء الطلب (خصم 5% واسترجاع الباقي)</button>` : '';
 
                 html += `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
@@ -801,18 +797,16 @@
             document.getElementById('myOrdersListContainer').innerHTML = html;
         }
 
-        // == الدالة الجديدة الخاصة بإلغاء الطلب من قبل الزبون ==
         function cancelUserOrder(id, price) {
             let confirmCancel = confirm("هل أنت متأكد من إلغاء الطلب؟\nسيتم خصم 5% كرسوم إلغاء واسترجاع 95% من قيمة الطلب لرصيدك.");
             if (!confirmCancel) return;
 
-            let refundAmount = parseFloat(price) * 0.95; // حساب 95% من المبلغ
+            let refundAmount = parseFloat(price) * 0.95; 
 
             db.collection("orders").doc(id).update({ 
                 status: 'cancelled', 
                 adminReply: 'تم إلغاء الطلب من قبلك (تم استرجاع 95% من المبلغ)' 
             }).then(() => {
-                // إضافة المبلغ المخصوم للرصيد
                 db.collection("deposits").add({
                     method: 'استرجاع رصيد (إلغاء طلب ذاتي)',
                     amount: parseFloat(refundAmount.toFixed(3)),
@@ -927,8 +921,8 @@
             let contact = document.getElementById('subLinkContact').value.trim();
             let totalPrice = currentSubLinkProduct.price * qty;
             
-            if(!contactMethod||!countryCode||!contact) { alert("⚠️ يرجى تعبئة جميع الحقول!"); return; }
-            if(userBalance < totalPrice) { alert("⚠️️ رصيدك غير كافٍ."); return; }
+            if(!contactMethod||!countryCode||!contact) { alert("⚠️️ يرجى تعبئة جميع الحقول!"); return; }
+            if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
             
             userBalance -= totalPrice; updateUserBalanceUI();
             
@@ -958,7 +952,6 @@
 
         function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
         function verifyAdmin() {
-            // تم تغيير كلمة المرور هنا لتصبح ADMIN10
             if (document.getElementById('adminPasswordInput').value === 'ADMIN10') {
                 document.getElementById('adminLoginModal').style.display = 'none'; 
                 document.getElementById('adminPasswordInput').value = ''; 
@@ -996,33 +989,35 @@
             });
         }
         
-        // --- إضافة الدالة الجديدة الخاصة بتعديل الرصيد من الإدارة ---
-        function adminAdjustBalance(userEmail, safeId) {
+        // --- دالة تعديل الرصيد الآمنة (بأزرار منفصلة للإضافة والخصم) ---
+        function adminAdjustBalance(userEmail, safeId, isSubtract) {
             let inputEl = document.getElementById(`balanceAdjust_${safeId}`);
-            let amount = parseFloat(inputEl.value);
+            let val = parseFloat(inputEl.value);
 
-            if (isNaN(amount) || amount === 0) {
-                alert("⚠️ يرجى إدخال مبلغ صحيح.\nللإضافة اكتب رقم عادي (مثال: 5)\nللخصم اكتب إشارة السالب (مثال: -5)");
+            if (isNaN(val) || val <= 0) {
+                alert("⚠️ يرجى إدخال مبلغ صحيح (أرقام فقط بدون إشارات).");
                 return;
             }
 
-            let isAdding = amount > 0;
-            let confirmMsg = isAdding 
-                ? `هل أنت متأكد من إضافة $${amount} إلى رصيد\n${userEmail} ؟` 
-                : `هل أنت متأكد من خصم $${Math.abs(amount)} من رصيد\n${userEmail} ؟`;
+            // إذا كان خصماً، نجعل القيمة سالبة برمجياً
+            let finalAmount = isSubtract ? -val : val;
+
+            let confirmMsg = isSubtract 
+                ? `هل أنت متأكد من خصم $${val} من رصيد\n${userEmail} ؟` 
+                : `هل أنت متأكد من إضافة $${val} إلى رصيد\n${userEmail} ؟`;
 
             if (!confirm(confirmMsg)) return;
 
             db.collection("deposits").add({
-                method: isAdding ? 'إضافة رصيد (مباشر من الإدارة)' : 'خصم رصيد (مباشر من الإدارة)',
-                amount: amount,
-                transactionId: (isAdding ? 'ADD-' : 'SUB-') + Math.floor(Math.random() * 1000000),
+                method: isSubtract ? 'خصم رصيد (مباشر من الإدارة)' : 'إضافة رصيد (مباشر من الإدارة)',
+                amount: finalAmount,
+                transactionId: (isSubtract ? 'SUB-' : 'ADD-') + Math.floor(Math.random() * 1000000),
                 status: 'approved',
                 credited: false,
                 userEmail: userEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
-                alert("✅ تم تعديل الرصيد بنجاح! سينعكس ذلك على حساب المستخدم فوراً.");
+                alert("✅ تم تنفيذ العملية بنجاح!");
                 inputEl.value = "";
             }).catch(err => {
                 alert("❌ حدث خطأ: " + err.message);
@@ -1070,16 +1065,15 @@
                 let userData = manualUserTiers[safeId] || {};
                 let currentTierVal = userData.tier || 'auto';
 
-                // --- حساب الرصيد الحالي للمستخدم بدقة وعرضه للإدارة ---
                 let userDeposits = balanceRequests.filter(req => req.userEmail === email && req.status === 'approved');
                 let totalDeposited = userDeposits.reduce((sum, req) => sum + parseFloat(req.amount || 0), 0);
                 
                 let userOrders = gameOrders.filter(o => o.userEmail === email && (o.status === 'approved' || o.status === 'pending'));
                 let totalSpent = userOrders.reduce((sum, ord) => sum + parseFloat(ord.price || 0), 0);
                 
-                let calculatedBalance = 0.010 + totalDeposited - totalSpent; // 0.010 هو الرصيد الافتتاحي
+                let calculatedBalance = 0.010 + totalDeposited - totalSpent; 
 
-                // --- تصميم كرت المستخدم مع إظهار الرصيد وإمكانية التعديل ---
+                // --- تحديث الواجهة لتشمل زر "إضافة" وزر "خصم" منفصلين تماماً ---
                 usrHtml += `<div class="request-card" style="border-right: 4px solid #00a8ff; margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         <div style="font-weight: bold; color: #0f172a; font-size: 14px;">📧 ${email}</div>
@@ -1103,10 +1097,12 @@
                     </div>
                     
                     <div style="background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 10px;">
-                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px; font-weight: bold;">تعديل الرصيد يدويًا:</label>
+                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px; font-weight: bold;">تعديل الرصيد:</label>
+                        <input type="number" id="balanceAdjust_${safeId}" placeholder="أدخل المبلغ (أرقام فقط)..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; text-align: right; outline: none; direction: rtl; margin-bottom: 8px; box-sizing: border-box;">
+                        
                         <div style="display: flex; gap: 8px;">
-                            <input type="number" id="balanceAdjust_${safeId}" placeholder="مثال: 5 للإضافة أو -5 للخصم" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; text-align: right; outline: none; direction: rtl;">
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}')" style="background: #ff7e00; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">تأكيد العملية</button>
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}', false)" style="flex: 1; background: #10b981; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px;">➕ إضافة رصيد</button>
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}', true)" style="flex: 1; background: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px;">➖ خصم رصيد</button>
                         </div>
                     </div>
                 </div>`;
@@ -1165,23 +1161,21 @@
             db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { alert('تمت الموافقة وإرسال الرد للزبون بنجاح!'); calculateUserVIP(); });
         }
         
-        // == الدالة المعدلة لرفض الإدارة وإرجاع كامل المبلغ (100%) ==
         function rejectOrder(id) {
             let replyToken = document.getElementById(`reply_${id}`).value.trim();
-            let order = gameOrders.find(o => o.id === id); // جلب بيانات الطلب
+            let order = gameOrders.find(o => o.id === id); 
             
             db.collection("orders").doc(id).update({ 
                 status: 'rejected', 
                 adminReply: replyToken || 'تم رفض الطلب واسترجاع المبلغ لرصيدك ❌' 
             }).then(() => {
                 if (order) {
-                    // إنشاء حركة إيداع وهمية (مقبولة) لإرجاع الرصيد بشكل تلقائي للزبون
                     db.collection("deposits").add({
                         method: 'استرجاع رصيد (رفض الإدارة)',
                         amount: parseFloat(order.price),
                         transactionId: 'REFUND-' + id.substring(0, 6),
                         status: 'approved',
-                        credited: false, // لكي يلتقطها الكود ويضيفها لرصيد الزبون تلقائياً
+                        credited: false, 
                         userEmail: order.userEmail,
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
