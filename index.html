@@ -466,9 +466,9 @@
                     updateUserBalanceUI();
                     db.collection("deposits").doc(doc.id).update({ credited: true });
                     
-                    let notifyMsg = parseFloat(data.amount) > 0 
+                    let notifyMsg = parseFloat(data.amount) >= 0 
                         ? `✅ تمت إضافة $${data.amount} إلى رصيدك بنجاح.` 
-                        : `⚠️ قامت الإدارة بخصم $${Math.abs(data.amount)} من رصيدك.`;
+                        : `⚠️ قامت الإدارة بتعديل رصيدك ($${Math.abs(data.amount)}).`;
                     alert(notifyMsg);
                 }
             });
@@ -587,7 +587,7 @@
             document.getElementById('companyCodesGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود سكن الباندا', 14.420)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">سكن الباندا</div></div><div class="card-name-outside">سكن الباندا</div><div class="card-price-outside">$ 14.420</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن الابيض', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن الابيض</div></div><div class="card-name-outside">السكن الابيض</div><div class="card-price-outside">$ 10.815</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود الرقصة', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">الرقصة</div></div><div class="card-name-outside">الرقصة</div><div class="card-price-outside">$ 10.815</div></div>
+                <div class="card-wrapper" onclick="openCodeOrderModal('كود الرقصة', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️️</div><div class="card-name-inside">الرقصة</div></div><div class="card-name-outside">الرقصة</div><div class="card-price-outside">$ 10.815</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن', 13.390)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن</div></div><div class="card-name-outside">السكن</div><div class="card-price-outside">$ 13.390</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السيارة', 3.180)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السيارة</div></div><div class="card-name-outside">السيارة</div><div class="card-price-outside">$ 3.180</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود المسدس', 17.510)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">المسدس</div></div><div class="card-name-outside">المسدس</div><div class="card-price-outside">$ 17.510</div></div>
@@ -909,7 +909,7 @@
         function submitCodeOrder() {
             let qty = parseInt(document.getElementById('codeQuantity').value) || 1;
             let totalPrice = currentCodeProduct.price * qty;
-            if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
+            if(userBalance < totalPrice) { alert("⚠️️ رصيدك غير كافٍ."); return; }
             userBalance -= totalPrice; updateUserBalanceUI();
             db.collection("orders").add({ product: currentCodeProduct.title + ` (العدد: ${qty})`, price: totalPrice, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { alert("🚀 تم تسجيل طلبك وإرساله للإدارة!"); closeCodeOrderModal(); });
         }
@@ -921,7 +921,7 @@
             let contact = document.getElementById('subLinkContact').value.trim();
             let totalPrice = currentSubLinkProduct.price * qty;
             
-            if(!contactMethod||!countryCode||!contact) { alert("⚠️️ يرجى تعبئة جميع الحقول!"); return; }
+            if(!contactMethod||!countryCode||!contact) { alert("⚠️ يرجى تعبئة جميع الحقول!"); return; }
             if(userBalance < totalPrice) { alert("⚠️ رصيدك غير كافٍ."); return; }
             
             userBalance -= totalPrice; updateUserBalanceUI();
@@ -989,35 +989,43 @@
             });
         }
         
-        // --- دالة تعديل الرصيد الآمنة (بأزرار منفصلة للإضافة والخصم) ---
-        function adminAdjustBalance(userEmail, safeId, isSubtract) {
+        // --- دالة تعديل وتعيين الرصيد الدقيقة (تدعم الإضافة، الخصم، أو التعيين المباشر لأي رقم) ---
+        function adminAdjustBalance(userEmail, safeId, actionType, currentBalance) {
             let inputEl = document.getElementById(`balanceAdjust_${safeId}`);
             let val = parseFloat(inputEl.value);
 
-            if (isNaN(val) || val <= 0) {
-                alert("⚠️ يرجى إدخال مبلغ صحيح (أرقام فقط بدون إشارات).");
+            if (isNaN(val) || val < 0) {
+                alert("⚠️ يرجى إدخال مبلغ صحيح (أرقام موجبة فقط).");
                 return;
             }
 
-            // إذا كان خصماً، نجعل القيمة سالبة برمجياً
-            let finalAmount = isSubtract ? -val : val;
+            let adjustmentAmount = 0;
+            let actionName = '';
 
-            let confirmMsg = isSubtract 
-                ? `هل أنت متأكد من خصم $${val} من رصيد\n${userEmail} ؟` 
-                : `هل أنت متأكد من إضافة $${val} إلى رصيد\n${userEmail} ؟`;
+            if (actionType === 'add') {
+                adjustmentAmount = val;
+                actionName = `إضافة $${val} إلى`;
+            } else if (actionType === 'subtract') {
+                adjustmentAmount = -val;
+                actionName = `خصم $${val} من`;
+            } else if (actionType === 'set') {
+                // تعيين الرصيد ليساوي الرقم المدخل بالضبط (عبر حساب الفرق)
+                adjustmentAmount = val - currentBalance;
+                actionName = `تعيين رصيد ليصبح تماماً $${val} لـ`;
+            }
 
-            if (!confirm(confirmMsg)) return;
+            if (!confirm(`هل أنت متأكد من ${actionName} المستخدم\n${userEmail} ؟`)) return;
 
             db.collection("deposits").add({
-                method: isSubtract ? 'خصم رصيد (مباشر من الإدارة)' : 'إضافة رصيد (مباشر من الإدارة)',
-                amount: finalAmount,
-                transactionId: (isSubtract ? 'SUB-' : 'ADD-') + Math.floor(Math.random() * 1000000),
+                method: actionType === 'set' ? 'تعيين رصيد مباشر (الإدارة)' : (actionType === 'add' ? 'إضافة رصيد (الإدارة)' : 'خصم رصيد (الإدارة)'),
+                amount: adjustmentAmount,
+                transactionId: 'ADM-' + Math.floor(Math.random() * 1000000),
                 status: 'approved',
                 credited: false,
                 userEmail: userEmail,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
-                alert("✅ تم تنفيذ العملية بنجاح!");
+                alert("✅ تم تنفيذ العملية بنجاح وتحديث الرصيد فوراً!");
                 inputEl.value = "";
             }).catch(err => {
                 alert("❌ حدث خطأ: " + err.message);
@@ -1073,7 +1081,7 @@
                 
                 let calculatedBalance = 0.010 + totalDeposited - totalSpent; 
 
-                // --- تحديث الواجهة لتشمل زر "إضافة" وزر "خصم" منفصلين تماماً ---
+                // --- واجهة مستخدم متكاملة مع خيارات الإضافة، الخصم، والتعيين المباشر ---
                 usrHtml += `<div class="request-card" style="border-right: 4px solid #00a8ff; margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         <div style="font-weight: bold; color: #0f172a; font-size: 14px;">📧 ${email}</div>
@@ -1097,12 +1105,13 @@
                     </div>
                     
                     <div style="background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 10px;">
-                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px; font-weight: bold;">تعديل الرصيد:</label>
+                        <label style="font-size: 12px; color: #555; display: block; margin-bottom: 5px; font-weight: bold;">إدارة الرصيد:</label>
                         <input type="number" id="balanceAdjust_${safeId}" placeholder="أدخل المبلغ (أرقام فقط)..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; text-align: right; outline: none; direction: rtl; margin-bottom: 8px; box-sizing: border-box;">
                         
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}', false)" style="flex: 1; background: #10b981; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px;">➕ إضافة رصيد</button>
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}', true)" style="flex: 1; background: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px;">➖ خصم رصيد</button>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'add', ${calculatedBalance})" style="flex: 1; min-width: 90px; background: #10b981; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">➕ إضافة</button>
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'subtract', ${calculatedBalance})" style="flex: 1; min-width: 90px; background: #e74c3c; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">➖ خصم</button>
+                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'set', ${calculatedBalance})" style="flex: 1; min-width: 110px; background: #00a8ff; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">🎯 تعيين مباشر</button>
                         </div>
                     </div>
                 </div>`;
