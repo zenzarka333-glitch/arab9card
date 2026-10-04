@@ -15,14 +15,6 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; padding-bottom: 20px; }
         
-        /* وضع الصيانة العام */
-        #maintenanceOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0f172a; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; color: white; text-align: center; padding: 20px; box-sizing: border-box; }
-        .maintenance-box { background: #1e293b; padding: 40px 30px; border-radius: 20px; border: 2px solid #ff7e00; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 400px; width: 100%; }
-        .maintenance-logo { font-size: 35px; font-weight: 900; color: #00a8ff; margin-bottom: 15px; font-family: 'Arial Black'; }
-        .maintenance-logo span { color: #ff7e00; }
-        .maintenance-title { color: #ff7e00; font-size: 20px; font-weight: bold; margin-bottom: 10px; }
-        .maintenance-text { color: #cbd5e1; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
-
         /* تصميم الهيدر الجديد بألوان ARAB9CARD */
         .header { background-color: #0f172a; color: white; padding: 12px 20px; display: flex; flex-direction: column; gap: 12px; font-weight: bold; border-bottom: 2px solid #ff7e00; }
         .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
@@ -108,17 +100,7 @@
 </head>
 <body>
 
-    <!-- نافذة وضع الصيانة (اجعلها display: none عند إرادتك إلغاء الصيانة) -->
-    <div id="maintenanceOverlay">
-        <div class="maintenance-box">
-            <div class="maintenance-logo">A<span>9</span>C</div>
-            <div class="maintenance-title">الموقع تحت الصيانة 🛠️</div>
-            <div class="maintenance-text">نعمل حالياً على تطوير وتحديث خدماتنا لنقدم لكم تجربة أفضل. يرجى محاولة الدخول لاحقاً!</div>
-            <button onclick="checkAdminMaintenanceEntry()" style="background: transparent; border: 1px solid #00a8ff; color: #00a8ff; padding: 8px 15px; border-radius: 8px; font-size: 11px; cursor: pointer; font-weight: bold;">دخول المشرفين</button>
-        </div>
-    </div>
-
-    <div id="loginOverlay" class="login-overlay" style="display:none;">
+    <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
             <h2>مرحباً بك في ARAB9CARD</h2>
             <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني (gmail.com)...">
@@ -569,7 +551,7 @@
                 <div class="card-wrapper" onclick="openCodeOrderModal('Uc Voucher 40500', 504.530)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🔑</div><div class="card-name-inside">40500 UC</div></div><div class="card-name-outside">Uc Voucher 40500</div><div class="card-price-outside">$ 504.530</div></div>
             `;
             document.getElementById('minecraftGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 3500 كوينز ماين كرافت', 12.666)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">⛏️️</div><div class="card-name-inside">3500 كوينز</div></div><div class="card-name-outside">كود 3500 كوينز</div><div class="card-price-outside">$ 12.666</div></div>
+                <div class="card-wrapper" onclick="openCodeOrderModal('كود 3500 كوينز ماين كرافت', 12.666)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">⛏️</div><div class="card-name-inside">3500 كوينز</div></div><div class="card-name-outside">كود 3500 كوينز</div><div class="card-price-outside">$ 12.666</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود 1720 كوينز ماين كرافت', 6.333)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">⛏️</div><div class="card-name-inside">1720 كوينز</div></div><div class="card-name-outside">كود 1720 كوينز</div><div class="card-price-outside">$ 6.333</div></div>
             `;
             document.getElementById('robot1Grid').innerHTML = `
@@ -605,7 +587,7 @@
             document.getElementById('companyCodesGrid').innerHTML = `
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود سكن الباندا', 14.420)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">سكن الباندا</div></div><div class="card-name-outside">سكن الباندا</div><div class="card-price-outside">$ 14.420</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن الابيض', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن الابيض</div></div><div class="card-name-outside">السكن الابيض</div><div class="card-price-outside">$ 10.815</div></div>
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود الرقصة', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷</div><div class="card-name-inside">الرقصة</div></div><div class="card-name-outside">الرقصة</div><div class="card-price-outside">$ 10.815</div></div>
+                <div class="card-wrapper" onclick="openCodeOrderModal('كود الرقصة', 10.815)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️️</div><div class="card-name-inside">الرقصة</div></div><div class="card-name-outside">الرقصة</div><div class="card-price-outside">$ 10.815</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السكن', 13.390)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السكن</div></div><div class="card-name-outside">السكن</div><div class="card-price-outside">$ 13.390</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود السيارة', 3.180)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">السيارة</div></div><div class="card-name-outside">السيارة</div><div class="card-price-outside">$ 3.180</div></div>
                 <div class="card-wrapper" onclick="openCodeOrderModal('كود المسدس', 17.510)"><div class="card-box"><div class="card-circle" style="color: #00a8ff;">🏷️</div><div class="card-name-inside">المسدس</div></div><div class="card-name-outside">المسدس</div><div class="card-price-outside">$ 17.510</div></div>
@@ -632,11 +614,6 @@
                 });
             }
         };
-
-        // دالة مخصصة لتمكين المشرف من الدخول حتى أثناء وضع الصيانة
-        function checkAdminMaintenanceEntry() {
-            openAdminLogin();
-        }
 
         function sendSupportMessage() {
             let input = document.getElementById('chatInputBox');
@@ -697,7 +674,7 @@
             localStorage.setItem("userEmail", email); 
             currentUserEmail = email;
             let overlay = document.getElementById("loginOverlay");
-            if(overlay) overlay.style.display = 'none'; 
+            if(overlay) overlay.remove(); 
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
         }
 
@@ -711,7 +688,7 @@
             localStorage.setItem("userEmail", email);
             currentUserEmail = email;
             let overlay = document.getElementById("loginOverlay");
-            if(overlay) overlay.style.display = 'none';
+            if(overlay) overlay.remove();
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             alert("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
@@ -932,7 +909,7 @@
         function submitCodeOrder() {
             let qty = parseInt(document.getElementById('codeQuantity').value) || 1;
             let totalPrice = currentCodeProduct.price * qty;
-            if(userBalance < totalPrice) { alert("⚠ رصيدك غير كافٍ."); return; }
+            if(userBalance < totalPrice) { alert("⚠️️ رصيدك غير كافٍ."); return; }
             userBalance -= totalPrice; updateUserBalanceUI();
             db.collection("orders").add({ product: currentCodeProduct.title + ` (العدد: ${qty})`, price: totalPrice, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { alert("🚀 تم تسجيل طلبك وإرساله للإدارة!"); closeCodeOrderModal(); });
         }
@@ -979,12 +956,8 @@
                 document.getElementById('adminLoginModal').style.display = 'none'; 
                 document.getElementById('adminPasswordInput').value = ''; 
                 
-                // إخفاء نافذة الصيانة عند تسجيل دخول الأدمن بنجاح لتتمكن من فحص الموقع وتعديله
-                let maintenanceEl = document.getElementById('maintenanceOverlay');
-                if (maintenanceEl) maintenanceEl.style.display = 'none';
-
                 let overlay = document.getElementById('loginOverlay');
-                if (overlay) overlay.style.display = 'none';
+                if (overlay) overlay.remove();
 
                 currentUserEmail = "admin@arab9card.com";
                 localStorage.setItem("userEmail", currentUserEmail);
