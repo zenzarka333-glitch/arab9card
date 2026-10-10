@@ -109,7 +109,8 @@
         .pf-input::placeholder { color: #94a3b8; }
         .pf-btn-submit { background-color: #10b981; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
-        #adminDashboardPage { background-color: #022c22; min-height: 100vh; width: 100%; box-sizing: border-box; }
+        /* تعديل لوحة التحكم لتدعم التمرير بالكامل وعدم قص محتوى المستخدمين */
+        #adminDashboardPage { background-color: #022c22; min-height: 100vh; height: 100vh; overflow-y: auto; width: 100%; box-sizing: border-box; padding-bottom: 80px; }
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; color: white; box-sizing: border-box; width: 100%; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #064e3b; color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid #10b981; }
         .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -446,7 +447,7 @@
         </div>
     </div>
     
-    <!-- نافذة تعديل المنتج من لوحة التحكم -->
+    <!-- نافذة تعديل المنتج من لوحة التحكم القائمة المنسدلة للصور والأيقونات -->
     <div id="editProductModal" class="modal">
         <div class="modal-content" style="max-width: 380px; text-align: right;">
             <h3 style="color:#34d399; margin-top:0;">تعديل المنتج</h3>
@@ -471,8 +472,23 @@
                 <option value="companyCodesGrid">اكواد شركة فري فاير</option>
                 <option value="ffEuropeGrid">فري فاير أوروبا</option>
             </select>
-            <label style="font-size:12px; color:#064e3b;">رابط الصورة المصغرة (أو رمز)</label>
-            <input type="text" id="editProductImg" placeholder="رابط صورة أو اختصار مثل FF">
+            <label style="font-size:12px; color:#064e3b;">اختر أصل/صورة المنتج المتوفرة</label>
+            <select id="editProductImg">
+                <option value="🎮">🎮 لعبة عامة</option>
+                <option value="🔥">🔥 الأكثر مبيعاً</option>
+                <option value="💎">💎 جواهر / ألماس</option>
+                <option value="👑">👑 عضويات / VIP</option>
+                <option value="📱">📱 اتصالات / رصيد</option>
+                <option value="🔑">🔑 أكواد / كروت</option>
+                <option value="🤖">🤖 روبوت / آلي</option>
+                <option value="🏷️">🏷️ بطاقات وشحنات</option>
+                <option value="📦">📦 حزمة / باقة</option>
+                <option value="🇪🇺">🇪🇺 سيرفر أوروبي</option>
+                <option value="FF">FF - فري فاير نصي</option>
+                <option value="PUBG">PUBG - ببجي نصي</option>
+                <option value="ZAIN">ZAIN - زين نصي</option>
+                <option value="ORANGE">ORANGE - اورنج نصي</option>
+            </select>
             <div class="modal-buttons">
                 <button class="buy-action-btn" onclick="saveEditedProduct()">حفظ</button>
                 <button class="cancel-action-btn" onclick="document.getElementById('editProductModal').style.display='none'">إلغاء</button>
@@ -648,7 +664,7 @@
         const countryFlags = {
             '963': '🇸🇾', '964': '🇮🇶', '966': '🇸🇦', '971': '🇦🇪', '20': '🇪🇬',  
             '961': '🇱🇧', '962': '🇯🇴', '965': '🇰🇼', '974': '🇶🇦', '973': '🇧🇭', 
-            '968': '🇴🇲', '967': '🇾🇪', '212': '🇲🇦', '213': '🇩🇿', '216': '🇹🇳', 
+            '968': '🇴🇲', '967': '🇾🇪', '212': '🇲🇦', '213': '🇩ℤ', '216': '🇹🇳', 
             '249': '🇸🇩', '972': '🇵🇸', '90': '🇹🇷',  '1': '🇺🇸',   '49': '🇩🇪',  
             '7': '🇷🇺',   '91': '🇮🇳',  '86': '🇨🇳',  '82': '🇰🇷',  '850': '🇰🇵', '81': '🇯🇵'   
         };
@@ -659,7 +675,6 @@
             if (countryFlags[val]) { flagSpan.innerText = countryFlags[val]; } else { flagSpan.innerText = '🌐'; }
         }
 
-        /* طرق الدفع اليدوية والأوتوماتيكية المحدثة */
         const paymentMethods = [
             { name: "شام كاش دولار", symbol: "Z", address: "fd66709efc3e98993f92370ef6a4cb6c", isAuto: false },
             { name: "آسيا سيل العراق", symbol: "A", address: "07756752890", isAuto: false },
@@ -688,7 +703,6 @@
             showPage('searchResultsPage');
         }
 
-        /* جلب واستماع البيانات من فايربيس */
         db.collection("coupons").onSnapshot((snapshot) => {
             availableCoupons = [];
             snapshot.forEach((doc) => { availableCoupons.push({ id: doc.id, ...doc.data() }); });
@@ -921,7 +935,6 @@
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
-        /* إنشاء وسرد كشف الحساب المالي المفصل */
         function showTransactionsHistoryPage() {
             let myDeposits = balanceRequests.filter(r => r.userEmail === currentUserEmail && r.status === 'approved');
             let myPurchases = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
@@ -1221,7 +1234,7 @@
             let title = document.getElementById('newProdTitle').value.trim();
             let price = parseFloat(document.getElementById('newProdPrice').value);
             let category = document.getElementById('newProdCat').value;
-            let img = document.getElementById('newProdImg').value.trim();
+            let img = document.getElementById('newProdImgSelect').value;
 
             if (!title || isNaN(price) || price < 0) { showToast('⚠️ يرجى إدخال اسم المنتج والسعر بشكل صحيح!'); return; }
 
@@ -1229,7 +1242,6 @@
                 showToast('✅ تم إضافة المنتج بنجاح!');
                 document.getElementById('newProdTitle').value = '';
                 document.getElementById('newProdPrice').value = '';
-                document.getElementById('newProdImg').value = '';
             });
         }
 
@@ -1244,7 +1256,7 @@
             document.getElementById('editProductTitle').value = title;
             document.getElementById('editProductPrice').value = price;
             document.getElementById('editProductCat').value = category;
-            document.getElementById('editProductImg').value = img || '';
+            document.getElementById('editProductImg').value = img || '🎮';
             document.getElementById('editProductModal').style.display = 'flex';
         }
 
@@ -1253,7 +1265,7 @@
             let title = document.getElementById('editProductTitle').value.trim();
             let price = parseFloat(document.getElementById('editProductPrice').value);
             let category = document.getElementById('editProductCat').value;
-            let img = document.getElementById('editProductImg').value.trim();
+            let img = document.getElementById('editProductImg').value;
 
             if (!title || isNaN(price)) { showToast('⚠️ بيانات غير صحيحة!'); return; }
 
@@ -1306,7 +1318,6 @@
             if (document.getElementById('statApprovedOrders')) document.getElementById('statApprovedOrders').innerText = gameOrders.filter(o => o.status === 'approved').length;
             if (document.getElementById('statPendingOrders')) document.getElementById('statPendingOrders').innerText = gameOrders.filter(o => o.status === 'pending').length;
 
-            // طلبات الرصيد
             let balHtml = '';
             [...balanceRequests].sort((a,b)=>(a.numericId||0)-(b.numericId||0)).forEach(req => {
                 let receipt = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank"><img src="${req.receiptUrl}" style="max-width:100px; border-radius:5px;" /></a></div>` : '';
@@ -1316,7 +1327,6 @@
             });
             document.getElementById('adminBalanceSection').innerHTML = balHtml || '<p style="text-align:center;">لا توجد طلبات رصيد معلقة</p>';
 
-            // طلبات الألعاب
             let ordHtml = '';
             gameOrders.forEach(req => {
                 if(req.status === 'pending') {
@@ -1325,7 +1335,6 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
-            // إدارة المنتجات
             let prodHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة منتج جديد 📦</h3>
@@ -1346,7 +1355,23 @@
                         <option value="companyCodesGrid">اكواد شركة فري فاير</option>
                         <option value="ffEuropeGrid">فري فاير أوروبا</option>
                     </select>
-                    <input type="text" id="newProdImg" placeholder="رابط الصورة المصغرة أو رمز..." style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">اختر أصل/صورة المنتج المتوفرة:</label>
+                    <select id="newProdImgSelect" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <option value="🎮">🎮 لعبة عامة</option>
+                        <option value="🔥">🔥 الأكثر مبيعاً</option>
+                        <option value="💎">💎 جواهر / ألماس</option>
+                        <option value="👑">👑 عضويات / VIP</option>
+                        <option value="📱">📱 اتصالات / رصيد</option>
+                        <option value="🔑">🔑 أكواد / كروت</option>
+                        <option value="🤖">🤖 روبوت / آلي</option>
+                        <option value="🏷️">🏷️ بطاقات وشحنات</option>
+                        <option value="📦">📦 حزمة / باقة</option>
+                        <option value="🇪🇺">🇪🇺 سيرفر أوروبي</option>
+                        <option value="FF">FF - فري فاير نصي</option>
+                        <option value="PUBG">PUBG - ببجي نصي</option>
+                        <option value="ZAIN">ZAIN - زين نصي</option>
+                        <option value="ORANGE">ORANGE - اورنج نصي</option>
+                    </select>
                     <button onclick="adminAddProduct()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
                 </div>
                 <h4 style="color:#34d399;">المنتجات الحالية:</h4>
@@ -1365,14 +1390,12 @@
             }
             document.getElementById('adminProductsSection').innerHTML = prodHtml;
 
-            // الكوبونات
             let cpnHtml = `<div class="request-card"><h3 style="margin-top:0; color:#34d399;">إنشاء كوبون</h3><input type="text" id="newCouponCode" placeholder="الكود" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><input type="number" id="newCouponDiscount" placeholder="الخصم $" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة</button></div>`;
             availableCoupons.forEach(c => {
                 cpnHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> ($${c.discount})</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
             });
             document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
 
-            // الدعم الفني
             let supHtml = '';
             let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
             userEmails.forEach(user => {
@@ -1384,7 +1407,6 @@
             });
             document.getElementById('adminSupportSection').innerHTML = supHtml || '<p style="text-align:center;">لا توجد رسائل دعم</p>';
 
-            // إدارة المستخدمين
             let allEmails = new Set();
             gameOrders.forEach(o => { if(o.userEmail) allEmails.add(o.userEmail); });
             balanceRequests.forEach(d => { if(d.userEmail) allEmails.add(d.userEmail); });
