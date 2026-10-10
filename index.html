@@ -447,7 +447,7 @@
         </div>
     </div>
     
-    <!-- نافذة تعديل المنتج من لوحة التحكم القائمة المنسدلة للصور والأيقونات -->
+    <!-- نافذة تعديل المنتج من لوحة التحكم مع اختيار رفع صورة من الجهاز -->
     <div id="editProductModal" class="modal">
         <div class="modal-content" style="max-width: 380px; text-align: right;">
             <h3 style="color:#34d399; margin-top:0;">تعديل المنتج</h3>
@@ -472,23 +472,8 @@
                 <option value="companyCodesGrid">اكواد شركة فري فاير</option>
                 <option value="ffEuropeGrid">فري فاير أوروبا</option>
             </select>
-            <label style="font-size:12px; color:#064e3b;">اختر أصل/صورة المنتج المتوفرة</label>
-            <select id="editProductImg">
-                <option value="🎮">🎮 لعبة عامة</option>
-                <option value="🔥">🔥 الأكثر مبيعاً</option>
-                <option value="💎">💎 جواهر / ألماس</option>
-                <option value="👑">👑 عضويات / VIP</option>
-                <option value="📱">📱 اتصالات / رصيد</option>
-                <option value="🔑">🔑 أكواد / كروت</option>
-                <option value="🤖">🤖 روبوت / آلي</option>
-                <option value="🏷️">🏷️ بطاقات وشحنات</option>
-                <option value="📦">📦 حزمة / باقة</option>
-                <option value="🇪🇺">🇪🇺 سيرفر أوروبي</option>
-                <option value="FF">FF - فري فاير نصي</option>
-                <option value="PUBG">PUBG - ببجي نصي</option>
-                <option value="ZAIN">ZAIN - زين نصي</option>
-                <option value="ORANGE">ORANGE - اورنج نصي</option>
-            </select>
+            <label style="font-size:12px; color:#064e3b;">رفع صورة جديدة من الجهاز</label>
+            <input type="file" id="editProductImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
             <div class="modal-buttons">
                 <button class="buy-action-btn" onclick="saveEditedProduct()">حفظ</button>
                 <button class="cancel-action-btn" onclick="document.getElementById('editProductModal').style.display='none'">إلغاء</button>
@@ -651,6 +636,7 @@
         let currentSubLinkProduct = { title: '', price: 0 };
         let currentBooyahProduct = { title: '', price: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
+        let currentEditProductImgUrl = "";
 
         function showToast(message) {
             let container = document.getElementById('toastContainer');
@@ -695,7 +681,7 @@
             let html = filtered.length === 0 ? '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد نتائج مطابقة لبحثك ❌</p>' : '';
             
             filtered.forEach(item => {
-                let imgContent = item.img && item.img.startsWith('http') ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
+                let imgContent = item.img && (item.img.startsWith('http') || item.img.startsWith('data:image')) ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
                 html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">متجر</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">$ ${item.price.toFixed(3)}</div></div>`;
             });
 
@@ -770,7 +756,7 @@
             let ffEuropeHtml = '';
 
             storeProducts.forEach(p => {
-                let imgContent = p.img && p.img.startsWith('http') ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
                 let cardHtml = `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div><div class="card-name-outside">${p.title}</div><div class="card-price-outside">$ ${p.price.toFixed(3)}</div></div>`;
 
                 if (p.category === 'best') bestSellersHtml += cardHtml;
@@ -1234,15 +1220,26 @@
             let title = document.getElementById('newProdTitle').value.trim();
             let price = parseFloat(document.getElementById('newProdPrice').value);
             let category = document.getElementById('newProdCat').value;
-            let img = document.getElementById('newProdImgSelect').value;
+            let fileInput = document.getElementById('newProdImgFile');
 
             if (!title || isNaN(price) || price < 0) { showToast('⚠️ يرجى إدخال اسم المنتج والسعر بشكل صحيح!'); return; }
 
-            db.collection("products").add({ title, price, category, img }).then(() => {
-                showToast('✅ تم إضافة المنتج بنجاح!');
-                document.getElementById('newProdTitle').value = '';
-                document.getElementById('newProdPrice').value = '';
-            });
+            let saveProduct = function(imgData) {
+                db.collection("products").add({ title, price, category, img: imgData || '🎮' }).then(() => {
+                    showToast('✅ تم إضافة المنتج بنجاح!');
+                    document.getElementById('newProdTitle').value = '';
+                    document.getElementById('newProdPrice').value = '';
+                    document.getElementById('newProdImgFile').value = '';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveProduct(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveProduct('🎮');
+            }
         }
 
         function adminDeleteProduct(id) {
@@ -1256,7 +1253,8 @@
             document.getElementById('editProductTitle').value = title;
             document.getElementById('editProductPrice').value = price;
             document.getElementById('editProductCat').value = category;
-            document.getElementById('editProductImg').value = img || '🎮';
+            currentEditProductImgUrl = img || '🎮';
+            document.getElementById('editProductImgFile').value = '';
             document.getElementById('editProductModal').style.display = 'flex';
         }
 
@@ -1265,14 +1263,24 @@
             let title = document.getElementById('editProductTitle').value.trim();
             let price = parseFloat(document.getElementById('editProductPrice').value);
             let category = document.getElementById('editProductCat').value;
-            let img = document.getElementById('editProductImg').value;
+            let fileInput = document.getElementById('editProductImgFile');
 
             if (!title || isNaN(price)) { showToast('⚠️ بيانات غير صحيحة!'); return; }
 
-            db.collection("products").doc(id).update({ title, price, category, img }).then(() => {
-                showToast('✅ تم تعديل المنتج بنجاح!');
-                document.getElementById('editProductModal').style.display = 'none';
-            });
+            let updateProduct = function(imgData) {
+                db.collection("products").doc(id).update({ title, price, category, img: imgData }).then(() => {
+                    showToast('✅ تم تعديل المنتج بنجاح!');
+                    document.getElementById('editProductModal').style.display = 'none';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { updateProduct(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                updateProduct(currentEditProductImgUrl);
+            }
         }
 
         function adminAddCoupon() {
@@ -1355,23 +1363,8 @@
                         <option value="companyCodesGrid">اكواد شركة فري فاير</option>
                         <option value="ffEuropeGrid">فري فاير أوروبا</option>
                     </select>
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">اختر أصل/صورة المنتج المتوفرة:</label>
-                    <select id="newProdImgSelect" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        <option value="🎮">🎮 لعبة عامة</option>
-                        <option value="🔥">🔥 الأكثر مبيعاً</option>
-                        <option value="💎">💎 جواهر / ألماس</option>
-                        <option value="👑">👑 عضويات / VIP</option>
-                        <option value="📱">📱 اتصالات / رصيد</option>
-                        <option value="🔑">🔑 أكواد / كروت</option>
-                        <option value="🤖">🤖 روبوت / آلي</option>
-                        <option value="🏷️">🏷️ بطاقات وشحنات</option>
-                        <option value="📦">📦 حزمة / باقة</option>
-                        <option value="🇪🇺">🇪🇺 سيرفر أوروبي</option>
-                        <option value="FF">FF - فري فاير نصي</option>
-                        <option value="PUBG">PUBG - ببجي نصي</option>
-                        <option value="ZAIN">ZAIN - زين نصي</option>
-                        <option value="ORANGE">ORANGE - اورنج نصي</option>
-                    </select>
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">رفع صورة المنتج من الجهاز:</label>
+                    <input type="file" id="newProdImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px; font-size:12px;">
                     <button onclick="adminAddProduct()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
                 </div>
                 <h4 style="color:#34d399;">المنتجات الحالية:</h4>
