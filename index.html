@@ -56,7 +56,8 @@
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 10px; padding: 20px 15px; direction: rtl; }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .card-box { background: linear-gradient(135deg, #022c22, #064e3b); width: 100%; aspect-ratio: 1 / 1.1; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; box-shadow: 0 4px 8px rgba(0,0,0,0.15); border: 1px solid #10b981; position: relative; }
-        .card-circle { width: 55%; aspect-ratio: 1 / 1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; font-weight: bold; margin-bottom: 8px; border: 2px solid #10b981; background-color: #022c22; color: #34d399; text-align: center; }
+        .card-circle { width: 55%; aspect-ratio: 1 / 1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; font-weight: bold; margin-bottom: 8px; border: 2px solid #10b981; background-color: #022c22; color: #34d399; text-align: center; overflow: hidden; }
+        .card-circle img { width: 100%; height: 100%; object-fit: cover; }
         .card-name-inside { color: #34d399; font-size: 9px; font-weight: bold; text-align: center; }
         .card-name-outside { margin-top: 6px; font-size: 10px; font-weight: bold; color: #34d399; text-align: center; }
         .card-price-outside { margin-top: 2px; font-size: 11px; font-weight: bold; color: #34d399; text-align: center; }
@@ -80,7 +81,7 @@
         .buy-action-btn { flex: 1; background-color: #10b981; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .cancel-action-btn { flex: 1; background-color: #ffffff; color: #f87171; border: 1px solid #f87171; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #telecomPage, #egyptTelecomPage, #jordanTelecomPage, #zainSubPage, #orangeSubPage, #zainGsmPage, #zainDataPage, #zainMixPage, #orangeCallPage, #orangeInternetPage, #orangeNassPage, #orangeWinkPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage { display: none; }
+        #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #telecomPage, #egyptTelecomPage, #jordanTelecomPage, #zainSubPage, #orangeSubPage, #zainGsmPage, #zainDataPage, #zainMixPage, #orangeCallPage, #orangeInternetPage, #orangeNassPage, #orangeWinkPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage { display: none; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 44, 34, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background-color: #064e3b; color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; border: 2px solid #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
@@ -91,7 +92,7 @@
         .btn-google img { width: 20px; }
         
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #022c22; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); text-align: right; border-left: 2px solid #10b981; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #34d399; display: block; border-bottom: 1px solid rgba(16, 185, 129, 0.2); font-weight: bold; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 16px; color: #34d399; display: block; border-bottom: 1px solid rgba(16, 185, 129, 0.2); font-weight: bold; }
         .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; cursor: pointer; color: white; }
 
         .balance-page-container { padding: 15px; }
@@ -108,30 +109,36 @@
         .pf-input::placeholder { color: #94a3b8; }
         .pf-btn-submit { background-color: #10b981; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
-        .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; min-height: 100vh; color: white; }
+        #adminDashboardPage { background-color: #022c22; min-height: 100vh; width: 100%; box-sizing: border-box; }
+        .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; color: white; box-sizing: border-box; width: 100%; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #064e3b; color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid #10b981; }
         .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
         .admin-tab { flex: 1; min-width: 70px; text-align: center; padding: 10px 5px; background: #064e3b; border-radius: 8px; font-weight: bold; cursor: pointer; color: #34d399; font-size: 11px; border: 1px solid #10b981; }
         .admin-tab.active { background: #10b981; color: white; }
-        .request-card { background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .request-card { background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid #10b981; border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box; }
         .request-card.approved { border-right-color: #34d399; opacity: 0.95; }
         .request-card.rejected { border-right-color: #f87171; opacity: 0.95; }
         .req-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-acc { background: #10b981; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #ef4444; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        .tx-badge { background: #022c22; color: #34d399; padding: 6px 10px; border-radius: 6px; font-weight: bold; font-size: 13px; display: inline-block; margin-top: 5px; border: 1px solid #10b981; }
 
         .stat-card { background: #064e3b; border: 1px solid #10b981; border-radius: 10px; padding: 15px; text-align: center; flex: 1; }
         .stat-num { font-size: 20px; font-weight: 900; color: #34d399; }
         .stat-title { font-size: 11px; color: #a7f3d0; margin-top: 4px; }
+
+        /* أنماط كشف الحساب */
+        .statement-card { background: #064e3b; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid #10b981; font-size: 13px; }
+        .st-header { display: flex; justify-content: space-between; font-weight: bold; color: #34d399; margin-bottom: 5px; }
+        .st-plus { color: #34d399; }
+        .st-minus { color: #f87171; }
     </style>
 </head>
 <body>
 
     <div id="toastContainer"></div>
 
-    <!-- شريط الإشعار عند الشراء الفعلي فقط -->
+    <!-- شريط الإشعار المباشر للعمليات عند الشراء الفعلي فقط -->
     <div id="liveSalesBanner">
         <span style="font-size: 18px;">🛒</span>
         <span id="liveSalesText"></span>
@@ -170,7 +177,10 @@
         <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
         <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
         <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
+        <a href="#" onclick="showTransactionsHistoryPage(); closeSidebar()">📊 كشف الحساب السجل المالي</a>
         <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
+        <a href="#" onclick="showPage('aboutPage'); closeSidebar()">ℹ️ من نحن (عن المتجر)</a>
+        <a href="#" onclick="showPage('termsPage'); closeSidebar()">📜 الشروط والأحكام</a>
         <a href="#" onclick="showPage('supportPage'); closeSidebar()">🎧 الدعم الفني</a>
         <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: #34d399;">⚙️ لوحة التحكم (Admin)</a>
         <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 20px;">🚪 تسجيل خروج</a>
@@ -204,7 +214,7 @@
         </div>
 
         <div class="search-bar-container">
-            <input type="text" id="globalSearchInput" class="search-input" placeholder="🔍 ابحث عن لعبة أو فئة أو منتج (مثال: ببجي، زين، فري فاير)..." oninput="handleSearch(this.value)">
+            <input type="text" id="globalSearchInput" class="search-input" placeholder="🔍 ابحث عن لعبة أو فئة أو منتج..." oninput="handleSearch(this.value)">
         </div>
     </div>
 
@@ -221,6 +231,36 @@
             <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid #10b981; border-radius: 20px; outline: none; font-size: 14px; text-align: right; background: #064e3b; color: white;">
             <button onclick="sendSupportMessage()" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">إرسال</button>
         </div>
+    </div>
+
+    <!-- صفحة من نحن -->
+    <div id="aboutPage">
+        <div class="page-title">عن ARAB9CARD ℹ️</div>
+        <div style="padding: 20px; direction: rtl; background: #022c22; color: white; margin: 15px; border-radius: 15px; border: 1px solid #10b981; line-height: 1.8; font-size: 14px;">
+            <h3 style="color:#34d399;">مرحباً بكم في متجر ARAB9CARD</h3>
+            <p>نحن المنصة العربية الرائدة المتخصصة في تقديم خدمات شحن الألعاب الكبرى بطريقة آمنة وسريعة وسلسة، بالإضافة إلى توفير بطاقات الاتصالات الدولية وشحن الرصيد بأعلى جودة وأفضل الأسعار لجميع التجار والزبائن الأفراد.</p>
+            <p>هدفنا الأساسي هو ضمان تجربة تسوق رقمية آمنة 100% مع دعم فني متواصل وحلول دفع مرنة تتناسب مع احتياجات جميع المستخدمين في الوطن العربي.</p>
+        </div>
+    </div>
+
+    <!-- صفحة الشروط والأحكام -->
+    <div id="termsPage">
+        <div class="page-title">الشروط والأحكام 📜</div>
+        <div style="padding: 20px; direction: rtl; background: #022c22; color: white; margin: 15px; border-radius: 15px; border: 1px solid #10b981; line-height: 1.8; font-size: 13px;">
+            <h3 style="color:#34d399;">سياسة وشروط استخدام المتجر</h3>
+            <ol>
+                <li>يرجى التأكد دائماً من كتابة المعرف (Player ID) بشكل صحيح أثناء عملية الطلب والشراء.</li>
+                <li>تتم معالجة جميع الطلبات بسرعة، وبمجرد الشحن واكتمال الطلب لا يمكن إلغاؤه أو استرجاعه.</li>
+                <li>في حال إلغاء الطلب من قبل المستخدم قبل تنفيذه، يتم خصم رسوم إلغاء قدرها 5% واسترجاع الباقي إلى الرصيد المالي في حسابك بالمتجر.</li>
+                <li>يمنع استخدام أي وسيلة تحويل غير قانونية، وتتحمل الإدارة مسؤولية التحقق من صحة الإيصالات المقدمة.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- صفحة كشف الحساب السجل المالي المفصل -->
+    <div id="transactionsHistoryPage">
+        <div class="page-title">📊 كشف الحساب المالي المفصل</div>
+        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="statementListContainer"></div>
     </div>
 
     <div id="homePage" style="display: block;">
@@ -256,14 +296,15 @@
         </div>
 
         <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 10px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
-        <div class="grid-container" style="padding-top: 5px;">
-            <div class="card-wrapper" onclick="openOrderModal('Free Fire 110 جوهرة', 1.03)"><div class="card-box"><div class="card-circle" style="color: #34d399;">FF</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة فري فاير</div><div class="card-price-outside">$ 1.03</div></div>
-            <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 60 UC', 0.976)"><div class="card-box"><div class="card-circle" style="color: #34d399;">PUBG</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">ببجي 60 شدة</div><div class="card-price-outside">$ 0.976</div></div>
-            <div class="card-wrapper" onclick="openOrderModal('زين اتصال 1 دينار', 2.373)"><div class="card-box"><div class="card-circle" style="color: #34d399;">ZAIN</div><div class="card-name-inside">1 دينار</div></div><div class="card-name-outside">زين اتصال 1 د</div><div class="card-price-outside">$ 2.373</div></div>
-        </div>
+        <div class="grid-container" id="dynamicBestSellersGrid" style="padding-top: 5px;"></div>
     </div>
 
-    <div id="addBalancePage"><div class="balance-page-container"><div class="payment-grid" id="paymentMethodsGrid"></div></div></div>
+    <div id="addBalancePage">
+        <div class="balance-page-container">
+            <div class="page-title" style="font-size: 15px; margin-top:0;">💳 طرُق الدفع والشحن المتاحة</div>
+            <div class="payment-grid" id="paymentMethodsGrid"></div>
+        </div>
+    </div>
     <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
 
     <div id="gamesPage">
@@ -356,7 +397,7 @@
     <div id="companyCodesPage"><div class="page-title">اكواد شركة فري فاير</div><div class="grid-container" id="companyCodesGrid"></div></div>
     <div id="ffEuropePage"><div class="page-title">فري فاير أوروبا</div><div class="grid-container" id="ffEuropeGrid"></div></div>
 
-    <!-- نوافذ الطلب -->
+    <!-- نافذة الطلب -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -405,6 +446,40 @@
         </div>
     </div>
     
+    <!-- نافذة تعديل المنتج من لوحة التحكم -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content" style="max-width: 380px; text-align: right;">
+            <h3 style="color:#34d399; margin-top:0;">تعديل المنتج</h3>
+            <input type="hidden" id="editProductId">
+            <label style="font-size:12px; color:#064e3b;">اسم المنتج</label>
+            <input type="text" id="editProductTitle">
+            <label style="font-size:12px; color:#064e3b;">السعر ($)</label>
+            <input type="number" step="0.001" id="editProductPrice">
+            <label style="font-size:12px; color:#064e3b;">القسم</label>
+            <select id="editProductCat">
+                <option value="best">الأكثر مبيعاً</option>
+                <option value="zainGsmGrid">Zain GSM</option>
+                <option value="zainDataGrid">Zain Data</option>
+                <option value="zainMixGrid">Zain Mix</option>
+                <option value="pubgRobotGrid">ببجي روبوت</option>
+                <option value="pubgCodesGrid">ببجي أكواد</option>
+                <option value="minecraftGrid">ماين كرافت</option>
+                <option value="robot1Grid">فري فاير روبوت 1</option>
+                <option value="subLinkGemsGrid">جواهر ربط فرعي</option>
+                <option value="membershipsGrid">عضويات</option>
+                <option value="ffCodesGrid">فري فاير أكواد</option>
+                <option value="companyCodesGrid">اكواد شركة فري فاير</option>
+                <option value="ffEuropeGrid">فري فاير أوروبا</option>
+            </select>
+            <label style="font-size:12px; color:#064e3b;">رابط الصورة المصغرة (أو رمز)</label>
+            <input type="text" id="editProductImg" placeholder="رابط صورة أو اختصار مثل FF">
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="saveEditedProduct()">حفظ</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('editProductModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <!-- نافذة الربط الفرعي والعضويات -->
     <div id="subLinkModal" class="modal">
         <div class="modal-content" style="max-width: 380px; text-align: right;">
@@ -518,6 +593,7 @@
             <div class="admin-tabs">
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
                 <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
                 <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
                 <div class="admin-tab" id="tabUsers" onclick="switchAdminTab('users')">إدارة المستخدمين 👥</div>
@@ -525,6 +601,7 @@
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
+            <div id="adminProductsSection" style="display:none;"></div>
             <div id="adminCouponsSection" style="display:none;"></div>
             <div id="adminSupportSection" style="display:none;"></div>
             <div id="adminUsersSection" style="display:none;"></div>
@@ -551,6 +628,7 @@
         let supportMessages = [];
         let availableCoupons = [];
         let manualUserTiers = {};
+        let storeProducts = [];
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentCodeProduct = { title: '', price: 0, originalPrice: 0 };
@@ -581,25 +659,13 @@
             if (countryFlags[val]) { flagSpan.innerText = countryFlags[val]; } else { flagSpan.innerText = '🌐'; }
         }
 
+        /* طرق الدفع اليدوية والأوتوماتيكية المحدثة */
         const paymentMethods = [
-            { name: "شام كاش دولار", symbol: "Z", address: "fd66709efc3e98993f92370ef6a4cb6c" },
-            { name: "آسيا سيل العراق", symbol: "A", address: "07756752890" },
-            { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960" }
-        ];
-
-        const allProductsList = [
-            { title: 'زين اتصال 5 دينار', price: 11.122, category: 'بطاقات زين اتصال' },
-            { title: 'زين اتصال 3 دينار', price: 6.673, category: 'بطاقات زين اتصال' },
-            { title: 'زين اتصال 1 دينار', price: 2.373, category: 'بطاقات زين اتصال' },
-            { title: 'PUBG Mobile 60 UC', price: 0.976, category: 'ببجي روبوت' },
-            { title: 'PUBG Mobile 325 UC', price: 4.255, category: 'ببجي روبوت' },
-            { title: 'PUBG Mobile 880 UC', price: 9.764, category: 'ببجي روبوت' },
-            { title: 'Free Fire 110 جوهرة', price: 1.03, category: 'فري فاير روبوت 1' },
-            { title: 'Free Fire 231 جوهرة', price: 2.06, category: 'فري فاير روبوت 1' },
-            { title: 'Free Fire 583 جوهرة', price: 5.16, category: 'فري فاير روبوت 1' },
-            { title: 'كود سكن الباندا', price: 14.420, category: 'أكواد فري فاير' },
-            { title: 'كود السكن الابيض', price: 10.815, category: 'أكواد فري فاير' },
-            { title: 'إهداء بويا باس', price: 2.040, category: 'عضويات فري فاير' }
+            { name: "شام كاش دولار", symbol: "Z", address: "fd66709efc3e98993f92370ef6a4cb6c", isAuto: false },
+            { name: "آسيا سيل العراق", symbol: "A", address: "07756752890", isAuto: false },
+            { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960", isAuto: false },
+            { name: "Binance Pay (تلقائي)", symbol: "🟡", address: "ID: 284719284", isAuto: true },
+            { name: "PayPal (دفع مباشر)", symbol: "🅿️", address: "paypal@arab9card.com", isAuto: true }
         ];
 
         function handleSearch(query) {
@@ -610,18 +676,19 @@
                 return;
             }
 
-            let filtered = allProductsList.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            let filtered = storeProducts.filter(p => p.title.toLowerCase().includes(query));
             let html = filtered.length === 0 ? '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد نتائج مطابقة لبحثك ❌</p>' : '';
             
             filtered.forEach(item => {
-                html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle" style="color: #34d399;">🔍</div><div class="card-name-inside">${item.category}</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">$ ${item.price.toFixed(3)}</div></div>`;
+                let imgContent = item.img && item.img.startsWith('http') ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
+                html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">متجر</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">$ ${item.price.toFixed(3)}</div></div>`;
             });
 
             grid.innerHTML = html;
             showPage('searchResultsPage');
         }
 
-        /* جلب واستماع الأكواد والكوبونات */
+        /* جلب واستماع البيانات من فايربيس */
         db.collection("coupons").onSnapshot((snapshot) => {
             availableCoupons = [];
             snapshot.forEach((doc) => { availableCoupons.push({ id: doc.id, ...doc.data() }); });
@@ -666,7 +733,62 @@
             renderMyPayments(); renderAdminData(); calculateUserVIP();
         });
 
-        /* تشغيل شريط الإشعارات الحية: يظهر فقط عند الشراء الفعلي ويختفي بعد 5 ثوانٍ دون تكرار آلي */
+        db.collection("products").onSnapshot((snapshot) => {
+            storeProducts = [];
+            snapshot.forEach((doc) => { storeProducts.push({ id: doc.id, ...doc.data() }); });
+            renderDynamicProducts();
+            renderAdminData();
+        });
+
+        function renderDynamicProducts() {
+            let bestSellersHtml = '';
+            let zainGsmHtml = '';
+            let zainDataHtml = '';
+            let zainMixHtml = '';
+            let pubgRobotHtml = '';
+            let pubgCodesHtml = '';
+            let minecraftHtml = '';
+            let robot1Html = '';
+            let subLinkGemsHtml = '';
+            let membershipsHtml = '';
+            let ffCodesHtml = '';
+            let companyCodesHtml = '';
+            let ffEuropeHtml = '';
+
+            storeProducts.forEach(p => {
+                let imgContent = p.img && p.img.startsWith('http') ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let cardHtml = `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div><div class="card-name-outside">${p.title}</div><div class="card-price-outside">$ ${p.price.toFixed(3)}</div></div>`;
+
+                if (p.category === 'best') bestSellersHtml += cardHtml;
+                if (p.category === 'zainGsmGrid') zainGsmHtml += cardHtml;
+                if (p.category === 'zainDataGrid') zainDataHtml += cardHtml;
+                if (p.category === 'zainMixGrid') zainMixHtml += cardHtml;
+                if (p.category === 'pubgRobotGrid') pubgRobotHtml += cardHtml;
+                if (p.category === 'pubgCodesGrid') pubgCodesHtml += cardHtml;
+                if (p.category === 'minecraftGrid') minecraftHtml += cardHtml;
+                if (p.category === 'robot1Grid') robot1Html += cardHtml;
+                if (p.category === 'subLinkGemsGrid') subLinkGemsHtml += cardHtml;
+                if (p.category === 'membershipsGrid') membershipsHtml += cardHtml;
+                if (p.category === 'ffCodesGrid') ffCodesHtml += cardHtml;
+                if (p.category === 'companyCodesGrid') companyCodesHtml += cardHtml;
+                if (p.category === 'ffEuropeGrid') ffEuropeHtml += cardHtml;
+            });
+
+            if(document.getElementById('dynamicBestSellersGrid')) document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد عروض مضافة حالياً</p>';
+            if(document.getElementById('zainGsmGrid')) document.getElementById('zainGsmGrid').innerHTML = zainGsmHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('zainDataGrid')) document.getElementById('zainDataGrid').innerHTML = zainDataHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('zainMixGrid')) document.getElementById('zainMixGrid').innerHTML = zainMixHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('pubgRobotGrid')) document.getElementById('pubgRobotGrid').innerHTML = pubgRobotHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('pubgCodesGrid')) document.getElementById('pubgCodesGrid').innerHTML = pubgCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('minecraftGrid')) document.getElementById('minecraftGrid').innerHTML = minecraftHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('robot1Grid')) document.getElementById('robot1Grid').innerHTML = robot1Html || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('subLinkGemsGrid')) document.getElementById('subLinkGemsGrid').innerHTML = subLinkGemsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('membershipsGrid')) document.getElementById('membershipsGrid').innerHTML = membershipsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('ffCodesGrid')) document.getElementById('ffCodesGrid').innerHTML = ffCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('companyCodesGrid')) document.getElementById('companyCodesGrid').innerHTML = companyCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if(document.getElementById('ffEuropeGrid')) document.getElementById('ffEuropeGrid').innerHTML = ffEuropeHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+        }
+
         function triggerLiveSalesPopup(email, product) {
             let banner = document.getElementById('liveSalesBanner');
             let textSpan = document.getElementById('liveSalesText');
@@ -686,48 +808,6 @@
             }
             document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#34d399; margin-bottom:2px;">${m.name}</div></div>`).join('');
             
-            document.getElementById('zainGsmGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('زين اتصال 5 دينار', 11.122)"><div class="card-box"><div class="card-circle" style="color: #34d399;">GSM</div><div class="card-name-inside">5 دينار</div></div><div class="card-name-outside">زين اتصال 5 دينار</div><div class="card-price-outside">$ 11.122</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('زين اتصال 3 دينار', 6.673)"><div class="card-box"><div class="card-circle" style="color: #34d399;">GSM</div><div class="card-name-inside">3 دينار</div></div><div class="card-name-outside">زين اتصال 3 دينار</div><div class="card-price-outside">$ 6.673</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('زين اتصال 1 دينار', 2.373)"><div class="card-box"><div class="card-circle" style="color: #34d399;">GSM</div><div class="card-name-inside">1 دينار</div></div><div class="card-name-outside">زين اتصال 1 دينار</div><div class="card-price-outside">$ 2.373</div></div>
-            `;
-            document.getElementById('zainDataGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('زين نت 4 دينار', 7.118)"><div class="card-box"><div class="card-circle" style="color: #34d399;">DATA</div><div class="card-name-inside">4 دينار</div></div><div class="card-name-outside">زين نت 4 دينار</div><div class="card-price-outside">$ 7.118</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('زين نت 3 دينار', 5.339)"><div class="card-box"><div class="card-circle" style="color: #34d399;">DATA</div><div class="card-name-inside">3 دينار</div></div><div class="card-name-outside">زين نت 3 دينار</div><div class="card-price-outside">$ 5.339</div></div>
-            `;
-            document.getElementById('zainMixGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('زين مكس 3\'3', 12.161)"><div class="card-box"><div class="card-circle" style="color: #34d399;">MIX</div><div class="card-name-inside">3'3</div></div><div class="card-name-outside">زين مكس 3'3</div><div class="card-price-outside">$ 12.161</div></div>
-            `;
-            document.getElementById('pubgRobotGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 60 UC', 0.976)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🤖</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">PUBG Mobile 60 UC</div><div class="card-price-outside">$ 0.976</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('PUBG Mobile 325 UC', 4.255)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🤖</div><div class="card-name-inside">325 UC</div></div><div class="card-name-outside">PUBG Mobile 325 UC</div><div class="card-price-outside">$ 4.255</div></div>
-            `;
-            document.getElementById('pubgCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('Uc Voucher 60', 0.965)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🔑</div><div class="card-name-inside">60 UC</div></div><div class="card-name-outside">Uc Voucher 60</div><div class="card-price-outside">$ 0.965</div></div>
-            `;
-            document.getElementById('minecraftGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 3500 كوينز ماين كرافت', 12.666)"><div class="card-box"><div class="card-circle" style="color: #34d399;">⛏️</div><div class="card-name-inside">3500 كوينز</div></div><div class="card-name-outside">كود 3500 كوينز</div><div class="card-price-outside">$ 12.666</div></div>
-            `;
-            document.getElementById('robot1Grid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 110 جوهرة', 1.03)"><div class="card-box"><div class="card-circle" style="color: #34d399;">💎</div><div class="card-name-inside">110 جوهرة</div></div><div class="card-name-outside">110 جوهرة</div><div class="card-price-outside">$ 1.03</div></div>
-                <div class="card-wrapper" onclick="openOrderModal('Free Fire 231 جوهرة', 2.06)"><div class="card-box"><div class="card-circle" style="color: #34d399;">💎</div><div class="card-name-inside">231 جوهرة</div></div><div class="card-name-outside">231 جوهرة</div><div class="card-price-outside">$ 2.06</div></div>
-            `;
-            document.getElementById('subLinkGemsGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openSubLinkModal('ربط فرعي 520 جوهرة', 4.346)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🔗</div><div class="card-name-inside">520 جوهرة</div></div><div class="card-name-outside">520 جوهرة</div><div class="card-price-outside">$ 4.346</div></div>
-            `;
-            document.getElementById('membershipsGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openBooyahModal('إهداء بويا باس', 2.040)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🎁</div><div class="card-name-inside">إهداء بويا باس</div></div><div class="card-name-outside">إهداء بويا باس</div><div class="card-price-outside">$ 2.040</div></div>
-            `;
-            document.getElementById('ffCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود 110 جوهرة', 1.010)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🔑</div><div class="card-name-inside">كود 110 جوهرة</div></div><div class="card-name-outside">كود 110 جوهرة</div><div class="card-price-outside">$ 1.010</div></div>
-            `;
-            document.getElementById('companyCodesGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openCodeOrderModal('كود سكن الباندا', 14.420)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🏷️</div><div class="card-name-inside">سكن الباندا</div></div><div class="card-name-outside">سكن الباندا</div><div class="card-price-outside">$ 14.420</div></div>
-            `;
-            document.getElementById('ffEuropeGrid').innerHTML = `
-                <div class="card-wrapper" onclick="openOrderModal('فري فاير أوروبا 100 جوهرة', 1.062)"><div class="card-box"><div class="card-circle" style="color: #34d399;">🇪🇺</div><div class="card-name-inside">100 جوهرة</div></div><div class="card-name-outside">100 جوهرة</div><div class="card-price-outside">$ 1.062</div></div>
-            `;
-
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
                     client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
@@ -741,14 +821,9 @@
             let text = input.value.trim();
             if (!text) return;
 
-            let msgData = {
-                sender: currentUserEmail,
-                text: text,
-                isAdmin: false,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            db.collection("support_messages").add(msgData).then(() => {
+            db.collection("support_messages").add({
+                sender: currentUserEmail, text: text, isAdmin: false, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
                 input.value = "";
                 if (text.toLowerCase().includes("السلام عليكم") || text.toLowerCase().includes("مرحبا")) {
                     setTimeout(() => {
@@ -771,30 +846,19 @@
                 let border = isBot ? '1px solid #10b981' : 'none';
 
                 html += `<div style="display: flex; justify-content: ${align}; margin-bottom: 8px;">
-                    <div style="background: ${bg}; color: ${color}; padding: 10px 14px; border-radius: 12px; max-width: 75%; font-size: 13px; border: ${border}; box-shadow: 0 1px 4px rgba(0,0,0,0.1); text-align: right;">
-                        ${m.text}
-                    </div>
+                    <div style="background: ${bg}; color: ${color}; padding: 10px 14px; border-radius: 12px; max-width: 75%; font-size: 13px; border: ${border}; text-align: right;">${m.text}</div>
                 </div>`;
             });
             let container = document.getElementById('chatMessagesContainer');
-            if (container) {
-                container.innerHTML = html;
-                container.scrollTop = container.scrollHeight;
-            }
+            if (container) { container.innerHTML = html; container.scrollTop = container.scrollHeight; }
         }
 
         function loginUser() { 
             let email = document.getElementById("userEmailInput").value.trim();
             let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-            if (!emailRegex.test(email)) {
-                showToast("⚠️ يرجى إدخال بريد إلكتروني صالح ينتهي بـ @gmail.com");
-                return;
-            }
-
-            localStorage.setItem("userEmail", email); 
-            currentUserEmail = email;
-            let overlay = document.getElementById("loginOverlay");
-            if(overlay) overlay.style.display = 'none'; 
+            if (!emailRegex.test(email)) { showToast("⚠️ يرجى إدخال بريد إلكتروني صالح ينتهي بـ @gmail.com"); return; }
+            localStorage.setItem("userEmail", email); currentUserEmail = email;
+            document.getElementById("loginOverlay").style.display = 'none'; 
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
         }
 
@@ -805,10 +869,8 @@
         function handleCredentialResponse(response) {
             let payload = parseJwt(response.credential);
             let email = payload.email;
-            localStorage.setItem("userEmail", email);
-            currentUserEmail = email;
-            let overlay = document.getElementById("loginOverlay");
-            if(overlay) overlay.style.display = 'none';
+            localStorage.setItem("userEmail", email); currentUserEmail = email;
+            document.getElementById("loginOverlay").style.display = 'none';
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             showToast("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
@@ -824,7 +886,7 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage', 'searchResultsPage'];
+            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'];
             pages.forEach(p => { let el = document.getElementById(p); if (el) el.style.display = 'none'; });
             let targetEl = document.getElementById(pageId);
             if (targetEl) targetEl.style.display = 'block';
@@ -835,7 +897,7 @@
 
         function goBack() {
             if (currentPage === 'paymentFormPage') showPage('addBalancePage');
-            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage', 'vipTiersPage', 'telecomPage', 'supportPage', 'searchResultsPage'].includes(currentPage)) showPage('homePage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage', 'vipTiersPage', 'telecomPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'].includes(currentPage)) showPage('homePage');
             else if (['egyptTelecomPage', 'jordanTelecomPage'].includes(currentPage)) showPage('telecomPage');
             else if (['pubgRobotPage', 'pubgCodesPage'].includes(currentPage)) showPage('pubgSubPage');
             else if (['minecraftPage'].includes(currentPage)) showPage('gamesPage');
@@ -859,10 +921,34 @@
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
         function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
 
+        /* إنشاء وسرد كشف الحساب المالي المفصل */
+        function showTransactionsHistoryPage() {
+            let myDeposits = balanceRequests.filter(r => r.userEmail === currentUserEmail && r.status === 'approved');
+            let myPurchases = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
+            
+            let allLogs = [];
+            myDeposits.forEach(d => allLogs.push({ type: 'deposit', title: `إيداع شحن (${d.method})`, amount: d.amount, date: d.timestamp }));
+            myPurchases.forEach(p => allLogs.push({ type: 'purchase', title: `شراء: ${p.product}`, amount: p.price, date: p.timestamp }));
+
+            let html = allLogs.length === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا توجد معاملات مالية مسجلة بعد</p>' : '';
+            allLogs.forEach(log => {
+                let isPlus = log.type === 'deposit';
+                html += `<div class="statement-card">
+                    <div class="st-header">
+                        <span>${log.title}</span>
+                        <span class="${isPlus ? 'st-plus' : 'st-minus'}">${isPlus ? '+' : '-'}$${parseFloat(log.amount).toFixed(3)}</span>
+                    </div>
+                    <div style="font-size:11px; color:#a7f3d0;">نوع العملية: ${isPlus ? 'شحن رصيد' : 'خصم شراء'}</div>
+                </div>`;
+            });
+
+            document.getElementById('statementListContainer').innerHTML = html;
+            showPage('transactionsHistoryPage');
+        }
+
         function calculateUserVIP() {
             let emailKey = currentUserEmail ? currentUserEmail.replace(/[^a-zA-Z0-9]/g, '_') : '';
             let manualData = manualUserTiers[emailKey] || {};
-
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
             let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
             
@@ -885,13 +971,6 @@
             let tierEl = document.getElementById('currentTierTitleDisplay'); if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
             let spentText = document.getElementById('userSpentText'); if(spentText) spentText.innerText = `$${totalSpent.toFixed(2)} / $${nextTarget.toFixed(2)}`;
             let progressBar = document.getElementById('tierProgressBar'); if(progressBar) { let percent = Math.min(100, (totalSpent / nextTarget) * 100); progressBar.style.width = percent + '%'; }
-
-            if(document.getElementById('badgeBronze')) {
-                document.getElementById('badgeBronze').innerText = (totalSpent >= 1 || manualData.tier === 'bronze' || manualData.tier === 'silver' || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
-                document.getElementById('badgeSilver').innerText = (totalSpent >= 40 || manualData.tier === 'silver' || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
-                document.getElementById('badgeGold').innerText = (totalSpent >= 100 || manualData.tier === 'gold' || manualData.tier === 'diamond') ? '✅' : '🔒';
-                document.getElementById('badgeDiamond').innerText = (totalSpent >= 300 || manualData.tier === 'diamond') ? '✅' : '🔒';
-            }
             return discount;
         }
 
@@ -900,10 +979,8 @@
         function applyCoupon(type) {
             let inputId = type === 'order' ? 'orderCouponInput' : 'codeCouponInput';
             let code = document.getElementById(inputId).value.trim().toUpperCase();
-            
             let found = availableCoupons.find(c => c.code === code);
             if (!found) { showToast('⚠️ كود الخصم غير صحيح أو منتهي الصلاحية!'); return; }
-
             let discountVal = parseFloat(found.discount);
             if (type === 'order') {
                 currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - discountVal);
@@ -923,43 +1000,24 @@
                 let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : (order.status === 'cancelled' ? '🚫 ملغي' : '❌ مرفوض'));
                 let replyBox = order.adminReply ? `<div style="background: #022c22; color: #34d399; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid #10b981;"><b>رد الإدارة / الكود:</b> ${order.adminReply}</div>` : '';
                 let cancelBtn = order.status === 'pending' ? `<button onclick="cancelUserOrder('${order.id}', ${order.price})" style="background: #022c22; color: #f87171; border: 1px solid #f87171; padding: 8px; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; cursor: pointer; font-size: 12px;">إلغاء الطلب (خصم 5% واسترجاع الباقي)</button>` : '';
-
-                html += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3);">
+                html += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
                     <div style="font-weight: bold; margin-bottom: 5px;">${order.product}</div>
                     <div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-bottom: 5px;">الحالة: ${statusText}</div>
-                    ${replyBox}
-                    ${cancelBtn}
+                    ${replyBox} ${cancelBtn}
                 </div>`;
             });
             document.getElementById('myOrdersListContainer').innerHTML = html;
         }
 
         function cancelUserOrder(id, price) {
-            let confirmCancel = confirm("هل أنت متأكد من إلغاء الطلب؟\nسيتم خصم 5% كرسوم إلغاء واسترجاع 95% من قيمة الطلب لرصيدك.");
-            if (!confirmCancel) return;
-
-            let refundAmount = parseFloat(price) * 0.95; 
-
-            db.collection("orders").doc(id).update({ 
-                status: 'cancelled', 
-                adminReply: 'تم إلغاء الطلب من قبلك (تم استرجاع 95% من المبلغ)' 
-            }).then(() => {
+            if (!confirm("هل أنت متأكد من إلغاء الطلب؟")) return;
+            let refundAmount = parseFloat(price) * 0.95;
+            db.collection("orders").doc(id).update({ status: 'cancelled', adminReply: 'تم إلغاء الطلب من قبلك' }).then(() => {
                 db.collection("deposits").get().then(snapshot => {
-                    let maxNum = 0;
-                    snapshot.forEach(doc => {
-                        let num = doc.data().numericId || 0;
-                        if (num > maxNum) maxNum = num;
-                    });
-                    
+                    let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                     db.collection("deposits").add({
-                        numericId: maxNum + 1,
-                        method: 'استرجاع رصيد (إلغاء طلب ذاتي)',
-                        amount: parseFloat(refundAmount.toFixed(3)),
-                        transactionId: 'CANCEL-' + id.substring(0, 6),
-                        status: 'approved',
-                        credited: false,
-                        userEmail: currentUserEmail,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        numericId: maxNum + 1, method: 'استرجاع رصيد (إلغاء طلب)', amount: parseFloat(refundAmount.toFixed(3)),
+                        transactionId: 'CANCEL-' + id.substring(0, 6), status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
                 });
             });
@@ -971,13 +1029,11 @@
             myPayments.forEach(req => {
                 let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#34d399' : '#ef4444');
                 let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
-                let receiptView = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank" style="color:#34d399; font-size:12px;">📄 عرض صورة الإيصال المرفق</a></div>` : '';
-                let serialNumber = req.numericId ? `طلب رقم: #${req.numericId}` : '';
+                let receiptView = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank" style="color:#34d399; font-size:12px;">📄 عرض صورة الإيصال</a></div>` : '';
                 html += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - $${req.amount}</span><span style="color:#34d399; font-weight:bold; font-size:12px;">${serialNumber}</span></div>
-                    <div style="font-size: 13px; color: #a7f3d0; margin-bottom: 3px;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
-                    ${receiptView}
-                    <div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-top: 5px;">الحالة: ${statusText}</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - $${req.amount}</span></div>
+                    <div style="font-size: 13px; color: #a7f3d0;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
+                    ${receiptView}<div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-top: 5px;">الحالة: ${statusText}</div>
                 </div>`;
             });
             document.getElementById('myPaymentsListContainer').innerHTML = html;
@@ -985,16 +1041,29 @@
 
         function openPaymentForm(index) {
             const method = paymentMethods[index];
+            if (method.isAuto) {
+                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nيرجى إدخال المبلغ بالدولار ($):`);
+                if (autoAmount && !isNaN(autoAmount) && parseFloat(autoAmount) > 0) {
+                    db.collection("deposits").get().then(snapshot => {
+                        let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
+                        db.collection("deposits").add({
+                            numericId: maxNum + 1, method: method.name, amount: parseFloat(autoAmount), transactionId: 'AUTO-' + Math.floor(Math.random()*1000000),
+                            status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            showToast(`⚡ تم شحن $${autoAmount} تلقائياً فوراً إلى حسابك!`);
+                        });
+                    });
+                }
+                return;
+            }
+
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
                 <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
-                <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية من إيصال التحويل"></div>
-                <div class="pf-field-group">
-                    <span class="pf-label">صورة إيصال التحويل (اختر من صور جهازك)</span>
-                    <input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: #022c22; color: white;">
-                </div>
-                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب وإعلام الإدارة عبر الواتساب</button>
+                <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية"></div>
+                <div class="pf-field-group"><span class="pf-label">صورة إيصال التحويل</span><input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: #022c22; color: white;"></div>
+                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
             `;
             showPage('paymentFormPage');
         }
@@ -1003,51 +1072,22 @@
             let amount = parseFloat(document.getElementById('depositAmount').value);
             let transactionId = document.getElementById('transactionId').value.trim();
             let fileInput = document.getElementById('receiptImageFile');
-            
-            if (!amount || amount <= 0) { showToast('يرجى إدخال مبلغ صحيح!'); return; }
-            if (!transactionId) { showToast('يرجى إدخال رقم العملية (Transaction ID)!'); return; }
-            if (fileInput.files.length === 0) { showToast('يرجى اختيار صورة الإيصال من جهازك!'); return; }
-
-            let file = fileInput.files[0];
+            if (!amount || amount <= 0 || !transactionId || fileInput.files.length === 0) { showToast('يرجى تعبئة كافة الحقول وإرفاق الصورة!'); return; }
             let reader = new FileReader();
-            
-            showToast('جاري معالجة ورفع الصورة...');
-            
-            reader.onload = function(uploadEvent) {
-                let base64Image = uploadEvent.target.result;
-
+            reader.onload = function(e) {
                 db.collection("deposits").get().then(snapshot => {
-                    let maxNum = 0;
-                    snapshot.forEach(doc => {
-                        let num = doc.data().numericId || 0;
-                        if (num > maxNum) maxNum = num;
-                    });
-                    let nextNumericId = maxNum + 1;
-
+                    let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                     db.collection("deposits").add({
-                        numericId: nextNumericId,
-                        method: methodName,
-                        amount: amount,
-                        transactionId: transactionId,
-                        receiptUrl: base64Image,
-                        status: 'pending',
-                        credited: false,
-                        userEmail: currentUserEmail,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => { 
-                        showToast(`🚀 تم إرسال الطلب برقم تسلسلي #${nextNumericId} بنجاح!`); 
-                        
-                        let waMsg = `📢 *طلب شحن رصيد جديد (#${nextNumericId})*\n\n👤 المستخدم: ${currentUserEmail}\n💰 المبلغ: $${amount}\n💳 الطريقة: ${methodName}\n🔢 رقم العملية: ${transactionId}\n\nيرجى مراجعة التطبيق لقبول الطلب.`;
-                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
-
-                        showPage('addBalancePage'); 
+                        numericId: maxNum + 1, method: methodName, amount: amount, transactionId: transactionId, receiptUrl: e.target.result,
+                        status: 'pending', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
+                        showToast(`🚀 تم إرسال الطلب برقم #${maxNum + 1}`);
+                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${amount}`)}`, '_blank');
+                        showPage('addBalancePage');
                     });
-                }).catch(err => {
-                    showToast("❌ خطأ أثناء توليد الرقم التسلسلي: " + err.message);
                 });
             };
-            
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(fileInput.files[0]);
         }
 
         function openOrderModal(title, basePrice) {
@@ -1055,8 +1095,7 @@
             currentSelectedProduct = { title, price: finalPrice, originalPrice: finalPrice };
             document.getElementById('modalItemTitle').innerText = title; 
             document.getElementById('modalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('playerId').value = ""; 
-            document.getElementById('orderCouponInput').value = "";
+            document.getElementById('playerId').value = ""; document.getElementById('orderCouponInput').value = "";
             document.getElementById('orderModal').style.display = 'flex';
         }
         function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
@@ -1066,28 +1105,20 @@
             currentCodeProduct = { title, price: finalPrice, originalPrice: finalPrice };
             document.getElementById('codeModalItemTitle').innerText = title; 
             document.getElementById('codeModalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('codeQuantity').value = 1; 
-            document.getElementById('codeModalTotal').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('codeQuantity').value = 1; document.getElementById('codeModalTotal').innerText = '$ ' + finalPrice.toFixed(3);
             document.getElementById('codeCouponInput').value = "";
             document.getElementById('codeOrderModal').style.display = 'flex';
         }
         function closeCodeOrderModal() { document.getElementById('codeOrderModal').style.display = 'none'; }
-        function updateCodeTotal() { 
-            let qty = parseInt(document.getElementById('codeQuantity').value) || 1; 
-            document.getElementById('codeModalTotal').innerText = '$ ' + (currentCodeProduct.price * qty).toFixed(3); 
-        }
+        function updateCodeTotal() { let qty = parseInt(document.getElementById('codeQuantity').value) || 1; document.getElementById('codeModalTotal').innerText = '$ ' + (currentCodeProduct.price * qty).toFixed(3); }
 
         function openSubLinkModal(title, basePrice) {
             let finalPrice = getDiscountedPrice(basePrice);
             currentSubLinkProduct = { title, price: finalPrice };
-            document.getElementById('subLinkModalTitle').innerText = title; 
-            document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('subLinkQty').value = 1; 
-            document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
-            
+            document.getElementById('subLinkModalTitle').innerText = title; document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
+            document.getElementById('subLinkQty').value = 1; document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
             ['subLinkContactMethod','subLinkCountryCode','subLinkContact'].forEach(id => document.getElementById(id).value = "");
-            document.getElementById('subLinkFlagDisplay').innerText = "🌐"; 
-            document.getElementById('subLinkModal').style.display = 'flex';
+            document.getElementById('subLinkFlagDisplay').innerText = "🌐"; document.getElementById('subLinkModal').style.display = 'flex';
         }
         function closeSubLinkModal() { document.getElementById('subLinkModal').style.display = 'none'; }
         function updateSubLinkTotal() { let qty = parseInt(document.getElementById('subLinkQty').value) || 1; document.getElementById('subLinkTotal').innerText = '$ ' + (currentSubLinkProduct.price * qty).toFixed(3); }
@@ -1103,25 +1134,14 @@
 
         function submitGameOrder() {
             let playerId = document.getElementById('playerId').value.trim();
-            if(playerId === "") { showToast("⚠️ يرجى إدخال الأيدي أولاً!"); return; }
+            if(playerId === "") { showToast("⚠️ يرجى إدخال الايدي!"); return; }
             if(userBalance < currentSelectedProduct.price) { showToast("⚠️ رصيدك غير كافٍ."); return; }
             userBalance -= currentSelectedProduct.price; updateUserBalanceUI();
-            
             let productDesc = currentSelectedProduct.title + ' (ID: ' + playerId + ')';
             db.collection("orders").add({ 
-                product: productDesc, 
-                price: currentSelectedProduct.price, 
-                status: 'pending', 
-                adminReply: '', 
-                userEmail: currentUserEmail, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                product: productDesc, price: currentSelectedProduct.price, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم تسجيل طلبك وإرساله للإدارة!"); 
-                triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title);
-                closeOrderModal(); 
-
-                let waMsg = `🛒 *طلب لعبة جديد*\n\n👤 الزبون: ${currentUserEmail}\n🎮 المنتج: ${productDesc}\n💵 السعر: $${currentSelectedProduct.price.toFixed(3)}`;
-                window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title); closeOrderModal(); 
             });
         }
 
@@ -1130,22 +1150,11 @@
             let totalPrice = currentCodeProduct.price * qty;
             if(userBalance < totalPrice) { showToast("⚠️ رصيدك غير كافٍ."); return; }
             userBalance -= totalPrice; updateUserBalanceUI();
-            
             let productDesc = currentCodeProduct.title + ` (العدد: ${qty})`;
             db.collection("orders").add({ 
-                product: productDesc, 
-                price: totalPrice, 
-                status: 'pending', 
-                adminReply: '', 
-                userEmail: currentUserEmail, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                product: productDesc, price: totalPrice, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم تسجيل طلبك وإرساله للإدارة!"); 
-                triggerLiveSalesPopup(currentUserEmail, currentCodeProduct.title);
-                closeCodeOrderModal(); 
-
-                let waMsg = `🔑 *طلب كود جديد*\n\n👤 الزبون: ${currentUserEmail}\n📦 المنتج: ${productDesc}\n💵 الإجمالي: $${totalPrice.toFixed(3)}`;
-                window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentCodeProduct.title); closeCodeOrderModal(); 
             });
         }
 
@@ -1155,31 +1164,14 @@
             let countryCode = document.getElementById('subLinkCountryCode').value.trim(); 
             let contact = document.getElementById('subLinkContact').value.trim();
             let totalPrice = currentSubLinkProduct.price * qty;
-            
-            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة جميع الحقول!"); return; }
+            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة الحقول!"); return; }
             if(userBalance < totalPrice) { showToast("⚠️ رصيدك غير كافٍ."); return; }
-            
             userBalance -= totalPrice; updateUserBalanceUI();
             let productDesc = `${currentSubLinkProduct.title} (العدد: ${qty})`;
-            let fullContact = `${countryCode} ${contact}`;
-            
             db.collection("orders").add({ 
-                product: productDesc, 
-                price: totalPrice, 
-                contactMethod: contactMethod, 
-                countryCode: countryCode, 
-                contact: fullContact, 
-                status: 'pending', 
-                adminReply: '', 
-                userEmail: currentUserEmail, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                product: productDesc, price: totalPrice, contactMethod: contactMethod, countryCode: countryCode, contact: `${countryCode} ${contact}`, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم إرسال الطلب بنجاح!"); 
-                triggerLiveSalesPopup(currentUserEmail, currentSubLinkProduct.title);
-                closeSubLinkModal(); 
-
-                let waMsg = `🔗 *طلب ربط فرعي جديد*\n\n👤 الزبون: ${currentUserEmail}\n📦 المنتج: ${productDesc}\n💵 الإجمالي: $${totalPrice.toFixed(3)}\n📱 التواصل: ${contactMethod} (${fullContact})`;
-                window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                showToast("🚀 تم إرسال الطلب!"); triggerLiveSalesPopup(currentUserEmail, currentSubLinkProduct.title); closeSubLinkModal(); 
             });
         }
 
@@ -1187,30 +1179,13 @@
             let contactMethod = document.getElementById('booyahContactMethod').value; 
             let countryCode = document.getElementById('booyahCountryCode').value.trim(); 
             let contact = document.getElementById('booyahContact').value.trim();
-            
-            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة جميع الحقول!"); return; }
+            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة الحقول!"); return; }
             if(userBalance < currentBooyahProduct.price) { showToast("⚠️ رصيدك غير كافٍ."); return; }
-            
             userBalance -= currentBooyahProduct.price; updateUserBalanceUI();
-            let fullContact = `${countryCode} ${contact}`;
-
             db.collection("orders").add({ 
-                product: currentBooyahProduct.title, 
-                price: currentBooyahProduct.price, 
-                contactMethod: contactMethod, 
-                countryCode: countryCode, 
-                contact: fullContact, 
-                status: 'pending', 
-                adminReply: '', 
-                userEmail: currentUserEmail, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                product: currentBooyahProduct.title, price: currentBooyahProduct.price, contactMethod: contactMethod, countryCode: countryCode, contact: `${countryCode} ${contact}`, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم تسجيل طلب إهداء بويا باس بنجاح!"); 
-                triggerLiveSalesPopup(currentUserEmail, currentBooyahProduct.title);
-                closeBooyahModal(); 
-
-                let waMsg = `🎁 *طلب إهداء بويا باس*\n\n👤 الزبون: ${currentUserEmail}\n💵 السعر: $${currentBooyahProduct.price.toFixed(3)}\n📱 التواصل: ${contactMethod} (${fullContact})`;
-                window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                showToast("🚀 تم تسجيل الطلب!"); triggerLiveSalesPopup(currentUserEmail, currentBooyahProduct.title); closeBooyahModal(); 
             });
         }
 
@@ -1219,315 +1194,251 @@
             if (document.getElementById('adminPasswordInput').value === 'ADMIN10') {
                 document.getElementById('adminLoginModal').style.display = 'none'; 
                 document.getElementById('adminPasswordInput').value = ''; 
-                
-                let overlay = document.getElementById('loginOverlay');
-                if (overlay) overlay.style.display = 'none';
-
-                currentUserEmail = "admin@arab9card.com";
-                localStorage.setItem("userEmail", currentUserEmail);
+                document.getElementById('loginOverlay').style.display = 'none';
+                currentUserEmail = "admin@arab9card.com"; localStorage.setItem("userEmail", currentUserEmail);
                 showPage('adminDashboardPage');
             } else { showToast('كلمة المرور خاطئة!'); }
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
             document.getElementById('tabBalance').classList.toggle('active', isBal); 
             document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabProducts').classList.toggle('active', isPrd);
             document.getElementById('tabCoupons').classList.toggle('active', isCpn); 
             document.getElementById('tabSupport').classList.toggle('active', isSup);
             document.getElementById('tabUsers').classList.toggle('active', isUsr);
             
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
             document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminProductsSection').style.display = isPrd ? 'block' : 'none';
             document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
             document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
             document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
         }
 
+        function adminAddProduct() {
+            let title = document.getElementById('newProdTitle').value.trim();
+            let price = parseFloat(document.getElementById('newProdPrice').value);
+            let category = document.getElementById('newProdCat').value;
+            let img = document.getElementById('newProdImg').value.trim();
+
+            if (!title || isNaN(price) || price < 0) { showToast('⚠️ يرجى إدخال اسم المنتج والسعر بشكل صحيح!'); return; }
+
+            db.collection("products").add({ title, price, category, img }).then(() => {
+                showToast('✅ تم إضافة المنتج بنجاح!');
+                document.getElementById('newProdTitle').value = '';
+                document.getElementById('newProdPrice').value = '';
+                document.getElementById('newProdImg').value = '';
+            });
+        }
+
+        function adminDeleteProduct(id) {
+            if(confirm("هل أنت متأكد من حذف هذا المنتج؟")) {
+                db.collection("products").doc(id).delete().then(() => { showToast('🗑️ تم حذف المنتج بنجاح!'); });
+            }
+        }
+
+        function openEditProductModal(id, title, price, category, img) {
+            document.getElementById('editProductId').value = id;
+            document.getElementById('editProductTitle').value = title;
+            document.getElementById('editProductPrice').value = price;
+            document.getElementById('editProductCat').value = category;
+            document.getElementById('editProductImg').value = img || '';
+            document.getElementById('editProductModal').style.display = 'flex';
+        }
+
+        function saveEditedProduct() {
+            let id = document.getElementById('editProductId').value;
+            let title = document.getElementById('editProductTitle').value.trim();
+            let price = parseFloat(document.getElementById('editProductPrice').value);
+            let category = document.getElementById('editProductCat').value;
+            let img = document.getElementById('editProductImg').value.trim();
+
+            if (!title || isNaN(price)) { showToast('⚠️ بيانات غير صحيحة!'); return; }
+
+            db.collection("products").doc(id).update({ title, price, category, img }).then(() => {
+                showToast('✅ تم تعديل المنتج بنجاح!');
+                document.getElementById('editProductModal').style.display = 'none';
+            });
+        }
+
         function adminAddCoupon() {
             let code = document.getElementById('newCouponCode').value.trim().toUpperCase();
             let discount = parseFloat(document.getElementById('newCouponDiscount').value);
-
-            if (!code || isNaN(discount) || discount <= 0) { showToast('⚠️ يرجى كتابة كود وقيمة خصم صحيحة!'); return; }
-
+            if (!code || isNaN(discount) || discount <= 0) { showToast('⚠️ كود أو خصم غير صالح!'); return; }
             db.collection("coupons").add({ code, discount }).then(() => {
-                showToast('✅ تم إضافة الكوبون بنجاح!');
-                document.getElementById('newCouponCode').value = '';
-                document.getElementById('newCouponDiscount').value = '';
+                showToast('✅ تم إضافة الكوبون!');
+                document.getElementById('newCouponCode').value = ''; document.getElementById('newCouponDiscount').value = '';
             });
         }
 
-        function adminDeleteCoupon(id) {
-            db.collection("coupons").doc(id).delete().then(() => { showToast('تم حذف الكوبون!'); });
-        }
-
+        function adminDeleteCoupon(id) { db.collection("coupons").doc(id).delete().then(() => { showToast('تم الحذف!'); }); }
         function adminSaveUserTier(email) {
             let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
-            let selectedTier = document.getElementById(`tierSelect_${safeId}`).value;
-            db.collection("users").doc(safeId).set({ email: email, tier: selectedTier }, { merge: true }).then(() => {
-                showToast("✅ تم حفظ مستوى الزبون / التاجر بنجاح!");
-            });
+            let tier = document.getElementById(`tierSelect_${safeId}`).value;
+            db.collection("users").doc(safeId).set({ email, tier }, { merge: true }).then(() => { showToast('✅ تم الحفظ!'); });
         }
-        
+
         function adminAdjustBalance(userEmail, safeId, actionType, currentBalance) {
-            let inputEl = document.getElementById(`balanceAdjust_${safeId}`);
-            let val = parseFloat(inputEl.value);
-
-            if (isNaN(val) || val < 0) { showToast("⚠️ يرجى إدخال مبلغ صحيح."); return; }
-
-            let adjustmentAmount = 0; let actionName = '';
-            if (actionType === 'add') { adjustmentAmount = val; actionName = `إضافة $${val} إلى`; } 
-            else if (actionType === 'subtract') { adjustmentAmount = -val; actionName = `خصم $${val} من`; } 
-            else if (actionType === 'set') { adjustmentAmount = val - currentBalance; actionName = `تعيين رصيد ليصبح تماماً $${val} لـ`; }
-
-            if (!confirm(`هل أنت متأكد من ${actionName} المستخدم\n${userEmail} ؟`)) return;
-
+            let val = parseFloat(document.getElementById(`balanceAdjust_${safeId}`).value);
+            if (isNaN(val) || val < 0) { showToast("⚠️ مبلغ غير صالح"); return; }
+            let adjustment = actionType === 'add' ? val : (actionType === 'subtract' ? -val : val - currentBalance);
             db.collection("deposits").get().then(snapshot => {
-                let maxNum = 0;
-                snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
-                
+                let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                 db.collection("deposits").add({
-                    numericId: maxNum + 1,
-                    method: actionType === 'set' ? 'تعيين رصيد مباشر' : (actionType === 'add' ? 'إضافة رصيد' : 'خصم رصيد'),
-                    amount: adjustmentAmount,
-                    transactionId: 'ADM-' + Math.floor(Math.random() * 1000000),
-                    status: 'approved',
-                    credited: false,
-                    userEmail: userEmail,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast("✅ تم تنفيذ العملية بنجاح!");
-                    inputEl.value = "";
-                });
+                    numericId: maxNum + 1, method: 'تعديل رصيد إداري', amount: adjustment, transactionId: 'ADM-' + Math.floor(Math.random()*1000000),
+                    status: 'approved', credited: false, userEmail: userEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => { showToast("✅ تم تعديل الرصيد!"); document.getElementById(`balanceAdjust_${safeId}`).value = ''; });
             });
         }
 
         function exportOrdersToExcel() {
-            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-            csvContent += "ID,UserEmail,Product,Price,Status\n";
-            gameOrders.forEach(ord => { csvContent += `"${ord.id}","${ord.userEmail}","${ord.product}","${ord.price}","${ord.status}"\n`; });
-            let encodedUri = encodeURI(csvContent);
-            let link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "arab9card_orders_report.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast("📊 تم تصدير تقرير الطلبات بنجاح!");
+            let csv = "data:text/csv;charset=utf-8,\uFEFFID,User,Product,Price,Status\n";
+            gameOrders.forEach(o => { csv += `"${o.id}","${o.userEmail}","${o.product}","${o.price}","${o.status}"\n`; });
+            let link = document.createElement("a"); link.setAttribute("href", encodeURI(csv)); link.setAttribute("download", "orders.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
         }
 
         function renderAdminData() {
             let totalRevenue = gameOrders.filter(o => o.status === 'approved').reduce((sum, o) => sum + parseFloat(o.price || 0), 0);
-            let approvedOrdersCount = gameOrders.filter(o => o.status === 'approved').length;
-            let pendingOrdersCount = gameOrders.filter(o => o.status === 'pending').length;
-
             if (document.getElementById('statTotalRevenue')) document.getElementById('statTotalRevenue').innerText = '$' + totalRevenue.toFixed(2);
-            if (document.getElementById('statApprovedOrders')) document.getElementById('statApprovedOrders').innerText = approvedOrdersCount;
-            if (document.getElementById('statPendingOrders')) document.getElementById('statPendingOrders').innerText = pendingOrdersCount;
+            if (document.getElementById('statApprovedOrders')) document.getElementById('statApprovedOrders').innerText = gameOrders.filter(o => o.status === 'approved').length;
+            if (document.getElementById('statPendingOrders')) document.getElementById('statPendingOrders').innerText = gameOrders.filter(o => o.status === 'pending').length;
 
-            let sortedRequests = [...balanceRequests].sort((a, b) => (a.numericId || 0) - (b.numericId || 0));
-
-            let balHtml = sortedRequests.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات رصيد</p>' : '';
-            sortedRequests.forEach(req => {
-                let serialBadge = req.numericId ? `<span style="background:#10b981; color:white; padding:2px 8px; border-radius:6px; font-size:12px;">طلب #${req.numericId}</span>` : '';
-                let txBadge = req.transactionId ? `<div class="tx-badge">💳 رقم العملية: ${req.transactionId}</div>` : `<span style="font-size:11px; color:#a7f3d0;">لا يوجد رقم عملية</span>`;
-                let receiptView = req.receiptUrl ? `<div style="margin-top:8px;"><a href="${req.receiptUrl}" target="_blank"><img src="${req.receiptUrl}" style="max-width:120px; max-height:120px; border-radius:8px; border:1px solid #10b981;" alt="الإيصال"/></a></div>` : '';
-                
+            // طلبات الرصيد
+            let balHtml = '';
+            [...balanceRequests].sort((a,b)=>(a.numericId||0)-(b.numericId||0)).forEach(req => {
+                let receipt = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank"><img src="${req.receiptUrl}" style="max-width:100px; border-radius:5px;" /></a></div>` : '';
                 if(req.status === 'pending') {
-                    balHtml += `<div class="request-card">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <span>الزبون: <b>${req.userEmail}</b></span>${serialBadge}
-                        </div>
-                        <div class="req-info" style="flex-direction:column; gap:5px;">
-                            <span>طريقة الدفع: <b>${req.method}</b> | المبلغ: <b>$${req.amount}</b></span>
-                            ${txBadge} ${receiptView}
-                        </div>
-                        <div class="req-actions">
-                            <button class="btn-acc" onclick="approveBalance('${req.id}')">قبول</button>
-                            <button class="btn-rej" onclick="rejectBalance('${req.id}')">رفض</button>
-                        </div>
-                    </div>`;
-                } else {
-                    let text = req.status === 'approved' ? '✅ مقبول' : '❌ مرفوض';
-                    balHtml += `<div class="request-card ${req.status}">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <span>الزبون: <b>${req.userEmail}</b></span>${serialBadge}
-                        </div>
-                        <div class="req-info" style="flex-direction:column; gap:5px;">
-                            <span>المبلغ: <b>$${req.amount}</b> | الحالة: <b>${text}</b></span>
-                            <span>رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></span>
-                            ${receiptView}
-                        </div>
-                    </div>`;
+                    balHtml += `<div class="request-card"><div><b>${req.userEmail}</b> | مبلغ: $${req.amount} (${req.method})</div>${receipt}<div class="req-actions"><button class="btn-acc" onclick="db.collection('deposits').doc('${req.id}').update({status:'approved'})">قبول</button><button class="btn-rej" onclick="db.collection('deposits').doc('${req.id}').update({status:'rejected'})">رفض</button></div></div>`;
                 }
             });
-            document.getElementById('adminBalanceSection').innerHTML = balHtml;
+            document.getElementById('adminBalanceSection').innerHTML = balHtml || '<p style="text-align:center;">لا توجد طلبات رصيد معلقة</p>';
 
-            let ordHtml = gameOrders.length === 0 ? '<p style="text-align:center;">لا يوجد طلبات ألعاب</p>' : '';
+            // طلبات الألعاب
+            let ordHtml = '';
             gameOrders.forEach(req => {
-                let extraDetails = req.contact ? `<div style="background:#022c22; padding:8px; border-radius:6px; margin:5px 0; font-size:12px; border:1px solid #10b981;">📱 التواصل: <b>${req.contactMethod}</b> | 📞 الهاتف: <b>${req.contact}</b></div>` : '';
-
                 if(req.status === 'pending') {
-                    ordHtml += `<div class="request-card"><div class="req-info" style="flex-direction:column; gap:5px;"><span>الزبون: <b>${req.userEmail}</b></span><span>المنتج: <b>${req.product}</b></span>${extraDetails}</div><textarea id="reply_${req.id}" placeholder="اكتب رد الإدارة أو الأكواد هنا..." style="width:100%; padding:10px; margin-top:10px; border:1px solid #10b981; border-radius:8px; font-size:13px; text-align:right; box-sizing:border-box; background:#022c22; color:white;" rows="2"></textarea><div class="req-actions"><button class="btn-acc" onclick="approveOrder('${req.id}')">إتمام وشحن</button><button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض</button></div></div>`;
-                } else {
-                    let text = req.status === 'approved' ? '✅ مشحون ومكتمل' : (req.status === 'cancelled' ? '🚫 ملغي من قِبل الزبون' : '❌ مرفوض');
-                    let statusColor = req.status === 'approved' ? '#34d399' : (req.status === 'cancelled' ? '#9ca3af' : '#ef4444');
-                    ordHtml += `<div class="request-card ${req.status}"><div class="req-info" style="flex-direction:column; gap:5px;"><span><b>${req.userEmail}</b> | <b>${req.product}</b></span>${extraDetails}<span style="color:${statusColor}; font-weight:bold;">الحالة: ${text}</span>${req.adminReply ? '<span style="font-size:13px; color:#fff; background:#022c22; padding:6px; border-radius:5px; border:1px solid #10b981;"><b>الرد:</b> ' + req.adminReply + '</span>' : ''}</div></div>`;
+                    ordHtml += `<div class="request-card"><div><b>${req.userEmail}</b> | <b>${req.product}</b></div><textarea id="reply_${req.id}" placeholder="اكتب الرد أو الكود هنا..." style="width:100%; padding:8px; margin-top:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:6px;" rows="2"></textarea><div class="req-actions"><button class="btn-acc" onclick="approveOrder('${req.id}')">إتمام وشحن</button><button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض</button></div></div>`;
                 }
             });
-            document.getElementById('adminOrdersSection').innerHTML = ordHtml;
+            document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
-            let cpnHtml = `
+            // إدارة المنتجات
+            let prodHtml = `
                 <div class="request-card">
-                    <h3 style="margin-top:0; color:#34d399;">إنشاء كوبون خصم جديد 🎟️</h3>
-                    <input type="text" id="newCouponCode" placeholder="كود الكوبون (مثال: VIP10)" style="width:100%; padding:10px; border:1px solid #10b981; border-radius:8px; margin-bottom:8px; background:#022c22; color:white;">
-                    <input type="number" id="newCouponDiscount" placeholder="قيمة الخصم بالدولار ($)" style="width:100%; padding:10px; border:1px solid #10b981; border-radius:8px; margin-bottom:12px; background:#022c22; color:white;">
-                    <button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الكوبون</button>
+                    <h3 style="margin-top:0; color:#34d399;">إضافة منتج جديد 📦</h3>
+                    <input type="text" id="newProdTitle" placeholder="اسم المنتج..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.001" id="newProdPrice" placeholder="السعر ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <select id="newProdCat" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <option value="best">الأكثر مبيعاً</option>
+                        <option value="zainGsmGrid">Zain GSM</option>
+                        <option value="zainDataGrid">Zain Data</option>
+                        <option value="zainMixGrid">Zain Mix</option>
+                        <option value="pubgRobotGrid">ببجي روبوت</option>
+                        <option value="pubgCodesGrid">ببجي أكواد</option>
+                        <option value="minecraftGrid">ماين كرافت</option>
+                        <option value="robot1Grid">فري فاير روبوت 1</option>
+                        <option value="subLinkGemsGrid">جواهر ربط فرعي</option>
+                        <option value="membershipsGrid">عضويات</option>
+                        <option value="ffCodesGrid">فري فاير أكواد</option>
+                        <option value="companyCodesGrid">اكواد شركة فري فاير</option>
+                        <option value="ffEuropeGrid">فري فاير أوروبا</option>
+                    </select>
+                    <input type="text" id="newProdImg" placeholder="رابط الصورة المصغرة أو رمز..." style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <button onclick="adminAddProduct()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
                 </div>
-                <h4 style="color:#34d399;">الكوبونات المتاحة حالياً:</h4>
+                <h4 style="color:#34d399;">المنتجات الحالية:</h4>
             `;
-            if (availableCoupons.length === 0) { cpnHtml += '<p>لا توجد كوبونات مضافة حالياً.</p>'; }
+            if(storeProducts.length === 0) { prodHtml += '<p>لا توجد منتجات مضافة.</p>'; }
             else {
-                availableCoupons.forEach(cpn => {
-                    cpnHtml += `<div style="background:#064e3b; padding:12px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <span>الكود: <b>${cpn.code}</b> | الخصم: <b>$${cpn.discount}</b></span>
-                        <button onclick="adminDeleteCoupon('${cpn.id}')" style="background:#ef4444; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
+                storeProducts.forEach(p => {
+                    prodHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><b>${p.title}</b> - $${p.price.toFixed(3)} <br><span style="font-size:11px; color:#a7f3d0;">القسم: ${p.category}</span></div>
+                        <div style="display:flex; gap:5px;">
+                            <button onclick="openEditProductModal('${p.id}', '${p.title}', ${p.price}, '${p.category}', '${p.img || ''}')" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
+                            <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
+                        </div>
                     </div>`;
                 });
             }
+            document.getElementById('adminProductsSection').innerHTML = prodHtml;
+
+            // الكوبونات
+            let cpnHtml = `<div class="request-card"><h3 style="margin-top:0; color:#34d399;">إنشاء كوبون</h3><input type="text" id="newCouponCode" placeholder="الكود" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><input type="number" id="newCouponDiscount" placeholder="الخصم $" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة</button></div>`;
+            availableCoupons.forEach(c => {
+                cpnHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> ($${c.discount})</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
+            });
             document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
 
+            // الدعم الفني
+            let supHtml = '';
+            let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
+            userEmails.forEach(user => {
+                let msgs = supportMessages.filter(m => m.sender === user || (m.isAdmin && m.target === user));
+                let safeId = user.replace(/[^a-zA-Z0-9]/g, '');
+                supHtml += `<div class="request-card"><div><b>محادثة: ${user}</b></div><div style="max-height:150px; overflow-y:auto; background:#022c22; padding:8px; margin:8px 0; border-radius:6px;">`;
+                msgs.forEach(m => { supHtml += `<div style="text-align:${m.isAdmin?'left':'right'}; margin-bottom:5px;"><span style="font-size:10px; color:#a7f3d0;">${m.isAdmin?'الإدارة':'الزبون'}</span><div style="background:${m.isAdmin?'#064e3b':'#10b981'}; padding:6px; border-radius:6px; font-size:12px; display:inline-block;">${m.text}</div></div>`; });
+                supHtml += `</div><div style="display:flex; gap:5px;"><input type="text" id="adminReply_${safeId}" placeholder="رد..." style="flex:1; padding:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:6px;"><button onclick="adminSendReply('${user}', 'adminReply_${safeId}')" style="background:#10b981; color:white; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">إرسال</button></div></div>`;
+            });
+            document.getElementById('adminSupportSection').innerHTML = supHtml || '<p style="text-align:center;">لا توجد رسائل دعم</p>';
+
+            // إدارة المستخدمين
             let allEmails = new Set();
             gameOrders.forEach(o => { if(o.userEmail) allEmails.add(o.userEmail); });
             balanceRequests.forEach(d => { if(d.userEmail) allEmails.add(d.userEmail); });
             supportMessages.forEach(m => { if(m.sender && !m.isAdmin) allEmails.add(m.sender); });
 
-            let usrHtml = allEmails.size === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا يوجد مستخدمون مسجلون حالياً</p>' : '';
+            let usrHtml = '';
             allEmails.forEach(email => {
                 let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
                 let userData = manualUserTiers[safeId] || {};
                 let currentTierVal = userData.tier || 'auto';
+                let calcBal = 0.010 + balanceRequests.filter(r => r.userEmail === email && r.status === 'approved').reduce((s,r)=>s+r.amount,0) - gameOrders.filter(o=>o.userEmail===email && o.status==='approved').reduce((s,o)=>s+o.price,0);
 
-                let userDeposits = balanceRequests.filter(req => req.userEmail === email && req.status === 'approved');
-                let totalDeposited = userDeposits.reduce((sum, req) => sum + parseFloat(req.amount || 0), 0);
-                let userOrders = gameOrders.filter(o => o.userEmail === email && (o.status === 'approved' || o.status === 'pending'));
-                let totalSpent = userOrders.reduce((sum, ord) => sum + parseFloat(ord.price || 0), 0);
-                let calculatedBalance = 0.010 + totalDeposited - totalSpent; 
-
-                usrHtml += `<div class="request-card" style="border-right: 4px solid #10b981; margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #10b981; padding-bottom: 10px;">
-                        <div style="font-weight: bold; color: #34d399; font-size: 14px;">📧 ${email}</div>
-                        <div style="background: rgba(16, 185, 129, 0.2); padding: 5px 12px; border-radius: 20px; color: #34d399; font-weight: bold; font-size: 14px; border: 1px solid #10b981;">
-                            الرصيد: $${calculatedBalance.toFixed(3)}
-                        </div>
+                usrHtml += `<div class="request-card">
+                    <div><b>${email}</b> | الرصيد: $${calcBal.toFixed(3)}</div>
+                    <div style="margin:8px 0; display:flex; gap:5px;">
+                        <select id="tierSelect_${safeId}" style="flex:1; padding:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:6px;">
+                            <option value="auto" ${currentTierVal==='auto'?'selected':''}>تلقائي</option>
+                            <option value="bronze" ${currentTierVal==='bronze'?'selected':''}>برونزي</option>
+                            <option value="silver" ${currentTierVal==='silver'?'selected':''}>فضي</option>
+                            <option value="gold" ${currentTierVal==='gold'?'selected':''}>ذهبي</option>
+                            <option value="diamond" ${currentTierVal==='diamond'?'selected':''}>ألماسي</option>
+                        </select>
+                        <button onclick="adminSaveUserTier('${email}')" style="background:#10b981; color:white; border:none; padding:0 12px; border-radius:6px; font-weight:bold; cursor:pointer;">حفظ</button>
                     </div>
-                    
-                    <div style="margin-bottom: 10px;">
-                        <label style="font-size: 12px; color: #a7f3d0; display: block; margin-bottom: 4px;">مستوى التاجر (الشريحة):</label>
-                        <div style="display: flex; gap: 8px;">
-                            <select id="tierSelect_${safeId}" style="flex: 1; padding: 10px; border: 1px solid #10b981; border-radius: 8px; font-size: 13px; background: #022c22; color: white;">
-                                <option value="auto" ${currentTierVal === 'auto' ? 'selected' : ''}>تلقائي (حسب المبيعات)</option>
-                                <option value="bronze" ${currentTierVal === 'bronze' ? 'selected' : ''}>برونزي (1% خصم)</option>
-                                <option value="silver" ${currentTierVal === 'silver' ? 'selected' : ''}>فضي (2% خصم)</option>
-                                <option value="gold" ${currentTierVal === 'gold' ? 'selected' : ''}>ذهبي (3% خصم)</option>
-                                <option value="diamond" ${currentTierVal === 'diamond' ? 'selected' : ''}>💎 ألماسي - خصم التجار (5%)</option>
-                            </select>
-                            <button onclick="adminSaveUserTier('${email}')" style="background: #10b981; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">حفظ</button>
-                        </div>
-                    </div>
-                    
-                    <div style="background: #022c22; padding: 10px; border-radius: 8px; border: 1px solid #10b981; margin-top: 10px;">
-                        <label style="font-size: 12px; color: #a7f3d0; display: block; margin-bottom: 5px; font-weight: bold;">إدارة الرصيد:</label>
-                        <input type="number" id="balanceAdjust_${safeId}" placeholder="أدخل المبلغ..." style="width: 100%; padding: 10px; border: 1px solid #10b981; border-radius: 8px; font-size: 13px; text-align: right; outline: none; direction: rtl; margin-bottom: 8px; box-sizing: border-box; background: #064e3b; color: white;">
-                        
-                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'add', ${calculatedBalance})" style="flex: 1; min-width: 90px; background: #10b981; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">➕ إضافة</button>
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'subtract', ${calculatedBalance})" style="flex: 1; min-width: 90px; background: #ef4444; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">➖ خصم</button>
-                            <button onclick="adminAdjustBalance('${email}', '${safeId}', 'set', ${calculatedBalance})" style="flex: 1; min-width: 110px; background: #0284c7; color: white; border: none; padding: 10px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">🎯 تعيين مباشر</button>
-                        </div>
-                    </div>
+                    <div style="display:flex; gap:5px;"><input type="number" id="balanceAdjust_${safeId}" placeholder="المبلغ" style="flex:1; padding:8px; background:#064e3b; color:white; border:1px solid #10b981; border-radius:6px;"><button onclick="adminAdjustBalance('${email}','${safeId}','add',${calcBal})" style="background:#10b981; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">إضافة</button><button onclick="adminAdjustBalance('${email}','${safeId}','subtract',${calcBal})" style="background:#ef4444; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">خصم</button></div>
                 </div>`;
             });
-            document.getElementById('adminUsersSection').innerHTML = usrHtml;
-
-            let supHtml = '';
-            let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
-            
-            if(userEmails.length === 0) {
-                supHtml = '<p style="text-align:center; color:#a7f3d0;">لا توجد رسائل دعم فني حالياً</p>';
-            } else {
-                userEmails.forEach(user => {
-                    let msgs = supportMessages.filter(m => m.sender === user || (m.isAdmin && m.target === user));
-                    let safeId = user.replace(/[^a-zA-Z0-9]/g, '');
-                    
-                    supHtml += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
-                        <div style="font-weight: bold; margin-bottom: 10px; color: #34d399; border-bottom: 1px solid #10b981; padding-bottom: 5px;">محادثة الزبون: ${user}</div>
-                        <div style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #022c22; border-radius: 8px; border: 1px solid #10b981;">`;
-                    
-                    msgs.forEach(m => {
-                        let align = m.isAdmin ? 'left' : 'right';
-                        let bg = m.isAdmin ? '#064e3b' : '#10b981';
-                        let color = '#fff';
-                        let senderName = m.isAdmin ? 'الإدارة' : 'الزبون';
-                        supHtml += `<div style="text-align: ${align}; margin-bottom: 8px;">
-                            <span style="font-size: 10px; color: #a7f3d0; display: block; margin-bottom:2px;">${senderName}</span>
-                            <div style="background: ${bg}; color: ${color}; padding: 8px 12px; border-radius: 10px; display: inline-block; max-width: 85%; font-size: 13px;">${m.text}</div>
-                        </div>`;
-                    });
-
-                    supHtml += `</div>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="text" id="adminReply_${safeId}" placeholder="اكتب ردك هنا..." style="flex: 1; padding: 10px; border: 1px solid #10b981; border-radius: 8px; outline: none; background: #022c22; color: white;">
-                            <button onclick="adminSendReply('${user}', 'adminReply_${safeId}')" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">إرسال الرد</button>
-                        </div>
-                    </div>`;
-                });
-            }
-            document.getElementById('adminSupportSection').innerHTML = supHtml;
+            document.getElementById('adminUsersSection').innerHTML = usrHtml || '<p style="text-align:center;">لا توجد مستخدمين</p>';
         }
 
         function adminSendReply(userEmail, inputId) {
-            let inputElement = document.getElementById(inputId);
-            let text = inputElement.value.trim();
+            let text = document.getElementById(inputId).value.trim();
             if(!text) return;
-            
-            db.collection("support_messages").add({ sender: 'الإدارة', target: userEmail, text: text, isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { inputElement.value = ''; });
+            db.collection("support_messages").add({ sender: 'الإدارة', target: userEmail, text: text, isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { document.getElementById(inputId).value = ''; });
         }
 
-        function approveBalance(id) { db.collection("deposits").doc(id).update({ status: 'approved' }).then(() => { showToast(`تم قبول الطلب بنجاح!`); }); }
-        function rejectBalance(id) { db.collection("deposits").doc(id).update({ status: 'rejected' }); }
-        
         function approveOrder(id) {
             let replyToken = document.getElementById(`reply_${id}`).value.trim();
-            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم تنفيذ الطلب بنجاح ✅' }).then(() => { showToast('تمت الموافقة وإرسال الرد للزبون بنجاح!'); calculateUserVIP(); });
+            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم التنفيذ بنجاح' }).then(() => { showToast('تم التنفيذ!'); });
         }
-        
+
         function rejectOrder(id) {
-            let replyToken = document.getElementById(`reply_${id}`).value.trim();
-            let order = gameOrders.find(o => o.id === id); 
-            
-            db.collection("orders").doc(id).update({ 
-                status: 'rejected', 
-                adminReply: replyToken || 'تم رفض الطلب واسترجاع المبلغ لرصيدك ❌' 
-            }).then(() => {
+            let order = gameOrders.find(o => o.id === id);
+            db.collection("orders").doc(id).update({ status: 'rejected', adminReply: 'تم الرفض واسترجاع المبلغ' }).then(() => {
                 if (order) {
                     db.collection("deposits").get().then(snapshot => {
-                        let maxNum = 0;
-                        snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
-                        
+                        let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                         db.collection("deposits").add({
-                            numericId: maxNum + 1,
-                            method: 'استرجاع رصيد (رفض الإدارة)',
-                            amount: parseFloat(order.price),
-                            transactionId: 'REFUND-' + id.substring(0, 6),
-                            status: 'approved',
-                            credited: false, 
-                            userEmail: order.userEmail,
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                            numericId: maxNum + 1, method: 'استرجاع رصيد (رفض طلب)', amount: parseFloat(order.price),
+                            transactionId: 'REF-' + id.substring(0, 6), status: 'approved', credited: false, userEmail: order.userEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         });
                     });
                 }
-                showToast('تم رفض الطلب وإرجاع المبلغ للزبون بنجاح!'); 
+                showToast('تم الرفض واسترجاع المبلغ للزبون!');
             });
         }
     </script>
