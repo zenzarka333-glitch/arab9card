@@ -104,6 +104,7 @@
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #a7f3d0; margin-bottom: 6px; padding-right: 5px; }
         .pf-input { width: 100%; padding: 14px; border: 1px solid #10b981; border-radius: 10px; background-color: #022c22 !important; color: white !important; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
+        .pf-btn-submit { width: 100%; background: #10b981; color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
 
         #adminDashboardPage { background-color: #022c22; min-height: 100vh; height: 100vh; overflow-y: auto; width: 100%; box-sizing: border-box; padding-bottom: 80px; }
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; color: white; box-sizing: border-box; width: 100%; }
@@ -395,6 +396,22 @@
         </div>
     </div>
 
+    <!-- نافذة تعديل العملة -->
+    <div id="editCurrencyModal" class="modal">
+        <div class="modal-content" style="max-width: 380px; text-align: right;">
+            <h3 style="color:#34d399; margin-top:0;">تعديل العملة</h3>
+            <input type="hidden" id="editCurrencyId">
+            <label style="font-size:12px; color:#064e3b;">اسم العملة / الرمز (مثال: TL, ليرة تركية)</label>
+            <input type="text" id="editCurrencyName">
+            <label style="font-size:12px; color:#064e3b;">سعر الصرافة (كم تساوي الواحد دولار بالدولار؟ أو قيمة الصرف مقابل 1$)</label>
+            <input type="number" step="0.0001" id="editCurrencyRate" placeholder="مثال: 34.5 أو 0.03">
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="saveEditedCurrency()">حفظ</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('editCurrencyModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
     <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
 
@@ -428,6 +445,7 @@
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
                 <div class="admin-tab" id="tabPaymentsAdmin" onclick="switchAdminTab('paymentsAdmin')">طرق الدفع 💳</div>
+                <div class="admin-tab" id="tabCurrencies" onclick="switchAdminTab('currencies')">العملات 💱</div>
                 <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">إدارة الأقسام 🏷️</div>
                 <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
                 <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
@@ -438,6 +456,7 @@
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
             <div id="adminPaymentsSection" style="display:none;"></div>
+            <div id="adminCurrenciesSection" style="display:none;"></div>
             <div id="adminCategoriesSection" style="display:none;"></div>
             <div id="adminProductsSection" style="display:none;"></div>
             <div id="adminCouponsSection" style="display:none;"></div>
@@ -469,6 +488,7 @@
         let storeProducts = [];
         let storeCategories = [];
         let dbPaymentMethods = [];
+        let storeCurrencies = [];
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
@@ -508,6 +528,13 @@
         db.collection("payment_methods").onSnapshot((snapshot) => {
             dbPaymentMethods = [];
             snapshot.forEach((doc) => { dbPaymentMethods.push({ id: doc.id, ...doc.data() }); });
+            renderUserPaymentMethods();
+            renderAdminData();
+        });
+
+        db.collection("currencies").onSnapshot((snapshot) => {
+            storeCurrencies = [];
+            snapshot.forEach((doc) => { storeCurrencies.push({ id: doc.id, ...doc.data() }); });
             renderUserPaymentMethods();
             renderAdminData();
         });
@@ -841,15 +868,45 @@
 
         function getDiscountedPrice(basePrice) { return basePrice * (1 - calculateUserVIP()); }
 
+        let appliedCouponCode = null;
+        let appliedCouponDiscountAmount = 0;
+
         function applyCoupon(type) {
             let inputId = 'orderCouponInput';
             let code = document.getElementById(inputId).value.trim().toUpperCase();
             let found = availableCoupons.find(c => c.code === code);
             if (!found) { showToast('⚠️ كود الخصم غير صحيح أو منتهي الصلاحية!'); return; }
-            let discountVal = parseFloat(found.discount);
-            currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - discountVal);
+
+            // التحقق من الحد الأدنى للطلب
+            let minLimit = parseFloat(found.minLimit) || 0;
+            if (currentSelectedProduct.originalPrice < minLimit) {
+                showToast(`⚠️ لا يمكن استخدام هذا الكود، الحد الأدنى للطلب هو $${minLimit}`);
+                return;
+            }
+
+            // التحقق من عدد مرات الاستخدام المسموحة
+            let maxUses = parseInt(found.maxUses) || 0;
+            let usedList = found.usedList || [];
+            if (maxUses > 0 && usedList.length >= maxUses) {
+                showToast('⚠️ لقد تم استنفاد الحد الأقصى لاستخدام هذا الكود!');
+                return;
+            }
+
+            // حساب نسبة الخصم أو قيمته بناءً على ما حدده الإداري
+            let discountPercentage = parseFloat(found.discountPercentage) || 0;
+            let maxDiscountCap = parseFloat(found.maxDiscountCap) || 999999;
+
+            let calculatedDiscount = currentSelectedProduct.originalPrice * (discountPercentage / 100);
+            if (calculatedDiscount > maxDiscountCap) {
+                calculatedDiscount = maxDiscountCap;
+            }
+
+            appliedCouponCode = found.code;
+            appliedCouponDiscountAmount = calculatedDiscount;
+
+            currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - calculatedDiscount);
             document.getElementById('modalItemPrice').innerText = '$ ' + currentSelectedProduct.price.toFixed(3);
-            showToast(`🎉 تم تطبيق خصم $${discountVal} بنجاح!`);
+            showToast(`🎉 تم تطبيق الخصم بقيمة $${calculatedDiscount.toFixed(2)} بنجاح!`);
         }
 
         function renderMyOrders() {
@@ -890,8 +947,10 @@
                 let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#34d399' : '#ef4444');
                 let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
                 let receiptView = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank" style="color:#34d399; font-size:12px;">📄 عرض صورة الإيصال</a></div>` : '';
+                let currencyInfo = req.originalAmount && req.currencyName ? `<div style="font-size:12px; color:#34d399;">تم التحويل بـ: ${req.originalAmount} ${req.currencyName}</div>` : '';
                 html += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
                     <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - $${req.amount}</span></div>
+                    ${currencyInfo}
                     <div style="font-size: 13px; color: #a7f3d0;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
                     ${receiptView}<div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-top: 5px;">الحالة: ${statusText}</div>
                 </div>`;
@@ -905,6 +964,11 @@
 
             let min = method.minAmount || 1;
             let max = method.maxAmount || 1000;
+
+            let currencyOptions = `<option value="USD">دولار أمريكي (USD - 1)</option>`;
+            storeCurrencies.forEach(curr => {
+                currencyOptions += `<option value="${curr.id}" data-rate="${curr.rate}">${curr.name} (سعر الصرف مقابل الدولار: ${curr.rate})</option>`;
+            });
 
             if (method.isAuto === true || method.isAuto === "true") {
                 let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nأدخل المبلغ بين ($${min} - $${max}):`);
@@ -930,7 +994,14 @@
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
-                <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($) (من ${min}$ إلى ${max}$)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: ${min}"></div>
+                <div class="pf-field-group">
+                    <span class="pf-label">اختر العملة التي ستتم التحويل بها</span>
+                    <select id="depositCurrencySelect" class="pf-input" onchange="updateDepositCurrencyHint(${min}, ${max})">
+                        ${currencyOptions}
+                    </select>
+                </div>
+                <div class="pf-field-group"><span class="pf-label" id="depositAmountLabel">المبلغ المحول بالدولار ($) (من ${min}$ إلى ${max}$)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: ${min}" oninput="calcUsdEquivalent(${min}, ${max})"></div>
+                <div style="font-size:12px; color:#34d399; margin-bottom:10px;" id="currencyEquivalentHint"></div>
                 <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية"></div>
                 <div class="pf-field-group"><span class="pf-label">صورة إيصال التحويل</span><input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: #022c22; color: white;"></div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}', ${min}, ${max})">تقديم الطلب</button>
@@ -938,13 +1009,49 @@
             showPage('paymentFormPage');
         }
 
+        function updateDepositCurrencyHint(min, max) {
+            let select = document.getElementById('depositCurrencySelect');
+            let selectedOpt = select.options[select.selectedIndex];
+            let currName = selectedOpt.text;
+            let label = document.getElementById('depositAmountLabel');
+            if(select.value === 'USD') {
+                label.innerText = `المبلغ المحول بالدولار ($) (من ${min}$ إلى ${max}$)`;
+                document.getElementById('currencyEquivalentHint').innerText = '';
+            } else {
+                label.innerText = `المبلغ بالعملة المضافة (${currName})`;
+                calcUsdEquivalent(min, max);
+            }
+        }
+
+        function calcUsdEquivalent(min, max) {
+            let select = document.getElementById('depositCurrencySelect');
+            if(select.value === 'USD') return;
+            let selectedOpt = select.options[select.selectedIndex];
+            let rate = parseFloat(selectedOpt.getAttribute('data-rate')) || 1;
+            let val = parseFloat(document.getElementById('depositAmount').value) || 0;
+            let usdVal = val / rate;
+            document.getElementById('currencyEquivalentHint').innerText = `💱 يعادل تقريباً: $${usdVal.toFixed(3)} دولار أمريكي`;
+        }
+
         function submitDepositRequest(methodName, min, max) {
-            let amount = parseFloat(document.getElementById('depositAmount').value);
+            let select = document.getElementById('depositCurrencySelect');
+            let currVal = select.value;
+            let rawAmount = parseFloat(document.getElementById('depositAmount').value);
+            let finalUsdAmount = rawAmount;
+            let currencyNameUsed = 'USD';
+
+            if(currVal !== 'USD') {
+                let selectedOpt = select.options[select.selectedIndex];
+                let rate = parseFloat(selectedOpt.getAttribute('data-rate')) || 1;
+                currencyNameUsed = selectedOpt.text.split(' ')[0];
+                finalUsdAmount = rawAmount / rate;
+            }
+
             let transactionId = document.getElementById('transactionId').value.trim();
             let fileInput = document.getElementById('receiptImageFile');
 
-            if (isNaN(amount) || amount < min || amount > max) {
-                showToast(`⚠️ المبلغ يجب أن يكون بين $${min} و $${max}`);
+            if (isNaN(rawAmount) || finalUsdAmount < min || finalUsdAmount > max) {
+                showToast(`⚠️ المبلغ يجب ألا يقل عن القيمة المماثلة لـ $${min} وألا يزيد عن $${max}`);
                 return;
             }
 
@@ -954,11 +1061,11 @@
                 db.collection("deposits").get().then(snapshot => {
                     let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                     db.collection("deposits").add({
-                        numericId: maxNum + 1, method: methodName, amount: amount, transactionId: transactionId, receiptUrl: e.target.result,
+                        numericId: maxNum + 1, method: methodName, amount: parseFloat(finalUsdAmount.toFixed(3)), originalAmount: rawAmount, currencyName: currencyNameUsed, transactionId: transactionId, receiptUrl: e.target.result,
                         status: 'pending', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     }).then(() => {
                         showToast(`🚀 تم إرسال الطلب برقم #${maxNum + 1}`);
-                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${amount}`)}`, '_blank');
+                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${finalUsdAmount.toFixed(3)} (${rawAmount} ${currencyNameUsed})`)}`, '_blank');
                         showPage('addBalancePage');
                     });
                 });
@@ -969,6 +1076,8 @@
         function openOrderModal(title, basePrice) {
             let finalPrice = getDiscountedPrice(basePrice);
             currentSelectedProduct = { title, price: finalPrice, originalPrice: finalPrice };
+            appliedCouponCode = null;
+            appliedCouponDiscountAmount = 0;
             document.getElementById('modalItemTitle').innerText = title; 
             document.getElementById('modalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
             document.getElementById('playerId').value = ""; document.getElementById('orderCouponInput').value = "";
@@ -982,6 +1091,21 @@
             if(userBalance < currentSelectedProduct.price) { showToast("⚠️ رصيدك غير كافٍ."); return; }
             userBalance -= currentSelectedProduct.price; updateUserBalanceUI();
             let productDesc = currentSelectedProduct.title + ' (ID: ' + playerId + ')';
+
+            // إذا تم استخدام كوبون، قم بتحديث سجل الاستخدام في قاعدة البيانات لهذا الكوبون
+            if (appliedCouponCode) {
+                let couponObj = availableCoupons.find(c => c.code === appliedCouponCode);
+                if (couponObj) {
+                    let usedList = couponObj.usedList || [];
+                    usedList.push({
+                        userEmail: currentUserEmail,
+                        discountAmount: appliedCouponDiscountAmount,
+                        timestamp: new Date().toISOString()
+                    });
+                    db.collection("coupons").doc(couponObj.id).update({ usedList: usedList });
+                }
+            }
+
             db.collection("orders").add({ 
                 product: productDesc, price: currentSelectedProduct.price, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
@@ -1001,10 +1125,11 @@
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isPm = tab === 'paymentsAdmin'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isPm = tab === 'paymentsAdmin'; let isCur = tab === 'currencies'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
             document.getElementById('tabBalance').classList.toggle('active', isBal); 
             document.getElementById('tabOrders').classList.toggle('active', isOrd); 
             document.getElementById('tabPaymentsAdmin').classList.toggle('active', isPm);
+            document.getElementById('tabCurrencies').classList.toggle('active', isCur);
             document.getElementById('tabCategories').classList.toggle('active', isCat); 
             document.getElementById('tabProducts').classList.toggle('active', isPrd);
             document.getElementById('tabCoupons').classList.toggle('active', isCpn); 
@@ -1014,11 +1139,48 @@
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
             document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
             document.getElementById('adminPaymentsSection').style.display = isPm ? 'block' : 'none';
+            document.getElementById('adminCurrenciesSection').style.display = isCur ? 'block' : 'none';
             document.getElementById('adminCategoriesSection').style.display = isCat ? 'block' : 'none';
             document.getElementById('adminProductsSection').style.display = isPrd ? 'block' : 'none';
             document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
             document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
             document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
+        }
+
+        /* ------------------ إدارة العملات ------------------ */
+        function adminAddCurrency() {
+            let name = document.getElementById('newCurrName').value.trim();
+            let rate = parseFloat(document.getElementById('newCurrRate').value);
+            if(!name || isNaN(rate) || rate <= 0) { showToast('⚠️ يرجى إدخال اسم العملة وسعر الصرف بشكل صحيح'); return; }
+            db.collection("currencies").add({ name, rate }).then(() => {
+                showToast('✅ تم إضافة العملة بنجاح!');
+                document.getElementById('newCurrName').value = '';
+                document.getElementById('newCurrRate').value = '';
+            });
+        }
+
+        function adminDeleteCurrency(id) {
+            if(confirm("هل أنت متأكد من حذف هذه العملة؟")) {
+                db.collection("currencies").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
+            }
+        }
+
+        function openEditCurrencyModal(id, name, rate) {
+            document.getElementById('editCurrencyId').value = id;
+            document.getElementById('editCurrencyName').value = name;
+            document.getElementById('editCurrencyRate').value = rate;
+            document.getElementById('editCurrencyModal').style.display = 'flex';
+        }
+
+        function saveEditedCurrency() {
+            let id = document.getElementById('editCurrencyId').value;
+            let name = document.getElementById('editCurrencyName').value.trim();
+            let rate = parseFloat(document.getElementById('editCurrencyRate').value);
+            if(!name || isNaN(rate) || rate <= 0) { showToast('⚠️ بيانات غير صحيحة'); return; }
+            db.collection("currencies").doc(id).update({ name, rate }).then(() => {
+                showToast('✅ تم التعديل بنجاح!');
+                document.getElementById('editCurrencyModal').style.display = 'none';
+            });
         }
 
         /* ------------------ إدارة طرق الدفع والإيداع ------------------ */
@@ -1212,11 +1374,26 @@
 
         function adminAddCoupon() {
             let code = document.getElementById('newCouponCode').value.trim().toUpperCase();
-            let discount = parseFloat(document.getElementById('newCouponDiscount').value);
-            if (!code || isNaN(discount) || discount <= 0) { showToast('⚠️ كود أو خصم غير صالح!'); return; }
-            db.collection("coupons").add({ code, discount }).then(() => {
-                showToast('✅ تم إضافة الكوبون!');
-                document.getElementById('newCouponCode').value = ''; document.getElementById('newCouponDiscount').value = '';
+            let discountPercentage = parseFloat(document.getElementById('newCouponDiscountPercent').value) || 0;
+            let minLimit = parseFloat(document.getElementById('newCouponMinLimit').value) || 0;
+            let maxDiscountCap = parseFloat(document.getElementById('newCouponMaxCap').value) || 999999;
+            let maxUses = parseInt(document.getElementById('newCouponMaxUses').value) || 100;
+
+            if (!code || discountPercentage <= 0) { showToast('⚠️ يرجى إدخال الكود ونسبة الخصم بشكل صحيح!'); return; }
+            db.collection("coupons").add({ 
+                code, 
+                discountPercentage, 
+                minLimit, 
+                maxDiscountCap, 
+                maxUses, 
+                usedList: [] 
+            }).then(() => {
+                showToast('✅ تم إضافة الكوبون بنجاح!');
+                document.getElementById('newCouponCode').value = ''; 
+                document.getElementById('newCouponDiscountPercent').value = '';
+                document.getElementById('newCouponMinLimit').value = '';
+                document.getElementById('newCouponMaxCap').value = '';
+                document.getElementById('newCouponMaxUses').value = '';
             });
         }
 
@@ -1270,7 +1447,31 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
-            /* رسم شاشة إدارة طرق الدفع */
+            /* رسم شاشة إدارة العملات */
+            let currencyAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:#34d399;">إضافة عملة جديدة 💱</h3>
+                    <input type="text" id="newCurrName" placeholder="اسم العملة / الرمز (مثال: TL, ليرة تركية)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.0001" id="newCurrRate" placeholder="سعر الصرف مقابل الدولار (مثال: 34.5)..." style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <button onclick="adminAddCurrency()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة العملة</button>
+                </div>
+                <h4 style="color:#34d399;">العملات المضافة:</h4>
+            `;
+            if(storeCurrencies.length === 0) { currencyAdminHtml += '<p>لا توجد عملات مضافة بعد.</p>'; }
+            else {
+                storeCurrencies.forEach(curr => {
+                    currencyAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><b>${curr.name}</b> <br><span style="font-size:11px; color:#a7f3d0;">سعر الصرف: ${curr.rate}</span></div>
+                        <div style="display:flex; gap:5px;">
+                            <button onclick="openEditCurrencyModal('${curr.id}', '${curr.name}', ${curr.rate})" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
+                            <button onclick="adminDeleteCurrency('${curr.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
+                        </div>
+                    </div>`;
+                });
+            }
+            document.getElementById('adminCurrenciesSection').innerHTML = currencyAdminHtml;
+
+            /* رسم شاشة إدارة طرق الدفع والإيداع */
             let pmAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة طريقة دفع جديدة 💳</h3>
@@ -1391,9 +1592,42 @@
             }
             document.getElementById('adminProductsSection').innerHTML = prodHtml;
 
-            let cpnHtml = `<div class="request-card"><h3 style="margin-top:0; color:#34d399;">إنشاء كوبون</h3><input type="text" id="newCouponCode" placeholder="الكود" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><input type="number" id="newCouponDiscount" placeholder="الخصم $" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;"><button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة</button></div>`;
+            let cpnHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:#34d399;">إنشاء كوبون خصم متطور 🎟️</h3>
+                    <input type="text" id="newCouponCode" placeholder="كود الخصم (مثال: SAVE20)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="1" id="newCouponDiscountPercent" placeholder="نسبة الخصم % (مثال: 10 تعني 10%)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMinLimit" placeholder="الحد الأدنى للطلب ($) (مثال: 4)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMaxCap" placeholder="أقصى عدد/مبلغ خصم للكود ($) (مثال: 20)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" id="newCouponMaxUses" placeholder="عدد الناس الذين يمكنهم استخدامه (مثال: 50)" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الكوبون</button>
+                </div>
+                <h4 style="color:#34d399;">الكوبونات الحالية وسجل الاستخدام:</h4>
+            `;
+
             availableCoupons.forEach(c => {
-                cpnHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> ($${c.discount})</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
+                let usedList = c.usedList || [];
+                let usedDetailsHtml = '';
+                if(usedList.length === 0) {
+                    usedDetailsHtml = '<div style="font-size:11px; color:#a7f3d0; margin-top:5px;">لم يقم أحد باستخدام هذا الكود بعد.</div>';
+                } else {
+                    usedDetailsHtml = '<div style="margin-top:8px; font-size:11px; background:#022c22; padding:6px; border-radius:6px;"><b style="color:#34d399;">من استخدَم الكود:</b>';
+                    usedList.forEach(u => {
+                        usedDetailsHtml += `<div style="border-bottom:1px solid rgba(16,185,129,0.2); padding:3px 0;">👤 ${u.userEmail} | تم خصم: $${parseFloat(u.discountAmount).toFixed(2)}</div>`;
+                    });
+                    usedDetailsHtml += '</div>';
+                }
+
+                cpnHtml += `<div style="background:#064e3b; padding:12px; border-radius:8px; border:1px solid #10b981; margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <b>${c.code}</b> (نسبة الخصم: ${c.discountPercentage}%)<br>
+                            <span style="font-size:11px; color:#a7f3d0;">الحد الأدنى: $${c.minLimit || 0} | أقصى خصم: $${c.maxDiscountCap || 'بلا'} | الاستخدامات: ${usedList.length} / ${c.maxUses || 'غير محدود'}</span>
+                        </div>
+                        <button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button>
+                    </div>
+                    ${usedDetailsHtml}
+                </div>`;
             });
             document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
 
