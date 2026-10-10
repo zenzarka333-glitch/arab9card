@@ -19,7 +19,6 @@
         .toast-message { background: #022c22; color: white; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; text-align: center; border: 1px solid #10b981; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: fadeInOut 3s forwards; pointer-events: auto; }
         @keyframes fadeInOut { 0% { opacity: 0; transform: translateY(-20px); } 15% { opacity: 1; transform: translateY(0); } 85% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-20px); } }
 
-        /* شريط الإشعار المباشر للعمليات عند الشراء الفعلي فقط */
         #liveSalesBanner {
             position: fixed; bottom: 15px; right: 15px; z-index: 99999;
             background: rgba(2, 44, 34, 0.95); border: 1.5px solid #10b981;
@@ -72,7 +71,6 @@
         .modal input, .modal select { 
             width: 100%; padding: 12px; margin: 8px 0; border: 1.5px solid #10b981; border-radius: 12px; box-sizing: border-box; text-align: right; background-color: #f8fafc !important; color: #0f172a !important; font-family: inherit; font-size: 14px; font-weight: bold; outline: none; 
         }
-        .modal input::placeholder { color: #64748b !important; opacity: 1; }
 
         .coupon-group { display: flex; gap: 6px; margin-bottom: 8px; }
         .coupon-btn { background: #022c22; color: #34d399; border: 1px solid #10b981; padding: 0 15px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 12px; }
@@ -81,7 +79,7 @@
         .buy-action-btn { flex: 1; background-color: #10b981; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .cancel-action-btn { flex: 1; background-color: #ffffff; color: #f87171; border: 1px solid #f87171; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        #gamesPage, #freeFireSubPage, #robot1Page, #subLinkGemsPage, #levelPacksPage, #membershipsPage, #ffCodesPage, #companyCodesPage, #ffEuropePage, #pubgSubPage, #pubgRobotPage, #pubgCodesPage, #minecraftPage, #telecomPage, #egyptTelecomPage, #jordanTelecomPage, #zainSubPage, #orangeSubPage, #zainGsmPage, #zainDataPage, #zainMixPage, #orangeCallPage, #orangeInternetPage, #orangeNassPage, #orangeWinkPage, #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage { display: none; }
+        #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage, #dynamicCategoryViewPage { display: none; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 44, 34, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background-color: #064e3b; color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; border: 2px solid #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
@@ -106,20 +104,14 @@
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #a7f3d0; margin-bottom: 6px; padding-right: 5px; }
         .pf-input { width: 100%; padding: 14px; border: 1px solid #10b981; border-radius: 10px; background-color: #022c22 !important; color: white !important; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
-        .pf-input::placeholder { color: #94a3b8; }
-        .pf-btn-submit { background-color: #10b981; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 15px; cursor: pointer; }
 
-        /* تعديل لوحة التحكم لتدعم التمرير بالكامل وعدم قص محتوى المستخدمين */
         #adminDashboardPage { background-color: #022c22; min-height: 100vh; height: 100vh; overflow-y: auto; width: 100%; box-sizing: border-box; padding-bottom: 80px; }
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; color: white; box-sizing: border-box; width: 100%; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #064e3b; color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid #10b981; }
         .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
-        .admin-tab { flex: 1; min-width: 70px; text-align: center; padding: 10px 5px; background: #064e3b; border-radius: 8px; font-weight: bold; cursor: pointer; color: #34d399; font-size: 11px; border: 1px solid #10b981; }
+        .admin-tab { flex: 1; min-width: 65px; text-align: center; padding: 10px 5px; background: #064e3b; border-radius: 8px; font-weight: bold; cursor: pointer; color: #34d399; font-size: 11px; border: 1px solid #10b981; }
         .admin-tab.active { background: #10b981; color: white; }
         .request-card { background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid #10b981; border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box; }
-        .request-card.approved { border-right-color: #34d399; opacity: 0.95; }
-        .request-card.rejected { border-right-color: #f87171; opacity: 0.95; }
-        .req-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-acc { background: #10b981; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #ef4444; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
@@ -128,7 +120,6 @@
         .stat-num { font-size: 20px; font-weight: 900; color: #34d399; }
         .stat-title { font-size: 11px; color: #a7f3d0; margin-top: 4px; }
 
-        /* أنماط كشف الحساب */
         .statement-card { background: #064e3b; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid #10b981; font-size: 13px; }
         .st-header { display: flex; justify-content: space-between; font-weight: bold; color: #34d399; margin-bottom: 5px; }
         .st-plus { color: #34d399; }
@@ -139,7 +130,6 @@
 
     <div id="toastContainer"></div>
 
-    <!-- شريط الإشعار المباشر للعمليات عند الشراء الفعلي فقط -->
     <div id="liveSalesBanner">
         <span style="font-size: 18px;">🛒</span>
         <span id="liveSalesText"></span>
@@ -264,6 +254,7 @@
         <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="statementListContainer"></div>
     </div>
 
+    <!-- الصفحة الرئيسية الشاملة لجميع الأقسام الديناميكية -->
     <div id="homePage" style="display: block;">
         <div class="welcome-banner">
             <div class="wb-glow-1"></div>
@@ -271,33 +262,27 @@
             <div class="wb-content">
                 <h3 class="wb-title">أهلاً وسهلاً نورتنا يا وحش! ⚡</h3>
                 <p class="wb-subtitle">هنا راح تحصل كل شي تحتاجه بأفضل الأسعار</p>
-                <div class="wb-btn" onclick="showPage('gamesPage')">تسوق الآن!</div>
+                <div class="wb-btn" onclick="window.scrollTo({top: 300, behavior: 'smooth'});">تسوق الآن!</div>
             </div>
             <div class="wb-logo-box">
                 <span class="wb-logo-text">A9C</span>
             </div>
         </div>
 
-        <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('gamesPage')">
-                <div class="card-box"><div class="card-circle">PUBG</div><div class="card-circle" style="margin-top:2px;">FF</div></div>
-                <div class="card-name-outside">الألعاب</div>
-            </div>
-            <div class="card-wrapper" onclick="showPage('telecomPage')">
-                <div class="card-box"><div class="card-circle" style="color:#34d399;">📱</div><div class="card-name-inside">اتصال</div></div>
-                <div class="card-name-outside">بطاقات الاتصال</div>
-            </div>
-            <div class="card-wrapper" onclick="window.open('https://wa.me/963992448854', '_blank')">
-                <div class="card-box" style="border: 1px solid #25D366; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.15);">
-                    <div class="card-circle" style="color:#25D366; border-color:#25D366; font-size: 24px;">💬</div>
-                    <div class="card-name-inside" style="color:#25D366;">مباشر</div>
-                </div>
-                <div class="card-name-outside" style="color:#25D366;">تواصل معنا</div>
-            </div>
-        </div>
+        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 10px;">🏷️ الأقسام الرئيسية</div>
+        <div class="grid-container" id="dynamicMainCategoriesGrid"></div>
 
-        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 10px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
+        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 20px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
         <div class="grid-container" id="dynamicBestSellersGrid" style="padding-top: 5px;"></div>
+    </div>
+
+    <!-- صفحة العرض الديناميكي لأي قسم فرعي أو منتجات قسم -->
+    <div id="dynamicCategoryViewPage">
+        <div class="page-title" id="dynamicCategoryTitle">القسم</div>
+        <div class="page-title" style="font-size: 14px; color: #a7f3d0; margin-top: 0;" id="dynamicSubCategoriesTitle">📁 الأقسام الفرعية</div>
+        <div class="grid-container" id="dynamicSubCategoriesGrid"></div>
+        <div class="page-title" style="font-size: 14px; color: #34d399; margin-top: 15px;" id="dynamicProductsTitle">📦 المنتجات</div>
+        <div class="grid-container" id="dynamicCategoryProductsGrid"></div>
     </div>
 
     <div id="addBalancePage">
@@ -307,39 +292,6 @@
         </div>
     </div>
     <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
-
-    <div id="gamesPage">
-        <div class="page-title">الألعاب</div>
-        <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('freeFireSubPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">FF</div><div class="card-name-inside">فري فاير</div></div><div class="card-name-outside">فري فاير</div></div>
-            <div class="card-wrapper" onclick="showPage('pubgSubPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">PUBG</div><div class="card-name-inside">ببجي موبايل</div></div><div class="card-name-outside">ببجي موبايل</div></div>
-            <div class="card-wrapper" onclick="showPage('minecraftPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">MC</div><div class="card-name-inside">ماين كرافت</div></div><div class="card-name-outside">ماين كرافت</div></div>
-        </div>
-    </div>
-
-    <div id="telecomPage">
-        <div class="page-title">بطاقات الإتصالات</div>
-        <div class="grid-container">
-            <div class="card-wrapper" onclick="showPage('egyptTelecomPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🇪🇬</div><div class="card-name-inside">مصر</div></div><div class="card-name-outside">إتصالات مصر</div></div>
-            <div class="card-wrapper" onclick="showPage('jordanTelecomPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🇯🇴</div><div class="card-name-inside">الأردن</div></div><div class="card-name-outside">إتصالات الأردن</div></div>
-        </div>
-    </div>
-
-    <div id="egyptTelecomPage"><div class="page-title">إتصالات مصر</div><div class="grid-container"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
-    <div id="jordanTelecomPage"><div class="page-title">إتصالات الأردن</div><div class="grid-container">
-        <div class="card-wrapper" onclick="showPage('zainSubPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">ZAIN</div></div><div class="card-name-outside">زين (Zain)</div></div>
-        <div class="card-wrapper" onclick="showPage('orangeSubPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">ORANGE</div></div><div class="card-name-outside">أورنج (Orange)</div></div>
-    </div></div>
-    <div id="zainSubPage"><div class="page-title">زين (Zain)</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('zainGsmPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">GSM</div></div><div class="card-name-outside">Zain GSM</div></div><div class="card-wrapper" onclick="showPage('zainDataPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">DATA</div></div><div class="card-name-outside">Zain Data</div></div><div class="card-wrapper" onclick="showPage('zainMixPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">MIX</div></div><div class="card-name-outside">Zain Mix</div></div></div></div>
-    <div id="orangeSubPage"><div class="page-title">أورنج (Orange)</div><div class="grid-container"><div class="card-wrapper" onclick="showPage('orangeCallPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">📞</div></div><div class="card-name-outside">اورنج إتصال</div></div><div class="card-wrapper" onclick="showPage('orangeInternetPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🌐</div></div><div class="card-name-outside">اورنج إنترنت</div></div><div class="card-wrapper" onclick="showPage('orangeNassPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">½</div></div><div class="card-name-outside">اورنج نص بنص</div></div><div class="card-wrapper" onclick="showPage('orangeWinkPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">WINK</div></div><div class="card-name-outside">اورنج وينك</div></div></div></div>
-
-    <div id="zainGsmPage"><div class="page-title">Zain GSM</div><div class="grid-container" id="zainGsmGrid"></div></div>
-    <div id="zainDataPage"><div class="page-title">Zain Data</div><div class="grid-container" id="zainDataGrid"></div></div>
-    <div id="zainMixPage"><div class="page-title">Zain Mix</div><div class="grid-container" id="zainMixGrid"></div></div>
-    <div id="orangeCallPage"><div class="page-title">اورنج إتصال</div><div class="grid-container"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
-    <div id="orangeInternetPage"><div class="page-title">اورنج إنترنت</div><div class="grid-container"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
-    <div id="orangeNassPage"><div class="page-title">اورنج نص بنص</div><div class="grid-container"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
-    <div id="orangeWinkPage"><div class="page-title">اورنج وينك</div><div class="grid-container"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة حالياً ❌</p></div></div>
 
     <div id="vipTiersPage">
         <div class="page-title">مستويات الحساب (VIP) ⭐</div>
@@ -356,47 +308,8 @@
                 <div style="display: flex; justify-content: space-between; font-size: 12px; color: #a7f3d0; margin-bottom: 5px;"><span>التقدم للشريحة التالية</span><span id="userSpentText">$0.00 / $1.00</span></div>
                 <div style="width: 100%; background: #022c22; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid #10b981;"><div id="tierProgressBar" style="width: 0%; background: #10b981; height: 100%; transition: width 0.3s;"></div></div>
             </div>
-            
-            <div style="margin-top: 25px; background: linear-gradient(135deg, #022c22, #064e3b); border: 1px solid #10b981; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2); position: relative; overflow: hidden;">
-                <div style="position: absolute; top: 15px; right: -35px; background: #10b981; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 11px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">عرض خاص</div>
-                <div style="font-size: 30px; margin-bottom: 10px;">💎</div>
-                <h4 style="color: #34d399; margin: 0 0 10px 0; font-size: 16px;">ترقية فورية لـ "حساب تاجر"</h4>
-                <p style="color: #a7f3d0; font-size: 12px; line-height: 1.6; margin-bottom: 15px;">
-                    اشترِ هذه الباقة بـ 300$ وستتم إضافتها لمبيعاتك فوراً!<br>
-                    ستحصل تلقائياً على شريحة <b>الألماسي</b> وتستمتع بحسم دائم 5% على جميع المنتجات.
-                </p>
-                <button onclick="openOrderModal('ترقية حساب تاجر (الماسي)', 300)" style="background-color: #10b981; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); width: 100%;">
-                    شراء الترقية الآن - 300$
-                </button>
-            </div>
         </div>
     </div>
-
-    <!-- الأقسام الفرعية للألعاب -->
-    <div id="freeFireSubPage"><div class="page-title">فري فاير</div><div class="grid-container">
-        <div class="card-wrapper" onclick="showPage('robot1Page')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🤖</div></div><div class="card-name-outside">روبوت 1</div></div>
-        <div class="card-wrapper" onclick="showPage('subLinkGemsPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">💎</div></div><div class="card-name-outside">جواهر ربط فرعي</div></div>
-        <div class="card-wrapper" onclick="showPage('levelPacksPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">📦</div></div><div class="card-name-outside">حزم المستوى</div></div>
-        <div class="card-wrapper" onclick="showPage('membershipsPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">👑</div></div><div class="card-name-outside">عضويات</div></div>
-        <div class="card-wrapper" onclick="showPage('ffCodesPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🔑</div></div><div class="card-name-outside">فري فاير أكواد</div></div>
-        <div class="card-wrapper" onclick="showPage('companyCodesPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🏷️</div></div><div class="card-name-outside">اكواد شركة فري فاير</div></div>
-        <div class="card-wrapper" onclick="showPage('ffEuropePage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🇪🇺</div></div><div class="card-name-outside">فري فاير أوروبا</div></div>
-    </div></div>
-    <div id="pubgSubPage"><div class="page-title">ببجي موبايل</div><div class="grid-container">
-        <div class="card-wrapper" onclick="showPage('pubgRobotPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🤖</div><div class="card-name-inside">روبوت</div></div><div class="card-name-outside">ببجي روبوت</div></div>
-        <div class="card-wrapper" onclick="showPage('pubgCodesPage')"><div class="card-box"><div class="card-circle" style="color:#34d399;">🔑</div><div class="card-name-inside">أكواد</div></div><div class="card-name-outside">ببجي أكواد</div></div>
-    </div></div>
-
-    <div id="pubgRobotPage"><div class="page-title">ببجي روبوت</div><div class="grid-container" id="pubgRobotGrid"></div></div>
-    <div id="pubgCodesPage"><div class="page-title">ببجي أكواد</div><div class="grid-container" id="pubgCodesGrid"></div></div>
-    <div id="minecraftPage"><div class="page-title">Minecraft</div><div class="grid-container" id="minecraftGrid"></div></div>
-    <div id="robot1Page"><div class="page-title">فري فاير روبوت 1</div><div class="grid-container" id="robot1Grid"></div></div>
-    <div id="subLinkGemsPage"><div class="page-title">جواهر ربط فرعي</div><div class="grid-container" id="subLinkGemsGrid"></div></div>
-    <div id="levelPacksPage"><div class="page-title">حزم المستوى</div><div class="grid-container" id="levelPacksGrid"><p style="text-align:center; color:#a7f3d0; grid-column: span 3;">جميع حزم المستوى غير متوفرة حالياً ❌</p></div></div>
-    <div id="membershipsPage"><div class="page-title">عضويات</div><div class="grid-container" id="membershipsGrid"></div></div>
-    <div id="ffCodesPage"><div class="page-title">فري فاير أكواد</div><div class="grid-container" id="ffCodesGrid"></div></div>
-    <div id="companyCodesPage"><div class="page-title">اكواد شركة فري فاير</div><div class="grid-container" id="companyCodesGrid"></div></div>
-    <div id="ffEuropePage"><div class="page-title">فري فاير أوروبا</div><div class="grid-container" id="ffEuropeGrid"></div></div>
 
     <!-- نافذة الطلب -->
     <div id="orderModal" class="modal">
@@ -418,36 +331,24 @@
             </div>
         </div>
     </div>
-    
-    <div id="codeOrderModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <div class="modal-header">
-                <span id="codeModalItemTitle" style="font-size: 15px;">المنتج</span>
-                <span class="price-tag" id="codeModalItemPrice">$ 0.00</span>
-            </div>
-            <div style="margin-bottom: 8px; text-align: right;">
-                <label style="font-size: 12px; color: #064e3b; display: block; margin-bottom: 3px; font-weight: bold;">العدد</label>
-                <input type="number" id="codeQuantity" value="1" min="1" oninput="updateCodeTotal()">
-            </div>
-            
-            <div class="coupon-group">
-                <input type="text" id="codeCouponInput" placeholder="كوبون الخصم" style="margin:0;">
-                <button class="coupon-btn" onclick="applyCoupon('code')">تطبيق</button>
-            </div>
 
-            <div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #10b981;">
-                <span style="font-size: 13px; color: #064e3b; font-weight: bold;">الإجمالي النهائي</span>
-                <span id="codeModalTotal" style="color: #047857; font-weight: bold; font-size: 15px;">$ 0.00</span>
-            </div>
-            
+    <!-- نافذة تعديل القسم -->
+    <div id="editCategoryModal" class="modal">
+        <div class="modal-content" style="max-width: 380px; text-align: right;">
+            <h3 style="color:#34d399; margin-top:0;">تعديل القسم</h3>
+            <input type="hidden" id="editCatId">
+            <label style="font-size:12px; color:#064e3b;">اسم القسم</label>
+            <input type="text" id="editCatTitle">
+            <label style="font-size:12px; color:#064e3b;">تغيير صورة القسم من الجهاز</label>
+            <input type="file" id="editCatImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
             <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitCodeOrder()">شراء</button>
-                <button class="cancel-action-btn" onclick="closeCodeOrderModal()">إلغاء</button>
+                <button class="buy-action-btn" onclick="saveEditedCategory()">حفظ التعديلات</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('editCategoryModal').style.display='none'">إلغاء</button>
             </div>
         </div>
     </div>
     
-    <!-- نافذة تعديل المنتج من لوحة التحكم مع اختيار رفع صورة من الجهاز -->
+    <!-- نافذة تعديل المنتج -->
     <div id="editProductModal" class="modal">
         <div class="modal-content" style="max-width: 380px; text-align: right;">
             <h3 style="color:#34d399; margin-top:0;">تعديل المنتج</h3>
@@ -456,22 +357,8 @@
             <input type="text" id="editProductTitle">
             <label style="font-size:12px; color:#064e3b;">السعر ($)</label>
             <input type="number" step="0.001" id="editProductPrice">
-            <label style="font-size:12px; color:#064e3b;">القسم</label>
-            <select id="editProductCat">
-                <option value="best">الأكثر مبيعاً</option>
-                <option value="zainGsmGrid">Zain GSM</option>
-                <option value="zainDataGrid">Zain Data</option>
-                <option value="zainMixGrid">Zain Mix</option>
-                <option value="pubgRobotGrid">ببجي روبوت</option>
-                <option value="pubgCodesGrid">ببجي أكواد</option>
-                <option value="minecraftGrid">ماين كرافت</option>
-                <option value="robot1Grid">فري فاير روبوت 1</option>
-                <option value="subLinkGemsGrid">جواهر ربط فرعي</option>
-                <option value="membershipsGrid">عضويات</option>
-                <option value="ffCodesGrid">فري فاير أكواد</option>
-                <option value="companyCodesGrid">اكواد شركة فري فاير</option>
-                <option value="ffEuropeGrid">فري فاير أوروبا</option>
-            </select>
+            <label style="font-size:12px; color:#064e3b;">اختر القسم</label>
+            <select id="editProductCatSelect"></select>
             <label style="font-size:12px; color:#064e3b;">رفع صورة جديدة من الجهاز</label>
             <input type="file" id="editProductImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
             <div class="modal-buttons">
@@ -481,90 +368,10 @@
         </div>
     </div>
 
-    <!-- نافذة الربط الفرعي والعضويات -->
-    <div id="subLinkModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <div class="modal-header">
-                <span id="subLinkModalTitle" style="font-size: 15px;">المنتج</span>
-                <span class="price-tag" id="subLinkModalPrice">$ 0.00</span>
-            </div>
-            
-            <div style="margin-bottom: 5px;">
-                <label style="font-size: 12px; color: #064e3b; display: block; margin-bottom: 3px; font-weight: bold;">العدد</label>
-                <input type="number" id="subLinkQty" value="1" min="1" oninput="updateSubLinkTotal()">
-            </div>
-
-            <div style="background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #10b981;">
-                <span style="font-size: 13px; color: #064e3b; font-weight: bold;">الإجمالي</span>
-                <span id="subLinkTotal" style="color: #047857; font-weight: bold; font-size: 15px;">$ 0.00</span>
-            </div>
-
-            <div style="background: #f0fdf4; color: #064e3b; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 11px; border: 1px solid #10b981; text-align: center; line-height: 1.4;">
-                يرجى إدخال رقمك بالأسفل وإرسال الطلب، وسنقوم <b>نحن بالتواصل معك</b>.
-            </div>
-
-            <div style="margin-bottom: 5px;">
-                <select id="subLinkContactMethod">
-                    <option value="" disabled selected>اختر المنصة للتواصل...</option>
-                    <option value="واتساب">واتساب</option>
-                    <option value="تيليجرام">تيليجرام</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 10px; display: flex; gap: 8px; align-items: flex-end;">
-                <div style="width: 85px;">
-                    <div style="position: relative; display: flex; align-items: center;">
-                        <input type="text" id="subLinkCountryCode" placeholder="+963" oninput="updateFlag('subLinkCountryCode', 'subLinkFlagDisplay')" style="padding-left: 24px; font-size: 13px;">
-                        <span id="subLinkFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span>
-                    </div>
-                </div>
-                <div style="flex: 1;">
-                    <input type="text" id="subLinkContact" placeholder="رقم هاتفك">
-                </div>
-            </div>
-
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitSubLinkOrder()">إرسال الطلب</button>
-                <button class="cancel-action-btn" onclick="closeSubLinkModal()">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة إهداء بويا باس -->
-    <div id="booyahModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <div class="modal-header">
-                <span id="booyahModalTitle" style="font-size: 15px;">إهداء بويا باس</span>
-                <span class="price-tag" id="booyahModalPrice">$ 0.00</span>
-            </div>
-            <div style="margin-bottom: 5px;">
-                <select id="booyahContactMethod">
-                    <option value="" disabled selected>اختر طريقة التواصل</option>
-                    <option value="واتساب">واتساب</option>
-                    <option value="تيليجرام">تيليجرام</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: flex-end;">
-                <div style="width: 85px;">
-                    <div style="position: relative; display: flex; align-items: center;">
-                        <input type="text" id="booyahCountryCode" placeholder="+963" oninput="updateFlag('booyahCountryCode', 'booyahFlagDisplay')" style="padding-left: 24px; font-size: 13px;">
-                        <span id="booyahFlagDisplay" style="position: absolute; left: 6px; font-size: 14px;">🌐</span>
-                    </div>
-                </div>
-                <div style="flex: 1;">
-                    <input type="text" id="booyahContact" placeholder="رقم الهاتف">
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="submitBooyahOrder()">شراء</button>
-                <button class="cancel-action-btn" onclick="closeBooyahModal()">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
     <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
     <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
 
+    <!-- لوحة التحكم الإدارية الشاملة -->
     <div id="adminDashboardPage">
         <div class="admin-wrapper">
             <div class="admin-header">
@@ -575,7 +382,6 @@
                 </div>
             </div>
 
-            <!-- بطاقات الإحصائيات والأرباح -->
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                 <div class="stat-card">
                     <div class="stat-num" id="statTotalRevenue">$0.00</div>
@@ -594,6 +400,7 @@
             <div class="admin-tabs">
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">إدارة الأقسام 🏷️</div>
                 <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
                 <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
                 <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
@@ -602,6 +409,7 @@
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
+            <div id="adminCategoriesSection" style="display:none;"></div>
             <div id="adminProductsSection" style="display:none;"></div>
             <div id="adminCouponsSection" style="display:none;"></div>
             <div id="adminSupportSection" style="display:none;"></div>
@@ -630,13 +438,13 @@
         let availableCoupons = [];
         let manualUserTiers = {};
         let storeProducts = [];
+        let storeCategories = [];
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
-        let currentCodeProduct = { title: '', price: 0, originalPrice: 0 };
-        let currentSubLinkProduct = { title: '', price: 0 };
-        let currentBooyahProduct = { title: '', price: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
         let currentEditProductImgUrl = "";
+        let currentEditCatImgUrl = "";
+        let selectedCategoryForView = null;
 
         function showToast(message) {
             let container = document.getElementById('toastContainer');
@@ -645,20 +453,6 @@
             toast.innerText = message;
             container.appendChild(toast);
             setTimeout(() => { toast.remove(); }, 3000);
-        }
-
-        const countryFlags = {
-            '963': '🇸🇾', '964': '🇮🇶', '966': '🇸🇦', '971': '🇦🇪', '20': '🇪🇬',  
-            '961': '🇱🇧', '962': '🇯🇴', '965': '🇰🇼', '974': '🇶🇦', '973': '🇧🇭', 
-            '968': '🇴🇲', '967': '🇾🇪', '212': '🇲🇦', '213': '🇩ℤ', '216': '🇹🇳', 
-            '249': '🇸🇩', '972': '🇵🇸', '90': '🇹🇷',  '1': '🇺🇸',   '49': '🇩🇪',  
-            '7': '🇷🇺',   '91': '🇮🇳',  '86': '🇨🇳',  '82': '🇰🇷',  '850': '🇰🇵', '81': '🇯🇵'   
-        };
-
-        function updateFlag(inputId, flagId) {
-            let val = document.getElementById(inputId).value.replace('+', '').trim();
-            let flagSpan = document.getElementById(flagId);
-            if (countryFlags[val]) { flagSpan.innerText = countryFlags[val]; } else { flagSpan.innerText = '🌐'; }
         }
 
         const paymentMethods = [
@@ -688,6 +482,13 @@
             grid.innerHTML = html;
             showPage('searchResultsPage');
         }
+
+        db.collection("categories").onSnapshot((snapshot) => {
+            storeCategories = [];
+            snapshot.forEach((doc) => { storeCategories.push({ id: doc.id, ...doc.data() }); });
+            renderCategoriesAndStore();
+            renderAdminData();
+        });
 
         db.collection("coupons").onSnapshot((snapshot) => {
             availableCoupons = [];
@@ -736,57 +537,91 @@
         db.collection("products").onSnapshot((snapshot) => {
             storeProducts = [];
             snapshot.forEach((doc) => { storeProducts.push({ id: doc.id, ...doc.data() }); });
-            renderDynamicProducts();
+            renderCategoriesAndStore();
             renderAdminData();
         });
 
-        function renderDynamicProducts() {
-            let bestSellersHtml = '';
-            let zainGsmHtml = '';
-            let zainDataHtml = '';
-            let zainMixHtml = '';
-            let pubgRobotHtml = '';
-            let pubgCodesHtml = '';
-            let minecraftHtml = '';
-            let robot1Html = '';
-            let subLinkGemsHtml = '';
-            let membershipsHtml = '';
-            let ffCodesHtml = '';
-            let companyCodesHtml = '';
-            let ffEuropeHtml = '';
+        function renderCategoriesAndStore() {
+            let mainCatsHtml = '';
+            let mainCategories = storeCategories.filter(c => !c.parentId || c.parentId === 'none');
 
-            storeProducts.forEach(p => {
-                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
-                let cardHtml = `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div><div class="card-name-outside">${p.title}</div><div class="card-price-outside">$ ${p.price.toFixed(3)}</div></div>`;
-
-                if (p.category === 'best') bestSellersHtml += cardHtml;
-                if (p.category === 'zainGsmGrid') zainGsmHtml += cardHtml;
-                if (p.category === 'zainDataGrid') zainDataHtml += cardHtml;
-                if (p.category === 'zainMixGrid') zainMixHtml += cardHtml;
-                if (p.category === 'pubgRobotGrid') pubgRobotHtml += cardHtml;
-                if (p.category === 'pubgCodesGrid') pubgCodesHtml += cardHtml;
-                if (p.category === 'minecraftGrid') minecraftHtml += cardHtml;
-                if (p.category === 'robot1Grid') robot1Html += cardHtml;
-                if (p.category === 'subLinkGemsGrid') subLinkGemsHtml += cardHtml;
-                if (p.category === 'membershipsGrid') membershipsHtml += cardHtml;
-                if (p.category === 'ffCodesGrid') ffCodesHtml += cardHtml;
-                if (p.category === 'companyCodesGrid') companyCodesHtml += cardHtml;
-                if (p.category === 'ffEuropeGrid') ffEuropeHtml += cardHtml;
+            mainCategories.forEach(cat => {
+                let imgContent = cat.img && (cat.img.startsWith('http') || cat.img.startsWith('data:image')) ? `<img src="${cat.img}" alt="">` : (cat.img || '🏷️');
+                mainCatsHtml += `<div class="card-wrapper" onclick="openCategoryView('${cat.id}')">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">قسم</div></div>
+                    <div class="card-name-outside">${cat.title}</div>
+                </div>`;
             });
 
-            if(document.getElementById('dynamicBestSellersGrid')) document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد عروض مضافة حالياً</p>';
-            if(document.getElementById('zainGsmGrid')) document.getElementById('zainGsmGrid').innerHTML = zainGsmHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('zainDataGrid')) document.getElementById('zainDataGrid').innerHTML = zainDataHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('zainMixGrid')) document.getElementById('zainMixGrid').innerHTML = zainMixHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('pubgRobotGrid')) document.getElementById('pubgRobotGrid').innerHTML = pubgRobotHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('pubgCodesGrid')) document.getElementById('pubgCodesGrid').innerHTML = pubgCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('minecraftGrid')) document.getElementById('minecraftGrid').innerHTML = minecraftHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('robot1Grid')) document.getElementById('robot1Grid').innerHTML = robot1Html || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('subLinkGemsGrid')) document.getElementById('subLinkGemsGrid').innerHTML = subLinkGemsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('membershipsGrid')) document.getElementById('membershipsGrid').innerHTML = membershipsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('ffCodesGrid')) document.getElementById('ffCodesGrid').innerHTML = ffCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('companyCodesGrid')) document.getElementById('companyCodesGrid').innerHTML = companyCodesHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
-            if(document.getElementById('ffEuropeGrid')) document.getElementById('ffEuropeGrid').innerHTML = ffEuropeHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات</p>';
+            if (document.getElementById('dynamicMainCategoriesGrid')) {
+                document.getElementById('dynamicMainCategoriesGrid').innerHTML = mainCatsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد أقسام رئيسية بعد ❌ قم بإضافتها من لوحة التحكم</p>';
+            }
+
+            let bestSellersHtml = '';
+            let bestProducts = storeProducts.filter(p => p.category === 'best');
+            bestProducts.forEach(p => {
+                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                bestSellersHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div>
+                    <div class="card-name-outside">${p.title}</div>
+                    <div class="card-price-outside">$ ${p.price.toFixed(3)}</div>
+                </div>`;
+            });
+
+            if (document.getElementById('dynamicBestSellersGrid')) {
+                document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد عروض مضافة حالياً</p>';
+            }
+
+            if (selectedCategoryForView) {
+                renderSubCategoryView(selectedCategoryForView);
+            }
+        }
+
+        function openCategoryView(catId) {
+            selectedCategoryForView = catId;
+            renderSubCategoryView(catId);
+            showPage('dynamicCategoryViewPage');
+        }
+
+        function renderSubCategoryView(catId) {
+            let currentCat = storeCategories.find(c => c.id === catId);
+            if (!currentCat) return;
+
+            document.getElementById('dynamicCategoryTitle').innerText = currentCat.title;
+
+            let subCats = storeCategories.filter(c => c.parentId === catId);
+            let subCatsHtml = '';
+            subCats.forEach(sc => {
+                let imgContent = sc.img && (sc.img.startsWith('http') || sc.img.startsWith('data:image')) ? `<img src="${sc.img}" alt="">` : (sc.img || '📁');
+                subCatsHtml += `<div class="card-wrapper" onclick="openCategoryView('${sc.id}')">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">فرعي</div></div>
+                    <div class="card-name-outside">${sc.title}</div>
+                </div>`;
+            });
+
+            let subTitleEl = document.getElementById('dynamicSubCategoriesTitle');
+            let subGridEl = document.getElementById('dynamicSubCategoriesGrid');
+            if (subCats.length > 0) {
+                subTitleEl.style.display = 'block';
+                subGridEl.style.display = 'grid';
+                subGridEl.innerHTML = subCatsHtml;
+            } else {
+                subTitleEl.style.display = 'none';
+                subGridEl.style.display = 'none';
+            }
+
+            let catProducts = storeProducts.filter(p => p.category === catId);
+            let prodHtml = '';
+            catProducts.forEach(p => {
+                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                prodHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div>
+                    <div class="card-name-outside">${p.title}</div>
+                    <div class="card-price-outside">$ ${p.price.toFixed(3)}</div>
+                </div>`;
+            });
+
+            document.getElementById('dynamicCategoryProductsGrid').innerHTML = prodHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات مضافة لهذا القسم حالياً ❌</p>';
         }
 
         function triggerLiveSalesPopup(email, product) {
@@ -825,13 +660,6 @@
                 sender: currentUserEmail, text: text, isAdmin: false, timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 input.value = "";
-                if (text.toLowerCase().includes("السلام عليكم") || text.toLowerCase().includes("مرحبا")) {
-                    setTimeout(() => {
-                        db.collection("support_messages").add({
-                            sender: 'الإدارة', target: currentUserEmail, text: "وعليكم السلام ورحمة الله، كيف فيني ساعدك...?", isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    }, 1000);
-                }
             });
         }
 
@@ -886,7 +714,7 @@
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'gamesPage', 'freeFireSubPage', 'pubgSubPage', 'pubgRobotPage', 'pubgCodesPage', 'minecraftPage', 'telecomPage', 'egyptTelecomPage', 'jordanTelecomPage', 'zainSubPage', 'orangeSubPage', 'zainGsmPage', 'zainDataPage', 'zainMixPage', 'orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'];
+            const pages = ['homePage', 'dynamicCategoryViewPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'];
             pages.forEach(p => { let el = document.getElementById(p); if (el) el.style.display = 'none'; });
             let targetEl = document.getElementById(pageId);
             if (targetEl) targetEl.style.display = 'block';
@@ -897,15 +725,7 @@
 
         function goBack() {
             if (currentPage === 'paymentFormPage') showPage('addBalancePage');
-            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'gamesPage', 'adminDashboardPage', 'vipTiersPage', 'telecomPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'].includes(currentPage)) showPage('homePage');
-            else if (['egyptTelecomPage', 'jordanTelecomPage'].includes(currentPage)) showPage('telecomPage');
-            else if (['pubgRobotPage', 'pubgCodesPage'].includes(currentPage)) showPage('pubgSubPage');
-            else if (['minecraftPage'].includes(currentPage)) showPage('gamesPage');
-            else if (['zainGsmPage', 'zainDataPage', 'zainMixPage'].includes(currentPage)) showPage('zainSubPage');
-            else if (['orangeCallPage', 'orangeInternetPage', 'orangeNassPage', 'orangeWinkPage'].includes(currentPage)) showPage('orangeSubPage');
-            else if (['zainSubPage', 'orangeSubPage'].includes(currentPage)) showPage('jordanTelecomPage');
-            else if (['robot1Page', 'subLinkGemsPage', 'levelPacksPage', 'membershipsPage', 'ffCodesPage', 'companyCodesPage', 'ffEuropePage'].includes(currentPage)) showPage('freeFireSubPage');
-            else if (['pubgSubPage', 'freeFireSubPage'].includes(currentPage)) showPage('gamesPage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'adminDashboardPage', 'vipTiersPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage', 'dynamicCategoryViewPage'].includes(currentPage)) showPage('homePage');
         }
 
         function updateUserBalanceUI() {
@@ -976,18 +796,13 @@
         function getDiscountedPrice(basePrice) { return basePrice * (1 - calculateUserVIP()); }
 
         function applyCoupon(type) {
-            let inputId = type === 'order' ? 'orderCouponInput' : 'codeCouponInput';
+            let inputId = 'orderCouponInput';
             let code = document.getElementById(inputId).value.trim().toUpperCase();
             let found = availableCoupons.find(c => c.code === code);
             if (!found) { showToast('⚠️ كود الخصم غير صحيح أو منتهي الصلاحية!'); return; }
             let discountVal = parseFloat(found.discount);
-            if (type === 'order') {
-                currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - discountVal);
-                document.getElementById('modalItemPrice').innerText = '$ ' + currentSelectedProduct.price.toFixed(3);
-            } else if (type === 'code') {
-                currentCodeProduct.price = Math.max(0, currentCodeProduct.originalPrice - discountVal);
-                updateCodeTotal();
-            }
+            currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - discountVal);
+            document.getElementById('modalItemPrice').innerText = '$ ' + currentSelectedProduct.price.toFixed(3);
             showToast(`🎉 تم تطبيق خصم $${discountVal} بنجاح!`);
         }
 
@@ -1099,38 +914,6 @@
         }
         function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
 
-        function openCodeOrderModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentCodeProduct = { title, price: finalPrice, originalPrice: finalPrice };
-            document.getElementById('codeModalItemTitle').innerText = title; 
-            document.getElementById('codeModalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('codeQuantity').value = 1; document.getElementById('codeModalTotal').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('codeCouponInput').value = "";
-            document.getElementById('codeOrderModal').style.display = 'flex';
-        }
-        function closeCodeOrderModal() { document.getElementById('codeOrderModal').style.display = 'none'; }
-        function updateCodeTotal() { let qty = parseInt(document.getElementById('codeQuantity').value) || 1; document.getElementById('codeModalTotal').innerText = '$ ' + (currentCodeProduct.price * qty).toFixed(3); }
-
-        function openSubLinkModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentSubLinkProduct = { title, price: finalPrice };
-            document.getElementById('subLinkModalTitle').innerText = title; document.getElementById('subLinkModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            document.getElementById('subLinkQty').value = 1; document.getElementById('subLinkTotal').innerText = '$ ' + finalPrice.toFixed(3);
-            ['subLinkContactMethod','subLinkCountryCode','subLinkContact'].forEach(id => document.getElementById(id).value = "");
-            document.getElementById('subLinkFlagDisplay').innerText = "🌐"; document.getElementById('subLinkModal').style.display = 'flex';
-        }
-        function closeSubLinkModal() { document.getElementById('subLinkModal').style.display = 'none'; }
-        function updateSubLinkTotal() { let qty = parseInt(document.getElementById('subLinkQty').value) || 1; document.getElementById('subLinkTotal').innerText = '$ ' + (currentSubLinkProduct.price * qty).toFixed(3); }
-
-        function openBooyahModal(title, basePrice) {
-            let finalPrice = getDiscountedPrice(basePrice);
-            currentBooyahProduct = { title, price: finalPrice };
-            document.getElementById('booyahModalTitle').innerText = title; document.getElementById('booyahModalPrice').innerText = '$ ' + finalPrice.toFixed(3);
-            ['booyahContactMethod','booyahCountryCode','booyahContact'].forEach(id => document.getElementById(id).value = "");
-            document.getElementById('booyahFlagDisplay').innerText = "🌐"; document.getElementById('booyahModal').style.display = 'flex';
-        }
-        function closeBooyahModal() { document.getElementById('booyahModal').style.display = 'none'; }
-
         function submitGameOrder() {
             let playerId = document.getElementById('playerId').value.trim();
             if(playerId === "") { showToast("⚠️ يرجى إدخال الايدي!"); return; }
@@ -1141,50 +924,6 @@
                 product: productDesc, price: currentSelectedProduct.price, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
                 showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title); closeOrderModal(); 
-            });
-        }
-
-        function submitCodeOrder() {
-            let qty = parseInt(document.getElementById('codeQuantity').value) || 1;
-            let totalPrice = currentCodeProduct.price * qty;
-            if(userBalance < totalPrice) { showToast("⚠️ رصيدك غير كافٍ."); return; }
-            userBalance -= totalPrice; updateUserBalanceUI();
-            let productDesc = currentCodeProduct.title + ` (العدد: ${qty})`;
-            db.collection("orders").add({ 
-                product: productDesc, price: totalPrice, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
-            }).then(() => { 
-                showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentCodeProduct.title); closeCodeOrderModal(); 
-            });
-        }
-
-        function submitSubLinkOrder() {
-            let qty = parseInt(document.getElementById('subLinkQty').value) || 1;
-            let contactMethod = document.getElementById('subLinkContactMethod').value; 
-            let countryCode = document.getElementById('subLinkCountryCode').value.trim(); 
-            let contact = document.getElementById('subLinkContact').value.trim();
-            let totalPrice = currentSubLinkProduct.price * qty;
-            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة الحقول!"); return; }
-            if(userBalance < totalPrice) { showToast("⚠️ رصيدك غير كافٍ."); return; }
-            userBalance -= totalPrice; updateUserBalanceUI();
-            let productDesc = `${currentSubLinkProduct.title} (العدد: ${qty})`;
-            db.collection("orders").add({ 
-                product: productDesc, price: totalPrice, contactMethod: contactMethod, countryCode: countryCode, contact: `${countryCode} ${contact}`, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
-            }).then(() => { 
-                showToast("🚀 تم إرسال الطلب!"); triggerLiveSalesPopup(currentUserEmail, currentSubLinkProduct.title); closeSubLinkModal(); 
-            });
-        }
-
-        function submitBooyahOrder() {
-            let contactMethod = document.getElementById('booyahContactMethod').value; 
-            let countryCode = document.getElementById('booyahCountryCode').value.trim(); 
-            let contact = document.getElementById('booyahContact').value.trim();
-            if(!contactMethod||!countryCode||!contact) { showToast("⚠️ يرجى تعبئة الحقول!"); return; }
-            if(userBalance < currentBooyahProduct.price) { showToast("⚠️ رصيدك غير كافٍ."); return; }
-            userBalance -= currentBooyahProduct.price; updateUserBalanceUI();
-            db.collection("orders").add({ 
-                product: currentBooyahProduct.title, price: currentBooyahProduct.price, contactMethod: contactMethod, countryCode: countryCode, contact: `${countryCode} ${contact}`, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
-            }).then(() => { 
-                showToast("🚀 تم تسجيل الطلب!"); triggerLiveSalesPopup(currentUserEmail, currentBooyahProduct.title); closeBooyahModal(); 
             });
         }
 
@@ -1200,9 +939,10 @@
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
             document.getElementById('tabBalance').classList.toggle('active', isBal); 
             document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabCategories').classList.toggle('active', isCat); 
             document.getElementById('tabProducts').classList.toggle('active', isPrd);
             document.getElementById('tabCoupons').classList.toggle('active', isCpn); 
             document.getElementById('tabSupport').classList.toggle('active', isSup);
@@ -1210,16 +950,80 @@
             
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
             document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminCategoriesSection').style.display = isCat ? 'block' : 'none';
             document.getElementById('adminProductsSection').style.display = isPrd ? 'block' : 'none';
             document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
             document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
             document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
         }
 
+        /* ------------------ إدارة الأقسام الرئيسية والفرعية ------------------ */
+        function adminAddCategory() {
+            let title = document.getElementById('newCatTitle').value.trim();
+            let parentId = document.getElementById('newCatParentSelect').value;
+            let fileInput = document.getElementById('newCatImgFile');
+
+            if (!title) { showToast('⚠️ يرجى كتابة اسم القسم!'); return; }
+
+            let saveCategory = function(imgData) {
+                db.collection("categories").add({ title, parentId, img: imgData || '🏷️' }).then(() => {
+                    showToast('✅ تم إضافة القسم بنجاح!');
+                    document.getElementById('newCatTitle').value = '';
+                    document.getElementById('newCatImgFile').value = '';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveCategory(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveCategory('🏷️');
+            }
+        }
+
+        function adminDeleteCategory(id) {
+            if(confirm("هل أنت متأكد من حذف هذا القسم؟ قد تتأثر المنتجات المرتبطة به.")) {
+                db.collection("categories").doc(id).delete().then(() => { showToast('🗑️ تم حذف القسم بنجاح!'); });
+            }
+        }
+
+        function openEditCategoryModal(id, title, img) {
+            document.getElementById('editCatId').value = id;
+            document.getElementById('editCatTitle').value = title;
+            currentEditCatImgUrl = img || '🏷️';
+            document.getElementById('editCatImgFile').value = '';
+            document.getElementById('editCategoryModal').style.display = 'flex';
+        }
+
+        function saveEditedCategory() {
+            let id = document.getElementById('editCatId').value;
+            let title = document.getElementById('editCatTitle').value.trim();
+            let fileInput = document.getElementById('editCatImgFile');
+
+            if (!title) { showToast('⚠️ اسم القسم غير صالح!'); return; }
+
+            let updateCat = function(imgData) {
+                db.collection("categories").doc(id).update({ title, img: imgData }).then(() => {
+                    showToast('✅ تم تعديل القسم بنجاح!');
+                    document.getElementById('editCategoryModal').style.display = 'none';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { updateCat(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                updateCat(currentEditCatImgUrl);
+            }
+        }
+
+        /* ------------------ إدارة المنتجات ------------------ */
         function adminAddProduct() {
             let title = document.getElementById('newProdTitle').value.trim();
             let price = parseFloat(document.getElementById('newProdPrice').value);
-            let category = document.getElementById('newProdCat').value;
+            let category = document.getElementById('newProdCatSelect').value;
             let fileInput = document.getElementById('newProdImgFile');
 
             if (!title || isNaN(price) || price < 0) { showToast('⚠️ يرجى إدخال اسم المنتج والسعر بشكل صحيح!'); return; }
@@ -1252,7 +1056,7 @@
             document.getElementById('editProductId').value = id;
             document.getElementById('editProductTitle').value = title;
             document.getElementById('editProductPrice').value = price;
-            document.getElementById('editProductCat').value = category;
+            document.getElementById('editProductCatSelect').value = category;
             currentEditProductImgUrl = img || '🎮';
             document.getElementById('editProductImgFile').value = '';
             document.getElementById('editProductModal').style.display = 'flex';
@@ -1262,7 +1066,7 @@
             let id = document.getElementById('editProductId').value;
             let title = document.getElementById('editProductTitle').value.trim();
             let price = parseFloat(document.getElementById('editProductPrice').value);
-            let category = document.getElementById('editProductCat').value;
+            let category = document.getElementById('editProductCatSelect').value;
             let fileInput = document.getElementById('editProductImgFile');
 
             if (!title || isNaN(price)) { showToast('⚠️ بيانات غير صحيحة!'); return; }
@@ -1343,25 +1147,64 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
+            /* رسم شاشة إدارة الأقسام في لوحة التحكم */
+            let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل --</option>';
+            storeCategories.filter(c => !c.parentId || c.parentId === 'none').forEach(c => {
+                mainCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
+            });
+
+            let catAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:#34d399;">إضافة قسم جديد 🏷️</h3>
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم الجديد..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">نوع القسم (أين يقع؟):</label>
+                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        ${mainCatOptionsHtml}
+                    </select>
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">رفع صورة للقسم من الجهاز:</label>
+                    <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px; font-size:12px;">
+                    <button onclick="adminAddCategory()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
+                </div>
+                <h4 style="color:#34d399;">الأقسام الحالية:</h4>
+            `;
+
+            if (storeCategories.length === 0) { catAdminHtml += '<p>لا توجد أقسام مضافة بعد.</p>'; }
+            else {
+                storeCategories.forEach(c => {
+                    let parentName = 'قسم رئيسي مستقل';
+                    if (c.parentId && c.parentId !== 'none') {
+                        let pCat = storeCategories.find(x => x.id === c.parentId);
+                        if (pCat) parentName = 'فرعي من: ' + pCat.title;
+                    }
+                    catAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><b>${c.title}</b> <br><span style="font-size:11px; color:#a7f3d0;">${parentName}</span></div>
+                        <div style="display:flex; gap:5px;">
+                            <button onclick="openEditCategoryModal('${c.id}', '${c.title}', '${c.img || ''}')" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
+                            <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
+                        </div>
+                    </div>`;
+                });
+            }
+            document.getElementById('adminCategoriesSection').innerHTML = catAdminHtml;
+
+            /* رسم شاشة إدارة المنتجات مع ربطها بالأقسام */
+            let prodCatOptionsHtml = '<option value="best">🔥 الأكثر مبيعاً</option>';
+            storeCategories.forEach(c => {
+                prodCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
+            });
+
+            if (document.getElementById('editProductCatSelect')) {
+                document.getElementById('editProductCatSelect').innerHTML = prodCatOptionsHtml;
+            }
+
             let prodHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة منتج جديد 📦</h3>
                     <input type="text" id="newProdTitle" placeholder="اسم المنتج..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <input type="number" step="0.001" id="newProdPrice" placeholder="السعر ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <select id="newProdCat" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        <option value="best">الأكثر مبيعاً</option>
-                        <option value="zainGsmGrid">Zain GSM</option>
-                        <option value="zainDataGrid">Zain Data</option>
-                        <option value="zainMixGrid">Zain Mix</option>
-                        <option value="pubgRobotGrid">ببجي روبوت</option>
-                        <option value="pubgCodesGrid">ببجي أكواد</option>
-                        <option value="minecraftGrid">ماين كرافت</option>
-                        <option value="robot1Grid">فري فاير روبوت 1</option>
-                        <option value="subLinkGemsGrid">جواهر ربط فرعي</option>
-                        <option value="membershipsGrid">عضويات</option>
-                        <option value="ffCodesGrid">فري فاير أكواد</option>
-                        <option value="companyCodesGrid">اكواد شركة فري فاير</option>
-                        <option value="ffEuropeGrid">فري فاير أوروبا</option>
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">اختر القسم التابع له:</label>
+                    <select id="newProdCatSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        ${prodCatOptionsHtml}
                     </select>
                     <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">رفع صورة المنتج من الجهاز:</label>
                     <input type="file" id="newProdImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px; font-size:12px;">
@@ -1369,11 +1212,14 @@
                 </div>
                 <h4 style="color:#34d399;">المنتجات الحالية:</h4>
             `;
-            if(storeProducts.length === 0) { prodHtml += '<p>لا توجد منتجات مضافة.</p>'; }
+
+            if(storeProducts.length === 0) { prodHtml += '<p>لا توجد منتجات مضافة بعد.</p>'; }
             else {
                 storeProducts.forEach(p => {
+                    let catObj = storeCategories.find(c => c.id === p.category);
+                    let catName = catObj ? catObj.title : (p.category === 'best' ? 'الأكثر مبيعاً' : p.category);
                     prodHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><b>${p.title}</b> - $${p.price.toFixed(3)} <br><span style="font-size:11px; color:#a7f3d0;">القسم: ${p.category}</span></div>
+                        <div><b>${p.title}</b> - $${p.price.toFixed(3)} <br><span style="font-size:11px; color:#a7f3d0;">القسم: ${catName}</span></div>
                         <div style="display:flex; gap:5px;">
                             <button onclick="openEditProductModal('${p.id}', '${p.title}', ${p.price}, '${p.category}', '${p.img || ''}')" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
                             <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
@@ -1427,7 +1273,7 @@
                     <div style="display:flex; gap:5px;"><input type="number" id="balanceAdjust_${safeId}" placeholder="المبلغ" style="flex:1; padding:8px; background:#064e3b; color:white; border:1px solid #10b981; border-radius:6px;"><button onclick="adminAdjustBalance('${email}','${safeId}','add',${calcBal})" style="background:#10b981; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">إضافة</button><button onclick="adminAdjustBalance('${email}','${safeId}','subtract',${calcBal})" style="background:#ef4444; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">خصم</button></div>
                 </div>`;
             });
-            document.getElementById('adminUsersSection').innerHTML = usrHtml || '<p style="text-align:center;">لا توجد مستخدمين</p>';
+            document.getElementById('adminUsersSection').innerHTML = usrHtml || '<p style="text-align:center;">لا يوجد مستخدمون</p>';
         }
 
         function adminSendReply(userEmail, inputId) {
