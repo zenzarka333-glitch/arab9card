@@ -94,8 +94,8 @@
         .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; cursor: pointer; color: white; }
 
         .balance-page-container { padding: 15px; }
-        .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; direction: rtl; }
-        .payment-card { background: linear-gradient(135deg, #022c22, #064e3b); border-radius: 10px; padding: 12px 5px; text-align: center; color: white; font-size: 9px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; border: 1px solid #10b981; }
+        .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 8px; direction: rtl; }
+        .payment-card { background: linear-gradient(135deg, #022c22, #064e3b); border-radius: 10px; padding: 12px 5px; text-align: center; color: white; font-size: 10px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; border: 1px solid #10b981; }
         .payment-icon { width: 45px; height: 45px; background-color: #022c22; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: #34d399; font-size: 18px; border: 2px solid #10b981; }
         
         .pf-container { padding: 20px; direction: rtl; background-color: #064e3b; min-height: 100vh; color: white; }
@@ -109,7 +109,7 @@
         .admin-wrapper { padding: 20px; direction: rtl; background-color: #022c22; color: white; box-sizing: border-box; width: 100%; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #064e3b; color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid #10b981; }
         .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
-        .admin-tab { flex: 1; min-width: 65px; text-align: center; padding: 10px 5px; background: #064e3b; border-radius: 8px; font-weight: bold; cursor: pointer; color: #34d399; font-size: 11px; border: 1px solid #10b981; }
+        .admin-tab { flex: 1; min-width: 60px; text-align: center; padding: 10px 4px; background: #064e3b; border-radius: 8px; font-weight: bold; cursor: pointer; color: #34d399; font-size: 11px; border: 1px solid #10b981; }
         .admin-tab.active { background: #10b981; color: white; }
         .request-card { background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid #10b981; border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box; }
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
@@ -368,6 +368,33 @@
         </div>
     </div>
 
+    <!-- نافذة تعديل طريقة الدفع -->
+    <div id="editPaymentMethodModal" class="modal">
+        <div class="modal-content" style="max-width: 380px; text-align: right;">
+            <h3 style="color:#34d399; margin-top:0;">تعديل طريقة الدفع</h3>
+            <input type="hidden" id="editPmId">
+            <label style="font-size:12px; color:#064e3b;">اسم طريقة الدفع</label>
+            <input type="text" id="editPmName">
+            <label style="font-size:12px; color:#064e3b;">الرمز / الأيقونة</label>
+            <input type="text" id="editPmSymbol">
+            <label style="font-size:12px; color:#064e3b;">رقم/عنوان التحويل</label>
+            <input type="text" id="editPmAddress">
+            <label style="font-size:12px; color:#064e3b;">الحد الأدنى ($)</label>
+            <input type="number" step="0.1" id="editPmMin">
+            <label style="font-size:12px; color:#064e3b;">الحد الأقصى ($)</label>
+            <input type="number" step="0.1" id="editPmMax">
+            <label style="font-size:12px; color:#064e3b;">نوع الشحن</label>
+            <select id="editPmIsAuto">
+                <option value="false">يدوي (يتطلب رفع إيصال)</option>
+                <option value="true">تلقائي فوري</option>
+            </select>
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="saveEditedPaymentMethod()">حفظ التغيرات</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('editPaymentMethodModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
     <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
 
@@ -400,6 +427,7 @@
             <div class="admin-tabs">
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab" id="tabPaymentsAdmin" onclick="switchAdminTab('paymentsAdmin')">طرق الدفع 💳</div>
                 <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">إدارة الأقسام 🏷️</div>
                 <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
                 <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
@@ -409,6 +437,7 @@
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
+            <div id="adminPaymentsSection" style="display:none;"></div>
             <div id="adminCategoriesSection" style="display:none;"></div>
             <div id="adminProductsSection" style="display:none;"></div>
             <div id="adminCouponsSection" style="display:none;"></div>
@@ -439,6 +468,7 @@
         let manualUserTiers = {};
         let storeProducts = [];
         let storeCategories = [];
+        let dbPaymentMethods = [];
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
@@ -454,14 +484,6 @@
             container.appendChild(toast);
             setTimeout(() => { toast.remove(); }, 3000);
         }
-
-        const paymentMethods = [
-            { name: "شام كاش دولار", symbol: "Z", address: "fd66709efc3e98993f92370ef6a4cb6c", isAuto: false },
-            { name: "آسيا سيل العراق", symbol: "A", address: "07756752890", isAuto: false },
-            { name: "سيريتل كاش يدوي", symbol: "S", address: "57592960", isAuto: false },
-            { name: "Binance Pay (تلقائي)", symbol: "🟡", address: "ID: 284719284", isAuto: true },
-            { name: "PayPal (دفع مباشر)", symbol: "🅿️", address: "paypal@arab9card.com", isAuto: true }
-        ];
 
         function handleSearch(query) {
             query = query.trim().toLowerCase();
@@ -482,6 +504,13 @@
             grid.innerHTML = html;
             showPage('searchResultsPage');
         }
+
+        db.collection("payment_methods").onSnapshot((snapshot) => {
+            dbPaymentMethods = [];
+            snapshot.forEach((doc) => { dbPaymentMethods.push({ id: doc.id, ...doc.data() }); });
+            renderUserPaymentMethods();
+            renderAdminData();
+        });
 
         db.collection("categories").onSnapshot((snapshot) => {
             storeCategories = [];
@@ -540,6 +569,24 @@
             renderCategoriesAndStore();
             renderAdminData();
         });
+
+        function renderUserPaymentMethods() {
+            let container = document.getElementById('paymentMethodsGrid');
+            if (!container) return;
+            
+            if (dbPaymentMethods.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد طرق دفع متاحة حالياً</p>';
+                return;
+            }
+
+            container.innerHTML = dbPaymentMethods.map((m, i) => `
+                <div class="payment-card" onclick="openPaymentForm(${i})">
+                    <div class="payment-icon">${m.symbol || '💳'}</div>
+                    <div style="font-size:11px; color:#34d399; margin-bottom:2px;">${m.name}</div>
+                    <div style="font-size:9px; color:#a7f3d0;">(${m.minAmount || 1}$ - ${m.maxAmount || 1000}$)</div>
+                </div>
+            `).join('');
+        }
 
         function renderCategoriesAndStore() {
             let mainCatsHtml = '';
@@ -641,7 +688,6 @@
                 let overlay = document.getElementById("loginOverlay");
                 if(overlay) overlay.style.display = 'none'; 
             }
-            document.getElementById('paymentMethodsGrid').innerHTML = paymentMethods.map((m, i) => `<div class="payment-card" onclick="openPaymentForm(${i})"><div class="payment-icon">${m.symbol}</div><div style="font-size:10px; color:#34d399; margin-bottom:2px;">${m.name}</div></div>`).join('');
             
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
@@ -854,17 +900,27 @@
         }
 
         function openPaymentForm(index) {
-            const method = paymentMethods[index];
-            if (method.isAuto) {
-                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nيرجى إدخال المبلغ بالدولار ($):`);
-                if (autoAmount && !isNaN(autoAmount) && parseFloat(autoAmount) > 0) {
+            const method = dbPaymentMethods[index];
+            if (!method) return;
+
+            let min = method.minAmount || 1;
+            let max = method.maxAmount || 1000;
+
+            if (method.isAuto === true || method.isAuto === "true") {
+                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nأدخل المبلغ بين ($${min} - $${max}):`);
+                if (autoAmount && !isNaN(autoAmount)) {
+                    let amt = parseFloat(autoAmount);
+                    if (amt < min || amt > max) {
+                        showToast(`⚠️ قيمة الشحن يجب أن تكون بين $${min} و $${max}`);
+                        return;
+                    }
                     db.collection("deposits").get().then(snapshot => {
                         let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                         db.collection("deposits").add({
-                            numericId: maxNum + 1, method: method.name, amount: parseFloat(autoAmount), transactionId: 'AUTO-' + Math.floor(Math.random()*1000000),
+                            numericId: maxNum + 1, method: method.name, amount: amt, transactionId: 'AUTO-' + Math.floor(Math.random()*1000000),
                             status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            showToast(`⚡ تم شحن $${autoAmount} تلقائياً فوراً إلى حسابك!`);
+                            showToast(`⚡ تم شحن $${amt} تلقائياً فوراً إلى حسابك!`);
                         });
                     });
                 }
@@ -874,19 +930,25 @@
             document.getElementById('pfDynamicContent').innerHTML = `
                 <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
                 <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
-                <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: 5"></div>
+                <div class="pf-field-group"><span class="pf-label">المبلغ المحول ($) (من ${min}$ إلى ${max}$)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: ${min}"></div>
                 <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية"></div>
                 <div class="pf-field-group"><span class="pf-label">صورة إيصال التحويل</span><input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: #022c22; color: white;"></div>
-                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}')">تقديم الطلب</button>
+                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}', ${min}, ${max})">تقديم الطلب</button>
             `;
             showPage('paymentFormPage');
         }
 
-        function submitDepositRequest(methodName) {
+        function submitDepositRequest(methodName, min, max) {
             let amount = parseFloat(document.getElementById('depositAmount').value);
             let transactionId = document.getElementById('transactionId').value.trim();
             let fileInput = document.getElementById('receiptImageFile');
-            if (!amount || amount <= 0 || !transactionId || fileInput.files.length === 0) { showToast('يرجى تعبئة كافة الحقول وإرفاق الصورة!'); return; }
+
+            if (isNaN(amount) || amount < min || amount > max) {
+                showToast(`⚠️ المبلغ يجب أن يكون بين $${min} و $${max}`);
+                return;
+            }
+
+            if (!transactionId || fileInput.files.length === 0) { showToast('يرجى تعبئة كافة الحقول وإرفاق الصورة!'); return; }
             let reader = new FileReader();
             reader.onload = function(e) {
                 db.collection("deposits").get().then(snapshot => {
@@ -939,9 +1001,10 @@
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isPm = tab === 'paymentsAdmin'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isUsr = tab === 'users';
             document.getElementById('tabBalance').classList.toggle('active', isBal); 
             document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabPaymentsAdmin').classList.toggle('active', isPm);
             document.getElementById('tabCategories').classList.toggle('active', isCat); 
             document.getElementById('tabProducts').classList.toggle('active', isPrd);
             document.getElementById('tabCoupons').classList.toggle('active', isCpn); 
@@ -950,11 +1013,71 @@
             
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
             document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminPaymentsSection').style.display = isPm ? 'block' : 'none';
             document.getElementById('adminCategoriesSection').style.display = isCat ? 'block' : 'none';
             document.getElementById('adminProductsSection').style.display = isPrd ? 'block' : 'none';
             document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
             document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
             document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
+        }
+
+        /* ------------------ إدارة طرق الدفع والإيداع ------------------ */
+        function adminAddPaymentMethod() {
+            let name = document.getElementById('newPmName').value.trim();
+            let symbol = document.getElementById('newPmSymbol').value.trim() || '💳';
+            let address = document.getElementById('newPmAddress').value.trim();
+            let minAmount = parseFloat(document.getElementById('newPmMin').value) || 1;
+            let maxAmount = parseFloat(document.getElementById('newPmMax').value) || 1000;
+            let isAuto = document.getElementById('newPmIsAuto').value === 'true';
+
+            if (!name || !address) { showToast('⚠️ يرجى كتابة اسم الوسيلة ورقم/عنوان التحويل!'); return; }
+
+            db.collection("payment_methods").add({
+                name, symbol, address, minAmount, maxAmount, isAuto
+            }).then(() => {
+                showToast('✅ تم إضافة طريقة الدفع بنجاح!');
+                document.getElementById('newPmName').value = '';
+                document.getElementById('newPmSymbol').value = '';
+                document.getElementById('newPmAddress').value = '';
+                document.getElementById('newPmMin').value = '';
+                document.getElementById('newPmMax').value = '';
+            });
+        }
+
+        function adminDeletePaymentMethod(id) {
+            if(confirm("هل أنت متأكد من حذف طريقة الدفع هذه؟")) {
+                db.collection("payment_methods").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
+            }
+        }
+
+        function openEditPaymentMethodModal(id, name, symbol, address, min, max, isAuto) {
+            document.getElementById('editPmId').value = id;
+            document.getElementById('editPmName').value = name;
+            document.getElementById('editPmSymbol').value = symbol;
+            document.getElementById('editPmAddress').value = address;
+            document.getElementById('editPmMin').value = min;
+            document.getElementById('editPmMax').value = max;
+            document.getElementById('editPmIsAuto').value = isAuto ? 'true' : 'false';
+            document.getElementById('editPaymentMethodModal').style.display = 'flex';
+        }
+
+        function saveEditedPaymentMethod() {
+            let id = document.getElementById('editPmId').value;
+            let name = document.getElementById('editPmName').value.trim();
+            let symbol = document.getElementById('editPmSymbol').value.trim();
+            let address = document.getElementById('editPmAddress').value.trim();
+            let minAmount = parseFloat(document.getElementById('editPmMin').value) || 1;
+            let maxAmount = parseFloat(document.getElementById('editPmMax').value) || 1000;
+            let isAuto = document.getElementById('editPmIsAuto').value === 'true';
+
+            if (!name || !address) { showToast('⚠️ بيانات غير صحيحة!'); return; }
+
+            db.collection("payment_methods").doc(id).update({
+                name, symbol, address, minAmount, maxAmount, isAuto
+            }).then(() => {
+                showToast('✅ تم التعديل بنجاح!');
+                document.getElementById('editPaymentMethodModal').style.display = 'none';
+            });
         }
 
         /* ------------------ إدارة الأقسام الرئيسية والفرعية ------------------ */
@@ -1147,7 +1270,46 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
-            /* رسم شاشة إدارة الأقسام في لوحة التحكم */
+            /* رسم شاشة إدارة طرق الدفع */
+            let pmAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:#34d399;">إضافة طريقة دفع جديدة 💳</h3>
+                    <input type="text" id="newPmName" placeholder="اسم وسيلة الدفع (مثلاً: شام كاش)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="text" id="newPmSymbol" placeholder="الرمز أو الأيقونة (مثلاً: 🟡 أو S)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="text" id="newPmAddress" placeholder="رقم أو عنوان التحويل..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <div style="display:flex; gap:8px;">
+                        <input type="number" step="0.1" id="newPmMin" placeholder="أقل مبلغ للتحويل ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <input type="number" step="0.1" id="newPmMax" placeholder="أقصى مبلغ للتحويل ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    </div>
+                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">نوع الشحن:</label>
+                    <select id="newPmIsAuto" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <option value="false">يدوي (يتطلب رفع صورة إيصال)</option>
+                        <option value="true">تلقائي فوري</option>
+                    </select>
+                    <button onclick="adminAddPaymentMethod()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة طريقة الدفع</button>
+                </div>
+                <h4 style="color:#34d399;">طرق الدفع المتاحة حالياً:</h4>
+            `;
+
+            if (dbPaymentMethods.length === 0) { pmAdminHtml += '<p>لا توجد طرق دفع مضافة بعد.</p>'; }
+            else {
+                dbPaymentMethods.forEach(pm => {
+                    pmAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <b>${pm.symbol || '💳'} ${pm.name}</b> <br>
+                            <span style="font-size:11px; color:#a7f3d0;">العنوان/الرقم: <b>${pm.address}</b></span><br>
+                            <span style="font-size:10px; color:#34d399;">الحدود: من $${pm.minAmount||1} إلى $${pm.maxAmount||1000}</span>
+                        </div>
+                        <div style="display:flex; gap:5px;">
+                            <button onclick="openEditPaymentMethodModal('${pm.id}', '${pm.name}', '${pm.symbol||''}', '${pm.address}', ${pm.minAmount||1}, ${pm.maxAmount||1000}, ${pm.isAuto})" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
+                            <button onclick="adminDeletePaymentMethod('${pm.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
+                        </div>
+                    </div>`;
+                });
+            }
+            document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
+
+            /* رسم شاشة إدارة الأقسام */
             let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل --</option>';
             storeCategories.filter(c => !c.parentId || c.parentId === 'none').forEach(c => {
                 mainCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
@@ -1187,7 +1349,7 @@
             }
             document.getElementById('adminCategoriesSection').innerHTML = catAdminHtml;
 
-            /* رسم شاشة إدارة المنتجات مع ربطها بالأقسام */
+            /* رسم شاشة إدارة المنتجات */
             let prodCatOptionsHtml = '<option value="best">🔥 الأكثر مبيعاً</option>';
             storeCategories.forEach(c => {
                 prodCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
