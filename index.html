@@ -89,9 +89,9 @@
         .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; width: 100%; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-google img { width: 20px; }
         
-        .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #022c22; overflow-x: hidden; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); text-align: right; border-left: 2px solid #10b981; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 16px; color: #34d399; display: block; border-bottom: 1px solid rgba(16, 185, 129, 0.2); font-weight: bold; }
-        .sidebar .close-btn { position: absolute; top: 0; right: 25px; font-size: 36px; border-bottom: none; margin-left: 50px; cursor: pointer; color: white; }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #022c22; overflow-x: hidden; transition: 0.3s; padding-top: 40px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); text-align: right; border-left: 2px solid #10b981; }
+        .sidebar a { padding: 12px 20px; text-decoration: none; font-size: 14px; color: #34d399; display: block; border-bottom: 1px solid rgba(16, 185, 129, 0.2); font-weight: bold; }
+        .sidebar .close-btn { position: absolute; top: 0; right: 15px; font-size: 30px; border-bottom: none; cursor: pointer; color: white; }
 
         .balance-page-container { padding: 15px; }
         .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 8px; direction: rtl; }
@@ -162,20 +162,41 @@
         </div>
     </div>
 
-    <!-- القائمة الجانبية -->
+    <!-- القائمة الجانبية المحدثة بالشكل المطلوب -->
     <div id="sideMenu" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
-        <a href="#" onclick="showMyAccount(); closeSidebar()">👤 حسابي</a>
-        <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
-        <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
+        
+        <!-- قسم البروفایل العلوي (الصورة، الاسم، الشارة، والـ ID) -->
+        <div style="text-align: center; padding: 10px 15px; border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
+            <div style="width: 55px; height: 55px; background: #064e3b; border-radius: 50%; margin: 0 auto 8px auto; display: flex; align-items: center; justify-content: center; border: 2px solid #10b981; font-size: 22px;">👤</div>
+            <div style="font-size: 13px; font-weight: bold; color: white; display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap;">
+                <span id="sidebarUserName">مستخدم</span>
+                <span style="font-size: 10px; color: #94a3b8;" id="sidebarUserNumericId">#7271</span>
+                <span id="sidebarUserVipBadge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; padding: 2px 6px; border-radius: 8px; font-size: 10px; border: 1px solid #f59e0b;">⭐ مبدئي</span>
+            </div>
+        </div>
+
+        <!-- الرصيد -->
+        <div style="text-align: center; padding: 12px; font-size: 18px; font-weight: 900; color: white; border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
+            $<span id="sidebarBalanceDisplay">0.020</span>
+        </div>
+
+        <!-- زر تغيير العملة المنسدل -->
+        <div style="padding: 10px 15px; border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
+            <select id="currencySelector" onchange="changeActiveCurrency(this.value)" style="width: 100%; padding: 8px; background: #064e3b; color: #34d399; border: 1px solid #10b981; border-radius: 10px; font-weight: bold; font-size: 12px; outline: none;">
+                <option value="USD">العملة - الدولار الأمريكي ($)</option>
+            </select>
+        </div>
+
+        <a href="#" onclick="showPage('homePage'); closeSidebar()">🏠 الرئيسية</a>
+        <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
         <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
         <a href="#" onclick="showTransactionsHistoryPage(); closeSidebar()">📊 كشف الحساب السجل المالي</a>
-        <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
-        <a href="#" onclick="showPage('aboutPage'); closeSidebar()">ℹ️ من نحن (عن المتجر)</a>
-        <a href="#" onclick="showPage('termsPage'); closeSidebar()">📜 الشروط والأحكام</a>
+        <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
         <a href="#" onclick="showPage('supportPage'); closeSidebar()">🎧 الدعم الفني</a>
+        <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
         <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: #34d399;">⚙️ لوحة التحكم (Admin)</a>
-        <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 20px;">🚪 تسجيل خروج</a>
+        <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 10px;">🚪 تسجيل خروج</a>
     </div>
 
     <!-- الهيدر العلوي -->
@@ -185,7 +206,7 @@
                 <div style="font-size: 22px; cursor: pointer; color: #34d399;" onclick="openSidebar()">☰</div>
                 <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 13px; border: 1px solid #10b981; color:#34d399;" title="شريحتك الحالية">⭐ مبدئي</div>
                 <div class="balance">
-                    💰 $<span id="userBalanceDisplay" style="color: #34d399; font-weight: bold;">0.010</span>
+                    💰 <span id="userBalanceDisplay" style="color: #34d399; font-weight: bold;">0.010</span>
                     <button onclick="showPage('addBalancePage')" style="background: #10b981; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;" title="إضافة رصيد">+</button>
                 </div>
             </div>
@@ -401,10 +422,10 @@
         <div class="modal-content" style="max-width: 380px; text-align: right;">
             <h3 style="color:#34d399; margin-top:0;">تعديل العملة</h3>
             <input type="hidden" id="editCurrencyId">
-            <label style="font-size:12px; color:#064e3b;">اسم العملة / الرمز (مثال: TL, ليرة تركية)</label>
+            <label style="font-size:12px; color:#064e3b;">اسم العملة / الرمز (مثال: ليرة سورية SYP)</label>
             <input type="text" id="editCurrencyName">
-            <label style="font-size:12px; color:#064e3b;">سعر الصرافة (كم تساوي الواحد دولار بالدولار؟ أو قيمة الصرف مقابل 1$)</label>
-            <input type="number" step="0.0001" id="editCurrencyRate" placeholder="مثال: 34.5 أو 0.03">
+            <label style="font-size:12px; color:#064e3b;">سعر صرف 1 دولار بهذه العملة (مثال: 10)</label>
+            <input type="number" step="0.0001" id="editCurrencyRate" placeholder="مثال: 10">
             <div class="modal-buttons">
                 <button class="buy-action-btn" onclick="saveEditedCurrency()">حفظ</button>
                 <button class="cancel-action-btn" onclick="document.getElementById('editCurrencyModal').style.display='none'">إلغاء</button>
@@ -495,6 +516,8 @@
         let currentEditProductImgUrl = "";
         let currentEditCatImgUrl = "";
         let selectedCategoryForView = null;
+        let activeCurrencyRate = 1;
+        let activeCurrencySymbol = '$';
 
         function showToast(message) {
             let container = document.getElementById('toastContainer');
@@ -518,7 +541,8 @@
             
             filtered.forEach(item => {
                 let imgContent = item.img && (item.img.startsWith('http') || item.img.startsWith('data:image')) ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
-                html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">متجر</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">$ ${item.price.toFixed(3)}</div></div>`;
+                let displayPrice = (item.price * activeCurrencyRate).toFixed(3);
+                html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">متجر</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div></div>`;
             });
 
             grid.innerHTML = html;
@@ -535,7 +559,7 @@
         db.collection("currencies").onSnapshot((snapshot) => {
             storeCurrencies = [];
             snapshot.forEach((doc) => { storeCurrencies.push({ id: doc.id, ...doc.data() }); });
-            renderUserPaymentMethods();
+            renderCurrencySelector();
             renderAdminData();
         });
 
@@ -597,6 +621,30 @@
             renderAdminData();
         });
 
+        function renderCurrencySelector() {
+            let selector = document.getElementById('currencySelector');
+            if(!selector) return;
+            let html = `<option value="USD|1|$">العملة - الدولار الأمريكي ($)</option>`;
+            storeCurrencies.forEach(curr => {
+                html += `<option value="${curr.name}|${curr.rate}|${curr.name}">${curr.name} (1$ = ${curr.rate})</option>`;
+            });
+            selector.innerHTML = html;
+        }
+
+        function changeActiveCurrency(val) {
+            if(val === 'USD') {
+                activeCurrencyRate = 1;
+                activeCurrencySymbol = '$';
+            } else {
+                let parts = val.split('|');
+                activeCurrencyRate = parseFloat(parts[1]) || 1;
+                activeCurrencySymbol = parts[2] || parts[0];
+            }
+            updateUserBalanceUI();
+            renderCategoriesAndStore();
+            if(selectedCategoryForView) renderSubCategoryView(selectedCategoryForView);
+        }
+
         function renderUserPaymentMethods() {
             let container = document.getElementById('paymentMethodsGrid');
             if (!container) return;
@@ -635,10 +683,11 @@
             let bestProducts = storeProducts.filter(p => p.category === 'best');
             bestProducts.forEach(p => {
                 let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let displayPrice = (p.price * activeCurrencyRate).toFixed(3);
                 bestSellersHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
                     <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div>
                     <div class="card-name-outside">${p.title}</div>
-                    <div class="card-price-outside">$ ${p.price.toFixed(3)}</div>
+                    <div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div>
                 </div>`;
             });
 
@@ -688,10 +737,11 @@
             let prodHtml = '';
             catProducts.forEach(p => {
                 let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let displayPrice = (p.price * activeCurrencyRate).toFixed(3);
                 prodHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
                     <div class="card-box"><div class="card-circle">${imgContent}</div><div class="card-name-inside">${p.title}</div></div>
                     <div class="card-name-outside">${p.title}</div>
-                    <div class="card-price-outside">$ ${p.price.toFixed(3)}</div>
+                    <div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div>
                 </div>`;
             });
 
@@ -714,6 +764,7 @@
             if (currentUserEmail) { 
                 let overlay = document.getElementById("loginOverlay");
                 if(overlay) overlay.style.display = 'none'; 
+                updateSidebarUserInfo();
             }
             
             if (typeof google !== 'undefined') {
@@ -723,6 +774,22 @@
                 });
             }
         };
+
+        function updateSidebarUserInfo() {
+            if (!currentUserEmail) return;
+            let namePart = currentUserEmail.split('@')[0];
+            document.getElementById('sidebarUserName').innerText = namePart;
+            let hashVal = Math.abs(hashCode(currentUserEmail)) % 9000 + 1000;
+            document.getElementById('sidebarUserNumericId').innerText = '#' + hashVal;
+        }
+
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return hash;
+        }
 
         function sendSupportMessage() {
             let input = document.getElementById('chatInputBox');
@@ -760,6 +827,7 @@
             if (!emailRegex.test(email)) { showToast("⚠️ يرجى إدخال بريد إلكتروني صالح ينتهي بـ @gmail.com"); return; }
             localStorage.setItem("userEmail", email); currentUserEmail = email;
             document.getElementById("loginOverlay").style.display = 'none'; 
+            updateSidebarUserInfo();
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
         }
 
@@ -772,6 +840,7 @@
             let email = payload.email;
             localStorage.setItem("userEmail", email); currentUserEmail = email;
             document.getElementById("loginOverlay").style.display = 'none';
+            updateSidebarUserInfo();
             renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
             showToast("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
         }
@@ -802,13 +871,15 @@
         }
 
         function updateUserBalanceUI() {
-            document.getElementById('userBalanceDisplay').innerText = userBalance.toFixed(3);
+            let displayVal = userBalance * activeCurrencyRate;
+            document.getElementById('userBalanceDisplay').innerText = displayVal.toFixed(3);
+            document.getElementById('sidebarBalanceDisplay').innerText = displayVal.toFixed(3) + ' ' + activeCurrencySymbol;
             localStorage.setItem('a9c_balance', userBalance.toString());
         }
 
         function logoutUser() { localStorage.removeItem("userEmail"); location.reload(); }
         function showMyAccount() { showToast(`👤 معلومات الحساب:\nالبريد: ${currentUserEmail}\nالرصيد: $${userBalance.toFixed(3)}`); }
-        function openSidebar() { document.getElementById("sideMenu").style.width = "250px"; }
+        function openSidebar() { document.getElementById("sideMenu").style.width = "260px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
         
         function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
@@ -825,10 +896,11 @@
             let html = allLogs.length === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا توجد معاملات مالية مسجلة بعد</p>' : '';
             allLogs.forEach(log => {
                 let isPlus = log.type === 'deposit';
+                let displayAmt = (log.amount * activeCurrencyRate).toFixed(3);
                 html += `<div class="statement-card">
                     <div class="st-header">
                         <span>${log.title}</span>
-                        <span class="${isPlus ? 'st-plus' : 'st-minus'}">${isPlus ? '+' : '-'}$${parseFloat(log.amount).toFixed(3)}</span>
+                        <span class="${isPlus ? 'st-plus' : 'st-minus'}">${isPlus ? '+' : '-'}${displayAmt} ${activeCurrencySymbol}</span>
                     </div>
                     <div style="font-size:11px; color:#a7f3d0;">نوع العملية: ${isPlus ? 'شحن رصيد' : 'خصم شراء'}</div>
                 </div>`;
@@ -844,22 +916,23 @@
             let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
             let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
             
-            let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
+            let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let sidebarBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
             
             if (manualData.tier && manualData.tier !== 'auto') {
-                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.05; }
-                else if (manualData.tier === 'gold') { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; }
-                else if (manualData.tier === 'silver') { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; }
-                else if (manualData.tier === 'bronze') { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; }
+                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; sidebarBadgeText = '💎 ألماسي'; discount = 0.05; }
+                else if (manualData.tier === 'gold') { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; sidebarBadgeText = '🥇 ذهبي'; discount = 0.03; }
+                else if (manualData.tier === 'silver') { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; sidebarBadgeText = '🥈 فضي'; discount = 0.02; }
+                else if (manualData.tier === 'bronze') { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; sidebarBadgeText = '🥉 برونزي'; discount = 0.01; }
             } else {
-                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; discount = 0.05; nextTarget = 300; } 
-                else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
-                else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
-                else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
+                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; sidebarBadgeText = '💎 ألماسي'; discount = 0.05; nextTarget = 300; } 
+                else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; sidebarBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
+                else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; sidebarBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
+                else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; sidebarBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
                 else { nextTarget = 1; }
             }
 
             let badgeEl = document.getElementById('headerVipBadge'); if(badgeEl) badgeEl.innerText = headerBadgeText;
+            let sidebarBadgeEl = document.getElementById('sidebarUserVipBadge'); if(sidebarBadgeEl) sidebarBadgeEl.innerText = sidebarBadgeText;
             let tierEl = document.getElementById('currentTierTitleDisplay'); if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
             let spentText = document.getElementById('userSpentText'); if(spentText) spentText.innerText = `$${totalSpent.toFixed(2)} / $${nextTarget.toFixed(2)}`;
             let progressBar = document.getElementById('tierProgressBar'); if(progressBar) { let percent = Math.min(100, (totalSpent / nextTarget) * 100); progressBar.style.width = percent + '%'; }
@@ -877,14 +950,12 @@
             let found = availableCoupons.find(c => c.code === code);
             if (!found) { showToast('⚠️ كود الخصم غير صحيح أو منتهي الصلاحية!'); return; }
 
-            // التحقق من الحد الأدنى للطلب
             let minLimit = parseFloat(found.minLimit) || 0;
             if (currentSelectedProduct.originalPrice < minLimit) {
                 showToast(`⚠️ لا يمكن استخدام هذا الكود، الحد الأدنى للطلب هو $${minLimit}`);
                 return;
             }
 
-            // التحقق من عدد مرات الاستخدام المسموحة
             let maxUses = parseInt(found.maxUses) || 0;
             let usedList = found.usedList || [];
             if (maxUses > 0 && usedList.length >= maxUses) {
@@ -892,7 +963,6 @@
                 return;
             }
 
-            // حساب نسبة الخصم أو قيمته بناءً على ما حدده الإداري
             let discountPercentage = parseFloat(found.discountPercentage) || 0;
             let maxDiscountCap = parseFloat(found.maxDiscountCap) || 999999;
 
@@ -905,8 +975,9 @@
             appliedCouponDiscountAmount = calculatedDiscount;
 
             currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - calculatedDiscount);
-            document.getElementById('modalItemPrice').innerText = '$ ' + currentSelectedProduct.price.toFixed(3);
-            showToast(`🎉 تم تطبيق الخصم بقيمة $${calculatedDiscount.toFixed(2)} بنجاح!`);
+            let displayModalPrice = (currentSelectedProduct.price * activeCurrencyRate).toFixed(3);
+            document.getElementById('modalItemPrice').innerText = displayModalPrice + ' ' + activeCurrencySymbol;
+            showToast(`🎉 تم تطبيق الخصم بنجاح!`);
         }
 
         function renderMyOrders() {
@@ -947,10 +1018,9 @@
                 let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#34d399' : '#ef4444');
                 let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
                 let receiptView = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank" style="color:#34d399; font-size:12px;">📄 عرض صورة الإيصال</a></div>` : '';
-                let currencyInfo = req.originalAmount && req.currencyName ? `<div style="font-size:12px; color:#34d399;">تم التحويل بـ: ${req.originalAmount} ${req.currencyName}</div>` : '';
+                let displayReqAmt = (req.amount * activeCurrencyRate).toFixed(3);
                 html += `<div style="background: #064e3b; color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - $${req.amount}</span></div>
-                    ${currencyInfo}
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - ${displayReqAmt} ${activeCurrencySymbol}</span></div>
                     <div style="font-size: 13px; color: #a7f3d0;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
                     ${receiptView}<div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-top: 5px;">الحالة: ${statusText}</div>
                 </div>`;
@@ -965,26 +1035,22 @@
             let min = method.minAmount || 1;
             let max = method.maxAmount || 1000;
 
-            let currencyOptions = `<option value="USD">دولار أمريكي (USD - 1)</option>`;
+            let currencyOptions = `<option value="USD" data-rate="1">دولار أمريكي ($ USD)</option>`;
             storeCurrencies.forEach(curr => {
-                currencyOptions += `<option value="${curr.id}" data-rate="${curr.rate}">${curr.name} (سعر الصرف مقابل الدولار: ${curr.rate})</option>`;
+                currencyOptions += `<option value="${curr.id}" data-rate="${curr.rate}">${curr.name} (1$ = ${curr.rate})</option>`;
             });
 
             if (method.isAuto === true || method.isAuto === "true") {
-                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nأدخل المبلغ بين ($${min} - $${max}):`);
+                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nأدخل المبلغ:`);
                 if (autoAmount && !isNaN(autoAmount)) {
                     let amt = parseFloat(autoAmount);
-                    if (amt < min || amt > max) {
-                        showToast(`⚠️ قيمة الشحن يجب أن تكون بين $${min} و $${max}`);
-                        return;
-                    }
                     db.collection("deposits").get().then(snapshot => {
                         let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
                         db.collection("deposits").add({
                             numericId: maxNum + 1, method: method.name, amount: amt, transactionId: 'AUTO-' + Math.floor(Math.random()*1000000),
                             status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            showToast(`⚡ تم شحن $${amt} تلقائياً فوراً إلى حسابك!`);
+                            showToast(`⚡ تم شحن الرصيد تلقائياً بنجاح!`);
                         });
                     });
                 }
@@ -1000,8 +1066,8 @@
                         ${currencyOptions}
                     </select>
                 </div>
-                <div class="pf-field-group"><span class="pf-label" id="depositAmountLabel">المبلغ المحول بالدولار ($) (من ${min}$ إلى ${max}$)</span><input type="number" id="depositAmount" class="pf-input" placeholder="مثال: ${min}" oninput="calcUsdEquivalent(${min}, ${max})"></div>
-                <div style="font-size:12px; color:#34d399; margin-bottom:10px;" id="currencyEquivalentHint"></div>
+                <div class="pf-field-group"><span class="pf-label" id="depositAmountLabel">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="أدخل المبلغ..." oninput="calcUsdEquivalent(${min}, ${max})"></div>
+                <div style="font-size:13px; color:#34d399; margin-bottom:10px; font-weight:bold;" id="currencyEquivalentHint"></div>
                 <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية"></div>
                 <div class="pf-field-group"><span class="pf-label">صورة إيصال التحويل</span><input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: #022c22; color: white;"></div>
                 <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}', ${min}, ${max})">تقديم الطلب</button>
@@ -1011,14 +1077,14 @@
 
         function updateDepositCurrencyHint(min, max) {
             let select = document.getElementById('depositCurrencySelect');
-            let selectedOpt = select.options[select.selectedIndex];
-            let currName = selectedOpt.text;
             let label = document.getElementById('depositAmountLabel');
             if(select.value === 'USD') {
-                label.innerText = `المبلغ المحول بالدولار ($) (من ${min}$ إلى ${max}$)`;
+                label.innerText = `المبلغ المحول ($)`;
                 document.getElementById('currencyEquivalentHint').innerText = '';
             } else {
-                label.innerText = `المبلغ بالعملة المضافة (${currName})`;
+                let selectedOpt = select.options[select.selectedIndex];
+                let currName = selectedOpt.text.split(' ')[0];
+                label.innerText = `المبلغ المحول بـ (${currName})`;
                 calcUsdEquivalent(min, max);
             }
         }
@@ -1028,9 +1094,9 @@
             if(select.value === 'USD') return;
             let selectedOpt = select.options[select.selectedIndex];
             let rate = parseFloat(selectedOpt.getAttribute('data-rate')) || 1;
-            let val = parseFloat(document.getElementById('depositAmount').value) || 0;
-            let usdVal = val / rate;
-            document.getElementById('currencyEquivalentHint').innerText = `💱 يعادل تقريباً: $${usdVal.toFixed(3)} دولار أمريكي`;
+            let rawVal = parseFloat(document.getElementById('depositAmount').value) || 0;
+            let usdVal = rawVal / rate;
+            document.getElementById('currencyEquivalentHint').innerText = `💰 سيتم إضافة: $${usdVal.toFixed(3)} دولار أمريكي لرصيدك`;
         }
 
         function submitDepositRequest(methodName, min, max) {
@@ -1050,8 +1116,8 @@
             let transactionId = document.getElementById('transactionId').value.trim();
             let fileInput = document.getElementById('receiptImageFile');
 
-            if (isNaN(rawAmount) || finalUsdAmount < min || finalUsdAmount > max) {
-                showToast(`⚠️ المبلغ يجب ألا يقل عن القيمة المماثلة لـ $${min} وألا يزيد عن $${max}`);
+            if (isNaN(rawAmount)) {
+                showToast(`⚠️ يرجى إدخال مبلغ صحيح`);
                 return;
             }
 
@@ -1065,7 +1131,7 @@
                         status: 'pending', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     }).then(() => {
                         showToast(`🚀 تم إرسال الطلب برقم #${maxNum + 1}`);
-                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${finalUsdAmount.toFixed(3)} (${rawAmount} ${currencyNameUsed})`)}`, '_blank');
+                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${finalUsdAmount.toFixed(3)} (${rawAmount}${currencyNameUsed})`)}`, '_blank');
                         showPage('addBalancePage');
                     });
                 });
@@ -1079,7 +1145,8 @@
             appliedCouponCode = null;
             appliedCouponDiscountAmount = 0;
             document.getElementById('modalItemTitle').innerText = title; 
-            document.getElementById('modalItemPrice').innerText = '$ ' + finalPrice.toFixed(3);
+            let displayModalPrice = (finalPrice * activeCurrencyRate).toFixed(3);
+            document.getElementById('modalItemPrice').innerText = displayModalPrice + ' ' + activeCurrencySymbol;
             document.getElementById('playerId').value = ""; document.getElementById('orderCouponInput').value = "";
             document.getElementById('orderModal').style.display = 'flex';
         }
@@ -1092,7 +1159,6 @@
             userBalance -= currentSelectedProduct.price; updateUserBalanceUI();
             let productDesc = currentSelectedProduct.title + ' (ID: ' + playerId + ')';
 
-            // إذا تم استخدام كوبون، قم بتحديث سجل الاستخدام في قاعدة البيانات لهذا الكوبون
             if (appliedCouponCode) {
                 let couponObj = availableCoupons.find(c => c.code === appliedCouponCode);
                 if (couponObj) {
@@ -1120,6 +1186,7 @@
                 document.getElementById('adminPasswordInput').value = ''; 
                 document.getElementById('loginOverlay').style.display = 'none';
                 currentUserEmail = "admin@arab9card.com"; localStorage.setItem("userEmail", currentUserEmail);
+                updateSidebarUserInfo();
                 showPage('adminDashboardPage');
             } else { showToast('كلمة المرور خاطئة!'); }
         }
@@ -1147,7 +1214,6 @@
             document.getElementById('adminUsersSection').style.display = isUsr ? 'block' : 'none';
         }
 
-        /* ------------------ إدارة العملات ------------------ */
         function adminAddCurrency() {
             let name = document.getElementById('newCurrName').value.trim();
             let rate = parseFloat(document.getElementById('newCurrRate').value);
@@ -1183,7 +1249,6 @@
             });
         }
 
-        /* ------------------ إدارة طرق الدفع والإيداع ------------------ */
         function adminAddPaymentMethod() {
             let name = document.getElementById('newPmName').value.trim();
             let symbol = document.getElementById('newPmSymbol').value.trim() || '💳';
@@ -1242,7 +1307,6 @@
             });
         }
 
-        /* ------------------ إدارة الأقسام الرئيسية والفرعية ------------------ */
         function adminAddCategory() {
             let title = document.getElementById('newCatTitle').value.trim();
             let parentId = document.getElementById('newCatParentSelect').value;
@@ -1268,7 +1332,7 @@
         }
 
         function adminDeleteCategory(id) {
-            if(confirm("هل أنت متأكد من حذف هذا القسم؟ قد تتأثر المنتجات المرتبطة به.")) {
+            if(confirm("هل أنت متأكد من حذف هذا القسم؟")) {
                 db.collection("categories").doc(id).delete().then(() => { showToast('🗑️ تم حذف القسم بنجاح!'); });
             }
         }
@@ -1304,7 +1368,6 @@
             }
         }
 
-        /* ------------------ إدارة المنتجات ------------------ */
         function adminAddProduct() {
             let title = document.getElementById('newProdTitle').value.trim();
             let price = parseFloat(document.getElementById('newProdPrice').value);
@@ -1398,10 +1461,11 @@
         }
 
         function adminDeleteCoupon(id) { db.collection("coupons").doc(id).delete().then(() => { showToast('تم الحذف!'); }); }
+        
         function adminSaveUserTier(email) {
             let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
             let tier = document.getElementById(`tierSelect_${safeId}`).value;
-            db.collection("users").doc(safeId).set({ email, tier }, { merge: true }).then(() => { showToast('✅ تم الحفظ!'); });
+            db.collection("users").doc(safeId).set({ email, tier }, { merge: true }).then(() => { showToast('✅ تم حفظ رتبة المستخدم بنجاح!'); });
         }
 
         function adminAdjustBalance(userEmail, safeId, actionType, currentBalance) {
@@ -1413,7 +1477,7 @@
                 db.collection("deposits").add({
                     numericId: maxNum + 1, method: 'تعديل رصيد إداري', amount: adjustment, transactionId: 'ADM-' + Math.floor(Math.random()*1000000),
                     status: 'approved', credited: false, userEmail: userEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => { showToast("✅ تم تعديل الرصيد!"); document.getElementById(`balanceAdjust_${safeId}`).value = ''; });
+                }).then(() => { showToast("✅ تم تعديل الرصيد بنجاح!"); document.getElementById(`balanceAdjust_${safeId}`).value = ''; });
             });
         }
 
@@ -1447,12 +1511,12 @@
             });
             document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
 
-            /* رسم شاشة إدارة العملات */
+            /* إدارة العملات */
             let currencyAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة عملة جديدة 💱</h3>
-                    <input type="text" id="newCurrName" placeholder="اسم العملة / الرمز (مثال: TL, ليرة تركية)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="number" step="0.0001" id="newCurrRate" placeholder="سعر الصرف مقابل الدولار (مثال: 34.5)..." style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="text" id="newCurrName" placeholder="اسم العملة / الرمز (مثال: SYP)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.0001" id="newCurrRate" placeholder="سعر صرف 1$ بهذه العملة (مثال: 10)..." style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <button onclick="adminAddCurrency()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة العملة</button>
                 </div>
                 <h4 style="color:#34d399;">العملات المضافة:</h4>
@@ -1461,7 +1525,7 @@
             else {
                 storeCurrencies.forEach(curr => {
                     currencyAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><b>${curr.name}</b> <br><span style="font-size:11px; color:#a7f3d0;">سعر الصرف: ${curr.rate}</span></div>
+                        <div><b>${curr.name}</b> <br><span style="font-size:11px; color:#a7f3d0;">سعر صرف 1$ = ${curr.rate}</span></div>
                         <div style="display:flex; gap:5px;">
                             <button onclick="openEditCurrencyModal('${curr.id}', '${curr.name}', ${curr.rate})" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
                             <button onclick="adminDeleteCurrency('${curr.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
@@ -1471,46 +1535,33 @@
             }
             document.getElementById('adminCurrenciesSection').innerHTML = currencyAdminHtml;
 
-            /* رسم شاشة إدارة طرق الدفع والإيداع */
+            /* إدارة طرق الدفع */
             let pmAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة طريقة دفع جديدة 💳</h3>
-                    <input type="text" id="newPmName" placeholder="اسم وسيلة الدفع (مثلاً: شام كاش)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="text" id="newPmSymbol" placeholder="الرمز أو الأيقونة (مثلاً: 🟡 أو S)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="text" id="newPmName" placeholder="اسم وسيلة الدفع..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="text" id="newPmSymbol" placeholder="الرمز أو الأيقونة..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <input type="text" id="newPmAddress" placeholder="رقم أو عنوان التحويل..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <div style="display:flex; gap:8px;">
-                        <input type="number" step="0.1" id="newPmMin" placeholder="أقل مبلغ للتحويل ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        <input type="number" step="0.1" id="newPmMax" placeholder="أقصى مبلغ للتحويل ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <input type="number" step="0.1" id="newPmMin" placeholder="أقل مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                        <input type="number" step="0.1" id="newPmMax" placeholder="أقصى مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     </div>
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">نوع الشحن:</label>
                     <select id="newPmIsAuto" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        <option value="false">يدوي (يتطلب رفع صورة إيصال)</option>
+                        <option value="false">يدوي (يتطلب رفع إيصال)</option>
                         <option value="true">تلقائي فوري</option>
                     </select>
-                    <button onclick="adminAddPaymentMethod()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة طريقة الدفع</button>
+                    <button onclick="adminAddPaymentMethod()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة</button>
                 </div>
-                <h4 style="color:#34d399;">طرق الدفع المتاحة حالياً:</h4>
             `;
-
-            if (dbPaymentMethods.length === 0) { pmAdminHtml += '<p>لا توجد طرق دفع مضافة بعد.</p>'; }
-            else {
-                dbPaymentMethods.forEach(pm => {
-                    pmAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <b>${pm.symbol || '💳'} ${pm.name}</b> <br>
-                            <span style="font-size:11px; color:#a7f3d0;">العنوان/الرقم: <b>${pm.address}</b></span><br>
-                            <span style="font-size:10px; color:#34d399;">الحدود: من $${pm.minAmount||1} إلى $${pm.maxAmount||1000}</span>
-                        </div>
-                        <div style="display:flex; gap:5px;">
-                            <button onclick="openEditPaymentMethodModal('${pm.id}', '${pm.name}', '${pm.symbol||''}', '${pm.address}', ${pm.minAmount||1}, ${pm.maxAmount||1000}, ${pm.isAuto})" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
-                            <button onclick="adminDeletePaymentMethod('${pm.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
-                        </div>
-                    </div>`;
-                });
-            }
+            dbPaymentMethods.forEach(pm => {
+                pmAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${pm.symbol || '💳'} ${pm.name}</b><br><span style="font-size:11px; color:#a7f3d0;">${pm.address}</span></div>
+                    <button onclick="adminDeletePaymentMethod('${pm.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
             document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
 
-            /* رسم شاشة إدارة الأقسام */
+            /* إدارة الأقسام */
             let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل --</option>';
             storeCategories.filter(c => !c.parentId || c.parentId === 'none').forEach(c => {
                 mainCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
@@ -1519,115 +1570,54 @@
             let catAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة قسم جديد 🏷️</h3>
-                    <input type="text" id="newCatTitle" placeholder="اسم القسم الجديد..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">نوع القسم (أين يقع؟):</label>
-                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        ${mainCatOptionsHtml}
-                    </select>
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">رفع صورة للقسم من الجهاز:</label>
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">${mainCatOptionsHtml}</select>
                     <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px; font-size:12px;">
                     <button onclick="adminAddCategory()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
                 </div>
-                <h4 style="color:#34d399;">الأقسام الحالية:</h4>
             `;
-
-            if (storeCategories.length === 0) { catAdminHtml += '<p>لا توجد أقسام مضافة بعد.</p>'; }
-            else {
-                storeCategories.forEach(c => {
-                    let parentName = 'قسم رئيسي مستقل';
-                    if (c.parentId && c.parentId !== 'none') {
-                        let pCat = storeCategories.find(x => x.id === c.parentId);
-                        if (pCat) parentName = 'فرعي من: ' + pCat.title;
-                    }
-                    catAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><b>${c.title}</b> <br><span style="font-size:11px; color:#a7f3d0;">${parentName}</span></div>
-                        <div style="display:flex; gap:5px;">
-                            <button onclick="openEditCategoryModal('${c.id}', '${c.title}', '${c.img || ''}')" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
-                            <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
-                        </div>
-                    </div>`;
-                });
-            }
+            storeCategories.forEach(c => {
+                catAdminHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${c.title}</b></div>
+                    <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
             document.getElementById('adminCategoriesSection').innerHTML = catAdminHtml;
 
-            /* رسم شاشة إدارة المنتجات */
+            /* إدارة المنتجات */
             let prodCatOptionsHtml = '<option value="best">🔥 الأكثر مبيعاً</option>';
-            storeCategories.forEach(c => {
-                prodCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
-            });
-
-            if (document.getElementById('editProductCatSelect')) {
-                document.getElementById('editProductCatSelect').innerHTML = prodCatOptionsHtml;
-            }
-
+            storeCategories.forEach(c => { prodCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`; });
             let prodHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:#34d399;">إضافة منتج جديد 📦</h3>
                     <input type="text" id="newProdTitle" placeholder="اسم المنتج..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <input type="number" step="0.001" id="newProdPrice" placeholder="السعر ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">اختر القسم التابع له:</label>
-                    <select id="newProdCatSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                        ${prodCatOptionsHtml}
-                    </select>
-                    <label style="font-size:11px; color:#a7f3d0; display:block; margin-bottom:4px;">رفع صورة المنتج من الجهاز:</label>
+                    <select id="newProdCatSelect" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">${prodCatOptionsHtml}</select>
                     <input type="file" id="newProdImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px; font-size:12px;">
                     <button onclick="adminAddProduct()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
                 </div>
-                <h4 style="color:#34d399;">المنتجات الحالية:</h4>
             `;
-
-            if(storeProducts.length === 0) { prodHtml += '<p>لا توجد منتجات مضافة بعد.</p>'; }
-            else {
-                storeProducts.forEach(p => {
-                    let catObj = storeCategories.find(c => c.id === p.category);
-                    let catName = catObj ? catObj.title : (p.category === 'best' ? 'الأكثر مبيعاً' : p.category);
-                    prodHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><b>${p.title}</b> - $${p.price.toFixed(3)} <br><span style="font-size:11px; color:#a7f3d0;">القسم: ${catName}</span></div>
-                        <div style="display:flex; gap:5px;">
-                            <button onclick="openEditProductModal('${p.id}', '${p.title}', ${p.price}, '${p.category}', '${p.img || ''}')" style="background:#0284c7; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">تعديل</button>
-                            <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:bold;">حذف</button>
-                        </div>
-                    </div>`;
-                });
-            }
+            storeProducts.forEach(p => {
+                prodHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${p.title}</b> - $${p.price.toFixed(3)}</div>
+                    <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
             document.getElementById('adminProductsSection').innerHTML = prodHtml;
 
             let cpnHtml = `
                 <div class="request-card">
-                    <h3 style="margin-top:0; color:#34d399;">إنشاء كوبون خصم متطور 🎟️</h3>
-                    <input type="text" id="newCouponCode" placeholder="كود الخصم (مثال: SAVE20)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="number" step="1" id="newCouponDiscountPercent" placeholder="نسبة الخصم % (مثال: 10 تعني 10%)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="number" step="0.1" id="newCouponMinLimit" placeholder="الحد الأدنى للطلب ($) (مثال: 4)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="number" step="0.1" id="newCouponMaxCap" placeholder="أقصى عدد/مبلغ خصم للكود ($) (مثال: 20)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
-                    <input type="number" id="newCouponMaxUses" placeholder="عدد الناس الذين يمكنهم استخدامه (مثال: 50)" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <h3 style="margin-top:0; color:#34d399;">إنشاء كوبون خصم 🎟️</h3>
+                    <input type="text" id="newCouponCode" placeholder="كود الخصم" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="1" id="newCouponDiscountPercent" placeholder="نسبة الخصم %" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMinLimit" placeholder="الحد الأدنى للطلب ($)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMaxCap" placeholder="أقصى مبلغ خصم ($)" style="width:100%; padding:10px; margin-bottom:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
+                    <input type="number" id="newCouponMaxUses" placeholder="عدد المستخدمين" style="width:100%; padding:10px; margin-bottom:12px; background:#022c22; color:white; border:1px solid #10b981; border-radius:8px;">
                     <button onclick="adminAddCoupon()" style="width:100%; background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الكوبون</button>
                 </div>
-                <h4 style="color:#34d399;">الكوبونات الحالية وسجل الاستخدام:</h4>
             `;
-
             availableCoupons.forEach(c => {
-                let usedList = c.usedList || [];
-                let usedDetailsHtml = '';
-                if(usedList.length === 0) {
-                    usedDetailsHtml = '<div style="font-size:11px; color:#a7f3d0; margin-top:5px;">لم يقم أحد باستخدام هذا الكود بعد.</div>';
-                } else {
-                    usedDetailsHtml = '<div style="margin-top:8px; font-size:11px; background:#022c22; padding:6px; border-radius:6px;"><b style="color:#34d399;">من استخدَم الكود:</b>';
-                    usedList.forEach(u => {
-                        usedDetailsHtml += `<div style="border-bottom:1px solid rgba(16,185,129,0.2); padding:3px 0;">👤 ${u.userEmail} | تم خصم: $${parseFloat(u.discountAmount).toFixed(2)}</div>`;
-                    });
-                    usedDetailsHtml += '</div>';
-                }
-
-                cpnHtml += `<div style="background:#064e3b; padding:12px; border-radius:8px; border:1px solid #10b981; margin-bottom:10px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <b>${c.code}</b> (نسبة الخصم: ${c.discountPercentage}%)<br>
-                            <span style="font-size:11px; color:#a7f3d0;">الحد الأدنى: $${c.minLimit || 0} | أقصى خصم: $${c.maxDiscountCap || 'بلا'} | الاستخدامات: ${usedList.length} / ${c.maxUses || 'غير محدود'}</span>
-                        </div>
-                        <button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button>
-                    </div>
-                    ${usedDetailsHtml}
-                </div>`;
+                cpnHtml += `<div style="background:#064e3b; padding:10px; border-radius:8px; border:1px solid #10b981; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> (${c.discountPercentage}%)</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
             });
             document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
 
@@ -1642,34 +1632,58 @@
             });
             document.getElementById('adminSupportSection').innerHTML = supHtml || '<p style="text-align:center;">لا توجد رسائل دعم</p>';
 
+            /* إدارة المستخدمين (التصميم الجديد بالكامل والمطور) */
             let allEmails = new Set();
             gameOrders.forEach(o => { if(o.userEmail) allEmails.add(o.userEmail); });
             balanceRequests.forEach(d => { if(d.userEmail) allEmails.add(d.userEmail); });
             supportMessages.forEach(m => { if(m.sender && !m.isAdmin) allEmails.add(m.sender); });
 
-            let usrHtml = '';
-            allEmails.forEach(email => {
-                let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
-                let userData = manualUserTiers[safeId] || {};
-                let currentTierVal = userData.tier || 'auto';
-                let calcBal = 0.010 + balanceRequests.filter(r => r.userEmail === email && r.status === 'approved').reduce((s,r)=>s+r.amount,0) - gameOrders.filter(o=>o.userEmail===email && o.status==='approved').reduce((s,o)=>s+o.price,0);
+            let usrHtml = `<h3 style="color:#34d399; margin-bottom:15px;">👥 إدارة المستخدمين والرصيد والرتب</h3>`;
+            if(allEmails.size === 0) {
+                usrHtml += '<p style="text-align:center;">لا توجد حسابات مسجلة بعد</p>';
+            } else {
+                allEmails.forEach(email => {
+                    let safeId = email.replace(/[^a-zA-Z0-9]/g, '_');
+                    let userData = manualUserTiers[safeId] || {};
+                    let currentTierVal = userData.tier || 'auto';
+                    let calcBal = 0.010 + balanceRequests.filter(r => r.userEmail === email && r.status === 'approved').reduce((s,r)=>s+r.amount,0) - gameOrders.filter(o=>o.userEmail===email && o.status==='approved').reduce((s,o)=>s+o.price,0);
 
-                usrHtml += `<div class="request-card">
-                    <div><b>${email}</b> | الرصيد: $${calcBal.toFixed(3)}</div>
-                    <div style="margin:8px 0; display:flex; gap:5px;">
-                        <select id="tierSelect_${safeId}" style="flex:1; padding:8px; background:#022c22; color:white; border:1px solid #10b981; border-radius:6px;">
-                            <option value="auto" ${currentTierVal==='auto'?'selected':''}>تلقائي</option>
-                            <option value="bronze" ${currentTierVal==='bronze'?'selected':''}>برونزي</option>
-                            <option value="silver" ${currentTierVal==='silver'?'selected':''}>فضي</option>
-                            <option value="gold" ${currentTierVal==='gold'?'selected':''}>ذهبي</option>
-                            <option value="diamond" ${currentTierVal==='diamond'?'selected':''}>ألماسي</option>
-                        </select>
-                        <button onclick="adminSaveUserTier('${email}')" style="background:#10b981; color:white; border:none; padding:0 12px; border-radius:6px; font-weight:bold; cursor:pointer;">حفظ</button>
-                    </div>
-                    <div style="display:flex; gap:5px;"><input type="number" id="balanceAdjust_${safeId}" placeholder="المبلغ" style="flex:1; padding:8px; background:#064e3b; color:white; border:1px solid #10b981; border-radius:6px;"><button onclick="adminAdjustBalance('${email}','${safeId}','add',${calcBal})" style="background:#10b981; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">إضافة</button><button onclick="adminAdjustBalance('${email}','${safeId}','subtract',${calcBal})" style="background:#ef4444; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;">خصم</button></div>
-                </div>`;
-            });
-            document.getElementById('adminUsersSection').innerHTML = usrHtml || '<p style="text-align:center;">لا يوجد مستخدمون</p>';
+                    usrHtml += `
+                        <div style="background: linear-gradient(135deg, #022c22, #064e3b); border: 1.5px solid #10b981; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(16,185,129,0.3); padding-bottom: 8px;">
+                                <div>
+                                    <div style="font-weight: bold; font-size: 14px; color: #34d399;">📧 ${email}</div>
+                                    <div style="font-size: 12px; color: #a7f3d0; margin-top: 2px;">الرصيد الحالي: <b>$${calcBal.toFixed(3)}</b></div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 10px;">
+                                <label style="font-size: 11px; color: #a7f3d0; display: block; margin-bottom: 4px;">تحديد شريحة VIP للمستخدم:</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <select id="tierSelect_${safeId}" style="flex: 1; padding: 8px; background: #022c22; color: white; border: 1px solid #10b981; border-radius: 8px; font-size: 12px; outline: none;">
+                                        <option value="auto" ${currentTierVal==='auto'?'selected':''}>تلقائي حسب المبيعات</option>
+                                        <option value="bronze" ${currentTierVal==='bronze'?'selected':''}>برونزي / Bronze</option>
+                                        <option value="silver" ${currentTierVal==='silver'?'selected':''}>فضي / Silver</option>
+                                        <option value="gold" ${currentTierVal==='gold'?'selected':''}>ذهبي / Gold</option>
+                                        <option value="diamond" ${currentTierVal==='diamond'?'selected':''}>ألماسي / Diamond</option>
+                                    </select>
+                                    <button onclick="adminSaveUserTier('${email}')" style="background: #10b981; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">حفظ الرتبة</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label style="font-size: 11px; color: #a7f3d0; display: block; margin-bottom: 4px;">إدارة الرصيد المالي:</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <input type="number" step="0.001" id="balanceAdjust_${safeId}" placeholder="المبلغ ($)" style="flex: 1; padding: 8px; background: #022c22; color: white; border: 1px solid #10b981; border-radius: 8px; font-size: 12px; outline: none; margin: 0;">
+                                    <button onclick="adminAdjustBalance('${email}','${safeId}','add',${calcBal})" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">إضافة رصيد</button>
+                                    <button onclick="adminAdjustBalance('${email}','${safeId}','subtract',${calcBal})" style="background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">خصم رصيد</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('adminUsersSection').innerHTML = usrHtml;
         }
 
         function adminSendReply(userEmail, inputId) {
