@@ -1461,6 +1461,7 @@
                     showToast('✅ تم إضافة القسم بنجاح!');
                     document.getElementById('newCatTitle').value = '';
                     document.getElementById('newCatImgFile').value = '';
+                    renderAdminData();
                 });
             };
 
@@ -1632,7 +1633,8 @@
             });
             document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
 
-            let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل --</option>';
+            /* إدارة الأقسام مع خيار اختيار القسم الأب (الرئيسي) لتداخل الأقسام بدقة */
+            let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل (يظهر بالواجهة الرئيسية) --</option>';
             storeCategories.filter(c => !c.parentId || c.parentId === 'none').forEach(c => {
                 mainCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
             });
@@ -1640,15 +1642,19 @@
             let catAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">إضافة قسم جديد 🏷️</h3>
-                    <input type="text" id="newCatTitle" placeholder="اسم القسم..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم (مثال: قسم الألعاب أو ببجي)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لقسم رئيسي (أو اتركه مستقل):</label>
                     <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${mainCatOptionsHtml}</select>
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة القسم:</label>
                     <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
                     <button onclick="adminAddCategory()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
                 </div>
             `;
             storeCategories.forEach(c => {
+                let parentObj = storeCategories.find(p => p.id === c.parentId);
+                let parentNameText = parentObj ? ` (تابِع لـ: ${parentObj.title})` : ' (قسم رئيسي)';
                 catAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                    <div><b>${c.title}</b></div>
+                    <div><b>${c.title}</b> <span style="font-size:11px; color:#a7f3d0;">${parentNameText}</span></div>
                     <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
                 </div>`;
             });
