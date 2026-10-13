@@ -46,7 +46,6 @@
         .search-input { width: 100%; padding: 12px 18px; border-radius: 20px; border: 1px solid var(--primary-color); background: var(--bg-card); color: white; font-size: 14px; text-align: right; outline: none; box-sizing: border-box; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         .search-input::placeholder { color: #94a3b8; }
 
-        /* ===== تصميم الكروت الشامل (تعبئة الصورة بالكامل + خط واضح وفخم) ===== */
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px 12px; padding: 20px 15px; direction: rtl; }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%; }
         
@@ -234,7 +233,7 @@
         <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 10px;">🚪 تسجيل خروج</a>
     </div>
 
-    <!-- الهيدر العلوي المحدث (محتفظ بقائمة البرجر وشريط البحث فقط) -->
+    <!-- الهيدر العلوي -->
     <div class="header">
         <div class="header-top-row">
             <div class="header-group">
@@ -247,7 +246,7 @@
             </div>
             <div class="header-group">
                 <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px; color: var(--primary-color);">A<span style="color:var(--accent-color);">9</span>C</div>
-                <div id="backBtn" style="display:none; font-size:22px; cursor:pointer; color:var(--accent-color);" onclick="goBack()">→</div>
+                <div id="backBtn" style="display:none; font-size:22px; cursor:pointer; color:var(--accent-color);" onclick="goBack()">←</div>
             </div>
         </div>
 
@@ -298,7 +297,7 @@
         <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="statementListContainer"></div>
     </div>
 
-    <!-- الصفحة الرئيسية المحدثة والمنظمة -->
+    <!-- الصفحة الرئيسية -->
     <div id="homePage" style="display: block;">
         <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 15px;">🏷️ الأقسام الرئيسية</div>
         <div class="grid-container" id="dynamicMainCategoriesGrid"></div>
@@ -307,7 +306,7 @@
         <div class="grid-container" id="dynamicBestSellersGrid" style="padding-top: 5px;"></div>
     </div>
 
-    <!-- صفحة العرض الديناميكي لأي قسم فرعي أو منتجات قسم -->
+    <!-- صفحة العرض الديناميكي المتداخل للأقسام والمنتجات -->
     <div id="dynamicCategoryViewPage">
         <div class="page-title" id="dynamicCategoryTitle">القسم</div>
         <div class="page-title" style="font-size: 14px; color: #a7f3d0; margin-top: 0;" id="dynamicSubCategoriesTitle">📁 الأقسام الفرعية</div>
@@ -318,7 +317,6 @@
 
     <div id="addBalancePage">
         <div class="balance-page-container">
-            <!-- قسم أكواد الهدايا (Gift Card) للزبون -->
             <div class="gift-card-box">
                 <div class="gift-card-title">🎁 شحن عبر كود هدية (Gift Card)</div>
                 <div style="display: flex; gap: 8px;">
@@ -372,91 +370,10 @@
         </div>
     </div>
 
-    <!-- نافذة تعديل القسم -->
-    <div id="editCategoryModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <h3 style="color:var(--accent-color); margin-top:0;">تعديل القسم</h3>
-            <input type="hidden" id="editCatId">
-            <label style="font-size:12px; color:#064e3b;">اسم القسم</label>
-            <input type="text" id="editCatTitle">
-            <label style="font-size:12px; color:#064e3b;">تغيير صورة القسم من الجهاز</label>
-            <input type="file" id="editCatImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="saveEditedCategory()">حفظ التعديلات</button>
-                <button class="cancel-action-btn" onclick="document.getElementById('editCategoryModal').style.display='none'">إلغاء</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة تعديل المنتج -->
-    <div id="editProductModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <h3 style="color:var(--accent-color); margin-top:0;">تعديل المنتج</h3>
-            <input type="hidden" id="editProductId">
-            <label style="font-size:12px; color:#064e3b;">اسم المنتج</label>
-            <input type="text" id="editProductTitle">
-            <label style="font-size:12px; color:#064e3b;">السعر ($)</label>
-            <input type="number" step="0.001" id="editProductPrice">
-            <label style="font-size:12px; color:#064e3b;">اختر القسم</label>
-            <select id="editProductCatSelect"></select>
-            <label style="font-size:12px; color:#064e3b;">رفع صورة جديدة من الجهاز</label>
-            <input type="file" id="editProductImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="saveEditedProduct()">حفظ</button>
-                <button class="cancel-action-btn" onclick="document.getElementById('editProductModal').style.display='none'">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة تعديل طريقة الدفع -->
-    <div id="editPaymentMethodModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <h3 style="color:var(--accent-color); margin-top:0;">تعديل طريقة الدفع</h3>
-            <input type="hidden" id="editPmId">
-            <label style="font-size:12px; color:#064e3b;">اسم طريقة الدفع</label>
-            <input type="text" id="editPmName">
-            <label style="font-size:12px; color:#064e3b;">الرمز / الأيقونة</label>
-            <input type="text" id="editPmSymbol">
-            <label style="font-size:12px; color:#064e3b;">رقم/عنوان التحويل</label>
-            <input type="text" id="editPmAddress">
-            <label style="font-size:12px; color:#064e3b;">الحد الأدنى ($)</label>
-            <input type="number" step="0.1" id="editPmMin">
-            <label style="font-size:12px; color:#064e3b;">الحد الأقصى ($)</label>
-            <input type="number" step="0.1" id="editPmMax">
-            <label style="font-size:12px; color:#064e3b;">صورة الوسيلة المصغرة</label>
-            <input type="file" id="editPmImgFile" accept="image/*" style="padding: 8px; font-size:12px;">
-            <label style="font-size:12px; color:#064e3b;">نوع الشحن</label>
-            <select id="editPmIsAuto">
-                <option value="false">يدوي (يتطلب رفع إيصال)</option>
-                <option value="true">تلقائي فوري</option>
-            </select>
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="saveEditedPaymentMethod()">حفظ التغيرات</button>
-                <button class="cancel-action-btn" onclick="document.getElementById('editPaymentMethodModal').style.display='none'">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة تعديل العملة -->
-    <div id="editCurrencyModal" class="modal">
-        <div class="modal-content" style="max-width: 380px; text-align: right;">
-            <h3 style="color:var(--accent-color); margin-top:0;">تعديل العملة</h3>
-            <input type="hidden" id="editCurrencyId">
-            <label style="font-size:12px; color:#064e3b;">اسم العملة / الرمز</label>
-            <input type="text" id="editCurrencyName">
-            <label style="font-size:12px; color:#064e3b;">سعر صرف 1 دولار بهذه العملة</label>
-            <input type="number" step="0.0001" id="editCurrencyRate">
-            <div class="modal-buttons">
-                <button class="buy-action-btn" onclick="saveEditedCurrency()">حفظ</button>
-                <button class="cancel-action-btn" onclick="document.getElementById('editCurrencyModal').style.display='none'">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
     <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
     <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
 
-    <!-- لوحة التحكم الإدارية الشاملة -->
+    <!-- لوحة التحكم الإدارية -->
     <div id="adminDashboardPage">
         <div class="admin-wrapper">
             <div class="admin-header">
@@ -504,20 +421,15 @@
             <div id="adminProductsSection" style="display:none;"></div>
             <div id="adminCouponsSection" style="display:none;"></div>
             <div id="adminSupportSection" style="display:none;"></div>
-            <!-- قسم تعديل ألوان المتجر والخلفية -->
             <div id="adminThemeSection" style="display:none;">
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">تعديل ألوان المتجر والخلفيات 🎨</h3>
-                    
                     <label style="font-size:12px; color:#a7f3d0;">لون الخلفية الرئيسية:</label>
                     <input type="color" id="themeBgMain" value="#064e3b" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
-                    
                     <label style="font-size:12px; color:#a7f3d0;">لون الكروت والهيدر:</label>
                     <input type="color" id="themeBgCard" value="#022c22" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
-                    
                     <label style="font-size:12px; color:#a7f3d0;">اللون الأساسي (الأزرار والحدود):</label>
                     <input type="color" id="themePrimary" value="#10b981" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
-
                     <button onclick="saveStoreThemeColors()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">حفظ وتطبيق الألوان</button>
                 </div>
             </div>
@@ -552,8 +464,6 @@
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
-        let currentEditProductImgUrl = "";
-        let currentEditCatImgUrl = "";
         let currentEditPmImgUrl = "";
         let selectedCategoryForView = null;
         let activeCurrencyRate = 1;
@@ -793,7 +703,22 @@
                 </div>`;
             });
 
-            document.getElementById('dynamicCategoryProductsGrid').innerHTML = prodHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد منتجات مضافة لهذا القسم حالياً ❌</p>';
+            let prodTitleEl = document.getElementById('dynamicProductsTitle');
+            let prodGridEl = document.getElementById('dynamicCategoryProductsGrid');
+            if (catProducts.length > 0) {
+                prodTitleEl.style.display = 'block';
+                prodGridEl.style.display = 'grid';
+                prodGridEl.innerHTML = prodHtml;
+            } else {
+                if (subCats.length === 0) {
+                    prodTitleEl.style.display = 'block';
+                    prodGridEl.style.display = 'grid';
+                    prodGridEl.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد منتجات أو أقسام فرعية داخل هذا القسم حالياً ❌</p>';
+                } else {
+                    prodTitleEl.style.display = 'none';
+                    prodGridEl.style.display = 'none';
+                }
+            }
         }
 
         function triggerLiveSalesPopup(email, product) {
@@ -915,7 +840,16 @@
 
         function goBack() {
             if (currentPage === 'paymentFormPage') showPage('addBalancePage');
-            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'adminDashboardPage', 'vipTiersPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage', 'dynamicCategoryViewPage'].includes(currentPage)) showPage('homePage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'adminDashboardPage', 'vipTiersPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage', 'dynamicCategoryViewPage'].includes(currentPage)) {
+                if (currentPage === 'dynamicCategoryViewPage' && selectedCategoryForView) {
+                    let currentCat = storeCategories.find(c => c.id === selectedCategoryForView);
+                    if (currentCat && currentCat.parentId && currentCat.parentId !== 'none') {
+                        openCategoryView(currentCat.parentId);
+                        return;
+                    }
+                }
+                showPage('homePage');
+            }
         }
 
         function updateUserBalanceUI() {
@@ -1352,24 +1286,6 @@
             }
         }
 
-        function openEditCurrencyModal(id, name, rate) {
-            document.getElementById('editCurrencyId').value = id;
-            document.getElementById('editCurrencyName').value = name;
-            document.getElementById('editCurrencyRate').value = rate;
-            document.getElementById('editCurrencyModal').style.display = 'flex';
-        }
-
-        function saveEditedCurrency() {
-            let id = document.getElementById('editCurrencyId').value;
-            let name = document.getElementById('editCurrencyName').value.trim();
-            let rate = parseFloat(document.getElementById('editCurrencyRate').value);
-            if(!name || isNaN(rate) || rate <= 0) { showToast('⚠️ بيانات غير صحيحة'); return; }
-            db.collection("currencies").doc(id).update({ name, rate }).then(() => {
-                showToast('✅ تم التعديل بنجاح!');
-                document.getElementById('editCurrencyModal').style.display = 'none';
-            });
-        }
-
         function adminAddPaymentMethod() {
             let name = document.getElementById('newPmName').value.trim();
             let symbol = document.getElementById('newPmSymbol').value.trim() || '💳';
@@ -1406,47 +1322,6 @@
             if(confirm("هل أنت متأكد من حذف طريقة الدفع هذه؟")) {
                 db.collection("payment_methods").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
             }
-        }
-
-        function openEditPaymentMethodModal(id, name, symbol, address, min, max, isAuto, img) {
-            document.getElementById('editPmId').value = id;
-            document.getElementById('editPmName').value = name;
-            document.getElementById('editPmSymbol').value = symbol;
-            document.getElementById('editPmAddress').value = address;
-            document.getElementById('editPmMin').value = min;
-            document.getElementById('editPmMax').value = max;
-            document.getElementById('editPmIsAuto').value = isAuto ? 'true' : 'false';
-            currentEditPmImgUrl = img || '';
-            if(document.getElementById('editPmImgFile')) document.getElementById('editPmImgFile').value = '';
-            document.getElementById('editPaymentMethodModal').style.display = 'flex';
-        }
-
-        function saveEditedPaymentMethod() {
-            let id = document.getElementById('editPmId').value;
-            let name = document.getElementById('editPmName').value.trim();
-            let symbol = document.getElementById('editPmSymbol').value.trim();
-            let address = document.getElementById('editPmAddress').value.trim();
-            let minAmount = parseFloat(document.getElementById('editPmMin').value) || 1;
-            let maxAmount = parseFloat(document.getElementById('editPmMax').value) || 1000;
-            let isAuto = document.getElementById('editPmIsAuto').value === 'true';
-            let fileInput = document.getElementById('editPmImgFile');
-
-            if (!name || !address) { showToast('⚠️ بيانات غير صحيحة!'); return; }
-
-            let updatePm = function(imgData) {
-                db.collection("payment_methods").doc(id).update({
-                    name, symbol, address, minAmount, maxAmount, isAuto, img: imgData
-                }).then(() => {
-                    showToast('✅ تم التعديل بنجاح!');
-                    document.getElementById('editPaymentMethodModal').style.display = 'none';
-                });
-            };
-
-            if (fileInput && fileInput.files.length > 0) {
-                let reader = new FileReader();
-                reader.onload = function(e) { updatePm(e.target.result); };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else { updatePm(currentEditPmImgUrl); }
         }
 
         function adminAddCategory() {
@@ -1633,18 +1508,18 @@
             });
             document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
 
-            /* إدارة الأقسام مع خيار اختيار القسم الأب (الرئيسي) لتداخل الأقسام بدقة */
-            let mainCatOptionsHtml = '<option value="none">-- قسم رئيسي مستقل (يظهر بالواجهة الرئيسية) --</option>';
-            storeCategories.filter(c => !c.parentId || c.parentId === 'none').forEach(c => {
-                mainCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
+            /* قائمة اختيار الأب في إضافة الأقسام لتتيح وضع قسم داخل أي قسم آخر (مثل روبوت وعضويات داخل فري فاير) */
+            let parentCatOptionsHtml = '<option value="none">-- قسم رئيسي بالواجهة --</option>';
+            storeCategories.forEach(c => {
+                parentCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
             });
 
             let catAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">إضافة قسم جديد 🏷️</h3>
-                    <input type="text" id="newCatTitle" placeholder="اسم القسم (مثال: قسم الألعاب أو ببجي)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لقسم رئيسي (أو اتركه مستقل):</label>
-                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${mainCatOptionsHtml}</select>
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم (مثال: فري فاير، روبوت، عضويات)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لـ (اختر القسم الرئيسي أو الفرعي الذي ستضعه بداخله):</label>
+                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${parentCatOptionsHtml}</select>
                     <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة القسم:</label>
                     <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
                     <button onclick="adminAddCategory()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
@@ -1652,7 +1527,7 @@
             `;
             storeCategories.forEach(c => {
                 let parentObj = storeCategories.find(p => p.id === c.parentId);
-                let parentNameText = parentObj ? ` (تابِع لـ: ${parentObj.title})` : ' (قسم رئيسي)';
+                let parentNameText = parentObj ? ` (داخل: ${parentObj.title})` : ' (قسم رئيسي بالواجهة)';
                 catAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
                     <div><b>${c.title}</b> <span style="font-size:11px; color:#a7f3d0;">${parentNameText}</span></div>
                     <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
