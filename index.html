@@ -112,12 +112,12 @@
         .buy-action-btn { flex: 1; background-color: var(--primary-color); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .cancel-action-btn { flex: 1; background-color: #ffffff; color: #f87171; border: 1px solid #f87171; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #orderDetailsPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage, #dynamicCategoryViewPage, #changePasswordModal { display: none; }
+        #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage, #dynamicCategoryViewPage { display: none; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 44, 34, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background-color: var(--bg-main); color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; border: 2px solid var(--primary-color); box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
         .login-box h2 { color: var(--accent-color); font-size: 22px; margin-bottom: 20px; }
-        .login-box input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid var(--primary-color); border-radius: 8px; box-sizing: border-box; text-align: right; background: var(--bg-card); color: white; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--primary-color); border-radius: 8px; box-sizing: border-box; text-align: right; background: var(--bg-card); color: white; }
         .login-box button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-google { background-color: #fff !important; color: #555 !important; border: 1px solid #ccc !important; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; width: 100%; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-google img { width: 20px; }
@@ -126,19 +126,14 @@
         .sidebar a { padding: 12px 20px; text-decoration: none; font-size: 14px; color: var(--accent-color); display: block; border-bottom: 1px solid rgba(16, 185, 129, 0.2); font-weight: bold; }
         .sidebar .close-btn { position: absolute; top: 0; right: 15px; font-size: 30px; border-bottom: none; cursor: pointer; color: white; }
 
-        /* ستايل صفحة طلباتي المعززة */
-        .orders-filter-box { background: var(--bg-card); padding: 15px; border-radius: 16px; border: 1px solid var(--primary-color); margin-bottom: 15px; direction: rtl; }
-        .order-card-item { background: #111827; border: 1px solid #374151; border-radius: 14px; padding: 14px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; direction: rtl; }
-        .order-card-item:hover { border-color: var(--primary-color); }
-        .order-status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .status-pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; }
-        .status-approved { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
-        .status-rejected { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
-
-        /* ستايل صفحة تفاصيل الطلب */
-        .detail-row-card { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; direction: rtl; }
-        .detail-label { color: #9ca3af; font-size: 13px; font-weight: bold; }
-        .detail-value { color: #ffffff; font-size: 14px; font-weight: 900; word-break: break-all; text-align: left; }
+        .balance-page-container { padding: 15px; }
+        .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px 12px; direction: rtl; }
+        .payment-card { background: var(--bg-card); border-radius: 18px; padding: 12px 5px; text-align: center; color: white; font-size: 10px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; border: 1px solid var(--primary-color); }
+        .payment-icon { width: 100%; aspect-ratio: 1 / 1; background-color: var(--bg-card); border-radius: 16px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: var(--accent-color); font-size: 24px; border: 1px solid var(--primary-color); overflow: hidden; }
+        .payment-icon img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .gift-card-box { background: linear-gradient(135deg, var(--bg-card), var(--bg-main)); border: 1.5px solid var(--primary-color); border-radius: 15px; padding: 15px; margin-bottom: 20px; direction: rtl; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .gift-card-title { color: var(--accent-color); font-weight: 900; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
         .pf-container { padding: 20px; direction: rtl; background-color: var(--bg-main); min-height: 100vh; color: white; }
         .pf-header { text-align: center; margin-bottom: 25px; }
@@ -162,6 +157,11 @@
         .stat-card { background: var(--bg-main); border: 1px solid var(--primary-color); border-radius: 10px; padding: 15px; text-align: center; flex: 1; }
         .stat-num { font-size: 20px; font-weight: 900; color: var(--accent-color); }
         .stat-title { font-size: 11px; color: #a7f3d0; margin-top: 4px; }
+
+        .statement-card { background: var(--bg-main); border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--primary-color); font-size: 13px; }
+        .st-header { display: flex; justify-content: space-between; font-weight: bold; color: var(--accent-color); margin-bottom: 5px; }
+        .st-plus { color: var(--accent-color); }
+        .st-minus { color: #f87171; }
     </style>
 </head>
 <body>
@@ -173,13 +173,11 @@
         <span id="liveSalesText"></span>
     </div>
 
-    <!-- واجهة تسجيل الدخول مع كلمة المرور -->
     <div id="loginOverlay" class="login-overlay">
         <div class="login-box" id="mainLoginBox">
             <h2>مرحباً بك في ARAB4CARD</h2>
-            <input type="email" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني (gmail.com)...">
-            <input type="password" id="userPasswordInput" placeholder="أدخل كلمة المرور الحساب...">
-            <button onclick="loginUser()">دخول / تسجيل حساب</button>
+            <input type="text" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني (gmail.com)...">
+            <button onclick="loginUser()">إرسال</button>
             <div style="margin: 15px 0; border-top: 1px solid var(--primary-color); position: relative;">
                 <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-main); padding: 0 10px; font-size: 12px; color: var(--accent-color);">أو</span>
             </div>
@@ -190,9 +188,21 @@
         </div>
     </div>
 
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <h3 style="color:var(--accent-color);">دخول لوحة التحكم</h3>
+            <input type="password" id="adminPasswordInput" placeholder="كلمة المرور...">
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="verifyAdmin()">دخول</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('adminLoginModal').style.display='none'">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <!-- القائمة الجانبية -->
     <div id="sideMenu" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        
         <div style="text-align: center; padding: 10px 15px; border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
             <div style="width: 55px; height: 55px; background: var(--bg-main); border-radius: 50%; margin: 0 auto 8px auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary-color); font-size: 22px;">👤</div>
             <div style="font-size: 13px; font-weight: bold; color: white; display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap;">
@@ -206,11 +216,19 @@
             $<span id="sidebarBalanceDisplay">0.020</span>
         </div>
 
+        <div style="padding: 10px 15px; border-bottom: 1px solid rgba(16, 185, 129, 0.3);">
+            <select id="currencySelector" onchange="changeActiveCurrency(this.value)" style="width: 100%; padding: 8px; background: var(--bg-main); color: var(--accent-color); border: 1px solid var(--primary-color); border-radius: 10px; font-weight: bold; font-size: 12px; outline: none;">
+                <option value="USD">العملة - الدولار الأمريكي ($)</option>
+            </select>
+        </div>
+
         <a href="#" onclick="showPage('homePage'); closeSidebar()">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('addBalancePage'); closeSidebar()">💳 إضافة رصيد</a>
         <a href="#" onclick="showMyPaymentsPage(); closeSidebar()">🧾 دفعاتي</a>
+        <a href="#" onclick="showTransactionsHistoryPage(); closeSidebar()">📊 كشف الحساب السجل المالي</a>
         <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
         <a href="#" onclick="showPage('supportPage'); closeSidebar()">🎧 الدعم الفني</a>
+        <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
         <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: var(--accent-color);">⚙️ لوحة التحكم (Admin)</a>
         <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 10px;">🚪 تسجيل خروج</a>
     </div>
@@ -220,74 +238,114 @@
         <div class="header-top-row">
             <div class="header-group">
                 <div style="font-size: 22px; cursor: pointer; color: var(--accent-color);" onclick="openSidebar()">☰</div>
-                <div id="headerVipBadge" style="background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 13px; border: 1px solid var(--primary-color); color:var(--accent-color);">⭐ مبدئي</div>
+                <div id="headerVipBadge" onclick="showPage('vipTiersPage')" style="cursor: pointer; background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 13px; border: 1px solid var(--primary-color); color:var(--accent-color);" title="شريحتك الحالية">⭐ مبدئي</div>
                 <div class="balance">
                     💰 <span id="userBalanceDisplay" style="color: var(--accent-color); font-weight: bold;">0.010</span>
+                    <button onclick="showPage('addBalancePage')" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;" title="إضافة رصيد">+</button>
                 </div>
             </div>
             <div class="header-group">
-                <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px; color: var(--primary-color);">A<span style="color:var(--accent-color);">4</span>C</div>
+                <div style="font-weight: 900; font-family: 'Arial Black'; font-size: 18px; color: var(--primary-color);">ARAB4<span style="color:var(--accent-color);">CARD</span></div>
                 <div id="backBtn" style="display:none; font-size:22px; cursor:pointer; color:var(--accent-color);" onclick="goBack()">←</div>
             </div>
         </div>
+
+        <div class="search-bar-container">
+            <input type="text" id="globalSearchInput" class="search-input" placeholder="🔍 ابحث عن لعبة أو فئة أو منتج..." oninput="handleSearch(this.value)">
+        </div>
+    </div>
+
+    <!-- نتائج البحث -->
+    <div id="searchResultsPage">
+        <div class="page-title">نتائج البحث 🔍</div>
+        <div class="grid-container" id="searchResultsGrid"></div>
+    </div>
+
+    <!-- صفحة الدعم الفني -->
+    <div id="supportPage" style="display:none; background: var(--bg-main); min-height: 100vh; padding-bottom: 80px;">
+        <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 110px); overflow-y: auto;"></div>
+        <div style="position: fixed; bottom: 0; width: 100%; background: var(--bg-card); padding: 10px 15px; box-sizing: border-box; border-top: 1px solid var(--primary-color); display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid var(--primary-color); border-radius: 20px; outline: none; font-size: 14px; text-align: right; background: var(--bg-main); color: white;">
+            <button onclick="sendSupportMessage()" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">إرسال</button>
+        </div>
+    </div>
+
+    <!-- صفحة من نحن -->
+    <div id="aboutPage">
+        <div class="page-title">عن ARAB4CARD ℹ️</div>
+        <div style="padding: 20px; direction: rtl; background: var(--bg-card); color: white; margin: 15px; border-radius: 15px; border: 1px solid var(--primary-color); line-height: 1.8; font-size: 14px;">
+            <h3 style="color:var(--accent-color);">مرحباً بكم في متجر ARAB4CARD</h3>
+            <p>نحن المنصة العربية الرائدة المتخصصة في تقديم خدمات شحن الألعاب الكبرى بطريقة آمنة وسريعة وسلسة، بالإضافة إلى توفير بطاقات الاتصالات الدولية وشحن الرصيد بأعلى جودة وأفضل الأسعار لجميع التجار والزبائن الأفراد.</p>
+        </div>
+    </div>
+
+    <!-- صفحة الشروط والأحكام -->
+    <div id="termsPage">
+        <div class="page-title">الشروط والأحكام 📜</div>
+        <div style="padding: 20px; direction: rtl; background: var(--bg-card); color: white; margin: 15px; border-radius: 15px; border: 1px solid var(--primary-color); line-height: 1.8; font-size: 13px;">
+            <h3 style="color:var(--accent-color);">سياسة وشروط استخدام المتجر</h3>
+            <ol>
+                <li>يرجى التأكد دائماً من كتابة المعرف (Player ID) بشكل صحيح أثناء عملية الطلب والشراء.</li>
+                <li>تتم معالجة جميع الطلبات بسرعة، وبمجرد الشحن واكتمال الطلب لا يمكن إلغاؤه أو استرجاعه.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- صفحة كشف الحساب السجل المالي المفصل -->
+    <div id="transactionsHistoryPage">
+        <div class="page-title">📊 كشف الحساب المالي المفصل</div>
+        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="statementListContainer"></div>
     </div>
 
     <!-- الصفحة الرئيسية -->
     <div id="homePage" style="display: block;">
         <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 15px;">🏷️ الأقسام الرئيسية</div>
         <div class="grid-container" id="dynamicMainCategoriesGrid"></div>
+
+        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 20px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
+        <div class="grid-container" id="dynamicBestSellersGrid" style="padding-top: 5px;"></div>
     </div>
 
-    <!-- صفحة طلباتي المعدلة بالطريقة المطلوبة -->
-    <div id="myOrdersPage">
-        <div class="page-title">طلباتي</div>
-        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;">
-            
-            <!-- فلاتر التواريخ والبحث -->
-            <div class="orders-filter-box">
-                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <div style="flex: 1;">
-                        <label style="font-size: 11px; color: #9ca3af; display: block; margin-bottom: 3px;">من</label>
-                        <input type="date" id="orderFilterFrom" onchange="renderMyOrders()" style="width: 100%; padding: 8px; background: #1f2937; color: white; border: 1px solid #374151; border-radius: 8px; box-sizing: border-box; font-size: 12px;">
-                    </div>
-                    <div style="flex: 1;">
-                        <label style="font-size: 11px; color: #9ca3af; display: block; margin-bottom: 3px;">إلى</label>
-                        <input type="date" id="orderFilterTo" onchange="renderMyOrders()" style="width: 100%; padding: 8px; background: #1f2937; color: white; border: 1px solid #374151; border-radius: 8px; box-sizing: border-box; font-size: 12px;">
-                    </div>
-                </div>
+    <!-- صفحة العرض الديناميكي المتداخل للأقسام والمنتجات -->
+    <div id="dynamicCategoryViewPage">
+        <div class="page-title" id="dynamicCategoryTitle">القسم</div>
+        <div class="page-title" style="font-size: 14px; color: #a7f3d0; margin-top: 0;" id="dynamicSubCategoriesTitle">📁 الأقسام الفرعية</div>
+        <div class="grid-container" id="dynamicSubCategoriesGrid"></div>
+        <div class="page-title" style="font-size: 14px; color: var(--accent-color); margin-top: 15px;" id="dynamicProductsTitle">📦 المنتجات</div>
+        <div class="grid-container" id="dynamicCategoryProductsGrid"></div>
+    </div>
 
-                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                    <input type="text" id="orderSearchBox" placeholder="بحث..." oninput="renderMyOrders()" style="flex: 1; padding: 10px; background: #1f2937; color: white; border: 1px solid #374151; border-radius: 8px; outline: none; font-size: 13px;">
-                </div>
-
-                <!-- أزرار التصفية بالحالة -->
-                <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 5px;">
-                    <button onclick="setOrderTabFilter('all')" id="btnTabAll" style="padding: 6px 14px; background: var(--primary-color); color: white; border: none; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer;">الكل</button>
-                    <button onclick="setOrderTabFilter('approved')" id="btnTabApproved" style="padding: 6px 14px; background: #1f2937; color: #9ca3af; border: 1px solid #374151; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer;">مقبول</button>
-                    <button onclick="setOrderTabFilter('pending')" id="btnTabPending" style="padding: 6px 14px; background: #1f2937; color: #9ca3af; border: 1px solid #374151; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer;">انتظار</button>
-                    <button onclick="setOrderTabFilter('rejected')" id="btnTabRejected" style="padding: 6px 14px; background: #1f2937; color: #9ca3af; border: 1px solid #374151; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer;">مرفوض</button>
+    <div id="addBalancePage">
+        <div class="balance-page-container">
+            <div class="gift-card-box">
+                <div class="gift-card-title">🎁 شحن عبر كود هدية (Gift Card)</div>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="giftCodeInput" placeholder="أدخل كود الهدية هنا..." style="flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--primary-color); background: var(--bg-card); color: white; text-align: right; outline: none; font-size: 13px;">
+                    <button onclick="redeemGiftCode()" style="background: var(--primary-color); color: white; border: none; padding: 10px 18px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 12px;">تفعيل الكود</button>
                 </div>
             </div>
 
-            <!-- إجمالي المبالغ -->
-            <div style="text-align: center; margin-bottom: 15px; background: #1f2937; padding: 10px; border-radius: 12px; border: 1px solid #374151; font-weight: 900; font-size: 15px; color: var(--accent-color);">
-                إجمالي : <span id="ordersTotalSum">$ 0.000</span>
-            </div>
-
-            <!-- قائمة الطلبات -->
-            <div id="myOrdersListContainer"></div>
+            <div class="page-title" style="font-size: 15px; margin-top:0;">💳 طرُق الدفع والشحن المتاحة</div>
+            <div class="payment-grid" id="paymentMethodsGrid"></div>
         </div>
     </div>
+    <div id="paymentFormPage"><div class="pf-container" id="pfDynamicContent"></div></div>
 
-    <!-- صفحة تفاصيل الطلب المفردة (المطابقة للصورة) -->
-    <div id="orderDetailsPage">
-        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin:0; font-size: 20px; font-weight: 900; color: white;">تفاصيل الطلب</h2>
-                <button onclick="showPage('myOrdersPage')" style="background: #1f2937; color: white; border: 1px solid #374151; padding: 6px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;">رجوع</button>
+    <div id="vipTiersPage">
+        <div class="page-title">مستويات الحساب (VIP) ⭐</div>
+        <div style="padding: 20px; direction: rtl; background: var(--bg-card); color: white; margin: 15px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); border: 1px solid var(--primary-color);">
+            <div style="font-size: 15px; font-weight: bold; color: var(--accent-color); margin-bottom: 5px;" id="currentTierTitleDisplay">شريحتك الحالية: مبدئي</div>
+            <p style="font-size: 12px; color: #a7f3d0; line-height: 1.6; margin-bottom: 20px;">إذا كنت ترغب بترقية حسابك إلى شريحة أعلى، ما عليك إلا زيادة مبيعاتك.</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid var(--primary-color); background: var(--bg-main);"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥉</span><div><div style="font-weight: bold; font-size: 13px;">برونزي / Bronze</div><div style="font-size: 11px; color: #a7f3d0;">الشحن المطلوب: 1$ | الخصم: 1%</div></div></div><span id="badgeBronze" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid var(--primary-color); background: var(--bg-main);"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥈</span><div><div style="font-weight: bold; font-size: 13px;">فضي / Silver</div><div style="font-size: 11px; color: #a7f3d0;">الشحن المطلوب: 40$ | الخصم: 2%</div></div></div><span id="badgeSilver" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid var(--primary-color); background: var(--bg-main);"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">🥇</span><div><div style="font-weight: bold; font-size: 13px;">ذهبي / Gold</div><div style="font-size: 11px; color: #a7f3d0;">الشحن المطلوب: 100$ | الخصم: 3%</div></div></div><span id="badgeGold" style="font-size: 16px;">🔒</span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid var(--primary-color); background: var(--bg-main);"><div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 22px;">💎</span><div><div style="font-weight: bold; font-size: 13px;">ألماسي / Diamond</div><div style="font-size: 11px; color: #a7f3d0;">الشحن المطلوب: 300$ | الخصم: 5%</div></div></div><span id="badgeDiamond" style="font-size: 16px;">🔒</span></div>
             </div>
-
-            <div id="orderDetailsCardContent"></div>
+            <div style="margin-top: 25px;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #a7f3d0; margin-bottom: 5px;"><span>التقدم للشريحة التالية</span><span id="userSpentText">$0.00 / $1.00</span></div>
+                <div style="width: 100%; background: var(--bg-card); height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--primary-color);"><div id="tierProgressBar" style="width: 0%; background: var(--primary-color); height: 100%; transition: width 0.3s;"></div></div>
+            </div>
         </div>
     </div>
 
@@ -298,8 +356,13 @@
                 <span id="modalItemTitle">المنتج</span>
                 <span class="price-tag" id="modalItemPrice">$ 0.00</span>
             </div>
-            <input type="text" id="playerId" placeholder="الايدي (Player ID)">
+            <input type="text" id="playerId" placeholder="الايدي (Player ID) / أو اكتب اسمك">
             
+            <div class="coupon-group">
+                <input type="text" id="orderCouponInput" placeholder="كوبون الخصم (إن وجد)" style="margin:0;">
+                <button class="coupon-btn" onclick="applyCoupon('order')">تطبيق</button>
+            </div>
+
             <div class="modal-buttons">
                 <button class="buy-action-btn" onclick="submitGameOrder()">شراء وتأكيد</button>
                 <button class="cancel-action-btn" onclick="closeOrderModal()">إلغاء</button>
@@ -307,37 +370,103 @@
         </div>
     </div>
 
+    <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
+    <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
+
     <!-- لوحة التحكم الإدارية -->
     <div id="adminDashboardPage">
         <div class="admin-wrapper">
             <div class="admin-header">
                 <h2 style="margin:0;">لوحة التحكم</h2>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button onclick="exportOrdersToExcel()" style="background: var(--primary-color); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer;">📊 تصدير الطلبات (CSV)</button>
+                    <div style="font-size: 20px;">⚙️</div>
+                </div>
             </div>
+
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div class="stat-card">
+                    <div class="stat-num" id="statTotalRevenue">$0.00</div>
+                    <div class="stat-title">إجمالي مبيعات المتجر</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" id="statApprovedOrders">0</div>
+                    <div class="stat-title">طلبات مكتملة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" id="statPendingOrders" style="color:#f39c12;">0</div>
+                    <div class="stat-title">طلبات معلقة</div>
+                </div>
+            </div>
+
             <div class="admin-tabs">
-                <div class="admin-tab active" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
+                <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
+                <div class="admin-tab" id="tabGifts" onclick="switchAdminTab('gifts')">أكواد الهدايا 🎁</div>
+                <div class="admin-tab" id="tabPaymentsAdmin" onclick="switchAdminTab('paymentsAdmin')">طرق الدفع 💳</div>
+                <div class="admin-tab" id="tabCurrencies" onclick="switchAdminTab('currencies')">العملات 💱</div>
+                <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">إدارة الأقسام 🏷️</div>
+                <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
+                <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
+                <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
+                <div class="admin-tab" id="tabTheme" onclick="switchAdminTab('theme')">تعديل الألوان 🎨</div>
             </div>
-            <div id="adminOrdersSection"></div>
+            
+            <div id="adminBalanceSection"></div>
+            <div id="adminOrdersSection" style="display:none;"></div>
+            <div id="adminGiftsSection" style="display:none;"></div>
+            <div id="adminPaymentsSection" style="display:none;"></div>
+            <div id="adminCurrenciesSection" style="display:none;"></div>
+            <div id="adminCategoriesSection" style="display:none;"></div>
+            <div id="adminProductsSection" style="display:none;"></div>
+            <div id="adminCouponsSection" style="display:none;"></div>
+            <div id="adminSupportSection" style="display:none;"></div>
+            <div id="adminThemeSection" style="display:none;">
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">تعديل ألوان المتجر والخلفيات 🎨</h3>
+                    <label style="font-size:12px; color:#a7f3d0;">لون الخلفية الرئيسية:</label>
+                    <input type="color" id="themeBgMain" value="#064e3b" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
+                    <label style="font-size:12px; color:#a7f3d0;">لون الكروت والهيدر:</label>
+                    <input type="color" id="themeBgCard" value="#022c22" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
+                    <label style="font-size:12px; color:#a7f3d0;">اللون الأساسي (الأزرار والحدود):</label>
+                    <input type="color" id="themePrimary" value="#10b981" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
+                    <button onclick="saveStoreThemeColors()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">حفظ وتطبيق الألوان</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        const ADMIN_EMAIL = "admin@arab9card.com";
+        const ADMIN_WHATSAPP_NUMBER = "963992448854";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyAFN8LX9K5yqkwFCbME0epZWGVkkVKXaMg",
-            authDomain: "arab9card.firebaseapp.com",
-            projectId: "arab9card",
-            storageBucket: "arab9card.firebasestorage.app",
-            messagingSenderId: "258855549504",
-            appId: "1:258855549504:web:ab1597d5d5a7d350f33da5"
+            apiKey: "AIzaSyDLmHUp4kmZM5rvnWUqxMaqZvjRAoQLC2k",
+            authDomain: "arab9card-20961.firebaseapp.com",
+            projectId: "arab9card-20961",
+            storageBucket: "arab9card-20961.firebasestorage.app",
+            messagingSenderId: "877672514830",
+            appId: "1:877672514830:web:d4e6ac9109dc3385e5435f"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
         let userBalance = 0.010;
-        let gameOrders = [];
+        let balanceRequests = []; 
+        let gameOrders = [];      
+        let supportMessages = [];
+        let availableCoupons = [];
+        let giftCodes = [];
+        let manualUserTiers = {};
+        let storeProducts = [];
+        let storeCategories = [];
+        let dbPaymentMethods = [];
+        let storeCurrencies = [];
+        
+        let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
-        let currentOrderTabFilter = 'all';
+        let selectedCategoryForView = null;
+        let activeCurrencyRate = 1;
+        let activeCurrencySymbol = '$';
 
         function showToast(message) {
             let container = document.getElementById('toastContainer');
@@ -348,179 +477,1136 @@
             setTimeout(() => { toast.remove(); }, 3000);
         }
 
+        function handleSearch(query) {
+            query = query.trim().toLowerCase();
+            let grid = document.getElementById('searchResultsGrid');
+            if (!query) {
+                if(currentPage === 'searchResultsPage') showPage('homePage');
+                return;
+            }
+
+            let filtered = storeProducts.filter(p => p.title.toLowerCase().includes(query));
+            let html = filtered.length === 0 ? '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد نتائج مطابقة لبحثك ❌</p>' : '';
+            
+            filtered.forEach(item => {
+                let imgContent = item.img && (item.img.startsWith('http') || item.img.startsWith('data:image')) ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
+                let displayPrice = (item.price * activeCurrencyRate).toFixed(3);
+                html += `<div class="card-wrapper" onclick="openOrderModal('${item.title}', ${item.price})"><div class="card-box"><div class="card-circle">${imgContent}</div></div><div class="card-name-outside">${item.title}</div><div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div></div>`;
+            });
+
+            grid.innerHTML = html;
+            showPage('searchResultsPage');
+        }
+
+        db.collection("payment_methods").onSnapshot((snapshot) => {
+            dbPaymentMethods = [];
+            snapshot.forEach((doc) => { dbPaymentMethods.push({ id: doc.id, ...doc.data() }); });
+            renderUserPaymentMethods();
+            renderAdminData();
+        });
+
+        db.collection("currencies").onSnapshot((snapshot) => {
+            storeCurrencies = [];
+            snapshot.forEach((doc) => { storeCurrencies.push({ id: doc.id, ...doc.data() }); });
+            renderCurrencySelector();
+            renderAdminData();
+        });
+
+        db.collection("categories").onSnapshot((snapshot) => {
+            storeCategories = [];
+            snapshot.forEach((doc) => { storeCategories.push({ id: doc.id, ...doc.data() }); });
+            renderCategoriesAndStore();
+            renderAdminData();
+        });
+
+        db.collection("coupons").onSnapshot((snapshot) => {
+            availableCoupons = [];
+            snapshot.forEach((doc) => { availableCoupons.push({ id: doc.id, ...doc.data() }); });
+            renderAdminData();
+        });
+
+        db.collection("gift_codes").onSnapshot((snapshot) => {
+            giftCodes = [];
+            snapshot.forEach((doc) => { giftCodes.push({ id: doc.id, ...doc.data() }); });
+            renderAdminData();
+        });
+
+        db.collection("users").onSnapshot((snapshot) => {
+            manualUserTiers = {};
+            snapshot.forEach((doc) => { manualUserTiers[doc.id] = doc.data(); });
+            calculateUserVIP(); renderAdminData();
+        });
+
+        db.collection("support_messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
+            supportMessages = [];
+            snapshot.forEach((doc) => { supportMessages.push({ id: doc.id, ...doc.data() }); });
+            renderChatMessages(); renderAdminData();
+        });
+
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
             snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
-            renderMyOrders();
+            renderMyOrders(); renderAdminData(); calculateUserVIP();
         });
 
-        /* دالة تنسيق الوقت بدقة بالثواني */
-        function formatFullTimestamp(ts) {
-            if (!ts) return "2026-10-24 16:39:39";
-            let dateObj = ts.toDate ? ts.toDate() : new Date(ts);
-            let year = dateObj.getFullYear();
-            let month = String(dateObj.getMonth() + 1).padStart(2, '0');
-            let day = String(dateObj.getDate()).padStart(2, '0');
-            let hours = String(dateObj.getHours()).padStart(2, '0');
-            let minutes = String(dateObj.getMinutes()).padStart(2, '0');
-            let seconds = String(dateObj.getSeconds()).padStart(2, '0');
-            return `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
-        }
-
-        function setOrderTabFilter(status) {
-            currentOrderTabFilter = status;
-            ['btnTabAll', 'btnTabApproved', 'btnTabPending', 'btnTabRejected'].forEach(id => {
-                let btn = document.getElementById(id);
-                if (btn) {
-                    btn.style.background = '#1f2937';
-                    btn.style.color = '#9ca3af';
-                    btn.style.border = '1px solid #374151';
+        db.collection("deposits").orderBy("numericId", "asc").onSnapshot((snapshot) => {
+            balanceRequests = [];
+            snapshot.forEach((doc) => { 
+                let data = doc.data();
+                balanceRequests.push({ id: doc.id, ...data });
+                
+                if (currentUserEmail && data.userEmail === currentUserEmail && data.status === 'approved' && !data.credited) {
+                    userBalance += parseFloat(data.amount);
+                    updateUserBalanceUI();
+                    db.collection("deposits").doc(doc.id).update({ credited: true });
+                    
+                    let notifyMsg = parseFloat(data.amount) >= 0 
+                        ? `✅ تمت إضافة $${data.amount} إلى رصيدك بنجاح.` 
+                        : `⚠️ قامت الإدارة بتعديل رصيدك ($${Math.abs(data.amount)}).`;
+                    showToast(notifyMsg);
                 }
             });
-            let activeBtn = document.getElementById(status === 'all' ? 'btnTabAll' : (status === 'approved' ? 'btnTabApproved' : (status === 'pending' ? 'btnTabPending' : 'btnTabRejected')));
-            if (activeBtn) {
-                activeBtn.style.background = 'var(--primary-color)';
-                activeBtn.style.color = 'white';
-                activeBtn.style.border = 'none';
-            }
-            renderMyOrders();
+            renderMyPayments(); renderAdminData(); calculateUserVIP();
+        });
+
+        db.collection("products").onSnapshot((snapshot) => {
+            storeProducts = [];
+            snapshot.forEach((doc) => { storeProducts.push({ id: doc.id, ...doc.data() }); });
+            renderCategoriesAndStore();
+            renderAdminData();
+        });
+
+        function renderCurrencySelector() {
+            let selector = document.getElementById('currencySelector');
+            if(!selector) return;
+            let html = `<option value="USD|1|$">العملة - الدولار الأمريكي ($)</option>`;
+            storeCurrencies.forEach(curr => {
+                html += `<option value="${curr.name}|${curr.rate}|${curr.name}">${curr.name} (1$ = ${curr.rate})</option>`;
+            });
+            selector.innerHTML = html;
         }
 
-        function renderMyOrders() {
-            let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
-            let search = document.getElementById('orderSearchBox') ? document.getElementById('orderSearchBox').value.trim().toLowerCase() : '';
-            let fromDate = document.getElementById('orderFilterFrom') ? document.getElementById('orderFilterFrom').value : '';
-            let toDate = document.getElementById('orderFilterTo') ? document.getElementById('orderFilterTo').value : '';
+        function changeActiveCurrency(val) {
+            if(val === 'USD') {
+                activeCurrencyRate = 1;
+                activeCurrencySymbol = '$';
+            } else {
+                let parts = val.split('|');
+                activeCurrencyRate = parseFloat(parts[1]) || 1;
+                activeCurrencySymbol = parts[2] || parts[0];
+            }
+            updateUserBalanceUI();
+            renderCategoriesAndStore();
+            if(selectedCategoryForView) renderSubCategoryView(selectedCategoryForView);
+        }
 
-            let filtered = myOrders.filter(o => {
-                let matchStatus = currentOrderTabFilter === 'all' || o.status === currentOrderTabFilter;
-                let matchSearch = !search || (o.product && o.product.toLowerCase().includes(search)) || (o.playerId && o.playerId.includes(search)) || o.id.includes(search);
-                return matchStatus && matchSearch;
-            });
-
-            let totalSum = filtered.reduce((sum, o) => sum + (parseFloat(o.price) || 0), 0);
-            if (document.getElementById('ordersTotalSum')) {
-                document.getElementById('ordersTotalSum').innerText = `$ ${totalSum.toFixed(3)}`;
+        function renderUserPaymentMethods() {
+            let container = document.getElementById('paymentMethodsGrid');
+            if (!container) return;
+            
+            if (dbPaymentMethods.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد طرق دفع متاحة حالياً</p>';
+                return;
             }
 
-            let html = filtered.length === 0 ? '<p style="text-align:center; color:#9ca3af; margin-top:20px;">لا توجد طلبات مطابقة</p>' : '';
-            
-            filtered.forEach(order => {
-                let shortId = "ID_" + order.id.substring(0, 15);
-                let formattedTime = formatFullTimestamp(order.timestamp);
-                let badgeClass = order.status === 'pending' ? 'status-pending' : (order.status === 'approved' ? 'status-approved' : 'status-rejected');
-                let badgeText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ مقبول' : '❌ مرفوض');
+            container.innerHTML = dbPaymentMethods.map((m, i) => {
+                let iconContent = m.img && (m.img.startsWith('http') || m.img.startsWith('data:image')) ? `<img src="${m.img}" alt="">` : (m.symbol || '💳');
+                return `
+                <div class="payment-card" onclick="openPaymentForm(${i})">
+                    <div class="payment-icon">${iconContent}</div>
+                    <div class="card-name-outside" style="margin-top:4px; font-size:13px;">${m.name}</div>
+                    <div style="font-size:9px; color:#a7f3d0;">(${m.minAmount || 1}$ - ${m.maxAmount || 1000}$)</div>
+                </div>
+            `}).join('');
+        }
 
-                html += `
-                <div class="order-card-item" onclick="openOrderDetails('${order.id}')">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <span class="order-status-badge ${badgeClass}">${badgeText}</span>
-                        <span style="font-size:12px; color:#9ca3af; font-family:monospace;">${shortId}</span>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <div style="font-weight:bold; font-size:14px; color:white; margin-bottom:4px;">${order.productName || order.product}</div>
-                            <div style="font-size:11px; color:#9ca3af;">#${order.playerId || 'بدون آيدي'}</div>
-                        </div>
-                        <div style="text-align:left;">
-                            <div style="font-weight:900; color:var(--accent-color); font-size:14px;">$ ${parseFloat(order.price || 0).toFixed(3)}</div>
-                            <div style="font-size:10px; color:#6b7280; margin-top:3px;">${formattedTime}</div>
-                        </div>
-                    </div>
+        function renderCategoriesAndStore() {
+            let mainCatsHtml = '';
+            let mainCategories = storeCategories.filter(c => !c.parentId || c.parentId === 'none');
+
+            mainCategories.forEach(cat => {
+                let imgContent = cat.img && (cat.img.startsWith('http') || cat.img.startsWith('data:image')) ? `<img src="${cat.img}" alt="">` : (cat.img || '🏷️');
+                mainCatsHtml += `<div class="card-wrapper" onclick="openCategoryView('${cat.id}')">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div></div>
+                    <div class="card-name-outside">${cat.title}</div>
                 </div>`;
             });
 
-            let container = document.getElementById('myOrdersListContainer');
-            if (container) container.innerHTML = html;
+            if (document.getElementById('dynamicMainCategoriesGrid')) {
+                document.getElementById('dynamicMainCategoriesGrid').innerHTML = mainCatsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد أقسام رئيسية بعد ❌ قم بإضافتها من لوحة التحكم</p>';
+            }
+
+            let bestSellersHtml = '';
+            let bestProducts = storeProducts.filter(p => p.category === 'best');
+            bestProducts.forEach(p => {
+                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let displayPrice = (p.price * activeCurrencyRate).toFixed(3);
+                bestSellersHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div></div>
+                    <div class="card-name-outside">${p.title}</div>
+                    <div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div>
+                </div>`;
+            });
+
+            if (document.getElementById('dynamicBestSellersGrid')) {
+                document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد عروض مضافة حالياً</p>';
+            }
+
+            if (selectedCategoryForView) {
+                renderSubCategoryView(selectedCategoryForView);
+            }
         }
 
-        /* دالة فتح تفاصيل الطلب مثل الصورة المقابلة */
-        function openOrderDetails(orderId) {
-            let order = gameOrders.find(o => o.id === orderId);
-            if (!order) return;
+        function openCategoryView(catId) {
+            selectedCategoryForView = catId;
+            renderSubCategoryView(catId);
+            showPage('dynamicCategoryViewPage');
+        }
 
-            let fullId = "ID_" + order.id;
-            let formattedTime = formatFullTimestamp(order.timestamp);
-            let badgeClass = order.status === 'pending' ? 'status-pending' : (order.status === 'approved' ? 'status-approved' : 'status-rejected');
-            let badgeText = order.status === 'pending' ? 'قيد التنفيذ' : (order.status === 'approved' ? 'مقبول' : 'مرفوض');
-            let replyText = order.adminReply || order.reply || "لا يوجد رد بعد";
+        function renderSubCategoryView(catId) {
+            let currentCat = storeCategories.find(c => c.id === catId);
+            if (!currentCat) return;
 
-            let detailsHtml = `
-                <div class="detail-row-card">
-                    <span class="detail-label">رقم العملية</span>
-                    <span class="detail-value" style="font-family:monospace; font-size:12px;">${fullId}</span>
-                </div>
-                <div class="detail-row-card">
-                    <span class="detail-label">المنتج</span>
-                    <span class="detail-value">${order.productName || order.product}</span>
-                </div>
-                <div class="detail-row-card">
-                    <span class="detail-label">الكمية</span>
-                    <span class="detail-value">1</span>
-                </div>
-                <div class="detail-row-card">
-                    <span class="detail-label">السعر الإجمالي</span>
-                    <span class="detail-value" style="color:var(--accent-color);">$ ${parseFloat(order.price || 0).toFixed(3)}</span>
-                </div>
-                <div class="detail-row-card">
-                    <span class="detail-label">التاريخ والوقت بالثانية</span>
-                    <span class="detail-value" style="font-family:monospace;">${formattedTime}</span>
-                </div>
-                <div class="detail-row-card">
-                    <span class="detail-label">playerId</span>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <span class="detail-value">${order.playerId || 'غير متوفر'}</span>
-                        <span onclick="navigator.clipboard.writeText('${order.playerId}'); showToast('تم نسخ الايدي!')" style="cursor:pointer; font-size:14px;" title="نسخ">📋</span>
-                    </div>
-                </div>
-                
-                <div style="text-align:center; margin: 20px 0;">
-                    <span class="order-status-badge ${badgeClass}" style="font-size:16px; padding:8px 24px;">${badgeText}</span>
-                </div>
+            document.getElementById('dynamicCategoryTitle').innerText = currentCat.title;
 
-                <div style="background:#111827; border:1px solid #374151; border-radius:12px; padding:15px; text-align:right;">
-                    <div style="color:#9ca3af; font-size:12px; margin-bottom:8px; font-weight:bold;">الرد:</div>
-                    <div style="color:white; font-size:14px; font-weight:bold; background:#1f2937; padding:10px; border-radius:8px; border:1px solid var(--primary-color); word-break:break-all;">
-                        ${replyText}
-                    </div>
-                </div>
-            `;
+            let subCats = storeCategories.filter(c => c.parentId === catId);
+            let subCatsHtml = '';
+            subCats.forEach(sc => {
+                let imgContent = sc.img && (sc.img.startsWith('http') || sc.img.startsWith('data:image')) ? `<img src="${sc.img}" alt="">` : (sc.img || '📁');
+                subCatsHtml += `<div class="card-wrapper" onclick="openCategoryView('${sc.id}')">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div></div>
+                    <div class="card-name-outside">${sc.title}</div>
+                </div>`;
+            });
 
-            document.getElementById('orderDetailsCardContent').innerHTML = detailsHtml;
-            showPage('orderDetailsPage');
+            let subTitleEl = document.getElementById('dynamicSubCategoriesTitle');
+            let subGridEl = document.getElementById('dynamicSubCategoriesGrid');
+            if (subCats.length > 0) {
+                subTitleEl.style.display = 'block';
+                subGridEl.style.display = 'grid';
+                subGridEl.innerHTML = subCatsHtml;
+            } else {
+                subTitleEl.style.display = 'none';
+                subGridEl.style.display = 'none';
+            }
+
+            let catProducts = storeProducts.filter(p => p.category === catId);
+            let prodHtml = '';
+            catProducts.forEach(p => {
+                let imgContent = p.img && (p.img.startsWith('http') || p.img.startsWith('data:image')) ? `<img src="${p.img}" alt="">` : (p.img || '⭐');
+                let displayPrice = (p.price * activeCurrencyRate).toFixed(3);
+                prodHtml += `<div class="card-wrapper" onclick="openOrderModal('${p.title}', ${p.price})">
+                    <div class="card-box"><div class="card-circle">${imgContent}</div></div>
+                    <div class="card-name-outside">${p.title}</div>
+                    <div class="card-price-outside">${displayPrice} ${activeCurrencySymbol}</div>
+                </div>`;
+            });
+
+            let prodTitleEl = document.getElementById('dynamicProductsTitle');
+            let prodGridEl = document.getElementById('dynamicCategoryProductsGrid');
+            if (catProducts.length > 0) {
+                prodTitleEl.style.display = 'block';
+                prodGridEl.style.display = 'grid';
+                prodGridEl.innerHTML = prodHtml;
+            } else {
+                if (subCats.length === 0) {
+                    prodTitleEl.style.display = 'block';
+                    prodGridEl.style.display = 'grid';
+                    prodGridEl.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد منتجات أو أقسام فرعية داخل هذا القسم حالياً ❌</p>';
+                } else {
+                    prodTitleEl.style.display = 'none';
+                    prodGridEl.style.display = 'none';
+                }
+            }
+        }
+
+        function triggerLiveSalesPopup(email, product) {
+            let banner = document.getElementById('liveSalesBanner');
+            let textSpan = document.getElementById('liveSalesText');
+            if (banner && textSpan) {
+                textSpan.innerText = `${email} اشترى ${product}`;
+                banner.style.display = 'flex';
+                setTimeout(() => { banner.style.display = 'none'; }, 5000);
+            }
+        }
+
+        window.onload = function () {
+            if(localStorage.getItem('a4c_balance') !== null) { userBalance = parseFloat(localStorage.getItem('a4c_balance')); }
+            updateUserBalanceUI();
+            if (currentUserEmail) { 
+                let overlay = document.getElementById("loginOverlay");
+                if(overlay) overlay.style.display = 'none'; 
+                updateSidebarUserInfo();
+            }
+            
+            if (typeof google !== 'undefined') {
+                google.accounts.id.initialize({
+                    client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
+                    callback: handleCredentialResponse
+                });
+            }
+        };
+
+        function updateSidebarUserInfo() {
+            if (!currentUserEmail) return;
+            let namePart = currentUserEmail.split('@')[0];
+            document.getElementById('sidebarUserName').innerText = namePart;
+            let hashVal = Math.abs(hashCode(currentUserEmail)) % 9000 + 1000;
+            document.getElementById('sidebarUserNumericId').innerText = '#' + hashVal;
+        }
+
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return hash;
+        }
+
+        function sendSupportMessage() {
+            let input = document.getElementById('chatInputBox');
+            let text = input.value.trim();
+            if (!text) return;
+
+            db.collection("support_messages").add({
+                sender: currentUserEmail, text: text, isAdmin: false, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                input.value = "";
+            });
+        }
+
+        function renderChatMessages() {
+            let userMsgs = supportMessages.filter(m => m.sender === currentUserEmail || (m.isAdmin && m.target === currentUserEmail));
+            let html = '';
+            userMsgs.forEach(m => {
+                let isBot = m.isAdmin;
+                let bg = isBot ? 'var(--bg-card)' : 'var(--primary-color)';
+                let color = '#fff';
+                let align = isBot ? 'flex-start' : 'flex-end';
+                let border = isBot ? '1px solid var(--primary-color)' : 'none';
+
+                html += `<div style="display: flex; justify-content: ${align}; margin-bottom: 8px;">
+                    <div style="background: ${bg}; color: ${color}; padding: 10px 14px; border-radius: 12px; max-width: 75%; font-size: 13px; border: ${border}; text-align: right;">${m.text}</div>
+                </div>`;
+            });
+            let container = document.getElementById('chatMessagesContainer');
+            if (container) { container.innerHTML = html; container.scrollTop = container.scrollHeight; }
+        }
+
+        function loginUser() { 
+            let email = document.getElementById("userEmailInput").value.trim();
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!emailRegex.test(email)) { showToast("⚠️ يرجى إدخال بريد إلكتروني صالح ينتهي بـ @gmail.com"); return; }
+            localStorage.setItem("userEmail", email); currentUserEmail = email;
+            document.getElementById("loginOverlay").style.display = 'none'; 
+            updateSidebarUserInfo();
+            renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
+        }
+
+        function triggerGoogleLogin() {
+            if (typeof google !== 'undefined') { google.accounts.id.prompt(); } else { showToast("جاري تحميل مكتبة جوجل..."); }
+        }
+
+        function handleCredentialResponse(response) {
+            let payload = parseJwt(response.credential);
+            let email = payload.email;
+            localStorage.setItem("userEmail", email); currentUserEmail = email;
+            document.getElementById("loginOverlay").style.display = 'none';
+            updateSidebarUserInfo();
+            renderMyOrders(); renderMyPayments(); calculateUserVIP(); renderChatMessages();
+            showToast("✅ تم تسجيل الدخول بنجاح بحساب: " + email);
+        }
+
+        function parseJwt(token) {
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
         }
 
         let currentPage = 'homePage';
         function showPage(pageId) {
-            const pages = ['homePage', 'addBalancePage', 'adminDashboardPage', 'myOrdersPage', 'orderDetailsPage', 'supportPage'];
+            const pages = ['homePage', 'dynamicCategoryViewPage', 'vipTiersPage', 'addBalancePage', 'paymentFormPage', 'adminDashboardPage', 'myOrdersPage', 'myPaymentsPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage'];
             pages.forEach(p => { let el = document.getElementById(p); if (el) el.style.display = 'none'; });
             let targetEl = document.getElementById(pageId);
             if (targetEl) targetEl.style.display = 'block';
             currentPage = pageId;
+            document.getElementById('backBtn').style.display = (pageId === 'homePage') ? 'none' : 'block';
+            if(pageId === 'supportPage') { renderChatMessages(); }
         }
 
-        function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
+        function goBack() {
+            if (currentPage === 'paymentFormPage') showPage('addBalancePage');
+            else if (['addBalancePage', 'myOrdersPage', 'myPaymentsPage', 'adminDashboardPage', 'vipTiersPage', 'supportPage', 'searchResultsPage', 'aboutPage', 'termsPage', 'transactionsHistoryPage', 'dynamicCategoryViewPage'].includes(currentPage)) {
+                if (currentPage === 'dynamicCategoryViewPage' && selectedCategoryForView) {
+                    let currentCat = storeCategories.find(c => c.id === selectedCategoryForView);
+                    if (currentCat && currentCat.parentId && currentCat.parentId !== 'none') {
+                        openCategoryView(currentCat.parentId);
+                        return;
+                    }
+                }
+                showPage('homePage');
+            }
+        }
+
+        function updateUserBalanceUI() {
+            let displayVal = userBalance * activeCurrencyRate;
+            document.getElementById('userBalanceDisplay').innerText = displayVal.toFixed(3);
+            document.getElementById('sidebarBalanceDisplay').innerText = displayVal.toFixed(3);
+            localStorage.setItem('a4c_balance', userBalance.toString());
+        }
+
+        function logoutUser() { localStorage.removeItem("userEmail"); location.reload(); }
         function openSidebar() { document.getElementById("sideMenu").style.width = "260px"; }
         function closeSidebar() { document.getElementById("sideMenu").style.width = "0"; }
+        
+        function showMyOrdersPage() { renderMyOrders(); showPage('myOrdersPage'); }
+        function showMyPaymentsPage() { renderMyPayments(); showPage('myPaymentsPage'); }
+
+        function showTransactionsHistoryPage() {
+            let myDeposits = balanceRequests.filter(r => r.userEmail === currentUserEmail && r.status === 'approved');
+            let myPurchases = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
+            
+            let allLogs = [];
+            myDeposits.forEach(d => allLogs.push({ type: 'deposit', title: `إيداع شحن (${d.method})`, amount: d.amount, date: d.timestamp }));
+            myPurchases.forEach(p => allLogs.push({ type: 'purchase', title: `شراء: ${p.product}`, amount: p.price, date: p.timestamp }));
+
+            let html = allLogs.length === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا توجد معاملات مالية مسجلة بعد</p>' : '';
+            allLogs.forEach(log => {
+                let isPlus = log.type === 'deposit';
+                let displayAmt = (log.amount * activeCurrencyRate).toFixed(3);
+                html += `<div class="statement-card">
+                    <div class="st-header">
+                        <span>${log.title}</span>
+                        <span class="${isPlus ? 'st-plus' : 'st-minus'}">${isPlus ? '+' : '-'}${displayAmt} ${activeCurrencySymbol}</span>
+                    </div>
+                    <div style="font-size:11px; color:#a7f3d0;">نوع العملية: ${isPlus ? 'شحن رصيد' : 'خصم شراء'}</div>
+                </div>`;
+            });
+
+            document.getElementById('statementListContainer').innerHTML = html;
+            showPage('transactionsHistoryPage');
+        }
+
+        function calculateUserVIP() {
+            let emailKey = currentUserEmail ? currentUserEmail.replace(/[^a-zA-Z0-9]/g, '_') : '';
+            let manualData = manualUserTiers[emailKey] || {};
+            let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail && o.status === 'approved');
+            let totalSpent = myOrders.reduce((sum, ord) => sum + (parseFloat(ord.price) || 0), 0);
+            
+            let currentTier = 'مبدئي'; let headerBadgeText = '⭐ مبدئي'; let sidebarBadgeText = '⭐ مبدئي'; let discount = 0; let nextTarget = 1;
+            
+            if (manualData.tier && manualData.tier !== 'auto') {
+                if (manualData.tier === 'diamond') { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; sidebarBadgeText = '💎 ألماسي'; discount = 0.05; }
+                else if (manualData.tier === 'gold') { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; sidebarBadgeText = '🥇 ذهبي'; discount = 0.03; }
+                else if (manualData.tier === 'silver') { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; sidebarBadgeText = '🥈 فضي'; discount = 0.02; }
+                else if (manualData.tier === 'bronze') { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; sidebarBadgeText = '🥉 برونزي'; discount = 0.01; }
+            } else {
+                if (totalSpent >= 300) { currentTier = 'ألماسي / Diamond 💎'; headerBadgeText = '💎 ألماسي'; sidebarBadgeText = '💎 ألماسي'; discount = 0.05; nextTarget = 300; } 
+                else if (totalSpent >= 100) { currentTier = 'ذهبي / Gold 🥇'; headerBadgeText = '🥇 ذهبي'; sidebarBadgeText = '🥇 ذهبي'; discount = 0.03; nextTarget = 300; } 
+                else if (totalSpent >= 40) { currentTier = 'فضي / Silver 🥈'; headerBadgeText = '🥈 فضي'; sidebarBadgeText = '🥈 فضي'; discount = 0.02; nextTarget = 100; } 
+                else if (totalSpent >= 1) { currentTier = 'برونزي / Bronze 🥉'; headerBadgeText = '🥉 برونزي'; sidebarBadgeText = '🥉 برونزي'; discount = 0.01; nextTarget = 40; } 
+                else { nextTarget = 1; }
+            }
+
+            let badgeEl = document.getElementById('headerVipBadge'); if(badgeEl) badgeEl.innerText = headerBadgeText;
+            let sidebarBadgeEl = document.getElementById('sidebarUserVipBadge'); if(sidebarBadgeEl) sidebarBadgeEl.innerText = sidebarBadgeText;
+            let tierEl = document.getElementById('currentTierTitleDisplay'); if(tierEl) tierEl.innerText = `شريحتك الحالية: ${currentTier} (نسبة الخصم: ${discount * 100}%)`;
+            let spentText = document.getElementById('userSpentText'); if(spentText) spentText.innerText = `$${totalSpent.toFixed(2)} / $${nextTarget.toFixed(2)}`;
+            let progressBar = document.getElementById('tierProgressBar'); if(progressBar) { let percent = Math.min(100, (totalSpent / nextTarget) * 100); progressBar.style.width = percent + '%'; }
+            return discount;
+        }
+
+        function getDiscountedPrice(basePrice) { return basePrice * (1 - calculateUserVIP()); }
+
+        let appliedCouponCode = null;
+        let appliedCouponDiscountAmount = 0;
+
+        function applyCoupon(type) {
+            let inputId = 'orderCouponInput';
+            let code = document.getElementById(inputId).value.trim().toUpperCase();
+            let found = availableCoupons.find(c => c.code === code);
+            if (!found) { showToast('⚠️ كود الخصم غير صحيح أو منتهي الصلاحية!'); return; }
+
+            let minLimit = parseFloat(found.minLimit) || 0;
+            if (currentSelectedProduct.originalPrice < minLimit) {
+                showToast(`⚠️ لا يمكن استخدام هذا الكود، الحد الأدنى للطلب هو $${minLimit}`);
+                return;
+            }
+
+            let maxUses = parseInt(found.maxUses) || 0;
+            let usedList = found.usedList || [];
+            if (maxUses > 0 && usedList.length >= maxUses) {
+                showToast('⚠️ لقد تم استنفاد الحد الأقصى لاستخدام هذا الكود!');
+                return;
+            }
+
+            let discountPercentage = parseFloat(found.discountPercentage) || 0;
+            let maxDiscountCap = parseFloat(found.maxDiscountCap) || 999999;
+
+            let calculatedDiscount = currentSelectedProduct.originalPrice * (discountPercentage / 100);
+            if (calculatedDiscount > maxDiscountCap) {
+                calculatedDiscount = maxDiscountCap;
+            }
+
+            appliedCouponCode = found.code;
+            appliedCouponDiscountAmount = calculatedDiscount;
+
+            currentSelectedProduct.price = Math.max(0, currentSelectedProduct.originalPrice - calculatedDiscount);
+            let displayModalPrice = (currentSelectedProduct.price * activeCurrencyRate).toFixed(3);
+            document.getElementById('modalItemPrice').innerText = displayModalPrice + ' ' + activeCurrencySymbol;
+            showToast(`🎉 تم تطبيق الخصم بنجاح!`);
+        }
+
+        function redeemGiftCode() {
+            let codeInput = document.getElementById('giftCodeInput').value.trim().toUpperCase();
+            if(!codeInput) { showToast('⚠️ يرجى إدخال رمز الكود أولاً!'); return; }
+
+            let found = giftCodes.find(g => g.code === codeInput);
+            if(!found) { showToast('❌ كود الهدية غير صحيح!'); return; }
+
+            let today = new Date().toISOString().split('T')[0];
+            if(found.expiryDate && found.expiryDate < today) {
+                showToast('❌ هذا الكود انتهت مدة صلاحيته!'); return;
+            }
+
+            let usedUsers = found.usedUsers || [];
+            if(usedUsers.includes(currentUserEmail)) {
+                showToast('⚠️ لقد قمت بتمويل حسابك من هذا الكود مسبقاً!'); return;
+            }
+
+            if(usedUsers.length >= found.maxUsers) {
+                showToast('❌ لقد تم استخدام هذا الكود بالكامل!'); return;
+            }
+
+            let addedUsd = parseFloat(found.valueUsd);
+            userBalance += addedUsd;
+            updateUserBalanceUI();
+
+            usedUsers.push(currentUserEmail);
+            db.collection("gift_codes").doc(found.id).update({ usedUsers: usedUsers }).then(() => {
+                let convertedVal = (addedUsd * activeCurrencyRate).toFixed(3);
+                showToast(`🎉 مبروك! تم إضافة ${convertedVal} ${activeCurrencySymbol} إلى رصيدك!`);
+                document.getElementById('giftCodeInput').value = '';
+            });
+        }
+
+        function adminCreateGiftCode() {
+            let code = document.getElementById('newGiftCode').value.trim().toUpperCase();
+            let valueUsd = parseFloat(document.getElementById('newGiftValueUsd').value);
+            let maxUsers = parseInt(document.getElementById('newGiftMaxUsers').value);
+            let expiryDate = document.getElementById('newGiftExpiry').value;
+
+            if(!code || isNaN(valueUsd) || isNaN(maxUsers)) {
+                showToast('⚠️ يرجى كتابة كافة البيانات بشكل صحيح!'); return;
+            }
+
+            db.collection("gift_codes").add({
+                code, valueUsd, maxUsers, expiryDate, usedUsers: []
+            }).then(() => {
+                showToast('✅ تم إنشاء كود الهدية بنجاح!');
+                document.getElementById('newGiftCode').value = '';
+                document.getElementById('newGiftValueUsd').value = '';
+                document.getElementById('newGiftMaxUsers').value = '';
+                document.getElementById('newGiftExpiry').value = '';
+            });
+        }
+
+        function adminDeleteGiftCode(id) {
+            if(confirm('هل أنت متأكد من حذف هذا الكود؟')) {
+                db.collection("gift_codes").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح'); });
+            }
+        }
+
+        function saveStoreThemeColors() {
+            let bgMain = document.getElementById('themeBgMain').value;
+            let bgCard = document.getElementById('themeBgCard').value;
+            let primary = document.getElementById('themePrimary').value;
+
+            document.documentElement.style.setProperty('--bg-main', bgMain);
+            document.documentElement.style.setProperty('--bg-card', bgCard);
+            document.documentElement.style.setProperty('--primary-color', primary);
+
+            showToast('🎨 تم حفظ ألوان المتجر بنجاح!');
+        }
+
+        function renderMyOrders() {
+            let myOrders = gameOrders.filter(o => o.userEmail === currentUserEmail);
+            let html = myOrders.length === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا يوجد طلبات شحن حالياً</p>' : '';
+            myOrders.forEach(order => {
+                let statusColor = order.status === 'pending' ? '#f39c12' : (order.status === 'approved' ? '#34d399' : (order.status === 'cancelled' ? '#9ca3af' : '#ef4444'));
+                let statusText = order.status === 'pending' ? '⏳ قيد التنفيذ' : (order.status === 'approved' ? '✅ تم الشحن' : (order.status === 'cancelled' ? '🚫 ملغي' : '❌ مرفوض'));
+                let replyBox = order.adminReply ? `<div style="background: var(--bg-card); color: var(--accent-color); padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; border: 1px solid var(--primary-color);"><b>رد الإدارة / الكود:</b> ${order.adminReply}</div>` : '';
+                let cancelBtn = order.status === 'pending' ? `<button onclick="cancelUserOrder('${order.id}', ${order.price})" style="background: var(--bg-card); color: #f87171; border: 1px solid #f87171; padding: 8px; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; cursor: pointer; font-size: 12px;">إلغاء الطلب (خصم 5% واسترجاع الباقي)</button>` : '';
+                html += `<div style="background: var(--bg-main); color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <div style="font-weight: bold; margin-bottom: 5px;">${order.product}</div>
+                    <div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-bottom: 5px;">الحالة: ${statusText}</div>
+                    ${replyBox} ${cancelBtn}
+                </div>`;
+            });
+            document.getElementById('myOrdersListContainer').innerHTML = html;
+        }
+
+        function cancelUserOrder(id, price) {
+            if (!confirm("هل أنت متأكد من إلغاء الطلب؟")) return;
+            let refundAmount = parseFloat(price) * 0.95;
+            db.collection("orders").doc(id).update({ status: 'cancelled', adminReply: 'تم إلغاء الطلب من قبلك' }).then(() => {
+                db.collection("deposits").get().then(snapshot => {
+                    let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
+                    db.collection("deposits").add({
+                        numericId: maxNum + 1, method: 'استرجاع رصيد (إلغاء طلب)', amount: parseFloat(refundAmount.toFixed(3)),
+                        transactionId: 'CANCEL-' + id.substring(0, 6), status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                });
+            });
+        }
+
+        function renderMyPayments() {
+            let myPayments = balanceRequests.filter(req => req.userEmail === currentUserEmail);
+            let html = myPayments.length === 0 ? '<p style="text-align:center; color:#a7f3d0;">لا توجد دفعات حالياً</p>' : '';
+            myPayments.forEach(req => {
+                let statusColor = req.status === 'pending' ? '#f39c12' : (req.status === 'approved' ? '#34d399' : '#ef4444');
+                let statusText = req.status === 'pending' ? '⏳ قيد المراجعة' : (req.status === 'approved' ? '✅ تمت الإضافة' : '❌ مرفوض');
+                let receiptView = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank" style="color:var(--accent-color); font-size:12px;">📄 عرض صورة الإيصال</a></div>` : '';
+                let displayReqAmt = (req.amount * activeCurrencyRate).toFixed(3);
+                html += `<div style="background: var(--bg-main); color: white; padding: 15px; border-radius: 10px; margin-bottom: 12px; border-right: 4px solid ${statusColor}; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 5px;"><span style="font-weight: bold;">إيداع عبر ${req.method} - ${displayReqAmt} ${activeCurrencySymbol}</span></div>
+                    <div style="font-size: 13px; color: #a7f3d0;">رقم العملية: <b>${req.transactionId || 'غير متوفر'}</b></div>
+                    ${receiptView}<div style="font-size: 13px; color: ${statusColor}; font-weight: bold; margin-top: 5px;">الحالة: ${statusText}</div>
+                </div>`;
+            });
+            document.getElementById('myPaymentsListContainer').innerHTML = html;
+        }
+
+        function openPaymentForm(index) {
+            const method = dbPaymentMethods[index];
+            if (!method) return;
+
+            let min = method.minAmount || 1;
+            let max = method.maxAmount || 1000;
+
+            let currencyOptions = `<option value="USD" data-rate="1">دولار أمريكي ($ USD)</option>`;
+            storeCurrencies.forEach(curr => {
+                currencyOptions += `<option value="${curr.id}" data-rate="${curr.rate}">${curr.name} (1$ = ${curr.rate})</option>`;
+            });
+
+            if (method.isAuto === true || method.isAuto === "true") {
+                let autoAmount = prompt(`شحن تلقائي عبر ${method.name}\nأدخل المبلغ:`);
+                if (autoAmount && !isNaN(autoAmount)) {
+                    let amt = parseFloat(autoAmount);
+                    db.collection("deposits").get().then(snapshot => {
+                        let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
+                        db.collection("deposits").add({
+                            numericId: maxNum + 1, method: method.name, amount: amt, transactionId: 'AUTO-' + Math.floor(Math.random()*1000000),
+                            status: 'approved', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            showToast(`⚡ تم شحن الرصيد تلقائياً بنجاح!`);
+                        });
+                    });
+                }
+                return;
+            }
+
+            document.getElementById('pfDynamicContent').innerHTML = `
+                <div class="pf-header"><h2 class="pf-title">${method.name}</h2></div>
+                <div class="pf-field-group"><span class="pf-label">رقم/عنوان التحويل</span><input type="text" class="pf-input" value="${method.address}" readonly></div>
+                <div class="pf-field-group">
+                    <span class="pf-label">اختر العملة التي ستتم التحويل بها</span>
+                    <select id="depositCurrencySelect" class="pf-input" onchange="updateDepositCurrencyHint(${min}, ${max})">
+                        ${currencyOptions}
+                    </select>
+                </div>
+                <div class="pf-field-group"><span class="pf-label" id="depositAmountLabel">المبلغ المحول ($)</span><input type="number" id="depositAmount" class="pf-input" placeholder="أدخل المبلغ..." oninput="calcUsdEquivalent(${min}, ${max})"></div>
+                <div style="font-size:13px; color:var(--accent-color); margin-bottom:10px; font-weight:bold;" id="currencyEquivalentHint"></div>
+                <div class="pf-field-group"><span class="pf-label">رقم العملية (Transaction ID)</span><input type="text" id="transactionId" class="pf-input" placeholder="أدخل رقم العملية"></div>
+                <div class="pf-field-group"><span class="pf-label">صورة إيصال التحويل</span><input type="file" id="receiptImageFile" accept="image/*" class="pf-input" style="padding: 10px; background: var(--bg-card); color: white;"></div>
+                <button class="pf-btn-submit" onclick="submitDepositRequest('${method.name}', ${min}, ${max})">تقديم الطلب</button>
+            `;
+            showPage('paymentFormPage');
+        }
+
+        function updateDepositCurrencyHint(min, max) {
+            let select = document.getElementById('depositCurrencySelect');
+            let label = document.getElementById('depositAmountLabel');
+            if(select.value === 'USD') {
+                label.innerText = `المبلغ المحول ($)`;
+                document.getElementById('currencyEquivalentHint').innerText = '';
+            } else {
+                let selectedOpt = select.options[select.selectedIndex];
+                let currName = selectedOpt.text.split(' ')[0];
+                label.innerText = `المبلغ المحول بـ (${currName})`;
+                calcUsdEquivalent(min, max);
+            }
+        }
+
+        function calcUsdEquivalent(min, max) {
+            let select = document.getElementById('depositCurrencySelect');
+            if(select.value === 'USD') return;
+            let selectedOpt = select.options[select.selectedIndex];
+            let rate = parseFloat(selectedOpt.getAttribute('data-rate')) || 1;
+            let rawVal = parseFloat(document.getElementById('depositAmount').value) || 0;
+            let usdVal = rawVal / rate;
+            document.getElementById('currencyEquivalentHint').innerText = `💰 سيتم إضافة: $${usdVal.toFixed(3)} دولار أمريكي لرصيدك`;
+        }
+
+        function submitDepositRequest(methodName, min, max) {
+            let select = document.getElementById('depositCurrencySelect');
+            let currVal = select.value;
+            let rawAmount = parseFloat(document.getElementById('depositAmount').value);
+            let finalUsdAmount = rawAmount;
+            let currencyNameUsed = 'USD';
+
+            if(currVal !== 'USD') {
+                let selectedOpt = select.options[select.selectedIndex];
+                let rate = parseFloat(selectedOpt.getAttribute('data-rate')) || 1;
+                currencyNameUsed = selectedOpt.text.split(' ')[0];
+                finalUsdAmount = rawAmount / rate;
+            }
+
+            let transactionId = document.getElementById('transactionId').value.trim();
+            let fileInput = document.getElementById('receiptImageFile');
+
+            if (isNaN(rawAmount)) {
+                showToast(`⚠️ يرجى إدخال مبلغ صحيح`);
+                return;
+            }
+
+            if (!transactionId || fileInput.files.length === 0) { showToast('يرجى تعبئة كافة الحقول وإرفاق الصورة!'); return; }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                db.collection("deposits").get().then(snapshot => {
+                    let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
+                    db.collection("deposits").add({
+                        numericId: maxNum + 1, method: methodName, amount: parseFloat(finalUsdAmount.toFixed(3)), originalAmount: rawAmount, currencyName: currencyNameUsed, transactionId: transactionId, receiptUrl: e.target.result,
+                        status: 'pending', credited: false, userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
+                        showToast(`🚀 تم إرسال الطلب برقم #${maxNum + 1}`);
+                        window.open(`https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(`طلب شحن جديد من ${currentUserEmail} بمبلغ $${finalUsdAmount.toFixed(3)} (${rawAmount}${currencyNameUsed})`)}`, '_blank');
+                        showPage('addBalancePage');
+                    });
+                });
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function openOrderModal(title, basePrice) {
+            let finalPrice = getDiscountedPrice(basePrice);
+            currentSelectedProduct = { title, price: finalPrice, originalPrice: finalPrice };
+            appliedCouponCode = null;
+            appliedCouponDiscountAmount = 0;
+            document.getElementById('modalItemTitle').innerText = title; 
+            let displayModalPrice = (finalPrice * activeCurrencyRate).toFixed(3);
+            document.getElementById('modalItemPrice').innerText = displayModalPrice + ' ' + activeCurrencySymbol;
+            document.getElementById('playerId').value = ""; document.getElementById('orderCouponInput').value = "";
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+        function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
 
         function submitGameOrder() {
             let playerId = document.getElementById('playerId').value.trim();
             if(playerId === "") { showToast("⚠️ يرجى إدخال الايدي!"); return; }
-            
+            if(userBalance < currentSelectedProduct.price) { showToast("⚠️ رصيدك غير كافٍ."); return; }
+            userBalance -= currentSelectedProduct.price; updateUserBalanceUI();
+            let productDesc = currentSelectedProduct.title + ' (ID: ' + playerId + ')';
+
+            if (appliedCouponCode) {
+                let couponObj = availableCoupons.find(c => c.code === appliedCouponCode);
+                if (couponObj) {
+                    let usedList = couponObj.usedList || [];
+                    usedList.push({
+                        userEmail: currentUserEmail,
+                        discountAmount: appliedCouponDiscountAmount,
+                        timestamp: new Date().toISOString()
+                    });
+                    db.collection("coupons").doc(couponObj.id).update({ usedList: usedList });
+                }
+            }
+
             db.collection("orders").add({ 
-                product: "Free Fire 100 + 10 Diamond", 
-                productName: "Free Fire 100 + 10 Diamond",
-                price: 0.953, 
-                playerId: playerId,
-                status: 'pending', 
-                adminReply: '', 
-                userEmail: currentUserEmail, 
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+                product: productDesc, price: currentSelectedProduct.price, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم تسجيل طلبك!"); closeOrderModal(); renderMyOrders();
+                showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title); closeOrderModal(); 
             });
         }
-        function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+        function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
+        function verifyAdmin() {
+            if (document.getElementById('adminPasswordInput').value === 'ADMIN10') {
+                document.getElementById('adminLoginModal').style.display = 'none'; 
+                document.getElementById('adminPasswordInput').value = ''; 
+                document.getElementById('loginOverlay').style.display = 'none';
+                currentUserEmail = "admin@arab4card.com"; localStorage.setItem("userEmail", currentUserEmail);
+                updateSidebarUserInfo();
+                showPage('adminDashboardPage');
+            } else { showToast('كلمة المرور خاطئة!'); }
+        }
+
+        function switchAdminTab(tab) {
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isGift = tab === 'gifts'; let isPm = tab === 'paymentsAdmin'; let isCur = tab === 'currencies'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isTheme = tab === 'theme';
+            document.getElementById('tabBalance').classList.toggle('active', isBal); 
+            document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabGifts').classList.toggle('active', isGift);
+            document.getElementById('tabPaymentsAdmin').classList.toggle('active', isPm);
+            document.getElementById('tabCurrencies').classList.toggle('active', isCur);
+            document.getElementById('tabCategories').classList.toggle('active', isCat); 
+            document.getElementById('tabProducts').classList.toggle('active', isPrd);
+            document.getElementById('tabCoupons').classList.toggle('active', isCpn); 
+            document.getElementById('tabSupport').classList.toggle('active', isSup);
+            document.getElementById('tabTheme').classList.toggle('active', isTheme);
+            
+            document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
+            document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminGiftsSection').style.display = isGift ? 'block' : 'none';
+            document.getElementById('adminPaymentsSection').style.display = isPm ? 'block' : 'none';
+            document.getElementById('adminCurrenciesSection').style.display = isCur ? 'block' : 'none';
+            document.getElementById('adminCategoriesSection').style.display = isCat ? 'block' : 'none';
+            document.getElementById('adminProductsSection').style.display = isPrd ? 'block' : 'none';
+            document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
+            document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
+            document.getElementById('adminThemeSection').style.display = isTheme ? 'block' : 'none';
+        }
+
+        function adminAddCurrency() {
+            let name = document.getElementById('newCurrName').value.trim();
+            let rate = parseFloat(document.getElementById('newCurrRate').value);
+            if(!name || isNaN(rate) || rate <= 0) { showToast('⚠️ يرجى إدخال اسم العملة وسعر الصرف بشكل صحيح'); return; }
+            db.collection("currencies").add({ name, rate }).then(() => {
+                showToast('✅ تم إضافة العملة بنجاح!');
+                document.getElementById('newCurrName').value = '';
+                document.getElementById('newCurrRate').value = '';
+            });
+        }
+
+        function adminDeleteCurrency(id) {
+            if(confirm("هل أنت متأكد من حذف هذه العملة؟")) {
+                db.collection("currencies").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
+            }
+        }
+
+        function adminAddPaymentMethod() {
+            let name = document.getElementById('newPmName').value.trim();
+            let symbol = document.getElementById('newPmSymbol').value.trim() || '💳';
+            let address = document.getElementById('newPmAddress').value.trim();
+            let minAmount = parseFloat(document.getElementById('newPmMin').value) || 1;
+            let maxAmount = parseFloat(document.getElementById('newPmMax').value) || 1000;
+            let isAuto = document.getElementById('newPmIsAuto').value === 'true';
+            let fileInput = document.getElementById('newPmImgFile');
+
+            if (!name || !address) { showToast('⚠️ يرجى كتابة اسم الوسيلة ورقم/عنوان التحويل!'); return; }
+
+            let savePm = function(imgData) {
+                db.collection("payment_methods").add({
+                    name, symbol, address, minAmount, maxAmount, isAuto, img: imgData || ''
+                }).then(() => {
+                    showToast('✅ تم إضافة طريقة الدفع بنجاح!');
+                    document.getElementById('newPmName').value = '';
+                    document.getElementById('newPmSymbol').value = '';
+                    document.getElementById('newPmAddress').value = '';
+                    document.getElementById('newPmMin').value = '';
+                    document.getElementById('newPmMax').value = '';
+                    if(document.getElementById('newPmImgFile')) document.getElementById('newPmImgFile').value = '';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { savePm(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else { savePm(''); }
+        }
+
+        function adminDeletePaymentMethod(id) {
+            if(confirm("هل أنت متأكد من حذف طريقة الدفع هذه؟")) {
+                db.collection("payment_methods").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
+            }
+        }
+
+        function adminAddCategory() {
+            let title = document.getElementById('newCatTitle').value.trim();
+            let parentId = document.getElementById('newCatParentSelect').value;
+            let fileInput = document.getElementById('newCatImgFile');
+
+            if (!title) { showToast('⚠️ يرجى كتابة اسم القسم!'); return; }
+
+            let saveCategory = function(imgData) {
+                db.collection("categories").add({ title, parentId, img: imgData || '🏷️' }).then(() => {
+                    showToast('✅ تم إضافة القسم بنجاح!');
+                    document.getElementById('newCatTitle').value = '';
+                    document.getElementById('newCatImgFile').value = '';
+                    renderAdminData();
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveCategory(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveCategory('🏷️');
+            }
+        }
+
+        function adminDeleteCategory(id) {
+            if(confirm("هل أنت متأكد من حذف هذا القسم؟")) {
+                db.collection("categories").doc(id).delete().then(() => { showToast('🗑️ تم حذف القسم بنجاح!'); });
+            }
+        }
+
+        function adminAddProduct() {
+            let title = document.getElementById('newProdTitle').value.trim();
+            let price = parseFloat(document.getElementById('newProdPrice').value);
+            let category = document.getElementById('newProdCatSelect').value;
+            let fileInput = document.getElementById('newProdImgFile');
+
+            if (!title || isNaN(price) || price < 0) { showToast('⚠️ يرجى إدخال اسم المنتج والسعر بشكل صحيح!'); return; }
+
+            let saveProduct = function(imgData) {
+                db.collection("products").add({ title, price, category, img: imgData || '🎮' }).then(() => {
+                    showToast('✅ تم إضافة المنتج بنجاح!');
+                    document.getElementById('newProdTitle').value = '';
+                    document.getElementById('newProdPrice').value = '';
+                    document.getElementById('newProdImgFile').value = '';
+                });
+            };
+
+            if (fileInput && fileInput.files.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function(e) { saveProduct(e.target.result); };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveProduct('🎮');
+            }
+        }
+
+        function adminDeleteProduct(id) {
+            if(confirm("هل أنت متأكد من حذف هذا المنتج؟")) {
+                db.collection("products").doc(id).delete().then(() => { showToast('🗑️ تم حذف المنتج بنجاح!'); });
+            }
+        }
+
+        function adminAddCoupon() {
+            let code = document.getElementById('newCouponCode').value.trim().toUpperCase();
+            let discountPercentage = parseFloat(document.getElementById('newCouponDiscountPercent').value) || 0;
+            let minLimit = parseFloat(document.getElementById('newCouponMinLimit').value) || 0;
+            let maxDiscountCap = parseFloat(document.getElementById('newCouponMaxCap').value) || 999999;
+            let maxUses = parseInt(document.getElementById('newCouponMaxUses').value) || 100;
+
+            if (!code || discountPercentage <= 0) { showToast('⚠️ يرجى إدخال الكود ونسبة الخصم بشكل صحيح!'); return; }
+            db.collection("coupons").add({ 
+                code, discountPercentage, minLimit, maxDiscountCap, maxUses, usedList: [] 
+            }).then(() => {
+                showToast('✅ تم إضافة الكوبون بنجاح!');
+                document.getElementById('newCouponCode').value = ''; 
+                document.getElementById('newCouponDiscountPercent').value = '';
+                document.getElementById('newCouponMinLimit').value = '';
+                document.getElementById('newCouponMaxCap').value = '';
+                document.getElementById('newCouponMaxUses').value = '';
+            });
+        }
+
+        function adminDeleteCoupon(id) { db.collection("coupons").doc(id).delete().then(() => { showToast('تم الحذف!'); }); }
+        
+        function exportOrdersToExcel() {
+            let csv = "data:text/csv;charset=utf-8,\uFEFFID,User,Product,Price,Status\n";
+            gameOrders.forEach(o => { csv += `"${o.id}","${o.userEmail}","${o.product}","${o.price}","${o.status}"\n`; });
+            let link = document.createElement("a"); link.setAttribute("href", encodeURI(csv)); link.setAttribute("download", "orders.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        function renderAdminData() {
+            let totalRevenue = gameOrders.filter(o => o.status === 'approved').reduce((sum, o) => sum + parseFloat(o.price || 0), 0);
+            if (document.getElementById('statTotalRevenue')) document.getElementById('statTotalRevenue').innerText = '$' + totalRevenue.toFixed(2);
+            if (document.getElementById('statApprovedOrders')) document.getElementById('statApprovedOrders').innerText = gameOrders.filter(o => o.status === 'approved').length;
+            if (document.getElementById('statPendingOrders')) document.getElementById('statPendingOrders').innerText = gameOrders.filter(o => o.status === 'pending').length;
+
+            let balHtml = '';
+            [...balanceRequests].sort((a,b)=>(a.numericId||0)-(b.numericId||0)).forEach(req => {
+                let receipt = req.receiptUrl ? `<div style="margin-top:5px;"><a href="${req.receiptUrl}" target="_blank"><img src="${req.receiptUrl}" style="max-width:100px; border-radius:5px;" /></a></div>` : '';
+                if(req.status === 'pending') {
+                    balHtml += `<div class="request-card"><div><b>${req.userEmail}</b> | مبلغ: $${req.amount} (${req.method})</div>${receipt}<div class="req-actions"><button class="btn-acc" onclick="db.collection('deposits').doc('${req.id}').update({status:'approved'})">قبول</button><button class="btn-rej" onclick="db.collection('deposits').doc('${req.id}').update({status:'rejected'})">رفض</button></div></div>`;
+                }
+            });
+            document.getElementById('adminBalanceSection').innerHTML = balHtml || '<p style="text-align:center;">لا توجد طلبات رصيد معلقة</p>';
+
+            let ordHtml = '';
+            gameOrders.forEach(req => {
+                if(req.status === 'pending') {
+                    ordHtml += `<div class="request-card"><div><b>${req.userEmail}</b> | <b>${req.product}</b></div><textarea id="reply_${req.id}" placeholder="اكتب الرد أو الكود هنا..." style="width:100%; padding:8px; margin-top:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:6px;" rows="2"></textarea><div class="req-actions"><button class="btn-acc" onclick="approveOrder('${req.id}')">إتمام وشحن</button><button class="btn-rej" onclick="rejectOrder('${req.id}')">رفض</button></div></div>`;
+                }
+            });
+            document.getElementById('adminOrdersSection').innerHTML = ordHtml || '<p style="text-align:center;">لا توجد طلبات ألعاب معلقة</p>';
+
+            let giftAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إنشاء كود هدية جديد 🎁</h3>
+                    <input type="text" id="newGiftCode" placeholder="رمز الكود (مثال: ARAB4-50)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.01" id="newGiftValueUsd" placeholder="القيمة بالدولار ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" id="newGiftMaxUsers" placeholder="عدد الأشخاص الصالح لهم الاستخدام..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="date" id="newGiftExpiry" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <button onclick="adminCreateGiftCode()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إنشاء الكود</button>
+                </div>
+                <h4 style="color:var(--accent-color);">الأكواد الحالية المتاحة:</h4>
+            `;
+            if(giftCodes.length === 0) { giftAdminHtml += '<p style="color:#a7f3d0;">لا توجد أكواد هدايا مضافة بعد.</p>'; }
+            else {
+                giftCodes.forEach(g => {
+                    let usedCount = (g.usedUsers || []).length;
+                    giftAdminHtml += `<div style="background:var(--bg-main); border:1px solid var(--primary-color); padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <b style="color:var(--accent-color);">${g.code}</b> | <b>$${g.valueUsd}</b><br>
+                            <span style="font-size:11px; color:#a7f3d0;">المستخدمين: (${usedCount}/${g.maxUsers}) - الانتهاء: ${g.expiryDate || 'غير محدد'}</span>
+                        </div>
+                        <button onclick="adminDeleteGiftCode('${g.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                    </div>`;
+                });
+            }
+            document.getElementById('adminGiftsSection').innerHTML = giftAdminHtml;
+
+            let currencyAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة عملة جديدة 💱</h3>
+                    <input type="text" id="newCurrName" placeholder="اسم العملة / الرمز..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.0001" id="newCurrRate" placeholder="سعر صرف 1$ بهذه العملة..." style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <button onclick="adminAddCurrency()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة العملة</button>
+                </div>
+            `;
+            storeCurrencies.forEach(curr => {
+                currencyAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${curr.name}</b> <br><span style="font-size:11px; color:#a7f3d0;">سعر صرف 1$ = ${curr.rate}</span></div>
+                    <button onclick="adminDeleteCurrency('${curr.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
+            document.getElementById('adminCurrenciesSection').innerHTML = currencyAdminHtml;
+
+            let pmAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة طريقة دفع جديدة 💳</h3>
+                    <input type="text" id="newPmName" placeholder="اسم وسيلة الدفع..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="text" id="newPmSymbol" placeholder="الرمز أو الأيقونة..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="text" id="newPmAddress" placeholder="رقم أو عنوان التحويل..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <div style="display:flex; gap:8px;">
+                        <input type="number" step="0.1" id="newPmMin" placeholder="أقل مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                        <input type="number" step="0.1" id="newPmMax" placeholder="أقصى مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    </div>
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة الوسيلة المصغرة:</label>
+                    <input type="file" id="newPmImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    <select id="newPmIsAuto" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                        <option value="false">يدوي (يتطلب رفع إيصال)</option>
+                        <option value="true">تلقائي فوري</option>
+                    </select>
+                    <button onclick="adminAddPaymentMethod()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الوسيلة</button>
+                </div>
+            `;
+            dbPaymentMethods.forEach(pm => {
+                pmAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${pm.symbol || '💳'} ${pm.name}</b><br><span style="font-size:11px; color:#a7f3d0;">${pm.address}</span></div>
+                    <button onclick="adminDeletePaymentMethod('${pm.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
+            document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
+
+            let parentCatOptionsHtml = '<option value="none">-- قسم رئيسي بالواجهة --</option>';
+            storeCategories.forEach(c => {
+                parentCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
+            });
+
+            let catAdminHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة قسم جديد 🏷️</h3>
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم (مثال: فري فاير، روبوت، عضويات)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لـ (اختر القسم الرئيسي أو الفرعي الذي ستضعه بداخله):</label>
+                    <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${parentCatOptionsHtml}</select>
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة القسم:</label>
+                    <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    <button onclick="adminAddCategory()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
+                </div>
+            `;
+            storeCategories.forEach(c => {
+                let parentObj = storeCategories.find(p => p.id === c.parentId);
+                let parentNameText = parentObj ? ` (داخل: ${parentObj.title})` : ' (قسم رئيسي بالواجهة)';
+                catAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${c.title}</b> <span style="font-size:11px; color:#a7f3d0;">${parentNameText}</span></div>
+                    <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
+            document.getElementById('adminCategoriesSection').innerHTML = catAdminHtml;
+
+            let prodCatOptionsHtml = '<option value="best">🔥 الأكثر مبيعاً</option>';
+            storeCategories.forEach(c => { prodCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`; });
+            let prodHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة منتج جديد 📦</h3>
+                    <input type="text" id="newProdTitle" placeholder="اسم المنتج..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.001" id="newProdPrice" placeholder="السعر ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <select id="newProdCatSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${prodCatOptionsHtml}</select>
+                    <input type="file" id="newProdImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    <button onclick="adminAddProduct()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
+                </div>
+            `;
+            storeProducts.forEach(p => {
+                prodHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${p.title}</b> - $${p.price.toFixed(3)}</div>
+                    <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                </div>`;
+            });
+            document.getElementById('adminProductsSection').innerHTML = prodHtml;
+
+            let cpnHtml = `
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إنشاء كوبون خصم 🎟️</h3>
+                    <input type="text" id="newCouponCode" placeholder="كود الخصم" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="1" id="newCouponDiscountPercent" placeholder="نسبة الخصم %" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMinLimit" placeholder="الحد الأدنى للطلب ($)" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.1" id="newCouponMaxCap" placeholder="أقصى مبلغ خصم ($)" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" id="newCouponMaxUses" placeholder="عدد المستخدمين" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <button onclick="adminAddCoupon()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الكوبون</button>
+                </div>
+            `;
+            availableCoupons.forEach(c => {
+                cpnHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> (${c.discountPercentage}%)</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
+            });
+            document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
+
+            let supHtml = '';
+            let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
+            userEmails.forEach(user => {
+                let msgs = supportMessages.filter(m => m.sender === user || (m.isAdmin && m.target === user));
+                let safeId = user.replace(/[^a-zA-Z0-9]/g, '');
+                supHtml += `<div class="request-card"><div><b>محادثة: ${user}</b></div><div style="max-height:150px; overflow-y:auto; background:var(--bg-card); padding:8px; margin:8px 0; border-radius:6px;">`;
+                msgs.forEach(m => { supHtml += `<div style="text-align:${m.isAdmin?'left':'right'}; margin-bottom:5px;"><span style="font-size:10px; color:#a7f3d0;">${m.isAdmin?'الإدارة':'الزبون'}</span><div style="background:${m.isAdmin?'var(--bg-main)':'var(--primary-color)'}; padding:6px; border-radius:6px; font-size:12px; display:inline-block;">${m.text}</div></div>`; });
+                supHtml += `</div><div style="display:flex; gap:5px;"><input type="text" id="adminReply_${safeId}" placeholder="رد..." style="flex:1; padding:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:6px;"><button onclick="adminSendReply('${user}', 'adminReply_${safeId}')" style="background:var(--primary-color); color:white; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">إرسال</button></div></div>`;
+            });
+            document.getElementById('adminSupportSection').innerHTML = supHtml || '<p style="text-align:center;">لا توجد رسائل دعم</p>';
+        }
+
+        function adminSendReply(userEmail, inputId) {
+            let text = document.getElementById(inputId).value.trim();
+            if(!text) return;
+            db.collection("support_messages").add({ sender: 'الإدارة', target: userEmail, text: text, isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp() }).then(() => { document.getElementById(inputId).value = ''; });
+        }
+
+        function approveOrder(id) {
+            let replyToken = document.getElementById(`reply_${id}`).value.trim();
+            db.collection("orders").doc(id).update({ status: 'approved', adminReply: replyToken || 'تم التنفيذ بنجاح' }).then(() => { showToast('تم التنفيذ!'); });
+        }
+
+        function rejectOrder(id) {
+            let order = gameOrders.find(o => o.id === id);
+            db.collection("orders").doc(id).update({ status: 'rejected', adminReply: 'تم الرفض واسترجاع المبلغ' }).then(() => {
+                if (order) {
+                    db.collection("deposits").get().then(snapshot => {
+                        let maxNum = 0; snapshot.forEach(doc => { let num = doc.data().numericId || 0; if (num > maxNum) maxNum = num; });
+                        db.collection("deposits").add({
+                            numericId: maxNum + 1, method: 'استرجاع رصيد (رفض طلب)', amount: parseFloat(order.price),
+                            transactionId: 'REF-' + id.substring(0, 6), status: 'approved', credited: false, userEmail: order.userEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    });
+                }
+                showToast('تم الرفض واسترجاع المبلغ للزبون!');
+            });
+        }
     </script>
 </body>
 </html>
