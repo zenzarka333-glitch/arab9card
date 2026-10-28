@@ -5,20 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARAB4CARD - المتجر الشامل</title>
     
-    <!-- مكتبات Firebase الرسمية -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    
-    <!-- مكتبة Google Sign-In الحقيقية -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style id="customThemeStyles">
         :root {
-            --bg-main: #064e3b;
-            --bg-card: #022c22;
+            --bg-main: #051d14;
+            --bg-card: #0b2e21;
             --primary-color: #10b981;
-            --text-color: #ffffff;
             --accent-color: #34d399;
+            --text-color: #ffffff;
+            --bright-green: #22c55e;
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-main); color: var(--text-color); margin: 0; padding: 0; padding-bottom: 20px; }
@@ -27,9 +25,16 @@
         .toast-message { background: var(--bg-card); color: white; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; text-align: center; border: 1px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: fadeInOut 3s forwards; pointer-events: auto; }
         @keyframes fadeInOut { 0% { opacity: 0; transform: translateY(-20px); } 15% { opacity: 1; transform: translateY(0); } 85% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-20px); } }
 
+        #broadcastAlertBanner {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 9999999;
+            background: linear-gradient(135deg, #10b981, #059669); color: white;
+            padding: 12px 20px; text-align: center; font-weight: bold; font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: none; align-items: center; justify-content: space-between;
+        }
+
         #liveSalesBanner {
-            position: fixed; bottom: 15px; right: 15px; z-index: 99999;
-            background: rgba(2, 44, 34, 0.95); border: 1.5px solid var(--primary-color);
+            position: fixed; bottom: 20px; right: 15px; z-index: 99999;
+            background: rgba(11, 46, 33, 0.95); border: 1.5px solid var(--primary-color);
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
             border-radius: 12px; padding: 10px 15px; display: none;
             align-items: center; gap: 10px; font-size: 12px; font-weight: bold;
@@ -37,72 +42,61 @@
         }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        .header { background-color: var(--bg-card); color: white; padding: 12px 20px; display: flex; flex-direction: column; gap: 12px; font-weight: bold; border-bottom: 2px solid var(--primary-color); }
+        .marquee-container {
+            background: rgba(16, 185, 129, 0.15); border-bottom: 1px solid var(--primary-color);
+            border-top: 1px solid var(--primary-color); padding: 8px 0; overflow: hidden; white-space: nowrap;
+            width: 100%; box-sizing: border-box; margin-bottom: 10px;
+        }
+        .marquee-text {
+            display: inline-block; padding-left: 100%;
+            animation: marquee 25s linear infinite; font-size: 13px; font-weight: bold; color: var(--accent-color);
+        }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(100%, 0); } }
+
+        .banner-slider-container {
+            width: 95%; max-width: 550px; margin: 10px auto; border-radius: 14px; overflow: hidden;
+            border: 1.5px solid var(--primary-color); box-shadow: 0 4px 15px rgba(0,0,0,0.4); position: relative;
+            background: var(--bg-card); aspect-ratio: 16 / 7;
+        }
+        .banner-slides-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; cursor: grab; }
+        .banner-slides-track:active { cursor: grabbing; }
+        .banner-slide { min-width: 100%; height: 100%; flex-shrink: 0; }
+        .banner-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .banner-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+        .banner-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: 0.3s; }
+        .banner-dot.active { background: var(--primary-color); width: 16px; border-radius: 4px; }
+
+        .header { background-color: var(--bg-card); color: white; padding: 10px 15px; display: flex; flex-direction: column; gap: 10px; font-weight: bold; border-bottom: 2px solid var(--primary-color); }
         .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .header-group { display: flex; align-items: center; gap: 8px; }
-        .balance { background-color: rgba(16, 185, 129, 0.2); padding: 4px 10px; border-radius: 15px; font-size: 14px; display: flex; align-items: center; gap: 5px; border: 1px solid var(--primary-color); }
+        .balance { background-color: rgba(16, 185, 129, 0.2); padding: 4px 10px; border-radius: 15px; font-size: 13px; display: flex; align-items: center; gap: 5px; border: 1px solid var(--primary-color); }
 
-        .search-bar-container { padding: 0 5px; margin-top: 2px; }
-        .search-input { width: 100%; padding: 12px 18px; border-radius: 20px; border: 1px solid var(--primary-color); background: var(--bg-card); color: white; font-size: 14px; text-align: right; outline: none; box-sizing: border-box; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+        .search-bar-container { padding: 0 15px; margin-top: 2px; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .search-input { width: 100%; padding: 8px 14px; border-radius: 16px; border: 1px solid var(--primary-color); background: var(--bg-card); color: white; font-size: 13px; text-align: right; outline: none; box-sizing: border-box; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         .search-input::placeholder { color: #94a3b8; }
 
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px 12px; padding: 20px 15px; direction: rtl; }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px; direction: rtl; max-width: 600px; margin: 0 auto; }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 100%; }
         
         .card-box { 
-            background: var(--bg-card); 
-            width: 100%; 
-            aspect-ratio: 1 / 1; 
-            border-radius: 18px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            box-sizing: border-box; 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3); 
-            border: 1px solid var(--primary-color); 
-            position: relative; 
-            overflow: hidden; 
+            background: var(--bg-card); width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; 
+            display: flex; justify-content: center; align-items: center; box-sizing: border-box; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1.5px solid var(--primary-color); position: relative; overflow: hidden; 
         }
-        
-        .card-circle { 
-            width: 100% !important; 
-            height: 100% !important; 
-            border-radius: 0 !important; 
-            border: none !important; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background-color: transparent !important; 
-            overflow: hidden; 
-        }
-        
-        .card-circle img { 
-            width: 100% !important; 
-            height: 100% !important; 
-            object-fit: cover !important; 
-            border-radius: 16px !important; 
-        }
-        
-        .card-name-outside { 
-            margin-top: 10px; 
-            font-size: 15px; 
-            font-weight: 900; 
-            color: #ffffff; 
-            text-align: center; 
-            letter-spacing: 0.3px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6); 
-        }
-        .card-price-outside { margin-top: 2px; font-size: 13px; font-weight: bold; color: var(--accent-color); text-align: center; }
+        .card-circle { width: 100% !important; height: 100% !important; border-radius: 0 !important; display: flex; justify-content: center; align-items: center; background-color: transparent !important; overflow: hidden; }
+        .card-circle img { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 14px !important; }
+        .card-name-outside { margin-top: 6px; font-size: 13px; font-weight: 800; color: #ffffff; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        .card-price-outside { margin-top: 1px; font-size: 11px; font-weight: bold; color: var(--accent-color); text-align: center; }
 
-        .page-title { text-align: center; color: #fff; font-size: 20px; font-weight: 900; margin: 20px 0 10px 0; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .page-title { text-align: center; color: #fff; font-size: 18px; font-weight: 900; margin: 12px 0 4px 0; }
         
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.85); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; padding: 20px 0; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 29, 20, 0.85); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; padding: 20px 0; }
         .modal-content { background: #ffffff; color: var(--bg-main); padding: 25px 20px; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; box-sizing: border-box; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto; border: 2px solid var(--primary-color); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; font-size: 15px; color: var(--bg-main); }
         .price-tag { background-color: var(--bg-card); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 14px; border: 1px solid var(--primary-color); }
         
         .modal input, .modal select { 
-            width: 100%; padding: 12px; margin: 8px 0; border: 1.5px solid var(--primary-color); border-radius: 12px; box-sizing: border-box; text-align: right; background-color: #f8fafc !important; color: #0f172a !important; font-family: inherit; font-size: 14px; font-weight: bold; outline: none; 
+            width: 100%; padding: 12px; margin: 8px 0; border: 1.5px solid var(--primary-color); border-radius: 12px; box-sizing: border-box; text-align: right; background-color: #f8fafc !important; color: #0f172a !important; font-size: 14px; font-weight: bold; outline: none; 
         }
 
         .coupon-group { display: flex; gap: 6px; margin-bottom: 8px; }
@@ -114,8 +108,8 @@
 
         #vipTiersPage, #addBalancePage, #paymentFormPage, #adminDashboardPage, #myOrdersPage, #myPaymentsPage, #supportPage, #searchResultsPage, #aboutPage, #termsPage, #transactionsHistoryPage, #dynamicCategoryViewPage { display: none; }
 
-        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 44, 34, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .login-box { background-color: var(--bg-main); color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; position: relative; border: 2px solid var(--primary-color); box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 29, 20, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { background-color: var(--bg-main); color: white; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 350px; border: 2px solid var(--primary-color); box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
         .login-box h2 { color: var(--accent-color); font-size: 22px; margin-bottom: 20px; }
         .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--primary-color); border-radius: 8px; box-sizing: border-box; text-align: right; background: var(--bg-card); color: white; }
         .login-box button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
@@ -129,10 +123,10 @@
         .balance-page-container { padding: 15px; }
         .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px 12px; direction: rtl; }
         .payment-card { background: var(--bg-card); border-radius: 18px; padding: 12px 5px; text-align: center; color: white; font-size: 10px; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-weight: bold; border: 1px solid var(--primary-color); }
-        .payment-icon { width: 100%; aspect-ratio: 1 / 1; background-color: var(--bg-card); border-radius: 16px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; font-weight: bold; color: var(--accent-color); font-size: 24px; border: 1px solid var(--primary-color); overflow: hidden; }
+        .payment-icon { width: 100%; aspect-ratio: 1 / 1; background-color: var(--bg-card); border-radius: 16px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; color: var(--accent-color); font-size: 24px; border: 1px solid var(--primary-color); overflow: hidden; }
         .payment-icon img { width: 100%; height: 100%; object-fit: cover; }
         
-        .gift-card-box { background: linear-gradient(135deg, var(--bg-card), var(--bg-main)); border: 1.5px solid var(--primary-color); border-radius: 15px; padding: 15px; margin-bottom: 20px; direction: rtl; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .gift-card-box { background: linear-gradient(135deg, var(--bg-card), var(--bg-main)); border: 1.5px solid var(--primary-color); border-radius: 15px; padding: 15px; margin-bottom: 20px; direction: rtl; }
         .gift-card-title { color: var(--accent-color); font-weight: 900; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
         .pf-container { padding: 20px; direction: rtl; background-color: var(--bg-main); min-height: 100vh; color: white; }
@@ -140,16 +134,16 @@
         .pf-title { font-size: 22px; font-weight: 900; color: var(--accent-color); margin: 0; }
         .pf-field-group { margin-bottom: 15px; }
         .pf-label { display: block; font-size: 12px; color: #a7f3d0; margin-bottom: 6px; padding-right: 5px; }
-        .pf-input { width: 100%; padding: 14px; border: 1px solid var(--primary-color); border-radius: 10px; background-color: var(--bg-card) !important; color: white !important; box-sizing: border-box; text-align: right; font-family: inherit; font-size: 14px; outline: none; }
+        .pf-input { width: 100%; padding: 14px; border: 1px solid var(--primary-color); border-radius: 10px; background-color: var(--bg-card) !important; color: white !important; box-sizing: border-box; text-align: right; font-size: 14px; outline: none; }
         .pf-btn-submit { width: 100%; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
 
-        #adminDashboardPage { background-color: var(--bg-card); min-height: 100vh; height: 100vh; overflow-y: auto; width: 100%; box-sizing: border-box; padding-bottom: 80px; }
-        .admin-wrapper { padding: 20px; direction: rtl; background-color: var(--bg-card); color: white; box-sizing: border-box; width: 100%; }
+        #adminDashboardPage { background-color: var(--bg-card); min-height: 100vh; height: 100vh; overflow-y: auto; width: 100%; box-sizing: border-box; padding-bottom: 40px; }
+        .admin-wrapper { padding: 20px; direction: rtl; background-color: var(--bg-card); color: white; width: 100%; box-sizing: border-box; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: var(--bg-main); color: white; padding: 15px; border-radius: 12px; border-bottom: 2px solid var(--primary-color); }
         .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
         .admin-tab { flex: 1; min-width: 60px; text-align: center; padding: 10px 4px; background: var(--bg-main); border-radius: 8px; font-weight: bold; cursor: pointer; color: var(--accent-color); font-size: 11px; border: 1px solid var(--primary-color); }
         .admin-tab.active { background: var(--primary-color); color: white; }
-        .request-card { background: var(--bg-main); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-right: 4px solid var(--primary-color); border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box; }
+        .request-card { background: var(--bg-main); color: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-right: 4px solid var(--primary-color); border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box; }
         .req-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-acc { background: var(--primary-color); color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-rej { background: #ef4444; color: white; border: none; padding: 8px; flex: 1; border-radius: 6px; cursor: pointer; font-weight: bold; }
@@ -157,14 +151,14 @@
         .stat-card { background: var(--bg-main); border: 1px solid var(--primary-color); border-radius: 10px; padding: 15px; text-align: center; flex: 1; }
         .stat-num { font-size: 20px; font-weight: 900; color: var(--accent-color); }
         .stat-title { font-size: 11px; color: #a7f3d0; margin-top: 4px; }
-
-        .statement-card { background: var(--bg-main); border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--primary-color); font-size: 13px; }
-        .st-header { display: flex; justify-content: space-between; font-weight: bold; color: var(--accent-color); margin-bottom: 5px; }
-        .st-plus { color: var(--accent-color); }
-        .st-minus { color: #f87171; }
     </style>
 </head>
 <body>
+
+    <div id="broadcastAlertBanner">
+        <span id="broadcastAlertText">📢 تنبيه هام من الإدارة</span>
+        <button onclick="document.getElementById('broadcastAlertBanner').style.display='none'" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">✖</button>
+    </div>
 
     <div id="toastContainer"></div>
 
@@ -229,6 +223,7 @@
         <a href="#" onclick="showMyOrdersPage(); closeSidebar()">📦 طلباتي</a>
         <a href="#" onclick="showPage('supportPage'); closeSidebar()">🎧 الدعم الفني</a>
         <a href="#" onclick="showPage('vipTiersPage'); closeSidebar()">⭐ مستويات الحساب (VIP)</a>
+        <a href="#" id="installAppSidebarBtn" onclick="installAppPWA(); closeSidebar()" style="display:none; color: var(--accent-color);">📱 تثبيت التطبيق على الجهاز</a>
         <a href="#" onclick="openAdminLogin(); closeSidebar()" style="color: var(--accent-color);">⚙️ لوحة التحكم (Admin)</a>
         <a href="#" onclick="logoutUser(); closeSidebar()" style="color: #f87171; margin-top: 10px;">🚪 تسجيل خروج</a>
     </div>
@@ -262,7 +257,7 @@
     </div>
 
     <!-- صفحة الدعم الفني -->
-    <div id="supportPage" style="display:none; background: var(--bg-main); min-height: 100vh; padding-bottom: 80px;">
+    <div id="supportPage" style="display:none; background: var(--bg-main); min-height: 100vh; padding-bottom: 70px;">
         <div id="chatMessagesContainer" style="padding: 15px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 110px); overflow-y: auto;"></div>
         <div style="position: fixed; bottom: 0; width: 100%; background: var(--bg-card); padding: 10px 15px; box-sizing: border-box; border-top: 1px solid var(--primary-color); display: flex; gap: 10px; align-items: center;">
             <input type="text" id="chatInputBox" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 12px; border: 1px solid var(--primary-color); border-radius: 20px; outline: none; font-size: 14px; text-align: right; background: var(--bg-main); color: white;">
@@ -270,48 +265,40 @@
         </div>
     </div>
 
-    <!-- صفحة من نحن -->
-    <div id="aboutPage">
-        <div class="page-title">عن ARAB4CARD ℹ️</div>
-        <div style="padding: 20px; direction: rtl; background: var(--bg-card); color: white; margin: 15px; border-radius: 15px; border: 1px solid var(--primary-color); line-height: 1.8; font-size: 14px;">
-            <h3 style="color:var(--accent-color);">مرحباً بكم في متجر ARAB4CARD</h3>
-            <p>نحن المنصة العربية الرائدة المتخصصة في تقديم خدمات شحن الألعاب الكبرى بطريقة آمنة وسريعة وسلسة، بالإضافة إلى توفير بطاقات الاتصالات الدولية وشحن الرصيد بأعلى جودة وأفضل الأسعار لجميع التجار والزبائن الأفراد.</p>
-        </div>
-    </div>
-
-    <!-- صفحة الشروط والأحكام -->
-    <div id="termsPage">
-        <div class="page-title">الشروط والأحكام 📜</div>
-        <div style="padding: 20px; direction: rtl; background: var(--bg-card); color: white; margin: 15px; border-radius: 15px; border: 1px solid var(--primary-color); line-height: 1.8; font-size: 13px;">
-            <h3 style="color:var(--accent-color);">سياسة وشروط استخدام المتجر</h3>
-            <ol>
-                <li>يرجى التأكد دائماً من كتابة المعرف (Player ID) بشكل صحيح أثناء عملية الطلب والشراء.</li>
-                <li>تتم معالجة جميع الطلبات بسرعة، وبمجرد الشحن واكتمال الطلب لا يمكن إلغاؤه أو استرجاعه.</li>
-            </ol>
-        </div>
-    </div>
-
-    <!-- صفحة كشف الحساب السجل المالي المفصل -->
-    <div id="transactionsHistoryPage">
-        <div class="page-title">📊 كشف الحساب المالي المفصل</div>
-        <div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="statementListContainer"></div>
-    </div>
-
     <!-- الصفحة الرئيسية -->
     <div id="homePage" style="display: block;">
-        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 15px;">🏷️ الأقسام الرئيسية</div>
+        
+        <div class="marquee-container">
+            <div class="marquee-text">يا هلا فيك نورتنا في ARAB9CARD 💚🫡 نوفرلك شحن جميع الالعاب والخدمات ❤️‍🔥 ، لاي تاجر يرجى التواصل معنا واتساب للحصول على اسعار افضل ✅</div>
+        </div>
+
+        <!-- سلايدر الصور المتحركة (يتم تحميل الصور من لوحة التحكم ديناميكياً) -->
+        <div class="banner-slider-container" id="bannerSlider">
+            <div class="banner-slides-track" id="bannerTrack">
+                <div class="banner-slide"><img src="https://i.ibb.co/3ykB8xK7/1000061390.webp" alt="Banner 1" id="bannerImg0" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600'"></div>
+                <div class="banner-slide"><img src="https://i.ibb.co/Kz26kR82/1000061391.webp" alt="Banner 2" id="bannerImg1" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600'"></div>
+                <div class="banner-slide"><img src="https://i.ibb.co/6c2rV6nF/1000061389.webp" alt="Banner 3" id="bannerImg2" onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600'"></div>
+            </div>
+            <div class="banner-dots" id="bannerDots">
+                <div class="banner-dot active" onclick="currentSlide(0)"></div>
+                <div class="banner-dot" onclick="currentSlide(1)"></div>
+                <div class="banner-dot" onclick="currentSlide(2)"></div>
+            </div>
+        </div>
+
+        <div class="page-title" style="font-size: 15px; text-align: right; padding-right: 15px; margin-top: 10px;">🏷️ الأقسام الرئيسية</div>
         <div class="grid-container" id="dynamicMainCategoriesGrid"></div>
 
-        <div class="page-title" style="font-size: 16px; text-align: right; padding-right: 15px; margin-top: 20px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
+        <div class="page-title" style="font-size: 15px; text-align: right; padding-right: 15px; margin-top: 15px;">🔥 الأكثر مبيعاً وعروض سريعة</div>
         <div class="grid-container" id="dynamicBestSellersGrid" style="padding-top: 5px;"></div>
     </div>
 
-    <!-- صفحة العرض الديناميكي المتداخل للأقسام والمنتجات -->
+    <!-- صفحة العرض الديناميكي للأقسام والمنتجات -->
     <div id="dynamicCategoryViewPage">
         <div class="page-title" id="dynamicCategoryTitle">القسم</div>
-        <div class="page-title" style="font-size: 14px; color: #a7f3d0; margin-top: 0;" id="dynamicSubCategoriesTitle">📁 الأقسام الفرعية</div>
+        <div class="page-title" style="font-size: 13px; color: #a7f3d0; margin-top: 0;" id="dynamicSubCategoriesTitle">📁 الأقسام الفرعية</div>
         <div class="grid-container" id="dynamicSubCategoriesGrid"></div>
-        <div class="page-title" style="font-size: 14px; color: var(--accent-color); margin-top: 15px;" id="dynamicProductsTitle">📦 المنتجات</div>
+        <div class="page-title" style="font-size: 13px; color: var(--accent-color); margin-top: 10px;" id="dynamicProductsTitle">📦 المنتجات</div>
         <div class="grid-container" id="dynamicCategoryProductsGrid"></div>
     </div>
 
@@ -370,8 +357,8 @@
         </div>
     </div>
 
-    <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myOrdersListContainer"></div></div>
-    <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl; padding-bottom: 80px;" id="myPaymentsListContainer"></div></div>
+    <div id="myOrdersPage"><div class="page-title">طلباتي 📦</div><div style="padding: 15px; direction: rtl;" id="myOrdersListContainer"></div></div>
+    <div id="myPaymentsPage"><div class="page-title">دفعاتي 🧾</div><div style="padding: 15px; direction: rtl;" id="myPaymentsListContainer"></div></div>
 
     <!-- لوحة التحكم الإدارية -->
     <div id="adminDashboardPage">
@@ -402,18 +389,62 @@
             <div class="admin-tabs">
                 <div class="admin-tab active" id="tabBalance" onclick="switchAdminTab('balance')">طلبات الرصيد</div>
                 <div class="admin-tab" id="tabOrders" onclick="switchAdminTab('orders')">طلبات الألعاب</div>
-                <div class="admin-tab" id="tabGifts" onclick="switchAdminTab('gifts')">أكواد الهدايا 🎁</div>
-                <div class="admin-tab" id="tabPaymentsAdmin" onclick="switchAdminTab('paymentsAdmin')">طرق الدفع 💳</div>
+                <div class="admin-tab" id="tabBanners" onclick="switchAdminTab('banners')">🖼️ صور البانر</div>
+                <div class="admin-tab" id="tabBroadcast" onclick="switchAdminTab('broadcast')">📢 إشعار</div>
+                <div class="admin-tab" id="tabAutoReply" onclick="switchAdminTab('autoReply')">🤖 الرد الآلي</div>
+                <div class="admin-tab" id="tabGifts" onclick="switchAdminTab('gifts')">أكواد 🎁</div>
+                <div class="admin-tab" id="tabPaymentsAdmin" onclick="switchAdminTab('paymentsAdmin')">الدفع 💳</div>
                 <div class="admin-tab" id="tabCurrencies" onclick="switchAdminTab('currencies')">العملات 💱</div>
-                <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">إدارة الأقسام 🏷️</div>
-                <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">إدارة المنتجات 📦</div>
+                <div class="admin-tab" id="tabCategories" onclick="switchAdminTab('categories')">الأقسام 🏷️</div>
+                <div class="admin-tab" id="tabProducts" onclick="switchAdminTab('products')">المنتجات 📦</div>
                 <div class="admin-tab" id="tabCoupons" onclick="switchAdminTab('coupons')">الكوبونات 🎟️</div>
-                <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم الفني 🎧</div>
-                <div class="admin-tab" id="tabTheme" onclick="switchAdminTab('theme')">تعديل الألوان 🎨</div>
+                <div class="admin-tab" id="tabSupport" onclick="switchAdminTab('support')">الدعم 🎧</div>
+                <div class="admin-tab" id="tabTheme" onclick="switchAdminTab('theme')">الألوان 🎨</div>
             </div>
             
             <div id="adminBalanceSection"></div>
             <div id="adminOrdersSection" style="display:none;"></div>
+            
+            <!-- قسم إدارة وتعديل صور البانر المتحرك فوق الكتابات -->
+            <div id="adminBannersSection" style="display:none;">
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">تعديل صور البانر المتحرك فوق الكتابات 🖼️</h3>
+                    <p style="font-size:12px; color:#a7f3d0;">يمكنك تغيير صور السانر الثلاثة التي تظهر أعلى المتجر برفع صور جديدة من هاتفك:</p>
+                    
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; display:block; color:#fff; margin-bottom:4px;">الصورة الأولى:</label>
+                        <input type="file" id="bannerFile0" accept="image/*" style="width:100%; padding:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    </div>
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; display:block; color:#fff; margin-bottom:4px;">الصورة الثانية:</label>
+                        <input type="file" id="bannerFile1" accept="image/*" style="width:100%; padding:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <label style="font-size:12px; display:block; color:#fff; margin-bottom:4px;">الصورة الثالثة:</label>
+                        <input type="file" id="bannerFile2" accept="image/*" style="width:100%; padding:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
+                    </div>
+                    <button onclick="saveNewBannerImages()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">حفظ وتحديث صور البانر فوراً</button>
+                </div>
+            </div>
+
+            <div id="adminBroadcastSection" style="display:none;">
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إرسال إشعار فوري لجميع مستخدمي المتجر 📢</h3>
+                    <textarea id="adminBroadcastInput" placeholder="اكتب نص الإشعار هنا..." style="width:100%; padding:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; margin-bottom:12px;" rows="3"></textarea>
+                    <button onclick="sendGlobalBroadcast()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إرسال الإشعار للجميع</button>
+                </div>
+            </div>
+            
+            <div id="adminAutoReplySection" style="display:none;">
+                <div class="request-card">
+                    <h3 style="margin-top:0; color:var(--accent-color);">إدارة قواعد الرد التلقائي للدعم الفني 🤖</h3>
+                    <input type="text" id="newAutoKeyword" placeholder="الكلمة أو الرسالة (مثال: شحن، السلام عليكم)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <textarea id="newAutoReplyText" placeholder="الرد التلقائي الذي سيتم إرساله..." style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;" rows="3"></textarea>
+                    <button onclick="adminAddAutoReply()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة قاعدة الرد التلقائي</button>
+                </div>
+                <div id="adminAutoReplyList"></div>
+            </div>
+
             <div id="adminGiftsSection" style="display:none;"></div>
             <div id="adminPaymentsSection" style="display:none;"></div>
             <div id="adminCurrenciesSection" style="display:none;"></div>
@@ -425,13 +456,28 @@
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">تعديل ألوان المتجر والخلفيات 🎨</h3>
                     <label style="font-size:12px; color:#a7f3d0;">لون الخلفية الرئيسية:</label>
-                    <input type="color" id="themeBgMain" value="#064e3b" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
+                    <input type="color" id="themeBgMain" value="#051d14" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
                     <label style="font-size:12px; color:#a7f3d0;">لون الكروت والهيدر:</label>
-                    <input type="color" id="themeBgCard" value="#022c22" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
+                    <input type="color" id="themeBgCard" value="#0b2e21" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
                     <label style="font-size:12px; color:#a7f3d0;">اللون الأساسي (الأزرار والحدود):</label>
                     <input type="color" id="themePrimary" value="#10b981" style="width:100%; height:40px; margin-bottom:12px; cursor:pointer; background:none; border:none;">
                     <button onclick="saveStoreThemeColors()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">حفظ وتطبيق الألوان</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تعديل صورة القسم أو المنتج -->
+    <div id="editImageModal" class="modal">
+        <div class="modal-content">
+            <h3 style="color:var(--accent-color);" id="editModalTitle">تعديل الصورة</h3>
+            <input type="hidden" id="editItemType">
+            <input type="hidden" id="editItemId">
+            <label style="font-size:12px; color:#0f172a; display:block; margin-bottom:5px; text-align:right;">اختر صورة جديدة:</label>
+            <input type="file" id="editItemImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:#f8fafc; color:#0f172a; border:1px solid var(--primary-color); border-radius:8px;">
+            <div class="modal-buttons">
+                <button class="buy-action-btn" onclick="saveItemNewImage()">حفظ الصورة</button>
+                <button class="cancel-action-btn" onclick="document.getElementById('editImageModal').style.display='none'">إلغاء</button>
             </div>
         </div>
     </div>
@@ -461,15 +507,109 @@
         let storeCategories = [];
         let dbPaymentMethods = [];
         let storeCurrencies = [];
+        let autoReplies = [];
         
         let currentSelectedProduct = { title: '', price: 0, originalPrice: 0 };
         let currentUserEmail = localStorage.getItem("userEmail") || "";
         let selectedCategoryForView = null;
         let activeCurrencyRate = 1;
         let activeCurrencySymbol = '$';
+        let deferredPrompt = null;
+
+        let currentBannerIndex = 0;
+        const totalBanners = 3;
+        let bannerInterval;
+
+        function initBannerSlider() {
+            const track = document.getElementById('bannerTrack');
+            if(!track) return;
+
+            bannerInterval = setInterval(() => {
+                currentBannerIndex = (currentBannerIndex + 1) % totalBanners;
+                updateSliderPosition();
+            }, 5000);
+
+            let startX = 0;
+            let isDragging = false;
+
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                clearInterval(bannerInterval);
+            });
+
+            track.addEventListener('touchend', (e) => {
+                if(!isDragging) return;
+                let endX = e.changedTouches[0].clientX;
+                handleSwipeGesture(startX, endX);
+                isDragging = false;
+            });
+
+            track.addEventListener('mousedown', (e) => {
+                startX = e.clientX;
+                isDragging = true;
+                clearInterval(bannerInterval);
+            });
+
+            track.addEventListener('mouseup', (e) => {
+                if(!isDragging) return;
+                let endX = e.clientX;
+                handleSwipeGesture(startX, endX);
+                isDragging = false;
+            });
+        }
+
+        function handleSwipeGesture(start, end) {
+            let diff = start - end;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    currentBannerIndex = (currentBannerIndex + 1) % totalBanners;
+                } else {
+                    currentBannerIndex = (currentBannerIndex - 1 + totalBanners) % totalBanners;
+                }
+                updateSliderPosition();
+            }
+        }
+
+        function currentSlide(index) {
+            currentBannerIndex = index;
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            const track = document.getElementById('bannerTrack');
+            const dots = document.querySelectorAll('.banner-dot');
+            if(!track) return;
+            track.style.transform = `translateX(${currentBannerIndex * 100}%)`;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentBannerIndex);
+            });
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            let installBtn = document.getElementById('installAppSidebarBtn');
+            if(installBtn) installBtn.style.display = 'block';
+        });
+
+        function installAppPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('✅ تم تثبيت التطبيق بنجاح على جهازك!');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                showToast('💡 التطبيق مثبت مسبقاً أو أن المتصفح لا يدعم التثبيت المباشر.');
+            }
+        }
 
         function showToast(message) {
             let container = document.getElementById('toastContainer');
+            if(!container) return;
             let toast = document.createElement('div');
             toast.className = 'toast-message';
             toast.innerText = message;
@@ -486,7 +626,7 @@
             }
 
             let filtered = storeProducts.filter(p => p.title.toLowerCase().includes(query));
-            let html = filtered.length === 0 ? '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد نتائج مطابقة لبحثك ❌</p>' : '';
+            let html = filtered.length === 0 ? '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد نتائج مطابقة لبحثك ❌</p>' : '';
             
             filtered.forEach(item => {
                 let imgContent = item.img && (item.img.startsWith('http') || item.img.startsWith('data:image')) ? `<img src="${item.img}" alt="">` : (item.img || '⭐');
@@ -497,6 +637,38 @@
             grid.innerHTML = html;
             showPage('searchResultsPage');
         }
+
+        db.collection("broadcasts").orderBy("timestamp", "desc").limit(1).onSnapshot((snapshot) => {
+            snapshot.forEach((doc) => {
+                let data = doc.data();
+                let lastSeenId = localStorage.getItem("last_seen_broadcast") || "";
+                if (data.text && doc.id !== lastSeenId) {
+                    let banner = document.getElementById('broadcastAlertBanner');
+                    let textEl = document.getElementById('broadcastAlertText');
+                    if(banner && textEl) {
+                        textEl.innerText = "📢 " + data.text;
+                        banner.style.display = 'flex';
+                        localStorage.setItem("last_seen_broadcast", doc.id);
+                    }
+                }
+            });
+        });
+
+        // جلب صور البانر المحفوظة من فايربيس
+        db.collection("store_settings").doc("banners").onSnapshot((doc) => {
+            if(doc.exists) {
+                let data = doc.data();
+                if(data.img0 && document.getElementById('bannerImg0')) document.getElementById('bannerImg0').src = data.img0;
+                if(data.img1 && document.getElementById('bannerImg1')) document.getElementById('bannerImg1').src = data.img1;
+                if(data.img2 && document.getElementById('bannerImg2')) document.getElementById('bannerImg2').src = data.img2;
+            }
+        });
+
+        db.collection("auto_replies").onSnapshot((snapshot) => {
+            autoReplies = [];
+            snapshot.forEach((doc) => { autoReplies.push({ id: doc.id, ...doc.data() }); });
+            renderAdminAutoReplies();
+        });
 
         db.collection("payment_methods").onSnapshot((snapshot) => {
             dbPaymentMethods = [];
@@ -543,9 +715,26 @@
             renderChatMessages(); renderAdminData();
         });
 
+        let previousOrdersState = {};
         db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             gameOrders = [];
-            snapshot.forEach((doc) => { gameOrders.push({ id: doc.id, ...doc.data() }); });
+            snapshot.forEach((doc) => {
+                let ordData = doc.data();
+                let ordId = doc.id;
+                gameOrders.push({ id: ordId, ...ordData });
+
+                if (currentUserEmail && ordData.userEmail === currentUserEmail) {
+                    let prevState = previousOrdersState[ordId];
+                    if (prevState && prevState !== ordData.status) {
+                        if (ordData.status === 'approved') {
+                            showToast(`✅ تم قبول وشحن طلبك بنجاح: ${ordData.product}`);
+                        } else if (ordData.status === 'rejected') {
+                            showToast(`❌ تم رفض الطلب واسترجاع المبلغ: ${ordData.product}`);
+                        }
+                    }
+                    previousOrdersState[ordId] = ordData.status;
+                }
+            });
             renderMyOrders(); renderAdminData(); calculateUserVIP();
         });
 
@@ -633,7 +822,7 @@
             });
 
             if (document.getElementById('dynamicMainCategoriesGrid')) {
-                document.getElementById('dynamicMainCategoriesGrid').innerHTML = mainCatsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد أقسام رئيسية بعد ❌ قم بإضافتها من لوحة التحكم</p>';
+                document.getElementById('dynamicMainCategoriesGrid').innerHTML = mainCatsHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد أقسام رئيسية بعد ❌</p>';
             }
 
             let bestSellersHtml = '';
@@ -649,7 +838,7 @@
             });
 
             if (document.getElementById('dynamicBestSellersGrid')) {
-                document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد عروض مضافة حالياً</p>';
+                document.getElementById('dynamicBestSellersGrid').innerHTML = bestSellersHtml || '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد عروض مضافة حالياً</p>';
             }
 
             if (selectedCategoryForView) {
@@ -712,7 +901,7 @@
                 if (subCats.length === 0) {
                     prodTitleEl.style.display = 'block';
                     prodGridEl.style.display = 'grid';
-                    prodGridEl.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 2;">لا توجد منتجات أو أقسام فرعية داخل هذا القسم حالياً ❌</p>';
+                    prodGridEl.innerHTML = '<p style="text-align:center; color:#a7f3d0; grid-column: span 3;">لا توجد منتجات داخل هذا القسم حالياً ❌</p>';
                 } else {
                     prodTitleEl.style.display = 'none';
                     prodGridEl.style.display = 'none';
@@ -739,6 +928,8 @@
                 updateSidebarUserInfo();
             }
             
+            initBannerSlider();
+
             if (typeof google !== 'undefined') {
                 google.accounts.id.initialize({
                     client_id: "258855549504-4b1tfjrm3f6evk84sb1rv7cd085f43rg.apps.googleusercontent.com", 
@@ -772,6 +963,15 @@
                 sender: currentUserEmail, text: text, isAdmin: false, timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 input.value = "";
+                
+                let matchedReply = autoReplies.find(ar => text.includes(ar.keyword));
+                if (matchedReply) {
+                    setTimeout(() => {
+                        db.collection("support_messages").add({
+                            sender: 'الإدارة', target: currentUserEmail, text: matchedReply.replyText, isAdmin: true, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    }, 800);
+                }
             });
         }
 
@@ -877,12 +1077,11 @@
             allLogs.forEach(log => {
                 let isPlus = log.type === 'deposit';
                 let displayAmt = (log.amount * activeCurrencyRate).toFixed(3);
-                html += `<div class="statement-card">
-                    <div class="st-header">
+                html += `<div style="background: var(--bg-main); border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--primary-color); font-size: 13px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; color: var(--accent-color); margin-bottom: 5px;">
                         <span>${log.title}</span>
-                        <span class="${isPlus ? 'st-plus' : 'st-minus'}">${isPlus ? '+' : '-'}${displayAmt} ${activeCurrencySymbol}</span>
+                        <span style="color: ${isPlus ? 'var(--accent-color)' : '#f87171'}">${isPlus ? '+' : '-'}${displayAmt} ${activeCurrencySymbol}</span>
                     </div>
-                    <div style="font-size:11px; color:#a7f3d0;">نوع العملية: ${isPlus ? 'شحن رصيد' : 'خصم شراء'}</div>
                 </div>`;
             });
 
@@ -993,33 +1192,6 @@
             });
         }
 
-        function adminCreateGiftCode() {
-            let code = document.getElementById('newGiftCode').value.trim().toUpperCase();
-            let valueUsd = parseFloat(document.getElementById('newGiftValueUsd').value);
-            let maxUsers = parseInt(document.getElementById('newGiftMaxUsers').value);
-            let expiryDate = document.getElementById('newGiftExpiry').value;
-
-            if(!code || isNaN(valueUsd) || isNaN(maxUsers)) {
-                showToast('⚠️ يرجى كتابة كافة البيانات بشكل صحيح!'); return;
-            }
-
-            db.collection("gift_codes").add({
-                code, valueUsd, maxUsers, expiryDate, usedUsers: []
-            }).then(() => {
-                showToast('✅ تم إنشاء كود الهدية بنجاح!');
-                document.getElementById('newGiftCode').value = '';
-                document.getElementById('newGiftValueUsd').value = '';
-                document.getElementById('newGiftMaxUsers').value = '';
-                document.getElementById('newGiftExpiry').value = '';
-            });
-        }
-
-        function adminDeleteGiftCode(id) {
-            if(confirm('هل أنت متأكد من حذف هذا الكود؟')) {
-                db.collection("gift_codes").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح'); });
-            }
-        }
-
         function saveStoreThemeColors() {
             let bgMain = document.getElementById('themeBgMain').value;
             let bgCard = document.getElementById('themeBgCard').value;
@@ -1030,6 +1202,52 @@
             document.documentElement.style.setProperty('--primary-color', primary);
 
             showToast('🎨 تم حفظ ألوان المتجر بنجاح!');
+        }
+
+        // دالة حفظ صور البانر الجديدة من لوحة التحكم
+        function saveNewBannerImages() {
+            let file0 = document.getElementById('bannerFile0').files[0];
+            let file1 = document.getElementById('bannerFile1').files[0];
+            let file2 = document.getElementById('bannerFile2').files[0];
+
+            if(!file0 && !file1 && !file2) {
+                showToast('⚠️ يرجى اختيار صورة واحدة على الأقل للتحديث');
+                return;
+            }
+
+            db.collection("store_settings").doc("banners").get().then((doc) => {
+                let currentData = doc.exists ? doc.data() : {};
+                let pendingReads = 0;
+                let newData = { ...currentData };
+
+                function checkFinish() {
+                    pendingReads--;
+                    if(pendingReads === 0) {
+                        db.collection("store_settings").doc("banners").set(newData, { merge: true }).then(() => {
+                            showToast('✅ تم تحديث صور البانر بنجاح!');
+                        });
+                    }
+                }
+
+                if(file0) {
+                    pendingReads++;
+                    let reader = new FileReader();
+                    reader.onload = function(e) { newData.img0 = e.target.result; checkFinish(); };
+                    reader.readAsDataURL(file0);
+                }
+                if(file1) {
+                    pendingReads++;
+                    let reader = new FileReader();
+                    reader.onload = function(e) { newData.img1 = e.target.result; checkFinish(); };
+                    reader.readAsDataURL(file1);
+                }
+                if(file2) {
+                    pendingReads++;
+                    let reader = new FileReader();
+                    reader.onload = function(e) { newData.img2 = e.target.result; checkFinish(); };
+                    reader.readAsDataURL(file2);
+                }
+            });
         }
 
         function renderMyOrders() {
@@ -1227,7 +1445,7 @@
             db.collection("orders").add({ 
                 product: productDesc, price: currentSelectedProduct.price, status: 'pending', adminReply: '', userEmail: currentUserEmail, timestamp: firebase.firestore.FieldValue.serverTimestamp() 
             }).then(() => { 
-                showToast("🚀 تم تسجيل طلبك!"); triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title); closeOrderModal(); 
+                showToast("🚀 تم تسجيل طلبك بنجاح!"); triggerLiveSalesPopup(currentUserEmail, currentSelectedProduct.title); closeOrderModal(); 
             });
         }
 
@@ -1244,9 +1462,13 @@
         }
 
         function switchAdminTab(tab) {
-            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isGift = tab === 'gifts'; let isPm = tab === 'paymentsAdmin'; let isCur = tab === 'currencies'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isTheme = tab === 'theme';
+            let isBal = tab === 'balance'; let isOrd = tab === 'orders'; let isBanners = tab === 'banners'; let isBroadcast = tab === 'broadcast'; let isAuto = tab === 'autoReply'; let isGift = tab === 'gifts'; let isPm = tab === 'paymentsAdmin'; let isCur = tab === 'currencies'; let isCat = tab === 'categories'; let isPrd = tab === 'products'; let isCpn = tab === 'coupons'; let isSup = tab === 'support'; let isTheme = tab === 'theme';
+            
             document.getElementById('tabBalance').classList.toggle('active', isBal); 
             document.getElementById('tabOrders').classList.toggle('active', isOrd); 
+            document.getElementById('tabBanners').classList.toggle('active', isBanners);
+            document.getElementById('tabBroadcast').classList.toggle('active', isBroadcast); 
+            document.getElementById('tabAutoReply').classList.toggle('active', isAuto);
             document.getElementById('tabGifts').classList.toggle('active', isGift);
             document.getElementById('tabPaymentsAdmin').classList.toggle('active', isPm);
             document.getElementById('tabCurrencies').classList.toggle('active', isCur);
@@ -1258,6 +1480,9 @@
             
             document.getElementById('adminBalanceSection').style.display = isBal ? 'block' : 'none'; 
             document.getElementById('adminOrdersSection').style.display = isOrd ? 'block' : 'none'; 
+            document.getElementById('adminBannersSection').style.display = isBanners ? 'block' : 'none';
+            document.getElementById('adminBroadcastSection').style.display = isBroadcast ? 'block' : 'none'; 
+            document.getElementById('adminAutoReplySection').style.display = isAuto ? 'block' : 'none';
             document.getElementById('adminGiftsSection').style.display = isGift ? 'block' : 'none';
             document.getElementById('adminPaymentsSection').style.display = isPm ? 'block' : 'none';
             document.getElementById('adminCurrenciesSection').style.display = isCur ? 'block' : 'none';
@@ -1266,6 +1491,79 @@
             document.getElementById('adminCouponsSection').style.display = isCpn ? 'block' : 'none'; 
             document.getElementById('adminSupportSection').style.display = isSup ? 'block' : 'none';
             document.getElementById('adminThemeSection').style.display = isTheme ? 'block' : 'none';
+        }
+
+        function sendGlobalBroadcast() {
+            let text = document.getElementById('adminBroadcastInput').value.trim();
+            if(!text) { showToast('⚠️ يرجى كتابة نص الإشعار أولاً!'); return; }
+            db.collection("broadcasts").add({
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                showToast('✅ تم إرسال الإشعار لجميع المستخدمين بنجاح!');
+                document.getElementById('adminBroadcastInput').value = '';
+            });
+        }
+
+        function adminAddAutoReply() {
+            let keyword = document.getElementById('newAutoKeyword').value.trim();
+            let replyText = document.getElementById('newAutoReplyText').value.trim();
+            if(!keyword || !replyText) { showToast('⚠️ يرجى ملء الكلمة والرد التلقائي'); return; }
+            db.collection("auto_replies").add({ keyword, replyText }).then(() => {
+                showToast('✅ تمت إضافة الرد التلقائي بنجاح!');
+                document.getElementById('newAutoKeyword').value = '';
+                document.getElementById('newAutoReplyText').value = '';
+            });
+        }
+
+        function adminDeleteAutoReply(id) {
+            if(confirm("هل أنت متأكد من حذف قاعدة الرد هذه؟")) {
+                db.collection("auto_replies").doc(id).delete().then(() => { showToast('🗑️ تم الحذف بنجاح!'); });
+            }
+        }
+
+        function renderAdminAutoReplies() {
+            let container = document.getElementById('adminAutoReplyList');
+            if(!container) return;
+            let html = '<h4 style="color:var(--accent-color); margin-top:15px;">قواعد الرد التلقائي الحالية:</h4>';
+            if(autoReplies.length === 0) { html += '<p style="color:#a7f3d0;">لا توجد قواعد مضافة بعد.</p>'; }
+            else {
+                autoReplies.forEach(ar => {
+                    html += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><b>الكلمة:</b> ${ar.keyword}<br><b style="color:var(--accent-color);">الرد:</b> ${ar.replyText}</div>
+                        <button onclick="adminDeleteAutoReply('${ar.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                    </div>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+
+        function openEditImageModal(type, id, title) {
+            document.getElementById('editItemType').value = type;
+            document.getElementById('editItemId').value = id;
+            document.getElementById('editModalTitle').innerText = 'تعديل صورة: ' + title;
+            document.getElementById('editItemImgFile').value = '';
+            document.getElementById('editImageModal').style.display = 'flex';
+        }
+
+        function saveItemNewImage() {
+            let type = document.getElementById('editItemType').value;
+            let id = document.getElementById('editItemId').value;
+            let fileInput = document.getElementById('editItemImgFile');
+
+            if(fileInput.files.length === 0) { showToast('⚠️ يرجى اختيار صورة جديدة أولاً'); return; }
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let imgData = e.target.result;
+                let collectionName = (type === 'category') ? 'categories' : 'products';
+
+                db.collection(collectionName).doc(id).update({ img: imgData }).then(() => {
+                    showToast('✅ تم تحديث الصورة بنجاح!');
+                    document.getElementById('editImageModal').style.display = 'none';
+                });
+            };
+            reader.readAsDataURL(fileInput.files[0]);
         }
 
         function adminAddCurrency() {
@@ -1441,94 +1739,37 @@
             let giftAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">إنشاء كود هدية جديد 🎁</h3>
-                    <input type="text" id="newGiftCode" placeholder="رمز الكود (مثال: ARAB4-50)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" step="0.01" id="newGiftValueUsd" placeholder="القيمة بالدولار ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" id="newGiftMaxUsers" placeholder="عدد الأشخاص الصالح لهم الاستخدام..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="text" id="newGiftCode" placeholder="رمز الكود..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" step="0.01" id="newGiftValueUsd" placeholder="القيمة ($)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <input type="number" id="newGiftMaxUsers" placeholder="عدد المستخدمين..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
                     <input type="date" id="newGiftExpiry" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
                     <button onclick="adminCreateGiftCode()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إنشاء الكود</button>
                 </div>
-                <h4 style="color:var(--accent-color);">الأكواد الحالية المتاحة:</h4>
             `;
-            if(giftCodes.length === 0) { giftAdminHtml += '<p style="color:#a7f3d0;">لا توجد أكواد هدايا مضافة بعد.</p>'; }
-            else {
-                giftCodes.forEach(g => {
-                    let usedCount = (g.usedUsers || []).length;
-                    giftAdminHtml += `<div style="background:var(--bg-main); border:1px solid var(--primary-color); padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <b style="color:var(--accent-color);">${g.code}</b> | <b>$${g.valueUsd}</b><br>
-                            <span style="font-size:11px; color:#a7f3d0;">المستخدمين: (${usedCount}/${g.maxUsers}) - الانتهاء: ${g.expiryDate || 'غير محدد'}</span>
-                        </div>
-                        <button onclick="adminDeleteGiftCode('${g.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
-                    </div>`;
-                });
-            }
             document.getElementById('adminGiftsSection').innerHTML = giftAdminHtml;
-
-            let currencyAdminHtml = `
-                <div class="request-card">
-                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة عملة جديدة 💱</h3>
-                    <input type="text" id="newCurrName" placeholder="اسم العملة / الرمز..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" step="0.0001" id="newCurrRate" placeholder="سعر صرف 1$ بهذه العملة..." style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <button onclick="adminAddCurrency()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة العملة</button>
-                </div>
-            `;
-            storeCurrencies.forEach(curr => {
-                currencyAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                    <div><b>${curr.name}</b> <br><span style="font-size:11px; color:#a7f3d0;">سعر صرف 1$ = ${curr.rate}</span></div>
-                    <button onclick="adminDeleteCurrency('${curr.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
-                </div>`;
-            });
-            document.getElementById('adminCurrenciesSection').innerHTML = currencyAdminHtml;
-
-            let pmAdminHtml = `
-                <div class="request-card">
-                    <h3 style="margin-top:0; color:var(--accent-color);">إضافة طريقة دفع جديدة 💳</h3>
-                    <input type="text" id="newPmName" placeholder="اسم وسيلة الدفع..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="text" id="newPmSymbol" placeholder="الرمز أو الأيقونة..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="text" id="newPmAddress" placeholder="رقم أو عنوان التحويل..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <div style="display:flex; gap:8px;">
-                        <input type="number" step="0.1" id="newPmMin" placeholder="أقل مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                        <input type="number" step="0.1" id="newPmMax" placeholder="أقصى مبلغ ($)" style="flex:1; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    </div>
-                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة الوسيلة المصغرة:</label>
-                    <input type="file" id="newPmImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
-                    <select id="newPmIsAuto" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                        <option value="false">يدوي (يتطلب رفع إيصال)</option>
-                        <option value="true">تلقائي فوري</option>
-                    </select>
-                    <button onclick="adminAddPaymentMethod()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الوسيلة</button>
-                </div>
-            `;
-            dbPaymentMethods.forEach(pm => {
-                pmAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                    <div><b>${pm.symbol || '💳'} ${pm.name}</b><br><span style="font-size:11px; color:#a7f3d0;">${pm.address}</span></div>
-                    <button onclick="adminDeletePaymentMethod('${pm.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
-                </div>`;
-            });
-            document.getElementById('adminPaymentsSection').innerHTML = pmAdminHtml;
-
+            
             let parentCatOptionsHtml = '<option value="none">-- قسم رئيسي بالواجهة --</option>';
-            storeCategories.forEach(c => {
-                parentCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`;
-            });
+            storeCategories.forEach(c => { parentCatOptionsHtml += `<option value="${c.id}">${c.title}</option>`; });
 
             let catAdminHtml = `
                 <div class="request-card">
                     <h3 style="margin-top:0; color:var(--accent-color);">إضافة قسم جديد 🏷️</h3>
-                    <input type="text" id="newCatTitle" placeholder="اسم القسم (مثال: فري فاير، روبوت، عضويات)..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لـ (اختر القسم الرئيسي أو الفرعي الذي ستضعه بداخله):</label>
+                    <input type="text" id="newCatTitle" placeholder="اسم القسم..." style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
+                    <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">تابع لـ:</label>
                     <select id="newCatParentSelect" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">${parentCatOptionsHtml}</select>
                     <label style="font-size:12px; color:#a7f3d0; display:block; margin-bottom:4px;">صورة القسم:</label>
                     <input type="file" id="newCatImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
                     <button onclick="adminAddCategory()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة القسم</button>
                 </div>
+                <h4 style="color:var(--accent-color);">الأقسام الحالية (تعديل الصور):</h4>
             `;
             storeCategories.forEach(c => {
-                let parentObj = storeCategories.find(p => p.id === c.parentId);
-                let parentNameText = parentObj ? ` (داخل: ${parentObj.title})` : ' (قسم رئيسي بالواجهة)';
                 catAdminHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                    <div><b>${c.title}</b> <span style="font-size:11px; color:#a7f3d0;">${parentNameText}</span></div>
-                    <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                    <div><b>${c.title}</b></div>
+                    <div style="display:flex; gap:6px;">
+                        <button onclick="openEditImageModal('category', '${c.id}', '${c.title}')" style="background:var(--primary-color); color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:11px;">تعديل الصورة</button>
+                        <button onclick="adminDeleteCategory('${c.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:11px;">حذف</button>
+                    </div>
                 </div>`;
             });
             document.getElementById('adminCategoriesSection').innerHTML = catAdminHtml;
@@ -1544,30 +1785,18 @@
                     <input type="file" id="newProdImgFile" accept="image/*" style="width:100%; padding:8px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px; font-size:12px;">
                     <button onclick="adminAddProduct()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة المنتج</button>
                 </div>
+                <h4 style="color:var(--accent-color);">المنتجات الحالية (تعديل الصور):</h4>
             `;
             storeProducts.forEach(p => {
                 prodHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
                     <div><b>${p.title}</b> - $${p.price.toFixed(3)}</div>
-                    <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">حذف</button>
+                    <div style="display:flex; gap:6px;">
+                        <button onclick="openEditImageModal('product', '${p.id}', '${p.title}')" style="background:var(--primary-color); color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:11px;">تعديل الصورة</button>
+                        <button onclick="adminDeleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:11px;">حذف</button>
+                    </div>
                 </div>`;
             });
             document.getElementById('adminProductsSection').innerHTML = prodHtml;
-
-            let cpnHtml = `
-                <div class="request-card">
-                    <h3 style="margin-top:0; color:var(--accent-color);">إنشاء كوبون خصم 🎟️</h3>
-                    <input type="text" id="newCouponCode" placeholder="كود الخصم" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" step="1" id="newCouponDiscountPercent" placeholder="نسبة الخصم %" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" step="0.1" id="newCouponMinLimit" placeholder="الحد الأدنى للطلب ($)" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" step="0.1" id="newCouponMaxCap" placeholder="أقصى مبلغ خصم ($)" style="width:100%; padding:10px; margin-bottom:8px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <input type="number" id="newCouponMaxUses" placeholder="عدد المستخدمين" style="width:100%; padding:10px; margin-bottom:12px; background:var(--bg-card); color:white; border:1px solid var(--primary-color); border-radius:8px;">
-                    <button onclick="adminAddCoupon()" style="width:100%; background:var(--primary-color); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة الكوبون</button>
-                </div>
-            `;
-            availableCoupons.forEach(c => {
-                cpnHtml += `<div style="background:var(--bg-main); padding:10px; border-radius:8px; border:1px solid var(--primary-color); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;"><span><b>${c.code}</b> (${c.discountPercentage}%)</span><button onclick="adminDeleteCoupon('${c.id}')" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button></div>`;
-            });
-            document.getElementById('adminCouponsSection').innerHTML = cpnHtml;
 
             let supHtml = '';
             let userEmails = [...new Set(supportMessages.filter(m => !m.isAdmin).map(m => m.sender))];
